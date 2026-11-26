@@ -2,9 +2,10 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { RoundedBox } from "@react-three/drei";
-import { useEffect, useMemo, useRef, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, type RefObject } from "react";
 import {
   MathUtils,
+  PerspectiveCamera,
   Object3D,
   Vector3,
   type Group,
@@ -15,10 +16,6 @@ import {
 type SceneProps = {
   power: number;
   reduced: boolean;
-  compactLayout: boolean;
-  paused: boolean;
-  renderOnDemand: boolean;
-  pointer: RefObject<{ x: number; y: number }>;
   illumination: RefObject<HTMLDivElement | null>;
   onReady: () => void;
   onFailure: () => void;
@@ -30,124 +27,87 @@ function setLightProperty(overlay: HTMLDivElement, name: string, value: string) 
   }
 }
 
-function Fixture({
-  power,
-  paused,
-  reduced,
-  renderOnDemand,
-  compactLayout,
-  pointer,
-  illumination,
-  onReady,
-  onFailure,
-}: SceneProps) {
+// Both canvas and poster use these fixed aspect ratios and camera poses.
+function configureCamera(camera: PerspectiveCamera, aspect: number) {
+  camera.aspect = aspect;
+  camera.fov = 39;
+  if (aspect < 0.8) {
+    camera.position.set(-0.62, -2.7, 8.4);
+    camera.lookAt(-0.62, -1.8, 0);
+  } else {
+    camera.position.set(-0.18, -1.26, 6.5);
+    camera.lookAt(-0.12, -0.26, 0);
+  }
+  camera.updateProjectionMatrix();
+  camera.updateMatrixWorld(true);
+}
+
+function Fixture({ power, reduced, illumination, onReady, onFailure }: SceneProps) {
   const group = useRef<Group>(null);
   const diffuser = useRef<MeshStandardMaterial>(null);
   const lensCenter = useRef<Object3D>(null);
   const spotlight = useRef<SpotLight>(null);
   const target = useMemo(() => new Object3D(), []);
   const projected = useMemo(() => new Vector3(), []);
-  const gl = useThree((state) => state.gl);
-  const elapsedRef = useRef(0);
+  const gl = useThree(state => state.gl);
+  const camera = useThree(state => state.camera);
+  const width = useThree(state => state.size.width);
+  const height = useThree(state => state.size.height);
+  const invalidate = useThree(state => state.invalidate);
+  const frames = useRef(0);
   const readySent = useRef(false);
-  const camera = useThree((state) => state.camera);
-  const aspect = useThree(({ size }) => size.width / (size.height || 1));
-  const compact = useThree(({ size }) => size.width < 620);
-  const invalidate = useThree((state) => state.invalidate);
-  useEffect(() => {
-    if (compactLayout) {
-      const distance = Math.max(8.4, 4.8 / Math.max(0.4, aspect));
-      camera.position.set(-0.62, -2.7, distance);
-      camera.lookAt(-0.62, -1.8, 0);
-    } else {
-      const distance = compact ? Math.max(5.15, 5.75 / Math.max(0.8, aspect)) : 6.5;
-      camera.position.set(
-        compact ? -0.38 : -0.18,
-        compact ? -1.7 : -1.26,
-        distance,
-      );
-      camera.lookAt(compact ? -0.38 : -0.12, compact ? -0.68 : -0.26, 0);
-    }
+  const revealFrame = useRef<number | null>(null);
+  useLayoutEffect(() => {
+    if (!width || !height || !(camera instanceof PerspectiveCamera)) return;
+    configureCamera(camera, width / height);
+    if (!readySent.current) frames.current = 0;
     invalidate();
-  }, [aspect, camera, compact, compactLayout, invalidate]);
+  }, [camera, width, height, invalidate]);
 
-  useEffect(() => {
-    invalidate();
-  }, [invalidate, paused, power, reduced]);
-
+  useEffect(() => { invalidate(); }, [power, reduced, invalidate]);
   useEffect(() => {
     const canvas = gl.domElement;
-    const fail = (event: Event) => {
-      event.preventDefault();
-      onFailure();
-    };
+    const fail = (event: Event) => { event.preventDefault(); onFailure(); };
     canvas.addEventListener("webglcontextlost", fail);
-    return () => canvas.removeEventListener("webglcontextlost", fail);
+    return () => {
+      canvas.removeEventListener("webglcontextlost", fail);
+      if (revealFrame.current !== null) {
+        cancelAnimationFrame(revealFrame.current);
+        revealFrame.current = null;
+        if (!readySent.current) frames.current = 0;
+      }
+    };
   }, [gl, onFailure]);
+
   useFrame((_, delta) => {
     const fixture = group.current;
     const lens = diffuser.current;
-    if (!fixture || !lens) return;
-    const firstFrame = !readySent.current;
-    readySent.current = true;
-    // Three.Clock is deprecated. Cap frame gaps after Safari tab suspension.
-    const elapsed = elapsedRef.current;
-    const frameDelta = Math.min(delta, 0.05);
-    elapsedRef.current += frameDelta;
-    const t = MathUtils.smoothstep(elapsed, 0, 1.4);
-    fixture.rotation.y = reduced
-      ? -0.39
-      : MathUtils.damp(
-          fixture.rotation.y,
-          -0.39 + (1 - t) * 0.5 + pointer.current.x * 0.13,
-          5,
-          frameDelta,
-        );
-    fixture.rotation.x = reduced
-      ? 0.02
-      : MathUtils.damp(
-          fixture.rotation.x,
-          0.02 + pointer.current.y * 0.085,
-          5,
-          frameDelta,
-        );
-    fixture.position.y = reduced
-      ? 0
-      : MathUtils.damp(
-          fixture.position.y,
-          (1 - t) * 0.16 - pointer.current.y * 0.06,
-          5,
-          frameDelta,
-        );
-    const intensity = reduced
-      ? 1
-      : 0.08 + 0.92 * MathUtils.smoothstep(elapsed, 0.5, 1.5);
-    const spread = reduced ? 1 : MathUtils.smoothstep(elapsed, 1.5, 2.5);
-    const emission = power * intensity * 3;
-    lens.emissiveIntensity =
-      reduced || firstFrame || paused
-        ? emission
-        : MathUtils.damp(lens.emissiveIntensity, emission, 12, frameDelta);
-    if (spotlight.current) spotlight.current.intensity = 20 * power * intensity;
-
+    if (!fixture || !lens || !width || !height || !(camera instanceof PerspectiveCamera)) return;
+    configureCamera(camera, width / height);
+    fixture.updateWorldMatrix(true, true);
+    const emission = power * 3;
+    lens.emissiveIntensity = !readySent.current || reduced
+      ? emission : MathUtils.damp(lens.emissiveIntensity, emission, 12, Math.min(delta, 0.05));
+    if (spotlight.current) spotlight.current.intensity = 20 * power;
     const overlay = illumination.current;
     if (overlay && lensCenter.current) {
       lensCenter.current.getWorldPosition(projected).project(camera);
       setLightProperty(overlay, "--lens-x", `${((projected.x + 1) * 50).toFixed(1)}%`);
       setLightProperty(overlay, "--lens-y", `${((1 - projected.y) * 50).toFixed(1)}%`);
-      setLightProperty(overlay, "--lens-halo", intensity.toFixed(3));
-      setLightProperty(overlay, "--light-spread", spread.toFixed(3));
     }
-    if (firstFrame) onReady();
-    if (
-      renderOnDemand && !reduced && !paused &&
-      (elapsed < 2.6 || Math.abs(lens.emissiveIntensity - emission) > 0.005)
-    ) {
-      invalidate();
+    if (!readySent.current && revealFrame.current === null) {
+      frames.current += 1;
+      if (frames.current < 2) invalidate();
+      else revealFrame.current = requestAnimationFrame(() => {
+        revealFrame.current = null;
+        readySent.current = true;
+        onReady();
+      });
     }
+    if (!reduced && Math.abs(lens.emissiveIntensity - emission) > 0.005) invalidate();
   });
   return (
-    <group ref={group} rotation={[0.02, -0.2, -0.13]}>
+    <group ref={group} rotation={[0.02, -0.39, -0.13]}>
       <RoundedBox
         args={[0.25, 4.2, 0.32]}
         radius={0.055}
@@ -266,12 +226,12 @@ export default function StreetlightScene(props: SceneProps) {
   return (
     <Canvas
       aria-hidden
-      dpr={[1, props.compactLayout ? 1.2 : 1.5]}
-      frameloop={props.reduced || props.paused || props.renderOnDemand ? "demand" : "always"}
+      dpr={[1, 1.5]}
+      frameloop="demand"
       camera={{ position: [-0.18, -1.26, 6.5], fov: 39 }}
       gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
-      onCreated={({ camera, gl }) => {
-        camera.lookAt(-0.12, -0.26, 0);
+      onCreated={({ camera, gl, size }) => {
+        if (camera instanceof PerspectiveCamera && size.height > 0) configureCamera(camera, size.width / size.height);
         gl.setClearAlpha(0);
       }}
     >
