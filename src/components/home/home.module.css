@@ -1,11 +1,17 @@
 .hero {
+  --bg: var(--deep-navy);
+  --text: var(--white);
+  --muted: var(--sky);
+  --line: #557492;
+  --accent: var(--sky);
+  color-scheme: dark;
   min-height: max(690px, calc(100svh - 80px));
   position: relative;
   container-type: inline-size;
   isolation: isolate;
   overflow: clip;
   display: grid;
-  background: var(--bg);
+  background: radial-gradient(ellipse at 75% 30%, #174c7d 0%, var(--deep-navy) 65%);
   color: var(--text);
 }
 
@@ -526,7 +532,7 @@
     width: min(100%, 295px);
     margin-top: 0;
     padding: 9px 13px;
-    background: #000d;
+    background: #0B2E57ed;
   }
   .lightControls {
     gap: 14px;
@@ -641,3 +647,15 @@
     transition: none;
   }
 }
+
+.heroKicker { font-family: var(--font-montserrat), Arial, sans-serif; color: var(--sky); }
+.heroDot { color: var(--sky); }
+.heroPrimary { background: var(--white); color: var(--deep-navy); border-color: var(--white); }
+.heroPrimary:hover { background: var(--sky); color: var(--deep-navy); }
+.heroLink { background: transparent; color: var(--white); }
+.heroLink:hover { background: var(--sky); color: var(--deep-navy); }
+.about { background: var(--white); }
+.about h2, .faq h2 { color: var(--deep-navy); }
+.sectionKicker, .faqAnswer a { color: var(--accent); }
+.faq { background: var(--cloud); }
+.faqRow button[aria-expanded="true"] { color: var(--accent); }

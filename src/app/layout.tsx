@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Header from "@/components/nav";
 import { Footer } from "@/components/ui";
 import { brand, description, metadataOrigin, siteUrl } from "@/lib/site";
-import "@fontsource-variable/manrope";
+import { Hanken_Grotesk, Montserrat } from "next/font/google";
 import "./globals.css";
+
+const hanken = Hanken_Grotesk({ subsets: ["latin"], variable: "--font-hanken", display: "swap" });
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat", display: "swap" });
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +28,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${hanken.variable} ${montserrat.variable}`}>
       <body id="top">
         {siteUrl && (
           <script

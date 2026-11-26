@@ -76,7 +76,7 @@ export default function Header() {
           className="brand-link"
           onNavigate={(event) => followLink("/", event.preventDefault)}
         >
-          <BrandMark eager />
+          <BrandMark variant="light" eager />
         </Link>
         <button
           className="menu-toggle icon-button"

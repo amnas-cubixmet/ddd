@@ -39,7 +39,7 @@
 .heroImage, .applicationImage {
   position: relative;
   overflow: hidden;
-  background: #151515;
+  background: var(--cloud);
 }
 .heroImage {
   aspect-ratio: 1.38;
@@ -78,7 +78,7 @@
   display: flex;
   height: 100%;
   flex-direction: column;
-  background: #0c0c0c;
+  background: var(--cloud);
   border: 1px solid var(--line);
   border-radius: 12px;
   text-decoration: none;
@@ -86,7 +86,7 @@
   transition: border-color .25s;
 }
 .applicationCard:hover, .applicationCard:focus-visible {
-  border-color: #999;
+  border-color: var(--bharat-blue);
 }
 .applicationImage {
   aspect-ratio: 1.65;
@@ -161,7 +161,7 @@
   margin-bottom: var(--section-gap);
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: #0c0c0c;
+  background: var(--cloud);
 }
 .contact h2 {
   margin-top: .85rem;

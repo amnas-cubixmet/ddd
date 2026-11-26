@@ -12,7 +12,7 @@
 .figure {
   min-width: 0;
   overflow: hidden;
-  background: #111;
+  background: var(--cloud);
   border: 1px solid var(--line);
   border-radius: 8px;
 }
@@ -21,7 +21,7 @@
   display: block;
   position: relative;
   aspect-ratio: 4 / 5;
-  background: #111;
+  background: var(--cloud);
 }
 
 .photo img {

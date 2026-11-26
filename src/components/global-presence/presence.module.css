@@ -1,6 +1,12 @@
 @reference "../../app/globals.css";
 
 .section {
+  --bg: var(--deep-navy);
+  --text: var(--white);
+  --muted: var(--sky);
+  --line: #557492;
+  color: var(--text);
+  color-scheme: dark;
   @apply relative isolate overflow-hidden;
   padding-block: clamp(1.5rem, 4vw, 3.5rem);
   background: var(--bg);

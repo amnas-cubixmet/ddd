@@ -5,7 +5,7 @@
 .panel {
   min-width: 0;
   padding: clamp(16px, 3vw, 32px);
-  background: #111;
+  background: var(--cloud);
   border-radius: 8px;
 }
 
