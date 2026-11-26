@@ -961,7 +961,11 @@ textarea::placeholder {
 }
 
 .page-transition {
-  animation: page-enter 0.25s ease-out both;
+  animation: page-slide-in 0.25s ease-out both;
+}
+@keyframes page-slide-in {
+  from { transform: translateY(4px); }
+  to { transform: translateY(0); }
 }
 .gallery-image-transition {
   animation: page-enter 0.34s ease-out both;
