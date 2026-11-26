@@ -1,20 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { Search, X } from "lucide-react";
-import { MotionConfig, motion } from "motion/react";
 import {
   catalogueCategories,
   catalogueLabel,
   findCollection,
   publishedProducts,
-  projectCategories,
-  projects,
   type Product,
 } from "@/lib/catalogue";
-import { Action, ProductCard, ProjectCard } from "./ui";
-import { useSiteReducedMotion } from "./use-media-query";
+import { Action, ProductCard } from "./ui";
 
 const catalogueWattages = [
   ...new Set(
@@ -168,58 +163,6 @@ export function ProductsBrowser({ initialCategory }: { initialCategory: string }
           </>
         )}
       </dialog>
-    </>
-  );
-}
-
-export function ProjectsBrowser() {
-  const [category, setCategory] = useState("");
-  const reduced = useSiteReducedMotion();
-  if (projects.length === 0) {
-    return (
-      <div className="empty-state">
-        <p>No projects are currently listed.</p>
-        <Action href="/products">Explore the product catalogue</Action>
-      </div>
-    );
-  }
-  const visible = projects.filter(
-    (item) => !category || item.category === category,
-  );
-  return (
-    <>
-      <div className="filter-pills" aria-label="Filter project concepts">
-        {["", ...projectCategories].map((name) => (
-          <button
-            key={name}
-            aria-pressed={category === name}
-            onClick={() => setCategory(name)}
-          >
-            {name || "All spaces"}
-          </button>
-        ))}
-      </div>
-      {visible.length ? (
-        <MotionConfig reducedMotion={reduced ? "always" : "never"}>
-          <motion.div
-            initial={false}
-            key={category}
-            animate={reduced ? { opacity: 1 } : { opacity: [0.75, 1] }}
-            className="card-grid wide"
-          >
-            {visible.map((item) => (
-              <ProjectCard item={item} key={item.slug} />
-            ))}
-          </motion.div>
-        </MotionConfig>
-      ) : (
-        <div className="empty-state">
-          <p>No concept studies in this category yet.</p>
-          <Link className="text-link" href="/request-quote">
-            Discuss your project
-          </Link>
-        </div>
-      )}
     </>
   );
 }

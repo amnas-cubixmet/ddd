@@ -29,3 +29,12 @@ test("toggles hero illumination and brightness availability", async ({ page }) =
   await expect(brightness).toBeEnabled();
   await expect(power).toHaveAttribute("aria-pressed", "true");
 });
+
+test("portfolio routes are removed and the homepage does not link to them", async ({ page, request }) => {
+  await page.goto("/");
+  await expect(page.locator('a[href="/portfolio"], a[href^="/portfolio/"]')).toHaveCount(0);
+  for (const path of ["/portfolio", "/portfolio/sample-project"]) {
+    const response = await request.get(path, { maxRedirects: 0 });
+    expect(response.status()).toBe(404);
+  }
+});

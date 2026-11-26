@@ -1,12 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, ArrowRight } from "lucide-react";
 import {
-  artwork,
   catalogueLabel,
   findCollection,
   type Product,
-  type Project,
 } from "@/lib/catalogue";
 import { brand } from "@/lib/site";
 import { BrandMark } from "./nav";
@@ -136,35 +133,6 @@ export function ProductCard({
   );
 }
 
-export function ProjectCard({ item }: { item: Project }) {
-  return (
-    <article className="media-card project-card">
-      <Link
-        href={`/portfolio/${item.slug}`}
-        className="image-link"
-        aria-label={`View ${item.name}`}
-      >
-        <Image
-          src={artwork(item.image)}
-          alt=""
-          fill
-          loading="lazy"
-          sizes="(max-width: 680px) 100vw, 48vw"
-        />
-        <span className="card-icon">
-          <ArrowUpRight size={19} />
-        </span>
-      </Link>
-      <div className="card-body">
-        <p className="label">{item.category} · Concept / inspiration</p>
-        <h3>
-          <Link href={`/portfolio/${item.slug}`}>{item.name}</Link>
-        </h3>
-      </div>
-    </article>
-  );
-}
-
 export function QuoteBanner() {
   return (
     <section className="quote-banner">
@@ -200,7 +168,6 @@ export function Footer() {
           <nav className="footer-links" aria-labelledby="footer-explore">
             <h2 id="footer-explore">Explore</h2>
             <Link href="/products">Product Catalogue</Link>
-            <Link href="/portfolio">Projects</Link>
             <Link href="/about">Company Information</Link>
             <Link href="/#global-presence">Global presence</Link>
             <Link href="/contact">Contact</Link>
