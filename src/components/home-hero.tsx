@@ -38,6 +38,8 @@ class SceneBoundary extends Component<
 export function HomeHero({ catalogue }: { catalogue?: string }) {
   const root = useRef<HTMLElement>(null);
   const illumination = useRef<HTMLDivElement>(null);
+  const pointer = useRef({ x: 0, y: 0 });
+  const [visible, setVisible] = useState(false);
   const [powered, setPowered] = useState(true);
   const [brightness, setBrightness] = useState(80);
   const [enabled, setEnabled] = useState(false);
@@ -65,9 +67,12 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
         setEnabled(false);
       }
     }, { rootMargin: "120px" });
+    const visibility = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
     loader.observe(element);
+    visibility.observe(element);
     return () => {
       loader.disconnect();
+      visibility.disconnect();
     };
   }, [root]);
 
@@ -77,23 +82,29 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
       className={styles.hero}
       style={{ "--hero-light-power": power } as CSSProperties}
       ref={root}
+      onPointerMove={(event) => {
+        if (reduced || event.pointerType !== "mouse") return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        pointer.current = { x: (event.clientX - rect.left) / rect.width - 0.5, y: (event.clientY - rect.top) / rect.height - 0.5 };
+      }}
+      onPointerLeave={() => { pointer.current = { x: 0, y: 0 }; }}
     >
       <div className={`shell ${styles.heroInner}`}>
         <div className={styles.heroLead}>
-          <p className={styles.heroKicker}>
+          <p className={styles.heroKicker} data-hero-enter>
             Powering a Brighter Tomorrow
           </p>
-          <h1>
+          <h1 data-hero-enter>
             <span>Light up</span>
             <span>
               the future<span className={styles.heroDot}>.</span>
             </span>
           </h1>
-          <p className={styles.heroSummary}>
+          <p className={styles.heroSummary} data-hero-enter>
             Advanced LED lighting solutions for commercial, industrial and
             outdoor environments.
           </p>
-          <div className={styles.heroActions}>
+          <div className={styles.heroActions} data-hero-enter>
             <Link className={styles.heroPrimary} href="/products">
               Explore Products <ArrowDownRight size={19} aria-hidden="true" />
             </Link>
@@ -119,39 +130,43 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
           <div className={styles.heroIllumination} ref={illumination}>
             <div className={styles.heroGlow} />
           </div>
-          <picture className={styles.heroFallback}>
-            <source
-              media="(max-width: 650px) and (orientation: portrait), (max-width: 650px) and (min-height: 501px)"
-              srcSet="/images/streetlight-fixed-mobile.webp"
-            />
-            {/* Captured directly from the fixed camera; no optimizer resizing or cropping. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/streetlight-fixed-wide.webp"
-              alt=""
-              width={936}
-              height={780}
-              fetchPriority="high"
-              loading="eager"
-              decoding="sync"
-              data-testid="streetlight-poster"
-            />
-          </picture>
-          {enabled && (
-            <div className={styles.heroCanvas}>
-              <SceneBoundary fallback={useFallback}>
-                <StreetlightScene
-                  power={power}
-                  reduced={reduced}
-                  illumination={illumination}
-                  onReady={markReady}
-                  onFailure={useFallback}
-                />
-              </SceneBoundary>
-            </div>
-          )}
+          <div className={styles.heroVisual} data-testid="streetlight-visual">
+            <picture className={styles.heroFallback}>
+              <source
+                media="(max-width: 650px) and (orientation: portrait), (max-width: 650px) and (min-height: 501px)"
+                srcSet="/images/streetlight-fixed-mobile.webp"
+              />
+              {/* Captured directly from the fixed camera; no optimizer resizing or cropping. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/streetlight-fixed-wide.webp"
+                alt=""
+                width={936}
+                height={780}
+                fetchPriority="high"
+                loading="eager"
+                decoding="sync"
+                data-testid="streetlight-poster"
+              />
+            </picture>
+            {enabled && (
+              <div className={styles.heroCanvas}>
+                <SceneBoundary fallback={useFallback}>
+                  <StreetlightScene
+                    power={power}
+                    reduced={reduced}
+                    active={visible}
+                    pointer={pointer}
+                    illumination={illumination}
+                    onReady={markReady}
+                    onFailure={useFallback}
+                  />
+                </SceneBoundary>
+              </div>
+            )}
+          </div>
         </div>
-        <div className={styles.heroPanel}>
+        <div className={styles.heroPanel} data-hero-panel>
           <span className={styles.modelCaption}>Streetlight concept</span>
           <div className={styles.lightControls}>
             <button

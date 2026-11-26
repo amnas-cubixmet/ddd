@@ -107,11 +107,39 @@
   pointer-events: none;
   isolation: isolate;
 }
+.heroVisual,
 .heroCanvas,
 .heroFallback,
 .heroIllumination {
   position: absolute;
   inset: 0;
+}
+.heroVisual {
+  width: 100%;
+  height: 100%;
+  animation: fixture-power-up 1.65s cubic-bezier(.2,.65,.25,1) both;
+}
+@keyframes fixture-power-up {
+  0% { filter: brightness(.78); }
+  22% { filter: brightness(.86); }
+  64% { filter: brightness(1.06); }
+  100% { filter: brightness(1); }
+}
+.heroLead > [data-hero-enter] {
+  animation: hero-copy-enter .72s cubic-bezier(.2,.75,.25,1) both;
+}
+.heroLead > [data-hero-enter]:nth-child(1) { animation-delay: .04s; }
+.heroLead > [data-hero-enter]:nth-child(2) { animation-delay: .13s; }
+.heroLead > [data-hero-enter]:nth-child(3) { animation-delay: .22s; }
+.heroLead > [data-hero-enter]:nth-child(4) { animation-delay: .31s; }
+.heroPanel[data-hero-panel] { animation: hero-panel-enter .65s .42s ease-out both; }
+@keyframes hero-copy-enter {
+  from { opacity: .55; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-panel-enter {
+  from { opacity: .65; }
+  to { opacity: 1; }
 }
 .heroCanvas {
   width: 100%;
@@ -136,6 +164,8 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  filter: brightness(calc(.6 + .5 * var(--hero-light-power)));
+  transition: filter .35s ease;
 }
 .heroIllumination {
   --lens-x: 43.2%;
@@ -157,7 +187,7 @@
     #ffffff17 56%,
     transparent 100%
   );
-  animation: lens-halo 1.5s ease-out both;
+  animation: lens-halo 1.65s ease-out both;
 }
 .heroGlow::after {
   content: "";
@@ -174,7 +204,7 @@
     transparent 105deg
   );
   transform-origin: 50% 0;
-  animation: light-spread 1s 1.5s ease-out both;
+  animation: light-spread 1.15s .55s ease-out both;
 }
 @keyframes lens-halo {
   0%,
@@ -578,10 +608,13 @@
     transform: none;
   }
   .heroGlow,
-  .heroGlow::after {
+  .heroGlow::after,
+  .heroVisual,
+  .heroLead > [data-hero-enter],
+  .heroPanel[data-hero-panel] {
     animation: none;
   }
-  .hero :is(.heroIllumination, .heroLink, .heroPrimary, .heroCanvas, .heroFallback),
+  .hero :is(.heroIllumination, .heroLink, .heroPrimary, .heroCanvas, .heroFallback, .heroFallback img),
   .faqRow button svg,
   .faqAnswer {
     transition: none;

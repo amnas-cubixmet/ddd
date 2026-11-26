@@ -9,6 +9,7 @@ import {
   Object3D,
   Vector3,
   type Group,
+  type DirectionalLight,
   type MeshStandardMaterial,
   type SpotLight,
 } from "three";
@@ -16,6 +17,8 @@ import {
 type SceneProps = {
   power: number;
   reduced: boolean;
+  active: boolean;
+  pointer: RefObject<{ x: number; y: number }>;
   illumination: RefObject<HTMLDivElement | null>;
   onReady: () => void;
   onFailure: () => void;
@@ -42,11 +45,12 @@ function configureCamera(camera: PerspectiveCamera, aspect: number) {
   camera.updateMatrixWorld(true);
 }
 
-function Fixture({ power, reduced, illumination, onReady, onFailure }: SceneProps) {
+function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: SceneProps) {
   const group = useRef<Group>(null);
   const diffuser = useRef<MeshStandardMaterial>(null);
   const lensCenter = useRef<Object3D>(null);
   const spotlight = useRef<SpotLight>(null);
+  const reflection = useRef<DirectionalLight>(null);
   const target = useMemo(() => new Object3D(), []);
   const projected = useMemo(() => new Vector3(), []);
   const gl = useThree(state => state.gl);
@@ -88,7 +92,14 @@ function Fixture({ power, reduced, illumination, onReady, onFailure }: SceneProp
     const emission = power * 3;
     lens.emissiveIntensity = !readySent.current || reduced
       ? emission : MathUtils.damp(lens.emissiveIntensity, emission, 12, Math.min(delta, 0.05));
-    if (spotlight.current) spotlight.current.intensity = 20 * power;
+    if (spotlight.current) spotlight.current.intensity = lens.emissiveIntensity * (20 / 3);
+    // Move the reflection, not the fixture: no camera or geometry movement on pointer input.
+    if (reflection.current) {
+      const x = -3 + (readySent.current && !reduced ? pointer.current.x * 0.8 : 0);
+      const y = 5 + (readySent.current && !reduced ? pointer.current.y * 0.6 : 0);
+      reflection.current.position.x = reduced ? x : MathUtils.damp(reflection.current.position.x, x, 5, Math.min(delta, 0.05));
+      reflection.current.position.y = reduced ? y : MathUtils.damp(reflection.current.position.y, y, 5, Math.min(delta, 0.05));
+    }
     const overlay = illumination.current;
     if (overlay && lensCenter.current) {
       lensCenter.current.getWorldPosition(projected).project(camera);
@@ -107,6 +118,8 @@ function Fixture({ power, reduced, illumination, onReady, onFailure }: SceneProp
     if (!reduced && Math.abs(lens.emissiveIntensity - emission) > 0.005) invalidate();
   });
   return (
+    <>
+    <directionalLight ref={reflection} position={[-3, 5, 3]} intensity={3.1} color="#ffffff" />
     <group ref={group} rotation={[0.02, -0.39, -0.13]}>
       <RoundedBox
         args={[0.25, 4.2, 0.32]}
@@ -219,6 +232,7 @@ function Fixture({ power, reduced, illumination, onReady, onFailure }: SceneProp
         ))}
       </group>
     </group>
+    </>
   );
 }
 
@@ -227,7 +241,7 @@ export default function StreetlightScene(props: SceneProps) {
     <Canvas
       aria-hidden
       dpr={[1, 1.5]}
-      frameloop="demand"
+      frameloop={props.active && !props.reduced ? "always" : "demand"}
       camera={{ position: [-0.18, -1.26, 6.5], fov: 39 }}
       gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
       onCreated={({ camera, gl, size }) => {
@@ -236,7 +250,6 @@ export default function StreetlightScene(props: SceneProps) {
       }}
     >
       <hemisphereLight intensity={1.55} color="#ffffff" groundColor="#686868" />
-      <directionalLight position={[-3, 5, 3]} intensity={3.1} color="#ffffff" />
       <directionalLight position={[3, 3, -4]} intensity={2} color="#d4d4d4" />
       <Fixture {...props} />
     </Canvas>
