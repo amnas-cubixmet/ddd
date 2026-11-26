@@ -13,8 +13,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
-import { useMotion, type MotionTools } from "./motion";
-import { compactSceneQuery, useMediaQuery, useSiteReducedMotion, useTouchHomepageMotion } from "./use-media-query";
+import { useSiteReducedMotion } from "./use-media-query";
 import styles from "./home/home.module.css";
 
 const StreetlightScene = dynamic(() => import("./home/streetlight-scene"), {
@@ -37,66 +36,14 @@ class SceneBoundary extends Component<
   }
 }
 
-function animateHero(root: HTMLElement, { gsap, media }: MotionTools) {
-  const items = root.querySelectorAll("[data-hero-enter]");
-  const stage = root.querySelector("[data-hero-stage]");
-  media.add("all", () => {
-    gsap.from(items, {
-      opacity: 0,
-      y: 20,
-      duration: 0.68,
-      stagger: 0.1,
-      ease: "power3.out",
-      clearProps: "opacity,transform",
-    });
-  });
-  media.add(
-    "(min-width: 901px)",
-    () => {
-      if (!stage) return;
-      gsap.to(stage, {
-        y: 100,
-        scale: 0.94,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    },
-  );
-  media.add(
-    "(max-width: 900px)",
-    () => {
-      if (!stage) return;
-      gsap.to(stage, {
-        "--hero-scroll-y": "22px",
-        ease: "none",
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    },
-  );
-}
-
 export function HomeHero({ catalogue }: { catalogue?: string }) {
-  const touchMotion = useTouchHomepageMotion();
-  const root = useMotion<HTMLElement>(animateHero, touchMotion);
+  const root = useRef<HTMLElement>(null);
   const illumination = useRef<HTMLDivElement>(null);
-  const pointer = useRef({ x: 0, y: 0 });
   const [powered, setPowered] = useState(true);
   const [brightness, setBrightness] = useState(80);
   const [enabled, setEnabled] = useState(false);
   const [ready, setReady] = useState(false);
-  const reduced = useSiteReducedMotion() && !touchMotion;
-  const compact = useMediaQuery(compactSceneQuery);
-  const [visible, setVisible] = useState(false);
+  const reduced = useSiteReducedMotion();
   const markReady = useCallback(() => setReady(true), []);
   const useFallback = useCallback(() => {
     setEnabled(false);
@@ -119,14 +66,9 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
         setEnabled(false);
       }
     }, { rootMargin: "120px" });
-    const visibility = new IntersectionObserver(([entry]) =>
-      setVisible(entry.isIntersecting),
-    );
     loader.observe(element);
-    visibility.observe(element);
     return () => {
       loader.disconnect();
-      visibility.disconnect();
     };
   }, [root]);
 
@@ -134,37 +76,25 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   return (
     <section
       className={styles.hero}
-      data-touch-home-motion={touchMotion || undefined}
       style={{ "--hero-light-power": power } as CSSProperties}
       ref={root}
-      onPointerMove={(event) => {
-        if (reduced || event.pointerType !== "mouse") return;
-        const rect = event.currentTarget.getBoundingClientRect();
-        pointer.current = {
-          x: (event.clientX - rect.left) / rect.width - 0.5,
-          y: (event.clientY - rect.top) / rect.height - 0.5,
-        };
-      }}
-      onPointerLeave={() => {
-        pointer.current = { x: 0, y: 0 };
-      }}
     >
       <div className={`shell ${styles.heroInner}`}>
         <div className={styles.heroLead}>
-          <p className={styles.heroKicker} data-hero-enter>
+          <p className={styles.heroKicker}>
             Powering a Brighter Tomorrow
           </p>
-          <h1 data-hero-enter>
+          <h1>
             <span>Light up</span>
             <span>
               the future<span className={styles.heroDot}>.</span>
             </span>
           </h1>
-          <p className={styles.heroSummary} data-hero-enter>
+          <p className={styles.heroSummary}>
             Advanced LED lighting solutions for commercial, industrial and
             outdoor environments.
           </p>
-          <div className={styles.heroActions} data-hero-enter>
+          <div className={styles.heroActions}>
             <Link className={styles.heroPrimary} href="/products">
               Explore Products <ArrowDownRight size={19} aria-hidden="true" />
             </Link>
@@ -183,6 +113,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
           className={styles.heroStage}
           data-hero-stage
           data-testid="streetlight-stage"
+          data-fixed-hero="true"
           data-ready={ready}
           aria-hidden="true"
         >
@@ -203,10 +134,6 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
                 <StreetlightScene
                   power={power}
                   reduced={reduced}
-                  compactLayout={compact}
-                  paused={!visible}
-                  renderOnDemand={touchMotion}
-                  pointer={pointer}
                   illumination={illumination}
                   onReady={markReady}
                   onFailure={useFallback}
