@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowDownRight, ArrowUpRight, Power } from "lucide-react";
 import {
@@ -120,14 +119,24 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
           <div className={styles.heroIllumination} ref={illumination}>
             <div className={styles.heroGlow} />
           </div>
-          <Image
-            className={styles.heroFallback}
-            src="/images/streetlight-concept.webp"
-            alt=""
-            fill
-            preload
-            sizes="(max-width: 900px) 100vw, 64vw"
-          />
+          <picture className={styles.heroFallback}>
+            <source
+              media="(max-width: 650px) and (orientation: portrait), (max-width: 650px) and (min-height: 501px)"
+              srcSet="/images/streetlight-fixed-mobile.webp"
+            />
+            {/* Captured directly from the fixed camera; no optimizer resizing or cropping. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/streetlight-fixed-wide.webp"
+              alt=""
+              width={936}
+              height={780}
+              fetchPriority="high"
+              loading="eager"
+              decoding="sync"
+              data-testid="streetlight-poster"
+            />
+          </picture>
           {enabled && (
             <div className={styles.heroCanvas}>
               <SceneBoundary fallback={useFallback}>

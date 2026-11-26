@@ -31,9 +31,10 @@ test("capture final fixed streetlight frames and check responsive layout", async
       });
       expect(Math.abs(capture.ratio-profile.ratio)).toBeLessThan(0.025);
       expect(capture.visible).toBeGreaterThan(0.005);
-      // CI log chunks let the reviewed capture be retrieved without manual local scripts.
-      console.log("HERO_POSTER_META "+profile.name+" "+JSON.stringify({x:capture.x,y:capture.y,length:capture.image.length}));
-      for(let offset=0;offset<capture.image.length;offset+=1600) console.log("HERO_POSTER_CHUNK "+profile.name+" "+offset+" "+capture.image.slice(offset,offset+1600));
+      const poster = stage.getByTestId("streetlight-poster");
+      await expect(poster).toHaveJSProperty("complete", true);
+      expect(await poster.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+      expect(await poster.evaluate((img: HTMLImageElement) => img.currentSrc)).toContain(`streetlight-fixed-${profile.name}.webp`);
       const before=await stage.boundingBox();
       await page.waitForTimeout(600);
       const after=await stage.boundingBox();
@@ -44,10 +45,24 @@ test("capture final fixed streetlight frames and check responsive layout", async
 
 for(const width of [320,390,768,1440]) {
   test(`hero stage reserves fixed geometry at ${width}px`,async ({browser})=>{
-    const context=await browser.newContext({viewport:{width,height:900},javaScriptEnabled:false});
+    const context=await browser.newContext({viewport:{width,height:900},reducedMotion:"reduce"});
     try {
+      await context.addInitScript(() => {
+        const original = HTMLCanvasElement.prototype.getContext;
+        HTMLCanvasElement.prototype.getContext = function(this: HTMLCanvasElement, type: string, options?: unknown) {
+          if (/^(webgl|experimental-webgl)/.test(type)) return null;
+          return Reflect.apply(original, this, [type, options]);
+        } as typeof original;
+      });
       const page=await context.newPage(); await page.goto("/");
       const stage=page.getByTestId("streetlight-stage");
+      await expect(stage).toBeVisible();
+      await expect(stage).toHaveAttribute("data-ready", "false");
+      const poster = stage.getByTestId("streetlight-poster");
+      await expect(poster).toHaveJSProperty("complete", true);
+      expect(await poster.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+      expect(await poster.evaluate((img: HTMLImageElement) => img.currentSrc)).toContain(width<=650?"streetlight-fixed-mobile.webp":"streetlight-fixed-wide.webp");
+      await expect(poster).toBeVisible();
       const box=await stage.boundingBox(); expect(box).not.toBeNull();
       expect(Math.abs(box!.width/box!.height-(width<=650?31/50:6/5))).toBeLessThan(.025);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBeTruthy();

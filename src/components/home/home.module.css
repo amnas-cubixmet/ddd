@@ -129,12 +129,17 @@
 .heroFallback {
   opacity: 1;
   transition: opacity 240ms ease;
+  display: block;
+}
+.heroFallback img {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  filter: grayscale(1);
 }
 .heroIllumination {
-  --lens-x: 44%;
-  --lens-y: 18%;
+  --lens-x: 43.2%;
+  --lens-y: 33.5%;
   z-index: -1;
   opacity: var(--hero-light-power);
   transition: opacity 0.35s ease;
@@ -420,15 +425,9 @@
       transparent 83%
     );
   }
-  .heroFallback {
-    object-position: right -8vw top 0;
-    transform: scale(1.18);
-    transform-origin: 75% 0;
-    filter: grayscale(1) brightness(calc(1 + 0.28 * var(--hero-light-power)));
-  }
   .heroIllumination {
-    --lens-x: 61%;
-    --lens-y: 17%;
+    --lens-x: 52.8%;
+    --lens-y: 12.5%;
   }
   .heroGlow {
     background: radial-gradient(
@@ -548,8 +547,9 @@
   .heroFallback {
     mask-image: none;
   }
-  .heroFallback {
-    object-position: center;
+  .heroIllumination {
+    --lens-x: 43.2%;
+    --lens-y: 33.5%;
   }
   .heroPanel {
     grid-area: 2 / 2 / 3 / 3;
