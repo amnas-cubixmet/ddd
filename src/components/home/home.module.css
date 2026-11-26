@@ -4,7 +4,7 @@
   --muted: #d4d4d4;
   --line: #333333;
   color-scheme: dark;
-  min-height: max(690px, calc(100svh - 80px));
+  min-height: clamp(570px, 76svh, 690px);
   position: relative;
   container-type: inline-size;
   isolation: isolate;
@@ -19,7 +19,7 @@
   position: relative;
   display: grid;
   align-items: center;
-  padding-block: 60px 96px;
+  padding-block: 42px 68px;
 }
 .heroLead {
   min-width: 0;
@@ -208,7 +208,7 @@
   transform: translate(-50%, -12%);
   background: radial-gradient(
     ellipse 24% 9% at 50% 13%,
-    #ffffff42,
+    #ffffff65,
     #ffffff17 56%,
     transparent 100%
   );
@@ -219,8 +219,8 @@
   position: absolute;
   inset: 12% 13% 18%;
   background:
-    radial-gradient(ellipse 35% 43% at 53% 46%, #ffffff1b, transparent 100%),
-    radial-gradient(ellipse 47% 17% at 57% 73%, #ffffff13, transparent 100%);
+    radial-gradient(ellipse 35% 43% at 53% 46%, #ffffff40, transparent 100%),
+    radial-gradient(ellipse 47% 17% at 57% 73%, #ffffff29, transparent 100%);
   mask-image: conic-gradient(
     from 128deg at 50% 0%,
     transparent 0deg,
@@ -421,7 +421,7 @@
 }
 @media (max-width: 900px) {
   .hero {
-    min-height: calc(100svh - var(--header-height));
+    min-height: auto;
     overflow: visible;
   }
   .heroInner {
@@ -457,7 +457,7 @@
   .heroInner {
     grid-template-rows: 1fr auto;
     gap: clamp(24px, 6svh, 52px);
-    padding-block: clamp(139px, 46vw, 250px) 26px;
+    padding-block: clamp(120px, 39vw, 210px) 22px;
   }
   .heroStage {
     position: absolute;
@@ -500,7 +500,7 @@
   .heroGlow::after {
     inset: 12% 0 0;
     background:
-      radial-gradient(ellipse 44% 58% at 44% 40%, #fff4, transparent 96%),
+      radial-gradient(ellipse 44% 58% at 44% 40%, #fff6, transparent 96%),
       radial-gradient(ellipse 51% 29% at 43% 61%, #fff2, transparent 100%);
     mask-image: conic-gradient(
       from 117deg at 50% 0,
