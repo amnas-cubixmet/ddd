@@ -171,7 +171,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
           </div>
         </div>
         <div className={styles.heroPanel} data-hero-panel>
-          <span className={styles.modelCaption}>Graphite LED streetlight</span>
+          <span className={styles.modelCaption}>Streetlight concept</span>
           <div className={styles.lightControls}>
             <button type="button" aria-pressed={motionPaused} onClick={() => setMotionPaused(!motionPaused)}>
               {motionPaused ? "Resume motion" : "Pause motion"}

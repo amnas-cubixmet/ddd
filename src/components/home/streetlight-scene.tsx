@@ -1,6 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { RoundedBox } from "@react-three/drei";
 import { useEffect, useLayoutEffect, useMemo, useRef, type RefObject } from "react";
 import {
   MathUtils,
@@ -8,9 +9,8 @@ import {
   Object3D,
   Vector3,
   type Group,
-  type Mesh,
   type DirectionalLight,
-  MeshStandardMaterial,
+  type MeshStandardMaterial,
   type SpotLight,
 } from "three";
 
@@ -35,29 +35,19 @@ function configureCamera(camera: PerspectiveCamera, aspect: number) {
   camera.aspect = aspect;
   camera.fov = 39;
   if (aspect < 0.8) {
-    camera.position.set(0, -0.45, 7.25);
-    camera.lookAt(0, -0.1, 0);
+    camera.position.set(-0.62, -2.7, 8.4);
+    camera.lookAt(-0.62, -1.8, 0);
   } else {
     camera.position.set(-0.18, -1.26, 6.5);
-    camera.lookAt(0, 0, 0);
+    camera.lookAt(-0.12, -0.26, 0);
   }
   camera.updateProjectionMatrix();
   camera.updateMatrixWorld(true);
 }
 
-const chips = Array.from({ length: 40 }, (_, index) => [
-  -0.67 + (index % 10) * 0.19,
-  -0.253 + Math.floor(index / 10) * 0.16,
-]);
-const fins = Array.from({ length: 12 }, (_, index) => -0.95 + index * 0.19);
-
 function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: SceneProps) {
   const group = useRef<Group>(null);
-  const diffuser = useMemo(() => new MeshStandardMaterial({
-    color: "#e8d962", emissive: "#ffffff", emissiveIntensity: 0, roughness: 0.48,
-  }), []);
-  useEffect(() => () => diffuser.dispose(), [diffuser]);
-  const firstChip = useRef<Mesh>(null);
+  const diffuser = useRef<MeshStandardMaterial>(null);
   const lensCenter = useRef<Object3D>(null);
   const spotlight = useRef<SpotLight>(null);
   const reflection = useRef<DirectionalLight>(null);
@@ -95,8 +85,8 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
 
   useFrame((_, delta) => {
     const fixture = group.current;
-    const lens = firstChip.current?.material;
-    if (!fixture || !(lens instanceof MeshStandardMaterial) || !width || !height || !(camera instanceof PerspectiveCamera)) return;
+    const lens = diffuser.current;
+    if (!fixture || !lens || !width || !height || !(camera instanceof PerspectiveCamera)) return;
     configureCamera(camera, width / height);
     fixture.updateWorldMatrix(true, true);
     const emission = power * 3;
@@ -130,13 +120,43 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
   return (
     <>
     <directionalLight ref={reflection} position={[-3, 5, 3]} intensity={3.1} color="#ffffff" />
-      <group ref={group} rotation={[-0.28, -0.43, 0.28]}>
-        <object3D ref={lensCenter} position={[0, 0, 0.24]} />
-        <primitive object={target} position={[0, 0, 4]} />
+    <group ref={group} rotation={[0.02, -0.39, -0.13]}>
+      <RoundedBox
+        args={[0.25, 4.2, 0.32]}
+        radius={0.055}
+        smoothness={3}
+        position={[1.12, -1.35, 0.02]}
+      >
+        <meshStandardMaterial
+          color="#282828"
+          roughness={0.49}
+          metalness={0.42}
+        />
+      </RoundedBox>
+      <group position={[0.7, 0.57, 0]} rotation={[0, 0, -0.18]}>
+        <RoundedBox args={[1.1, 0.22, 0.24]} radius={0.09} smoothness={3}>
+          <meshStandardMaterial
+            color="#383838"
+            roughness={0.42}
+            metalness={0.55}
+          />
+        </RoundedBox>
+        <RoundedBox
+          args={[0.3, 0.32, 0.32]}
+          radius={0.055}
+          smoothness={3}
+          position={[0.45, -0.045, 0]}
+        >
+          <meshStandardMaterial color="#292929" roughness={0.52} />
+        </RoundedBox>
+      </group>
+      <group position={[-0.53, 0.69, 0.02]} rotation={[-0.34, 0.01, -0.23]}>
+        <object3D ref={lensCenter} position={[0, -0.225, 0]} />
+        <primitive object={target} position={[0, -3.8, 0.7]} />
         <spotLight
           ref={spotlight}
           target={target}
-          position={[0, 0, 0.28]}
+          position={[0, -0.24, 0]}
           intensity={0}
           distance={6}
           decay={2}
@@ -144,34 +164,74 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
           penumbra={0.9}
           color="#ffffff"
         />
-        <mesh position={[-1.62, -1.15, -0.14]} rotation={[0, 0, -0.17]}>
-          <cylinderGeometry args={[0.13, 0.16, 2.6, 24]} />
-          <meshStandardMaterial color="#17191c" roughness={0.52} metalness={0.45} />
-        </mesh>
-        <mesh position={[-1.46, 0, -0.03]} rotation={[0, 0, Math.PI / 2]}>
-          <cylinderGeometry args={[0.18, 0.18, 0.65, 24]} />
-          <meshStandardMaterial color="#292b2e" roughness={0.42} metalness={0.55} />
-        </mesh>
-        <mesh rotation={[0, 0, Math.PI / 2]} scale={[1, 1, 0.43]}>
-          <capsuleGeometry args={[0.57, 1.98, 12, 32]} />
-          <meshStandardMaterial color="#34383e" roughness={0.42} metalness={0.58} />
-        </mesh>
-        <mesh position={[0.18, 0, 0.17]}>
-          <boxGeometry args={[2.03, 0.78, 0.13]} />
-          <meshStandardMaterial color="#585b5d" roughness={0.48} metalness={0.53} />
-        </mesh>
-        {chips.map(([x, y], index) => (
-          <mesh key={index} ref={index === 0 ? firstChip : undefined} position={[x, y, 0.245]} material={diffuser}>
-            <boxGeometry args={[0.105, 0.095, 0.035]} />
-          </mesh>
-        ))}
-        {fins.map((x) => (
-          <mesh key={x} position={[x, 0.16, -0.23]}>
-            <boxGeometry args={[0.045, 0.66, 0.16]} />
-            <meshStandardMaterial color="#303238" roughness={0.48} metalness={0.54} />
-          </mesh>
+        <RoundedBox
+          args={[2.58, 0.37, 1.14]}
+          radius={0.17}
+          smoothness={5}
+          position={[0, 0.034, 0]}
+        >
+          <meshStandardMaterial
+            color="#262626"
+            roughness={0.35}
+            metalness={0.5}
+          />
+        </RoundedBox>
+        <RoundedBox
+          args={[2.44, 0.1, 1.05]}
+          radius={0.043}
+          smoothness={3}
+          position={[0, -0.13, 0]}
+        >
+          <meshStandardMaterial
+            color="#555555"
+            roughness={0.56}
+            metalness={0.32}
+          />
+        </RoundedBox>
+        <RoundedBox
+          args={[2.24, 0.09, 0.9]}
+          radius={0.043}
+          smoothness={4}
+          position={[0, -0.174, 0]}
+        >
+          <meshStandardMaterial
+            ref={diffuser}
+            color="#838383"
+            emissive="#ffffff"
+            emissiveIntensity={0}
+            roughness={0.37}
+            metalness={0.06}
+          />
+        </RoundedBox>
+        <RoundedBox
+          args={[1.95, 0.02, 0.055]}
+          radius={0.008}
+          smoothness={2}
+          position={[0, -0.225, 0]}
+        >
+          <meshStandardMaterial
+            color="#767676"
+            roughness={0.53}
+            metalness={0.1}
+          />
+        </RoundedBox>
+        {[-0.83, -0.58, -0.33, -0.08, 0.17, 0.42].map((x) => (
+          <RoundedBox
+            key={x}
+            args={[0.075, 0.055, 0.64]}
+            radius={0.018}
+            smoothness={2}
+            position={[x, 0.226, 0]}
+          >
+            <meshStandardMaterial
+              color="#4d4d4d"
+              roughness={0.44}
+              metalness={0.45}
+            />
+          </RoundedBox>
         ))}
       </group>
+    </group>
     </>
   );
 }

@@ -1,5 +1,5 @@
 .hero {
-  --bg: var(--ink);
+  --bg: #000000;
   --text: var(--white);
   --muted: var(--sky);
   --line: #557492;
@@ -11,7 +11,7 @@
   isolation: isolate;
   overflow: clip;
   display: grid;
-  background: var(--ink);
+  background: var(--bg);
   color: var(--text);
 }
 
