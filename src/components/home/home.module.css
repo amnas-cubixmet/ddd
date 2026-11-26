@@ -1,9 +1,8 @@
 .hero {
   --bg: #000000;
-  --text: var(--white);
-  --muted: var(--sky);
-  --line: #557492;
-  --accent: var(--sky);
+  --text: #ffffff;
+  --muted: #d4d4d4;
+  --line: #333333;
   color-scheme: dark;
   min-height: max(690px, calc(100svh - 80px));
   position: relative;
@@ -13,6 +12,7 @@
   display: grid;
   background: var(--bg);
   color: var(--text);
+  font-family: Manrope, var(--font-hanken), Arial, sans-serif;
 }
 
 .heroInner {
@@ -35,13 +35,9 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.heroKicker {
-  font-family: var(--font-montserrat), sans-serif;
-  font-weight: 600;
-}
 .hero h1 {
   margin: 21px 0 0;
-  font-size: clamp(4.4rem, 7.15vw, 7.5rem);
+  font-size: clamp(5.4rem, 11.2vw, 13.25rem);
   line-height: 0.8;
   font-weight: 800;
   letter-spacing: -0.087em;
@@ -163,12 +159,12 @@
 .heroLead > [data-hero-enter]:nth-child(4) { animation-delay: .31s; }
 .heroPanel[data-hero-panel] { animation: hero-panel-enter .65s .42s ease-out both; }
 @keyframes hero-copy-enter {
-  from { transform: translateY(12px); }
-  to { transform: translateY(0); }
+  from { opacity: .55; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes hero-panel-enter {
-  from { transform: translateY(6px); }
-  to { transform: translateY(0); }
+  from { opacity: .65; }
+  to { opacity: 1; }
 }
 .heroCanvas {
   width: 100%;
@@ -197,8 +193,8 @@
   transition: filter .35s ease;
 }
 .heroIllumination {
-  --lens-x: 49%;
-  --lens-y: 50%;
+  --lens-x: 43.2%;
+  --lens-y: 33.5%;
   z-index: -1;
   opacity: var(--hero-light-power);
   transition: opacity 0.35s ease;
@@ -217,6 +213,23 @@
     transparent 100%
   );
   animation: lens-halo 1.65s ease-out both;
+}
+.heroGlow::after {
+  content: "";
+  position: absolute;
+  inset: 12% 13% 18%;
+  background:
+    radial-gradient(ellipse 35% 43% at 53% 46%, #ffffff1b, transparent 100%),
+    radial-gradient(ellipse 47% 17% at 57% 73%, #ffffff13, transparent 100%);
+  mask-image: conic-gradient(
+    from 128deg at 50% 0%,
+    transparent 0deg,
+    #000 34deg,
+    #000 68deg,
+    transparent 105deg
+  );
+  transform-origin: 50% 0;
+  animation: light-spread 1.15s .55s ease-out both;
 }
 @keyframes lens-halo {
   0%,
@@ -403,7 +416,7 @@
 }
 @media (max-width: 1050px) {
   .hero h1 {
-    font-size: clamp(4.1rem, 7.5vw, 5.1rem);
+    font-size: clamp(5.6rem, 12.2vw, 8.4rem);
   }
 }
 @media (max-width: 900px) {
@@ -439,24 +452,22 @@
 }
 @media (max-width: 650px) {
   .hero {
-    min-height: auto;
     overflow: clip;
   }
   .heroInner {
-    grid-template-rows: auto auto;
-    gap: 22px;
-    padding-block: min(calc(70vw + 30px), 340px) 26px;
+    grid-template-rows: 1fr auto;
+    gap: clamp(24px, 6svh, 52px);
+    padding-block: clamp(139px, 46vw, 250px) 26px;
   }
   .heroStage {
     position: absolute;
-    inset: -92px auto auto 50%;
+    inset: 0 auto auto 50%;
     z-index: 0;
-    width: min(100cqw, 420px);
+    width: 100cqw;
     height: auto;
     aspect-ratio: 31 / 50;
     margin: 0;
-    transform: translateX(-50%) scale(.88);
-    transform-origin: top center;
+    transform: translateX(-50%);
   }
   .heroLead {
     z-index: 1;
@@ -466,9 +477,17 @@
     --fixture-travel-y: 2px;
     --fixture-tilt: .45deg;
   }
+  .heroCanvas,
+  .heroFallback {
+    mask-image: linear-gradient(
+      #000 0 23%,
+      #0006 45%,
+      transparent 83%
+    );
+  }
   .heroIllumination {
-    --lens-x: 49%;
-    --lens-y: 50%;
+    --lens-x: 52.8%;
+    --lens-y: 12.5%;
   }
   .heroGlow {
     background: radial-gradient(
@@ -476,6 +495,18 @@
       #fff7,
       #fff2 55%,
       transparent 100%
+    );
+  }
+  .heroGlow::after {
+    inset: 12% 0 0;
+    background:
+      radial-gradient(ellipse 44% 58% at 44% 40%, #fff4, transparent 96%),
+      radial-gradient(ellipse 51% 29% at 43% 61%, #fff2, transparent 100%);
+    mask-image: conic-gradient(
+      from 117deg at 50% 0,
+      transparent 0deg,
+      #000 38deg 98deg,
+      transparent 146deg
     );
   }
   .hero h1 {
@@ -501,7 +532,7 @@
     width: min(100%, 295px);
     margin-top: 0;
     padding: 9px 13px;
-    background: #0B2E57ed;
+    background: #000d;
   }
   .lightControls {
     gap: 14px;
@@ -577,8 +608,8 @@
     mask-image: none;
   }
   .heroIllumination {
-    --lens-x: 49%;
-    --lens-y: 50%;
+    --lens-x: 43.2%;
+    --lens-y: 33.5%;
   }
   .heroPanel {
     grid-area: 2 / 2 / 3 / 3;
@@ -617,12 +648,6 @@
   }
 }
 
-.heroKicker { font-family: var(--font-montserrat), Arial, sans-serif; color: var(--sky); }
-.heroDot { color: var(--sky); }
-.heroPrimary { background: var(--white); color: var(--deep-navy); border-color: var(--white); }
-.heroPrimary:hover { background: var(--sky); color: var(--deep-navy); }
-.heroLink { background: transparent; color: var(--white); }
-.heroLink:hover { background: var(--sky); color: var(--deep-navy); }
 .about { background: var(--white); }
 .about h2, .faq h2 { color: var(--deep-navy); }
 .sectionKicker, .faqAnswer a { color: var(--accent); }
