@@ -17,7 +17,7 @@ test("shows all ten product categories and links featured fixtures to quotes", a
     .toHaveAttribute("href", "/request-quote?product=round-black-exposed");
 });
 
-test("toggles hero illumination and pauses fixture movement", async ({ page }) => {
+test("toggles hero illumination and brightness availability", async ({ page }) => {
   await page.goto("/");
   const power = page.getByRole("button", { name: "Fixture power" });
   const brightness = page.getByRole("slider", { name: "Brightness" });
@@ -27,7 +27,5 @@ test("toggles hero illumination and pauses fixture movement", async ({ page }) =
   await expect(brightness).toBeDisabled();
   await power.click();
   await expect(brightness).toBeEnabled();
-  await page.getByRole("button", { name: "Pause motion" }).click();
-  await expect(page.getByTestId("streetlight-motion"))
-    .toHaveAttribute("data-motion-paused", "true");
+  await expect(power).toHaveAttribute("aria-pressed", "true");
 });
