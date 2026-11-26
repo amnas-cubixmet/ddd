@@ -1,4 +1,4 @@
-import { ArrowUpRight, Mail, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Globe2, Mail, MessageCircle, Phone } from "lucide-react";
 import { brand } from "@/lib/site";
 import { enquiryEmailHref } from "@/lib/enquiry";
 import EnquiryForm from "./enquiry-form";
@@ -31,6 +31,16 @@ export function ContactSection({
               <span>
                 <strong>Email</strong>
                 {brand.email}
+              </span>
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </a>
+          </li>
+          <li>
+            <a href={brand.website}>
+              <Globe2 size={19} aria-hidden="true" />
+              <span>
+                <strong>Website</strong>
+                bharatlums.com
               </span>
               <ArrowUpRight size={17} aria-hidden="true" />
             </a>

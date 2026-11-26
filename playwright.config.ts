@@ -29,7 +29,7 @@ export default defineConfig({
     },
     {
       name: "iphone-safari-emulation",
-      testMatch: "**/safari.spec.ts",
+      testMatch: ["**/mobile.spec.ts", "**/safari.spec.ts"],
       use: { ...devices["iPhone 13"], browserName: "webkit" },
     },
   ],

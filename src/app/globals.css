@@ -7,6 +7,10 @@
   --cloud: #F2F5F8;
   --ink: #14202E;
   --white: #ffffff;
+  --gradient-hero: radial-gradient(ellipse at 75% 35%, var(--bharat-blue), var(--deep-navy) 75%);
+  --gradient-brand: linear-gradient(135deg, var(--deep-navy), var(--bharat-blue));
+  --gradient-light: linear-gradient(180deg, var(--white), var(--cloud));
+  --gradient-sky: linear-gradient(135deg, var(--sky), var(--cloud));
   --bg: var(--white);
   --text: var(--ink);
   --muted: #435b73;

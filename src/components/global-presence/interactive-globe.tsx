@@ -91,36 +91,6 @@ function Earth({ onReady }: { onReady: () => void }) {
   );
 }
 
-function Stars() {
-  const coordinates = useMemo(() => {
-    const values = new Float32Array(140 * 3);
-    for (let i = 0; i < 140; i++) {
-      const z = 1 - (2 * (i + 0.5)) / 140;
-      const phi = i * 2.399963;
-      const radius = Math.sqrt(1 - z * z);
-      values.set(
-        [3.5 * Math.cos(phi) * radius, 3.5 * z, 3.5 * Math.sin(phi) * radius],
-        i * 3,
-      );
-    }
-    return values;
-  }, []);
-  return (
-    <points>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[coordinates, 3]} />
-      </bufferGeometry>
-      <pointsMaterial
-        color={neutral}
-        size={0.012}
-        transparent
-        opacity={0.7}
-        depthWrite={false}
-      />
-    </points>
-  );
-}
-
 function makeRoute(country: Country) {
   const a = pointOnGlobe(origin),
     b = pointOnGlobe(country);
@@ -382,7 +352,6 @@ function GlobeScene({
 
   return (
     <>
-      <Stars />
       <Suspense fallback={null}>
         <Earth onReady={onReady} />
       </Suspense>

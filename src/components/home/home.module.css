@@ -11,7 +11,7 @@
   isolation: isolate;
   overflow: clip;
   display: grid;
-  background: radial-gradient(ellipse at 75% 30%, var(--bharat-blue) 0%, var(--deep-navy) 65%);
+  background: var(--gradient-hero);
   color: var(--text);
 }
 
@@ -630,7 +630,7 @@
 .faqRow button[aria-expanded="true"] { color: var(--accent); }
 
 .featured {
-  background: var(--cloud);
+  background: var(--gradient-light);
   color: var(--deep-navy);
   padding-block: clamp(48px, 7vw, 100px);
 }
@@ -638,7 +638,7 @@
   margin-block: 28px;
 }
 .mission {
-  background: linear-gradient(135deg, var(--deep-navy), var(--bharat-blue));
+  background: var(--gradient-brand);
   color: var(--white);
   padding-block: clamp(48px, 7vw, 100px);
 }
@@ -650,4 +650,22 @@
 .mission p {
   max-width: 44ch;
   margin-top: 12px;
+}
+
+.strengths {
+  background: var(--gradient-sky);
+  color: var(--deep-navy);
+  padding-block: clamp(48px, 7vw, 100px);
+}
+
+.strengths ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 24px;
+  margin: 24px 0 0;
+  padding-inline-start: 1.25rem;
+}
+
+.strengths h3 {
+  margin-block-end: 8px;
 }

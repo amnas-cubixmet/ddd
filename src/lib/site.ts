@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 export const brand = {
   name: "Bharat Lums",
   tagline: "Powering a Brighter Tomorrow",
-  email: "suhail@bharatlums.in",
-  phone: "+91 9961 839 602",
+  email: "info@bharatlums.com",
+  phone: "+91 99618 39602",
+  website: "https://bharatlums.com",
   phoneHref: "tel:+919961839602",
 };
 
