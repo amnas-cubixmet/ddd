@@ -40,13 +40,12 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   const illumination = useRef<HTMLDivElement>(null);
   const pointer = useRef({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
-  const [motionPaused, setMotionPaused] = useState(false);
   const [powered, setPowered] = useState(true);
   const [brightness, setBrightness] = useState(80);
   const [enabled, setEnabled] = useState(false);
   const [ready, setReady] = useState(false);
   const touchMotion = useTouchHomepageMotion();
-  const reduced = (useSiteReducedMotion() && !touchMotion) || motionPaused;
+  const reduced = (useSiteReducedMotion() && !touchMotion);
   const markReady = useCallback(() => setReady(true), []);
   const useFallback = useCallback(() => {
     setEnabled(false);
@@ -173,9 +172,6 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
         <div className={styles.heroPanel} data-hero-panel>
           <span className={styles.modelCaption}>Streetlight concept</span>
           <div className={styles.lightControls}>
-            <button type="button" aria-pressed={motionPaused} onClick={() => setMotionPaused(!motionPaused)}>
-              {motionPaused ? "Resume motion" : "Pause motion"}
-            </button>
             <button
               type="button"
               aria-pressed={powered}
