@@ -166,12 +166,12 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
         />
         <RoundedBox
           args={[2.58, 0.37, 1.14]}
-          radius={0.17}
+          radius={0.18}
           smoothness={5}
           position={[0, 0.034, 0]}
         >
           <meshStandardMaterial
-            color="#262626"
+            color="#41464e"
             roughness={0.35}
             metalness={0.5}
           />
@@ -183,7 +183,7 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
           position={[0, -0.13, 0]}
         >
           <meshStandardMaterial
-            color="#555555"
+            color="#1b1e23"
             roughness={0.56}
             metalness={0.32}
           />
@@ -196,7 +196,7 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
         >
           <meshStandardMaterial
             ref={diffuser}
-            color="#838383"
+            color="#8c929a"
             emissive="#ffffff"
             emissiveIntensity={0}
             roughness={0.37}
@@ -210,26 +210,28 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
           position={[0, -0.225, 0]}
         >
           <meshStandardMaterial
-            color="#767676"
+            color="#14171c"
             roughness={0.53}
             metalness={0.1}
           />
         </RoundedBox>
-        {[-0.83, -0.58, -0.33, -0.08, 0.17, 0.42].map((x) => (
+        {Array.from({ length: 11 }, (_, index) => -1 + index * 0.19).map((x) => (
           <RoundedBox
             key={x}
-            args={[0.075, 0.055, 0.64]}
-            radius={0.018}
+            args={[0.064, 0.16, 0.72 - Math.abs(x) * 0.16]}
+            radius={0.026}
             smoothness={2}
-            position={[x, 0.226, 0]}
+            position={[x, 0.25, 0]}
           >
-            <meshStandardMaterial
-              color="#4d4d4d"
-              roughness={0.44}
-              metalness={0.45}
-            />
+            <meshStandardMaterial color="#30343a" roughness={0.42} metalness={0.62} />
           </RoundedBox>
         ))}
+        {[-0.9, 0, 0.9].flatMap((x) => [-0.48, 0.48].map((z) => (
+          <mesh key={`${x}:${z}`} position={[x, -0.183, z]}>
+            <cylinderGeometry args={[0.024, 0.024, 0.018, 12]} />
+            <meshStandardMaterial color="#b5ac9c" roughness={0.35} metalness={0.75} />
+          </mesh>
+        )))}
       </group>
     </group>
     </>
