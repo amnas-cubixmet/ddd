@@ -11,7 +11,7 @@ import {
   relatedProducts,
 } from "@/lib/catalogue";
 import { fixturePhoto, fixturePhotoGroups } from "@/lib/fixture-photos";
-import { brand, metadata as pageMetadata } from "@/lib/site";
+import { brand, metadata as pageMetadata, siteUrl } from "@/lib/site";
 import photoStyles from "./fixture-photos.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -62,8 +62,36 @@ export default async function ProductPage({ params }: Params) {
     `Hello Bharat Lums, I would like more information about ${item.name}. Please share the available options and specifications.`,
   );
 
+  const structuredProduct = siteUrl && item.status !== "draft"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: item.name,
+        description: item.description,
+        url: new URL(`/products/${slug}`, siteUrl).href,
+        image: item.images.map(({ src }) => new URL(src, siteUrl).href),
+        category: collections
+          .filter(({ slug: category }) => item.categories.includes(category))
+          .map(({ name }) => name)
+          .join(", "),
+        additionalProperty: specs.map(({ name, value }) => ({
+          "@type": "PropertyValue",
+          name,
+          value,
+        })),
+      }
+    : undefined;
+
   return (
     <>
+      {structuredProduct && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredProduct).replace(/</g, "\\u003c"),
+          }}
+        />
+      )}
       <PageIntro
         eyebrow={catalogueLabel(item)}
         title={item.name}
