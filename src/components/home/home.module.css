@@ -1,5 +1,5 @@
 .hero {
-  --bg: #000000;
+  --bg: var(--ink, #14202E);
   --text: #ffffff;
   --muted: #d4d4d4;
   --line: #333333;
