@@ -1,0 +1,77 @@
+.layout {
+  gap: clamp(14px, 2.8vw, 36px);
+}
+
+.panel {
+  min-width: 0;
+  padding: clamp(16px, 3vw, 32px);
+  background: #111;
+  border-radius: 8px;
+}
+
+.panel h2 {
+  font-size: clamp(1.55rem, 3.2vw, 2.55rem);
+}
+
+.person {
+  margin-block: 14px 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.person strong,
+.methods strong {
+  display: block;
+  color: var(--text);
+}
+
+.methods {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.methods a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  min-height: 60px;
+  padding: 10px 12px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.methods a:hover,
+.methods a:focus-visible {
+  border-color: var(--text);
+}
+
+.methods span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.methods strong {
+  font-size: 0.88rem;
+}
+
+.formHeading {
+  margin-bottom: clamp(17px, 2.8vw, 27px);
+}
+
+.panel :is(input, select, textarea)[aria-invalid="true"] {
+  border-color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  .panel :global(.enquiry-form) button[type="submit"] {
+    width: 100%;
+  }
+}

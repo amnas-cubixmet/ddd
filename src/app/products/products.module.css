@@ -1,0 +1,165 @@
+.page {
+  padding-block: clamp(40px, 6.8vw, 96px);
+}
+
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 0.8fr);
+  align-items: end;
+  gap: clamp(16px, 5vw, 68px);
+  margin-bottom: clamp(24px, 4vw, 52px);
+}
+
+.intro h1 {
+  margin-top: 10px;
+  font-size: clamp(2.65rem, 6.5vw, 6.2rem);
+  text-wrap: balance;
+}
+
+.intro > p,
+.quote p {
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 1.4vw, 1.13rem);
+}
+
+.catalogue :global(.filters) {
+  gap: 12px;
+  padding: clamp(14px, 2vw, 23px);
+  background: #111;
+  border-radius: 8px;
+}
+
+.catalogue :global(.filters) > label {
+  display: grid;
+  min-width: 0;
+  align-content: end;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+.catalogue :global(.filters) :is(input, select) {
+  min-width: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.catalogue :global(.catalogue-results) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 55px;
+  padding-inline: 2px;
+}
+
+.catalogue :global(.catalogue-results) button {
+  min-height: 44px;
+}
+
+.catalogue :global(.card-grid) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+}
+
+.overview {
+  margin-top: clamp(30px, 6vw, 80px);
+}
+
+.overview summary {
+  width: fit-content;
+  cursor: pointer;
+  padding-block: 12px;
+}
+
+.overviewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.overviewPhoto {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.overviewPhoto img {
+  object-fit: contain;
+}
+
+.quote {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: clamp(30px, 6vw, 80px);
+  padding: clamp(22px, 4vw, 52px);
+  background: #111;
+  border-radius: 8px;
+}
+
+.quote h2 {
+  font-size: clamp(1.85rem, 3.8vw, 3.3rem);
+}
+
+.quote p {
+  margin-top: 8px;
+}
+
+.quoteActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .catalogue :global(.card-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .quote {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .catalogue :global(.filters) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .catalogue :global(.filters) :is(input, select) {
+    font-size: 1rem;
+  }
+
+  .catalogue :global(.catalogue-search),
+  .catalogue :global(.catalogue-filters-with-wattage) > label:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (any-pointer: coarse) and (max-width: 1024px) {
+  .catalogue :global(.filters) :is(input, select) {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .catalogue :global(.filters) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .catalogue :global(.card-grid) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

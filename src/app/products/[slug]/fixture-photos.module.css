@@ -1,0 +1,52 @@
+.intro {
+  display: grid;
+  gap: 10px;
+  max-width: 64ch;
+  margin-bottom: clamp(20px, 3vw, 36px);
+}
+
+.intro p {
+  color: var(--muted);
+}
+
+.figure {
+  min-width: 0;
+  overflow: hidden;
+  background: #111;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.photo {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: #111;
+}
+
+.photo img {
+  object-fit: contain;
+}
+
+.caption {
+  display: grid;
+  gap: 6px;
+  padding: clamp(12px, 2vw, 20px);
+  overflow-wrap: anywhere;
+}
+
+.caption h3 {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  letter-spacing: -0.015em;
+}
+
+.caption p {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.specCaption {
+  text-align: left;
+  color: var(--muted);
+  padding-bottom: 8px;
+}

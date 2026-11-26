@@ -1,0 +1,86 @@
+.gallery { min-width: 0; max-width: 100%; align-self: start; }
+.stage { position: relative; min-width: 0; }
+.stage .mainImage { display: block; position: relative; touch-action: pan-y pinch-zoom; }
+.arrow {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #777;
+  border-radius: 50%;
+  background: #000c;
+  color: #fff;
+  transition: background .2s, color .2s;
+}
+.arrow:hover { background: #fff; color: #000; }
+.previous { left: 10px; }
+.next { right: 10px; }
+.counter {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  background: #000c;
+  color: #fff;
+  font-size: .75rem;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+}
+.gallery .rail {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 5px 4px;
+  margin-top: 8px;
+}
+.gallery .rail button {
+  flex: 0 0 clamp(68px, 12vw, 100px);
+  width: auto;
+  aspect-ratio: 1.45;
+  scroll-snap-align: start;
+}
+.gallery .rail button:focus-visible { outline-offset: -4px; }
+.lightboxNavigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: .5rem;
+  font-variant-numeric: tabular-nums;
+}
+.lightboxNavigation button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+@media (max-width: 560px) {
+  .gallery .rail button { flex-basis: clamp(68px, 23vw, 90px); }
+  .previous { left: 6px; }
+  .next { right: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arrow { transition: none; }
+  .gallery :global(.gallery-image-transition) { animation: none; }
+}
+
+.gallery .rail::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}

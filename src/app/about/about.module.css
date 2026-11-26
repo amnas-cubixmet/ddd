@@ -1,0 +1,192 @@
+.page {
+  --section-gap: clamp(2.75rem, 6vw, 6rem);
+  min-width: 0;
+}
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr);
+  align-items: center;
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding-block: clamp(2.75rem, 6vw, 5.75rem) var(--section-gap);
+}
+.heroCopy {
+  display: grid;
+  justify-items: start;
+  min-width: 0;
+  gap: clamp(.95rem, 2vw, 1.5rem);
+}
+.heroCopy h1 {
+  font-size: clamp(2.6rem, 5.3vw, 5.35rem);
+  line-height: 1.06;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+.lead {
+  color: var(--muted);
+  max-width: 40ch;
+  font-size: clamp(1rem, 1.65vw, 1.15rem);
+  line-height: 1.7;
+}
+.heroFigure {
+  margin: 0;
+  min-width: 0;
+}
+.heroFigure figcaption {
+  margin-top: .65rem;
+  color: var(--muted);
+  font-size: .75rem;
+}
+.heroImage, .applicationImage {
+  position: relative;
+  overflow: hidden;
+  background: #151515;
+}
+.heroImage {
+  aspect-ratio: 1.38;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.heroImage img {
+  object-fit: cover;
+  object-position: center;
+}
+.sectionHeading {
+  display: grid;
+  gap: .85rem;
+  align-content: start;
+}
+.sectionHeading h2 {
+  font-size: clamp(2rem, 4.2vw, 3.75rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.applications {
+  display: grid;
+  gap: clamp(1.4rem, 3vw, 2.4rem);
+  border-top: 1px solid var(--line);
+  padding-block: var(--section-gap);
+}
+.applicationGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.85rem, 2vw, 1.5rem);
+}
+.applicationItem {
+  min-width: 0;
+}
+.applicationCard {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  background: #0c0c0c;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color .25s;
+}
+.applicationCard:hover, .applicationCard:focus-visible {
+  border-color: #999;
+}
+.applicationImage {
+  aspect-ratio: 1.65;
+}
+.applicationImage img {
+  object-fit: cover;
+  transition: transform .45s ease;
+}
+.applicationCard:hover img, .applicationCard:focus-visible img {
+  transform: scale(1.045);
+}
+.applicationCopy {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: .75rem;
+  padding: clamp(1rem, 2vw, 1.6rem);
+}
+.applicationCopy h3 {
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+.applicationCopy p, .contact p:not(:global(.eyebrow)) {
+  margin-top: .65rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.applicationCopy > svg {
+  margin-top: .15rem;
+}
+.approach {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  align-items: start;
+  gap: clamp(1.5rem, 6vw, 5rem);
+  padding-block: var(--section-gap);
+  border-top: 1px solid var(--line);
+}
+.approachCopy {
+  min-width: 0;
+}
+.approachCopy p {
+  color: var(--muted);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.75;
+}
+.steps {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.steps li {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  padding-block: .9rem;
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+}
+.steps li span {
+  color: var(--muted);
+  font-size: .75rem;
+  font-variant-numeric: tabular-nums;
+}
+.contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  margin-bottom: var(--section-gap);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #0c0c0c;
+}
+.contact h2 {
+  margin-top: .85rem;
+  font-size: clamp(1.85rem, 3.8vw, 3.3rem);
+  line-height: 1.1;
+}
+.contact a { flex-shrink: 0; }
+@media (max-width: 800px) {
+  .hero, .approach {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .heroCopy h1 {
+    max-width: 18ch;
+    font-size: clamp(2.3rem, 8.5vw, 4.1rem);
+  }
+  .heroImage { aspect-ratio: 1.65; }
+  .contact { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 650px) {
+  .applicationGrid { grid-template-columns: minmax(0, 1fr); }
+  .applicationImage { aspect-ratio: 1.8; }
+  .heroImage { aspect-ratio: 1.35; }
+  .heroImage, .contact { border-radius: 10px; }
+  .contact a { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .applicationImage img, .applicationCard { transition: none; }
+}

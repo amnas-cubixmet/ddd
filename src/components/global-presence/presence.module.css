@@ -1,0 +1,203 @@
+@reference "../../app/globals.css";
+
+.section {
+  @apply relative isolate overflow-hidden;
+  padding-block: clamp(1.5rem, 4vw, 3.5rem);
+  background: var(--bg);
+  scroll-margin-top: 1rem;
+}
+
+.kicker {
+  @apply flex items-center gap-2 font-bold uppercase;
+  letter-spacing: 0.19em;
+  font-size: 0.72rem;
+  color: var(--text);
+}
+
+.console {
+  @apply grid min-w-0;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--bg);
+}
+
+.stage {
+  @apply relative isolate min-w-0 overflow-hidden;
+  min-height: 32rem;
+  border-radius: 1rem 0 0 1rem;
+  background: var(--bg);
+}
+
+.canvas,
+.fallback {
+  @apply absolute inset-0;
+}
+.canvas {
+  touch-action: pan-y;
+}
+.fallback {
+  @apply grid place-items-center;
+}
+.fallbackMap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1000 / 560;
+}
+.fallbackMap svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.fallbackMap img {
+  filter: grayscale(1);
+}
+.controls {
+  @apply flex min-w-0 flex-col justify-center;
+  padding: clamp(1.15rem, 3vw, 2.25rem);
+  border-inline-start: 1px solid var(--line);
+}
+.details h3 {
+  margin-block: 0.65rem 0.5rem;
+  font-size: clamp(1.85rem, 4vw, 3.65rem);
+  color: var(--text);
+}
+.details > p:last-child,
+.instruction {
+  color: var(--muted);
+}
+.details > p:last-child {
+  min-height: 3em;
+}
+.instruction {
+  margin-block: 1rem 0.72rem;
+  font-size: 0.83rem;
+}
+.countries {
+  @apply grid gap-2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.countries button {
+  @apply flex min-w-0 items-center gap-2 text-left font-bold;
+  min-height: 45px;
+  padding: 0.58rem 0.6rem;
+  border: 1px solid var(--text);
+  border-radius: 0.36rem;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.79rem;
+  transition:
+    border-color 0.22s,
+    background 0.22s,
+    box-shadow 0.22s;
+}
+.countries button span[aria-hidden="true"] {
+  color: var(--muted);
+  font-size: 0.61rem;
+  letter-spacing: 0.08em;
+}
+.countryName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.countries button svg {
+  margin-left: auto;
+  opacity: 0.7;
+}
+.countries button:hover {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+.countries button[aria-pressed="true"] {
+  border-color: var(--text);
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+.countries button:hover span[aria-hidden="true"] {
+  color: inherit;
+}
+.reset {
+  @apply mt-3 flex w-fit items-center gap-2 text-left;
+  color: var(--muted);
+  min-height: 44px;
+  font-size: 0.81rem;
+}
+.reset:hover {
+  color: var(--text);
+}
+.markerLabel {
+  white-space: nowrap;
+  pointer-events: none;
+  border: 1px solid var(--line);
+  border-radius: 0.25rem;
+  padding: 0.2rem 0.47rem;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+@media (max-width: 980px) {
+  .console {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stage {
+    min-height: clamp(20rem, 67vw, 32rem);
+    border-radius: 1rem 1rem 0 0;
+  }
+  .controls {
+    border-inline-start: 0;
+    border-top: 1px solid var(--line);
+  }
+  .countries {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .stage {
+    min-height: clamp(15.5rem, 81vw, 24rem);
+  }
+  .controls {
+    padding: clamp(0.7rem, 3.5vw, 1.15rem);
+  }
+  .countries {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.42rem;
+  }
+  .countries button {
+    gap: 0.38rem;
+    min-height: 44px;
+    padding: 0.42rem 0.55rem;
+    border-color: var(--line);
+    font-size: 0.78rem;
+  }
+  .countries button[aria-pressed="true"] {
+    background: var(--text);
+    color: var(--bg);
+    box-shadow: none;
+  }
+  .countries button[aria-pressed="true"] span[aria-hidden="true"] {
+    color: inherit;
+  }
+}
+@media (any-pointer: coarse) {
+  /* OrbitControls sets touch-action inline on the R3F event container. */
+  .canvas > div,
+  .canvas canvas {
+    touch-action: pan-y !important;
+  }
+}
+
+@media (max-width: 420px),
+  (min-width: 651px) and (max-width: 800px),
+  (min-width: 981px) and (max-width: 1140px) {
+  .countries button span[aria-hidden="true"],
+  .countries button svg {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section:not([data-touch-home-motion]) .countries button {
+    transition: none;
+  }
+}
