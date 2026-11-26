@@ -45,16 +45,11 @@ function configureCamera(camera: PerspectiveCamera, aspect: number) {
   camera.updateMatrixWorld(true);
 }
 
-const vents = Array.from({ length: 16 }, (_, index) => index * Math.PI / 8);
-const fasteners = Array.from({ length: 6 }, (_, index) => index * Math.PI / 3);
-const chips = [
-  { radius: 0.36, count: 4 },
-  { radius: 0.68, count: 7 },
-  { radius: 0.95, count: 10 },
-].flatMap(({ radius, count }) => Array.from({ length: count }, (_, index) => {
-  const angle = (index + 0.25) * Math.PI * 2 / count;
-  return [radius * Math.cos(angle), radius * Math.sin(angle)] as const;
-}));
+const chips = Array.from({ length: 40 }, (_, index) => [
+  -0.67 + (index % 10) * 0.19,
+  -0.253 + Math.floor(index / 10) * 0.16,
+]);
+const fins = Array.from({ length: 12 }, (_, index) => -0.95 + index * 0.19);
 
 function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: SceneProps) {
   const group = useRef<Group>(null);
@@ -135,7 +130,7 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
   return (
     <>
     <directionalLight ref={reflection} position={[-3, 5, 3]} intensity={3.1} color="#ffffff" />
-      <group ref={group} rotation={[-0.28, -0.43, 0.17]}>
+      <group ref={group} rotation={[-0.28, -0.43, 0.28]}>
         <object3D ref={lensCenter} position={[0, 0, 0.24]} />
         <primitive object={target} position={[0, 0, 4]} />
         <spotLight
@@ -149,48 +144,32 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
           penumbra={0.9}
           color="#ffffff"
         />
-        <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, 0, -0.07]}>
-          <cylinderGeometry args={[1.29, 1.34, 0.46, 64]} />
-          <meshStandardMaterial color="#25282b" roughness={0.46} metalness={0.55} />
+        <mesh position={[-1.62, -1.15, -0.14]} rotation={[0, 0, -0.17]}>
+          <cylinderGeometry args={[0.13, 0.16, 2.6, 24]} />
+          <meshStandardMaterial color="#17191c" roughness={0.52} metalness={0.45} />
         </mesh>
-        <mesh position={[0, 0, 0.178]}>
-          <ringGeometry args={[1.04, 1.54, 96]} />
-          <meshStandardMaterial color="#292c30" roughness={0.38} metalness={0.53} />
+        <mesh position={[-1.46, 0, -0.03]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.18, 0.18, 0.65, 24]} />
+          <meshStandardMaterial color="#292b2e" roughness={0.42} metalness={0.55} />
         </mesh>
-        <mesh position={[0, 0, 0.19]}>
-          <circleGeometry args={[1.055, 64]} />
-          <meshStandardMaterial color="#dce6de" roughness={0.69} />
+        <mesh rotation={[0, 0, Math.PI / 2]} scale={[1, 1, 0.43]}>
+          <capsuleGeometry args={[0.57, 1.98, 12, 32]} />
+          <meshStandardMaterial color="#34383e" roughness={0.42} metalness={0.58} />
         </mesh>
-        <mesh position={[0, 0, 0.245]}>
-          <ringGeometry args={[1.035, 1.105, 64]} />
-          <meshStandardMaterial color="#8b989e" roughness={0.38} metalness={0.56} />
-        </mesh>
-        <mesh position={[0, 0, 0.247]} renderOrder={1}>
-          <circleGeometry args={[1.035, 64]} />
-          <meshPhysicalMaterial color="#f2f5f8" roughness={0.24} transparent opacity={0.09} depthWrite={false} />
+        <mesh position={[0.18, 0, 0.17]}>
+          <boxGeometry args={[2.03, 0.78, 0.13]} />
+          <meshStandardMaterial color="#585b5d" roughness={0.48} metalness={0.53} />
         </mesh>
         {chips.map(([x, y], index) => (
-          <mesh key={index} ref={index === 0 ? firstChip : undefined} position={[x, y, 0.216]} material={diffuser}>
-            <boxGeometry args={[0.054, 0.054, 0.018]} />
+          <mesh key={index} ref={index === 0 ? firstChip : undefined} position={[x, y, 0.245]} material={diffuser}>
+            <boxGeometry args={[0.105, 0.095, 0.035]} />
           </mesh>
         ))}
-        {fasteners.map((angle) => (
-          <mesh key={angle} position={[1.17 * Math.cos(angle), 1.17 * Math.sin(angle), 0.195]} rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.044, 0.044, 0.025, 12]} />
-            <meshStandardMaterial color="#c3c6ca" metalness={0.7} roughness={0.45} />
+        {fins.map((x) => (
+          <mesh key={x} position={[x, 0.16, -0.23]}>
+            <boxGeometry args={[0.045, 0.66, 0.16]} />
+            <meshStandardMaterial color="#303238" roughness={0.48} metalness={0.54} />
           </mesh>
-        ))}
-        {vents.map((angle) => (
-          <group key={angle} rotation={[0, 0, angle]}>
-            <mesh position={[1.43, 0, 0.185]}>
-              <planeGeometry args={[0.105, 0.23]} />
-              <meshBasicMaterial color="#111316" />
-            </mesh>
-            <mesh position={[1.31, 0, -0.11]}>
-              <boxGeometry args={[0.11, 0.055, 0.38]} />
-              <meshStandardMaterial color="#383a3e" roughness={0.55} metalness={0.45} />
-            </mesh>
-          </group>
         ))}
       </group>
     </>
