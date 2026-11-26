@@ -12,7 +12,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
-import { useSiteReducedMotion } from "./use-media-query";
+import { useSiteReducedMotion, useTouchHomepageMotion } from "./use-media-query";
 import styles from "./home/home.module.css";
 
 const StreetlightScene = dynamic(() => import("./home/streetlight-scene"), {
@@ -44,7 +44,8 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   const [brightness, setBrightness] = useState(80);
   const [enabled, setEnabled] = useState(false);
   const [ready, setReady] = useState(false);
-  const reduced = useSiteReducedMotion();
+  const touchMotion = useTouchHomepageMotion();
+  const reduced = useSiteReducedMotion() && !touchMotion;
   const markReady = useCallback(() => setReady(true), []);
   const useFallback = useCallback(() => {
     setEnabled(false);
@@ -80,6 +81,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   return (
     <section
       className={styles.hero}
+      data-touch-home-motion={touchMotion || undefined}
       style={{ "--hero-light-power": power } as CSSProperties}
       ref={root}
       onPointerMove={(event) => {

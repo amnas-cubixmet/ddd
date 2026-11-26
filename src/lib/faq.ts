@@ -1,7 +1,7 @@
 import { brand } from "./site";
 
 export type FaqPart = string | { label: string; href: string; download?: boolean };
-export type FaqEntry = { question: string; answer: readonly FaqPart[] };
+export type FaqEntry = { question: string; answer: FaqPart[] };
 
 export function getFaqEntries(catalogue?: string): FaqEntry[] {
   return [
@@ -15,21 +15,43 @@ export function getFaqEntries(catalogue?: string): FaqEntry[] {
     },
     {
       question: "How can I request a quotation?",
-      answer: ["Use our ", { label: "quote form", href: "/request-quote" }, " and include the application, location and quantities you have in mind."],
+      answer: [
+        "Use our ",
+        { label: "quote form", href: "/request-quote" },
+        " and include the application, location and quantities you have in mind.",
+      ],
     },
     {
       question: "Can I download the product catalogue?",
-      answer: catalogue
-        ? ["Yes. ", { label: "Download the product catalogue", href: catalogue, download: true }, "."]
-        : ["You can ", { label: "request a catalogue", href: "/request-quote?catalogue=1" }, " from our team. There is currently no public download."],
+      answer: catalogue ? [
+        "Yes. ",
+        { label: "Download the product catalogue", href: catalogue, download: true },
+        ".",
+      ] : [
+        "You can ",
+        { label: "request a catalogue", href: "/request-quote?catalogue=1" },
+        " from our team. There is currently no public download.",
+      ],
     },
     {
       question: "How can I contact the Bharat Lums team?",
-      answer: ["Call ", { label: brand.phone, href: brand.phoneHref }, ", email ", { label: brand.email, href: `mailto:${brand.email}` }, " or use the ", { label: "contact form", href: "/contact" }, "."],
+      answer: [
+        "Call ",
+        { label: brand.phone, href: brand.phoneHref },
+        ", email ",
+        { label: brand.email, href: `mailto:${brand.email}` },
+        " or use the ",
+        { label: "contact form", href: "/contact" },
+        ".",
+      ],
     },
     {
       question: "Where can I find technical specifications?",
-      answer: ["Verified specifications appear on individual product pages when available. For a specific project, ", { label: "ask the team", href: "/request-quote" }, " for model and technical details."],
+      answer: [
+        "Verified specifications appear on individual product pages when available. For a specific project, ",
+        { label: "ask the team", href: "/request-quote" },
+        " for model and technical details.",
+      ],
     },
   ];
 }

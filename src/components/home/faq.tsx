@@ -37,14 +37,14 @@ export function HomeFaq({ catalogue }: { catalogue?: string }) {
               >
                 <div>
                   <p>
-                    {answer.map((part) =>
-                      typeof part === "string" ? part : part.download ? (
-                        <a key={part.href} href={part.href} download>{part.label}</a>
-                      ) : part.href.startsWith("/") ? (
-                        <Link key={part.href} href={part.href}>{part.label}</Link>
+                    {answer.map((part, partIndex) =>
+                      typeof part === "string" ? part : part.download || !part.href.startsWith("/") ? (
+                        <a key={partIndex} href={part.href} download={part.download || undefined}>
+                          {part.label}
+                        </a>
                       ) : (
-                        <a key={part.href} href={part.href}>{part.label}</a>
-                      ),
+                        <Link key={partIndex} href={part.href}>{part.label}</Link>
+                      )
                     )}
                   </p>
                 </div>

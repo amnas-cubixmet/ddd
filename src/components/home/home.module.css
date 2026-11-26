@@ -631,15 +631,11 @@
   .aboutArt:hover img {
     transform: none;
   }
-  .heroGlow,
-  .heroGlow::after,
-  .heroMotion,
-  .heroVisual,
-  .heroLead > [data-hero-enter],
-  .heroPanel[data-hero-panel] {
+  .hero:not([data-touch-home-motion]) :is(.heroGlow, .heroMotion, .heroVisual, .heroLead > [data-hero-enter], .heroPanel[data-hero-panel]),
+  .hero:not([data-touch-home-motion]) .heroGlow::after {
     animation: none;
   }
-  .hero :is(.heroIllumination, .heroLink, .heroPrimary, .heroCanvas, .heroFallback, .heroFallback img),
+  .hero:not([data-touch-home-motion]) :is(.heroIllumination, .heroLink, .heroPrimary, .heroCanvas, .heroFallback, .heroFallback img),
   .faqRow button svg,
   .faqAnswer {
     transition: none;

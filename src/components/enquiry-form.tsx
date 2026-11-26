@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowUpRight, MessageCircle, Send } from "lucide-react";
 import { useId, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { catalogueCategories } from "@/lib/catalogue";
 import {
   enquiryEmailHref,
   enquirySchema,
@@ -162,6 +163,23 @@ export default function EnquiryForm({
             <label className={home ? undefined : "sr-only"} htmlFor={id}>
               {field.label}{home && required && <span aria-hidden="true"> *</span>}
             </label>
+            {field.name === "interest" ? (
+              <select
+                id={id}
+                aria-invalid={Boolean(error)}
+                aria-describedby={error ? `${id}-error` : undefined}
+                {...register("interest")}
+              >
+                <option value="">Product interest</option>
+                {defaults?.interest && !catalogueCategories.some((category) => category.name === defaults.interest) && defaults.interest !== "Other" && (
+                  <option value={defaults.interest}>{defaults.interest}</option>
+                )}
+                {catalogueCategories.map((category) => (
+                  <option key={category.slug} value={category.name}>{category.name}</option>
+                ))}
+                <option value="Other">Other</option>
+              </select>
+            ) : (
             <input
               id={id}
               type={field.type}
@@ -173,6 +191,7 @@ export default function EnquiryForm({
               aria-describedby={error ? `${id}-error` : undefined}
               {...register(field.name)}
             />
+            )}
             {error && (
               <small className="field-error" id={`${id}-error`}>
                 {error.message}
