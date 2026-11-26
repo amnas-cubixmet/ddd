@@ -127,43 +127,45 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
           data-ready={ready}
           aria-hidden="true"
         >
-          <div className={styles.heroIllumination} ref={illumination}>
-            <div className={styles.heroGlow} />
-          </div>
-          <div className={styles.heroVisual} data-testid="streetlight-visual">
-            <picture className={styles.heroFallback}>
-              <source
-                media="(max-width: 650px) and (orientation: portrait), (max-width: 650px) and (min-height: 501px)"
-                srcSet="/images/streetlight-fixed-mobile.webp"
-              />
-              {/* Captured directly from the fixed camera; no optimizer resizing or cropping. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/streetlight-fixed-wide.webp"
-                alt=""
-                width={936}
-                height={780}
-                fetchPriority="high"
-                loading="eager"
-                decoding="sync"
-                data-testid="streetlight-poster"
-              />
-            </picture>
-            {enabled && (
-              <div className={styles.heroCanvas}>
-                <SceneBoundary fallback={useFallback}>
-                  <StreetlightScene
-                    power={power}
-                    reduced={reduced}
-                    active={visible}
-                    pointer={pointer}
-                    illumination={illumination}
-                    onReady={markReady}
-                    onFailure={useFallback}
-                  />
-                </SceneBoundary>
-              </div>
-            )}
+          <div className={styles.heroMotion} data-testid="streetlight-motion" data-motion-paused={!powered || !visible}>
+            <div className={styles.heroIllumination} ref={illumination}>
+              <div className={styles.heroGlow} />
+            </div>
+            <div className={styles.heroVisual} data-testid="streetlight-visual">
+              <picture className={styles.heroFallback}>
+                <source
+                  media="(max-width: 650px) and (orientation: portrait), (max-width: 650px) and (min-height: 501px)"
+                  srcSet="/images/streetlight-fixed-mobile.webp"
+                />
+                {/* Captured directly from the fixed camera; no optimizer resizing or cropping. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/streetlight-fixed-wide.webp"
+                  alt=""
+                  width={936}
+                  height={780}
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="sync"
+                  data-testid="streetlight-poster"
+                />
+              </picture>
+              {enabled && (
+                <div className={styles.heroCanvas}>
+                  <SceneBoundary fallback={useFallback}>
+                    <StreetlightScene
+                      power={power}
+                      reduced={reduced}
+                      active={visible}
+                      pointer={pointer}
+                      illumination={illumination}
+                      onReady={markReady}
+                      onFailure={useFallback}
+                    />
+                  </SceneBoundary>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <div className={styles.heroPanel} data-hero-panel>

@@ -11,13 +11,21 @@ for (const viewport of [{width:320,height:570},{width:1440,height:900}]) {
     expect(await visual.evaluate(el => getComputedStyle(el).animationName)).not.toBe("none");
     const copy = page.locator("[data-hero-enter]").first();
     expect(await copy.evaluate(el => getComputedStyle(el).animationName)).not.toBe("none");
+    const motion = page.getByTestId("streetlight-motion");
+    await expect(motion).toHaveAttribute("data-motion-paused", "false");
     const before = await stage.boundingBox();
-    await page.waitForTimeout(2000);
+    const first = await motion.evaluate(el => getComputedStyle(el).transform);
+    await expect.poll(() => motion.evaluate(el => getComputedStyle(el).transform)).not.toBe(first);
     const after = await stage.boundingBox();
     expect(after).toEqual(before);
+    expect(await motion.evaluate(el => {
+      const matrix = new DOMMatrixReadOnly(getComputedStyle(el).transform);
+      return Math.hypot(matrix.a, matrix.b);
+    })).toBeCloseTo(1, 3);
     const power = page.getByRole("button", { name: "Streetlight power" });
     await power.click();
     await expect(power).toHaveAttribute("aria-pressed", "false");
+    await expect(motion).toHaveAttribute("data-motion-paused", "true");
     await expect(page.getByRole("slider", { name: "Brightness" })).toBeDisabled();
     await power.click();
     await expect(power).toHaveAttribute("aria-pressed", "true");
@@ -29,4 +37,5 @@ test("reduced motion retains hero without entrance animation", async ({ page }) 
   await page.goto("/");
   await expect(page.getByTestId("streetlight-stage")).toBeVisible();
   expect(await page.getByTestId("streetlight-visual").evaluate(el => getComputedStyle(el).animationName)).toBe("none");
+  expect(await page.getByTestId("streetlight-motion").evaluate(el => getComputedStyle(el).animationName)).toBe("none");
 });
