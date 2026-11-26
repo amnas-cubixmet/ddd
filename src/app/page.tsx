@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Crosshair, Handshake, Lightbulb } from "lucide-react";
 import { Action, ProductCard } from "@/components/ui";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { HomeHero } from "@/components/home-hero";
@@ -107,14 +108,23 @@ export default function Home() {
           <h2 id="home-strengths">Built in India, designed to serve wider markets.</h2>
           <ul>
             <li>
+              <span className={styles.strengthIcon} aria-hidden="true">
+                <Crosshair size={23} strokeWidth={1.7} />
+              </span>
               <h3>Precision and craftsmanship</h3>
               <p>Our manufacturing approach puts care and attention to detail into LED lighting for real spaces.</p>
             </li>
             <li>
+              <span className={styles.strengthIcon} aria-hidden="true">
+                <Lightbulb size={23} strokeWidth={1.7} />
+              </span>
               <h3>Reliable LED lighting</h3>
               <p>We develop lighting for commercial, industrial and outdoor applications, with reliability as a design priority.</p>
             </li>
             <li>
+              <span className={styles.strengthIcon} aria-hidden="true">
+                <Handshake size={23} strokeWidth={1.7} />
+              </span>
               <h3>Cooperation and shared purpose</h3>
               <p>We work with customers and partners to understand the application and select suitable lighting.</p>
             </li>
