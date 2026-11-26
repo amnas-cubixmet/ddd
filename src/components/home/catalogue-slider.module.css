@@ -1,5 +1,5 @@
 .section {
-  padding-block: 0 clamp(54px, 7vw, 94px);
+  padding-block: clamp(48px, 7vw, 94px);
   min-width: 0;
 }
 
@@ -57,7 +57,7 @@
 .card {
   display: block;
   height: 100%;
-  color: var(--text);
+  color: var(--deep-navy);
 }
 
 .card:focus-visible {
@@ -101,9 +101,9 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  color: var(--text);
+  color: var(--white);
   border-radius: 50%;
-  background: var(--cloud);
+  background: var(--bharat-blue);
 }
 
 .controls button:disabled {

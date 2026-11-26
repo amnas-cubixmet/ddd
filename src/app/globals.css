@@ -110,6 +110,7 @@ svg {
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 22px;
+  padding-block: 8px;
 }
 .header-inner > .brand-link {
   justify-self: start;
@@ -120,7 +121,7 @@ svg {
   flex-shrink: 0;
 }
 .brand-logo {
-  width: 104px;
+  width: 160px;
   height: auto;
 }
 .main-nav {
@@ -129,8 +130,9 @@ svg {
   gap: clamp(13px, 2.2vw, 35px);
 }
 .main-nav > a:not(.button) {
-  font-size: 0.84rem;
-  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--deep-navy);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -138,6 +140,7 @@ svg {
 .main-nav > a.active {
   text-decoration: underline;
   text-underline-offset: 4px;
+  color: var(--bharat-blue);
 }
 .button {
   min-height: 46px;
@@ -170,6 +173,18 @@ svg {
   padding-inline: 14px;
   min-height: 40px;
   white-space: nowrap;
+}
+.site-header .header-quote,
+.main-nav .mobile-quote {
+  background: var(--bharat-blue);
+  color: var(--white);
+  border-color: var(--bharat-blue);
+}
+.site-header .header-quote:hover,
+.main-nav .mobile-quote:hover {
+  background: var(--deep-navy);
+  color: var(--white);
+  border-color: var(--deep-navy);
 }
 .menu-toggle,
 .main-nav .mobile-quote {
@@ -483,7 +498,7 @@ svg {
   margin-bottom: 3px;
 }
 .footer-main .brand-logo {
-  width: 108px;
+  width: 160px;
 }
 .footer-main p,
 .footer-main a:not(.brand-link),
@@ -761,9 +776,6 @@ textarea::placeholder {
     display: flex;
     justify-content: space-between;
   }
-  .site-header .brand-logo {
-    width: 94px;
-  }
   .header-quote {
     display: none;
   }
@@ -797,7 +809,7 @@ textarea::placeholder {
     padding: 10px 16px;
     margin-top: 12px;
     font-size: 0.93rem;
-    border: 1px solid var(--text);
+    border-color: var(--bharat-blue);
   }
   .hero {
     min-height: clamp(540px, calc(93svh - var(--header-height)), 680px);
@@ -1132,7 +1144,7 @@ textarea::placeholder {
 }
 
 .home-header .main-nav > a {
-  font-weight: 750;
+  font-weight: 600;
 }
 .footer-project {
   display: flex;
@@ -1161,9 +1173,6 @@ textarea::placeholder {
   }
   .footer-brand {
     grid-column: 1 / -1;
-  }
-  .footer-main .brand-logo {
-    width: 94px;
   }
   .footer-links {
     gap: 0;
@@ -1197,7 +1206,7 @@ textarea::placeholder {
 
 /* Bharat Lums brand guidelines — light catalogue, navy lighting scenes. */
 .site-header { background: var(--white); }
-.main-nav > a.active, .main-nav > a:not(.button):hover { color: var(--accent); }
+.main-nav > a.active, .main-nav > a:not(.button):hover { color: var(--bharat-blue); }
 :focus-visible { outline-color: var(--bharat-blue); }
 ::selection { background: var(--deep-navy); color: var(--white); }
 .page-intro h1, .section-head h2 { color: var(--deep-navy); }
