@@ -21,8 +21,8 @@ import { compactSceneQuery, useMediaQuery } from "../use-media-query";
 
 const start = { latitude: 14, longitude: 65 };
 const initialCamera = pointOnGlobe(start, 4.4).toArray();
-const highlighted = "#ffffff";
-const neutral = "#DCEAF6";
+const highlighted = "#79C6FF";
+const neutral = "#A7BFD5";
 
 function pointOnGlobe(
   point: Pick<Country, "latitude" | "longitude">,
@@ -62,9 +62,9 @@ const earthFragment = `
     vec2 terrain = vUv * vec2(210., 105.);
     float dots = 1. - smoothstep(.14, .38, length(fract(terrain) - .5));
     float land = smoothstep(.13, .75, mask.r);
-    vec3 navy = vec3(11., 46., 87.) / 255.;
+    vec3 navy = vec3(20., 32., 46.) / 255.;
     vec3 blue = vec3(31., 115., 189.) / 255.;
-    vec3 sky = vec3(220., 234., 246.) / 255.;
+    vec3 sky = vec3(155., 187., 216.) / 255.;
     vec3 base = mix(navy, blue, .13 * pow(1. - limb, 2.));
     vec3 led = mix(sky, vec3(1.), mask.g);
     float visibility = mix(.48, .98, max(limb, mask.g));
@@ -270,7 +270,7 @@ function CountryMarker({
       <mesh>
         <circleGeometry args={[selected ? 0.013 : 0.0085, 18]} />
         <meshBasicMaterial
-          color={selected ? "#ffffff" : neutral}
+          color={selected ? highlighted : neutral}
           toneMapped={false}
         />
       </mesh>

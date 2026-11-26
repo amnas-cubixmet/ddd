@@ -100,7 +100,7 @@ function RegionalMap({ country }: { country: Country }) {
             <path
               d={`M ${x} ${y} Q ${(x + destX) / 2} ${Math.min(y, destY) - 42} ${destX} ${destY}`}
               fill="none"
-              stroke="#ffffff"
+              stroke="#79C6FF"
               strokeWidth="3"
               strokeDasharray="8 6"
             />
@@ -116,7 +116,7 @@ function RegionalMap({ country }: { country: Country }) {
                     cy={cy}
                     r="15"
                     fill="none"
-                    stroke="#ffffff"
+                    stroke="#79C6FF"
                     strokeWidth="2"
                   />
                 )}
@@ -124,8 +124,8 @@ function RegionalMap({ country }: { country: Country }) {
                   cx={cx}
                   cy={cy}
                   r={selected ? 8 : 5}
-                  fill={selected ? "#ffffff" : "#b6b6b6"}
-                  stroke="#000000"
+                  fill={selected ? "#79C6FF" : "#A7BFD5"}
+                  stroke="#14202E"
                   strokeWidth="2"
                 />
               </g>
