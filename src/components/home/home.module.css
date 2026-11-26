@@ -445,11 +445,11 @@
   .heroInner {
     grid-template-rows: auto auto;
     gap: 22px;
-    padding-block: min(70vw, 310px) 26px;
+    padding-block: min(calc(70vw + 30px), 340px) 26px;
   }
   .heroStage {
     position: absolute;
-    inset: -122px auto auto 50%;
+    inset: -92px auto auto 50%;
     z-index: 0;
     width: min(100cqw, 420px);
     height: auto;
