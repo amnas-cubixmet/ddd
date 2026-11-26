@@ -7,7 +7,7 @@ test("capture final fixed streetlight frames and check responsive layout", async
     try {
       await context.addInitScript(() => {
         const original = HTMLCanvasElement.prototype.getContext;
-        HTMLCanvasElement.prototype.getContext = function(type: string, options?: unknown) {
+        HTMLCanvasElement.prototype.getContext = function(this: HTMLCanvasElement, type: string, options?: unknown) {
           return Reflect.apply(original, this, [type, /^webgl/.test(type) ? {...(options as object),preserveDrawingBuffer:true} : options]);
         } as typeof original;
       });
