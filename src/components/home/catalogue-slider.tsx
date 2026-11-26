@@ -144,7 +144,7 @@ export function CatalogueSlider({
               >
                 <span className={styles.image}>
                   <Image
-                    src={`/images/${image}.webp`}
+                    src={image}
                     alt=""
                     fill
                     loading="lazy"

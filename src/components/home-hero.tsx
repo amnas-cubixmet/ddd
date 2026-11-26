@@ -40,12 +40,13 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   const illumination = useRef<HTMLDivElement>(null);
   const pointer = useRef({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
+  const [motionPaused, setMotionPaused] = useState(false);
   const [powered, setPowered] = useState(true);
   const [brightness, setBrightness] = useState(80);
   const [enabled, setEnabled] = useState(false);
   const [ready, setReady] = useState(false);
   const touchMotion = useTouchHomepageMotion();
-  const reduced = useSiteReducedMotion() && !touchMotion;
+  const reduced = (useSiteReducedMotion() && !touchMotion) || motionPaused;
   const markReady = useCallback(() => setReady(true), []);
   const useFallback = useCallback(() => {
     setEnabled(false);
@@ -129,7 +130,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
           data-ready={ready}
           aria-hidden="true"
         >
-          <div className={styles.heroMotion} data-testid="streetlight-motion" data-motion-paused={!powered || !visible}>
+          <div className={styles.heroMotion} data-testid="streetlight-motion" data-motion-paused={!powered || !visible || reduced}>
             <div className={styles.heroIllumination} ref={illumination}>
               <div className={styles.heroGlow} />
             </div>
@@ -140,7 +141,6 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
                   srcSet="/images/streetlight-fixed-mobile.webp"
                 />
                 {/* Captured directly from the fixed camera; no optimizer resizing or cropping. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/streetlight-fixed-wide.webp"
                   alt=""
@@ -171,12 +171,15 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
           </div>
         </div>
         <div className={styles.heroPanel} data-hero-panel>
-          <span className={styles.modelCaption}>Streetlight concept</span>
+          <span className={styles.modelCaption}>Round LED fixture</span>
           <div className={styles.lightControls}>
+            <button type="button" aria-pressed={motionPaused} onClick={() => setMotionPaused(!motionPaused)}>
+              {motionPaused ? "Resume motion" : "Pause motion"}
+            </button>
             <button
               type="button"
               aria-pressed={powered}
-              aria-label="Streetlight power"
+              aria-label="Fixture power"
               onClick={() => setPowered(!powered)}
             >
               <Power size={16} aria-hidden="true" />{" "}
