@@ -4,11 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 import {
   catalogueCategories,
-  additionalRepresentativeProducts,
   catalogueLabel,
   findCollection,
   publishedProducts,
-  products,
   type Product,
 } from "@/lib/catalogue";
 import { Action, ProductCard } from "./ui";
@@ -35,7 +33,7 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
     setWattage("");
   }
 
-  const scope = allowedCategories ? products : [...publishedProducts, ...additionalRepresentativeProducts];
+  const scope = publishedProducts;
   const scopedProducts = scope.filter(item => !allowedCategories || item.categories.some(slug => allowedCategories.includes(slug)));
   const categories = catalogueCategories.filter(item => !allowedCategories || allowedCategories.includes(item.slug));
   const wattages = allowedCategories ? catalogueWattages.filter(watts => scopedProducts.some(item => item.wattages?.includes(watts))) : catalogueWattages;

@@ -29,7 +29,7 @@ export async function LightingDivisionPage({ division, searchParams }: { divisio
           <DivisionImage src={info.image} fallbackSrc={info.fallbackImage} alt={info.alt} sizes="(max-width: 800px) 92vw, 45vw" priority />
         </div>
       </section>
-      <section className={divisionStyles.families} aria-labelledby="division-families">
+      {categories.length > 0 && <section className={divisionStyles.families} aria-labelledby="division-families">
         <h2 id="division-families">Lighting categories</h2>
         <div className={divisionStyles.categoryGrid}>
           {categories.map(item => (
@@ -39,11 +39,11 @@ export async function LightingDivisionPage({ division, searchParams }: { divisio
             </Link>
           ))}
         </div>
-      </section>
-      <section id="division-catalogue" className={styles.catalogue} aria-labelledby="division-products">
+      </section>}
+      {categories.length > 0 ? <section id="division-catalogue" className={styles.catalogue} aria-labelledby="division-products">
         <h2 id="division-products">Explore products</h2>
         <ProductsBrowser key={initialCategory} initialCategory={initialCategory} allowedCategories={allowed} />
-      </section>
+      </section> : <section className={styles.catalogue} aria-label="Architectural lighting enquiries"><p>Contact our team for available architectural and commercial lighting options.</p></section>}
       <section className={styles.quote}>
         <div><h2>Planning a lighting project?</h2><p>Contact our team to confirm available fixtures, specifications and suitable lighting for your space.</p></div>
         <Action href="/request-quote">Request a quote</Action>

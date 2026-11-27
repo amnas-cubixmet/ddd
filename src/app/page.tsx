@@ -14,10 +14,8 @@ import {
   artwork,
   catalogueCategories,
   catalogueDownload,
-  findCatalogueFixture,
   publishedProducts,
 } from "@/lib/catalogue";
-import { fixturePhotoGroups } from "@/lib/fixture-photos";
 import { metadata as pageMetadata } from "@/lib/site";
 
 export const metadata = {
@@ -29,22 +27,14 @@ export const metadata = {
   title: { absolute: "Bharat Lums | Powering a Brighter Tomorrow" },
 };
 
-const catalogue = catalogueCategories.map((category) => {
-  const fixture = findCatalogueFixture(category.slug);
-  const photoSlug = fixture && fixturePhotoGroups[fixture.slug]?.photos[0]?.image;
-  const photo = publishedProducts.find((product) => product.slug === photoSlug);
+const slides = catalogueCategories.map((category) => {
+  const photo = publishedProducts.find(product => product.categories.includes(category.slug));
   return {
-    slide: {
-      ...category,
-      image: photo?.images[0].src ?? artwork(category.image),
-      href: fixture
-        ? `/products/${fixture.slug}`
-        : `/request-quote?collection=${category.slug}`,
-    },
+    ...category,
+    image: photo?.images[0].src ?? artwork(category.image),
+    href: `/products?category=${category.slug}`,
   };
 });
-
-const slides = catalogue.map(({ slide }) => slide);
 
 export default function Home() {
   return (

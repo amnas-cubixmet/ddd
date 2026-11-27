@@ -7,7 +7,7 @@ export const lightingDivisions = {
     alt: "Architectural and commercial lighting",
     fallbackImage: "/images/products/office-linear.webp",
     highlights: ["Shopping malls", "Retail & showrooms", "Hospitality", "Offices"],
-    categories: ["commercial-lighting", "led-panel-lights", "led-office-lights", "indoor-spot-lights", "recessed-down-lights", "surface-down-lights", "track-lights", "wall-lights", "ceiling-lights", "foot-lights", "led-lamps", "pendant-lamps", "led-strip-lights", "magnetic-track-48v"],
+    categories: [],
   },
   infrastructure: {
     title: "Outdoor & Infrastructure Lighting",
@@ -17,7 +17,7 @@ export const lightingDivisions = {
     fallbackImage: undefined,
     alt: "Illustrative outdoor road and street lighting application",
     highlights: ["Roads & highways", "High mast & flood lighting", "Industrial facilities", "Outdoor spaces"],
-    categories: ["floodlights", "led-street-lights", "high-bay-industrial-lighting", "led-industrial-lights", "outdoor-lighting", "led-high-mast-lighting", "led-warehouse-lighting", "outdoor-spot-lights", "spike-lights", "wall-washer-lights", "bollard-lights", "gate-lights", "inground-lights", "pole-lights", "underwater-lights"],
+    categories: ["floodlights", "led-street-lights", "high-bay-industrial-lighting", "led-warehouse-lighting"],
   },
 } as const;
 
