@@ -35,7 +35,7 @@
   overflow: hidden;
   background: var(--sky);
 }
-.image img { object-fit: contain; transition: transform .35s ease; }
+.image img { object-fit: cover; object-position: center; transition: transform .35s ease; }
 .card[data-division="infrastructure"] .image { grid-column: 2; grid-row: 1; }
 .card[data-division="infrastructure"] .image img { object-fit: cover; }
 .card[data-division="infrastructure"] .copy { grid-column: 1; grid-row: 1; }
