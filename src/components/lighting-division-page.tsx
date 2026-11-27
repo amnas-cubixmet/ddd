@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { DivisionImage } from "./division-image";
 import Link from "next/link";
 import { ProductsBrowser } from "@/components/browse";
 import { Action } from "@/components/ui";
@@ -25,7 +26,7 @@ export async function LightingDivisionPage({ division, searchParams }: { divisio
           <Action href="/request-quote">Discuss your project</Action>
         </div>
         <div className={divisionStyles.heroImage} data-division={division}>
-          <Image src={info.image} alt={info.alt} fill sizes="(max-width: 800px) 92vw, 45vw" priority />
+          <DivisionImage src={info.image} fallbackSrc={info.fallbackImage} alt={info.alt} sizes="(max-width: 800px) 92vw, 45vw" priority />
         </div>
       </section>
       <section className={divisionStyles.families} aria-labelledby="division-families">
