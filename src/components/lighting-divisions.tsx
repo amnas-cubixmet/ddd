@@ -7,16 +7,14 @@ import styles from "./lighting-divisions.module.css";
 export function LightingDivisions() {
   return (
     <section className={styles.section} aria-labelledby="lighting-divisions-title">
-      <p className="eyebrow">Lighting solutions</p>
       <h2 id="lighting-divisions-title">Lighting for every scale.</h2>
       <div className={styles.grid}>
-        {Object.entries(lightingDivisions).map(([key, division], index) => (
+        {Object.entries(lightingDivisions).map(([key, division]) => (
           <Link key={division.href} href={division.href} className={styles.card} data-division={key}>
             <div className={styles.image}>
               <Image src={division.image} alt={division.alt} fill sizes="(max-width: 700px) 92vw, 42vw" loading="lazy" />
             </div>
             <div className={styles.copy}>
-              <span className={styles.index}>0{index + 1} / Lighting division</span>
               <h3>{division.title}</h3>
               <p>{division.description}</p>
               <div className={styles.tags}>{division.highlights.map(text => <span key={text}>{text}</span>)}</div>
