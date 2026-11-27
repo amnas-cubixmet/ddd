@@ -1,14 +1,14 @@
 @reference "../../app/globals.css";
 
 .section {
-  --bg: var(--ink, #14202E);
-  --panel: #1B2B3C;
-  --button: #203246;
-  --selected: #29465F;
+  --bg: #1F73BD;
+  --panel: #195F9E;
+  --button: #164F85;
+  --selected: #0B2E57;
   --highlight: #79C6FF;
   --text: var(--white);
-  --muted: #B9CDE0;
-  --line: #506B82;
+  --muted: #E0EEF9;
+  --line: #82B5DF;
   color: var(--text);
   color-scheme: dark;
   @apply relative isolate overflow-hidden;
