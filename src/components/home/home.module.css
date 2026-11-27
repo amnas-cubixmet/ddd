@@ -626,7 +626,7 @@
 .about { background: var(--white); }
 .about h2, .faq h2 { color: var(--deep-navy); }
 .sectionKicker, .faqAnswer a { color: var(--accent); }
-.faq { background: var(--cloud); }
+.faq { background: var(--white); }
 .faqRow button[aria-expanded="true"] { color: var(--accent); }
 
 .featured {
@@ -638,7 +638,7 @@
   margin-block: 28px;
 }
 .mission {
-  background: var(--gradient-brand);
+  background: var(--deep-navy);
   color: var(--white);
   padding-block: clamp(48px, 7vw, 100px);
 }
@@ -653,7 +653,7 @@
 }
 
 .strengths {
-  background: var(--cloud);
+  background: var(--white);
   color: var(--deep-navy);
   padding-block: clamp(48px, 6vw, 88px);
 }
@@ -683,7 +683,7 @@
   min-width: 0;
   gap: 12px;
   padding: clamp(20px, 2.4vw, 32px);
-  background: var(--white);
+  background: var(--cloud);
   border: 1px solid var(--line);
   border-radius: 12px;
 }
@@ -720,4 +720,9 @@
   .strengths li {
     gap: 10px;
   }
+}
+
+.catalogueBand, .enquiryBand {
+  background: var(--cloud);
+  color: var(--deep-navy);
 }

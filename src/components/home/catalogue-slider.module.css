@@ -1,5 +1,5 @@
 .section {
-  padding-block: clamp(48px, 7vw, 94px) clamp(8px, 1vw, 16px);
+  padding-block: clamp(20px, 3vw, 40px) clamp(8px, 1vw, 16px);
   min-width: 0;
 }
 
@@ -15,6 +15,7 @@
 .heading h2 {
   font-size: clamp(2.45rem, 6vw, 5.5rem);
   text-transform: uppercase;
+  color: var(--deep-navy);
   letter-spacing: -0.075em;
 }
 
@@ -69,7 +70,7 @@
   position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 3;
-  background: var(--cloud);
+  background: var(--white);
   border-radius: 6px;
 }
 

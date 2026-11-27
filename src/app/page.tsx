@@ -51,7 +51,7 @@ export default function Home() {
     <>
       <HomeHero catalogue={catalogueDownload} />
       <div className="shell"><LightingDivisions /></div>
-      <CatalogueSlider slides={slides} />
+      <div className={styles.catalogueBand}><CatalogueSlider slides={slides} /></div>
       <section className={styles.about} aria-labelledby="home-about">
         <Reveal className={`shell ${styles.aboutInner}`}>
           <div className={styles.aboutCopy}>
@@ -120,7 +120,7 @@ export default function Home() {
       <GlobalPresenceSection />
 
       <HomeFaq catalogue={catalogueDownload} />
-      <HomeEnquiry />
+      <div className={styles.enquiryBand}><HomeEnquiry /></div>
     </>
   );
 }

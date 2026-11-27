@@ -29,7 +29,7 @@
   font-size: clamp(.88rem, 1.6vw, 1rem);
 }
 .panel {
-  background: var(--cloud);
+  background: var(--white);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: clamp(1rem, 4vw, 2.5rem);
