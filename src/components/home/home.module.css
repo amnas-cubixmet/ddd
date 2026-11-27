@@ -116,7 +116,6 @@
 .heroMotion,
 .heroVisual,
 .heroCanvas,
-.heroFallback,
 .heroIllumination {
   position: absolute;
   inset: 0;
@@ -132,7 +131,7 @@
 .heroMotion[data-motion-paused="true"] {
   animation-play-state: paused;
 }
-/* One continuous animation for the poster, live canvas and halo.
+/* One continuous animation for the live canvas and halo.
    The outer frame and model scale remain fixed. */
 @keyframes streetlight-drift {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
@@ -175,22 +174,8 @@
 .heroStage[data-ready="true"] .heroCanvas {
   opacity: 1;
 }
-.heroStage[data-ready="true"] .heroFallback {
+.heroStage:not([data-ready="true"]) .heroIllumination {
   opacity: 0;
-  transition-delay: 80ms;
-}
-.heroFallback {
-  opacity: 1;
-  transition: opacity 240ms ease;
-  display: block;
-}
-.heroFallback img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: brightness(calc(.6 + .5 * var(--hero-light-power)));
-  transition: filter .35s ease;
 }
 .heroIllumination {
   --lens-x: 43.2%;
@@ -477,8 +462,7 @@
     --fixture-travel-y: 2px;
     --fixture-tilt: .45deg;
   }
-  .heroCanvas,
-  .heroFallback {
+  .heroCanvas {
     mask-image: linear-gradient(
       #000 0 23%,
       #0006 45%,
@@ -603,8 +587,7 @@
     translate: none;
     z-index: 0;
   }
-  .heroCanvas,
-  .heroFallback {
+  .heroCanvas {
     mask-image: none;
   }
   .heroIllumination {
@@ -641,7 +624,7 @@
   .hero:not([data-touch-home-motion]) .heroGlow::after {
     animation: none;
   }
-  .hero:not([data-touch-home-motion]) :is(.heroIllumination, .heroLink, .heroPrimary, .heroCanvas, .heroFallback, .heroFallback img),
+  .hero:not([data-touch-home-motion]) :is(.heroIllumination, .heroLink, .heroPrimary, .heroCanvas),
   .faqRow button svg,
   .faqAnswer {
     transition: none;
