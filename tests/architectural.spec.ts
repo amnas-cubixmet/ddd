@@ -28,7 +28,8 @@ test("responsive architectural grid has no overflow or broken approved photograp
     await expect(grid.getByRole("listitem")).toHaveCount(16);
     expect(await grid.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(" ").length)).toBe(columns);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await expect(grid.getByRole("img", { name: "LED strip light reference image" })).toHaveCount(1);
+    await expect(grid.locator("img")).toHaveCount(16);
+    await expect(grid.getByRole("img", { name: "LED Strip Light reference image", exact: true })).toHaveCount(1);
     for (const photo of await grid.locator("img").all()) {
       await photo.scrollIntoViewIfNeeded();
       await expect(photo).toHaveAttribute("alt", /\S/);

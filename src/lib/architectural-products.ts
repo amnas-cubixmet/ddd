@@ -30,15 +30,37 @@ type ArchitecturalPhoto = {
 
 // Use verified photographs or explicitly identified reference images supplied for the catalogue.
 // Explicit src overrides the default architectural image path.
-const approvedPhotos: Partial<Record<ArchitecturalSlug, ArchitecturalPhoto>> = {
-  "strip-light": {
-    src: "/images/products/fixture-photos/led-strip-light.webp",
-    alt: "LED strip light reference image",
-    sourceUrl: "/images/products/fixture-photos/led-strip-light.webp",
-    credit: "Reference image",
-    representative: true,
-  },
+const suppliedImageFiles: Record<ArchitecturalSlug, string> = {
+  "recessed-downlight": "led-recessed-downlight.webp",
+  "surface-downlight": "led-surface-downlight.webp",
+  "cob-spotlight": "led-cob-spotlight.webp",
+  "track-light": "led-track-light.webp",
+  "magnetic-track-light": "magnetic-track-light.webp",
+  "linear-light": "led-linear-light.webp",
+  "suspended-linear-light": "suspended-linear-light.webp",
+  "panel-light": "led-panel-light.webp",
+  "pendant-light": "led-pendant-light.webp",
+  "wall-washer": "led-wall-washer.webp",
+  "strip-light": "led-strip-light.webp",
+  "profile-light": "led-profile-light.webp",
+  "adjustable-spotlight": "led-adjustable-spotlight.webp",
+  "grille-light": "led-grille-light.webp",
+  "ceiling-light": "led-ceiling-light.webp",
+  "cylinder-light": "led-cylinder-light.webp",
 };
+
+const approvedPhotos: Partial<Record<ArchitecturalSlug, ArchitecturalPhoto>> = Object.fromEntries(
+  architecturalProductTypes.map(item => {
+    const src = `/images/products/fixture-photos/${suppliedImageFiles[item.slug]}`;
+    return [item.slug, {
+      src,
+      alt: `${item.name} reference image`,
+      sourceUrl: src,
+      credit: "Reference image",
+      representative: true,
+    }];
+  }),
+);
 
 export const architecturalProducts = architecturalProductTypes.map(item => {
   const photo = approvedPhotos[item.slug];
