@@ -62,13 +62,11 @@ const earthFragment = `
     vec2 terrain = vUv * vec2(210., 105.);
     float dots = 1. - smoothstep(.14, .38, length(fract(terrain) - .5));
     float land = smoothstep(.13, .75, mask.r);
-    vec3 navy = vec3(20., 32., 46.) / 255.;
-    vec3 blue = vec3(31., 115., 189.) / 255.;
-    vec3 sky = vec3(155., 187., 216.) / 255.;
-    vec3 base = mix(navy, blue, .13 * pow(1. - limb, 2.));
-    vec3 led = mix(sky, vec3(1.), mask.g);
-    float visibility = mix(.48, .98, max(limb, mask.g));
-    gl_FragColor = vec4(mix(base, led, dots * land * visibility), 1.);
+    // Only land dots contribute colour; the ocean exposes the CSS grid behind it.
+    float visibility = mix(.42, 1., max(limb, mask.g));
+    float alpha = dots * land * visibility;
+    if (alpha < .015) discard;
+    gl_FragColor = vec4(vec3(1.), alpha);
   }
 `;
 
@@ -80,14 +78,24 @@ function Earth({ onReady }: { onReady: () => void }) {
   );
   useEffect(onReady, [onReady]);
   return (
-    <mesh>
-      <sphereGeometry args={[1, 64, 48]} />
-      <shaderMaterial
-        vertexShader={earthVertex}
-        fragmentShader={earthFragment}
-        uniforms={uniforms}
-      />
-    </mesh>
+    <>
+      {/* Invisible depth shell keeps routes on the far side occluded without painting a dark globe. */}
+      <mesh renderOrder={-2}>
+        <sphereGeometry args={[1, 64, 48]} />
+        <meshBasicMaterial colorWrite={false} depthWrite />
+      </mesh>
+      <mesh renderOrder={-1}>
+        <sphereGeometry args={[1, 64, 48]} />
+        <shaderMaterial
+          vertexShader={earthVertex}
+          fragmentShader={earthFragment}
+          uniforms={uniforms}
+          transparent
+          depthWrite={false}
+          toneMapped={false}
+        />
+      </mesh>
+    </>
   );
 }
 
@@ -417,6 +425,7 @@ export default function InteractiveGlobe(props: GlobeProps) {
         camera={{ position: initialCamera, fov: compact ? 43 : 51 }}
         dpr={[1, compact ? 1.2 : 1.4]}
         gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
+        onCreated={({ gl }) => gl.setClearAlpha(0)}
       >
         <GlobeScene {...props} />
       </Canvas>

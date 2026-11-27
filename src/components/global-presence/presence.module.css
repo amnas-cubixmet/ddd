@@ -2,7 +2,7 @@
 
 .section {
   --bg: #1F73BD;
-  --panel: #195F9E;
+  --panel: rgba(11, 46, 87, 0.28);
   --button: #164F85;
   --selected: #0B2E57;
   --highlight: #79C6FF;
@@ -13,7 +13,12 @@
   color-scheme: dark;
   @apply relative isolate overflow-hidden;
   padding-block: clamp(1.5rem, 4vw, 3.5rem);
-  background: var(--bg);
+  background-color: #1F73BD;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(120deg, #16416F 0%, #195F9E 55%, #1F73BD 100%);
+  background-size: 27px 27px, 27px 27px, 100% 100%;
   scroll-margin-top: 1rem;
 }
 
@@ -29,14 +34,14 @@
   grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
   border: 1px solid var(--line);
   border-radius: 1rem;
-  background: var(--panel);
+  background: transparent;
 }
 
 .stage {
   @apply relative isolate min-w-0 overflow-hidden;
   min-height: 32rem;
   border-radius: 1rem 0 0 1rem;
-  background: var(--bg);
+  background: transparent;
 }
 
 .canvas,
@@ -54,7 +59,7 @@
   width: 100%;
   aspect-ratio: 1000 / 560;
   isolation: isolate;
-  background: var(--bg);
+  background: transparent;
 }
 .fallbackMap svg {
   position: absolute;
@@ -71,6 +76,8 @@
   @apply flex min-w-0 flex-col justify-center;
   padding: clamp(1.15rem, 3vw, 2.25rem);
   border-inline-start: 1px solid var(--line);
+  border-radius: 0 1rem 1rem 0;
+  background: var(--panel);
 }
 .details h3 {
   margin-block: 0.65rem 0.5rem;
@@ -163,6 +170,7 @@
   .controls {
     border-inline-start: 0;
     border-top: 1px solid var(--line);
+    border-radius: 0 0 1rem 1rem;
   }
   .countries {
     grid-template-columns: repeat(4, minmax(0, 1fr));
