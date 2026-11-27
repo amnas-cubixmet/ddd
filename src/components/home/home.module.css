@@ -188,8 +188,8 @@
   transform: translate(-50%, -12%);
   background: radial-gradient(
     ellipse 24% 9% at 50% 13%,
-    #0b2e5765,
-    #0b2e5717 56%,
+    #ffffff65,
+    #ffffff17 56%,
     transparent 100%
   );
   animation: lens-halo 1.65s ease-out both;
@@ -199,8 +199,8 @@
   position: absolute;
   inset: 12% 13% 18%;
   background:
-    radial-gradient(ellipse 35% 43% at 53% 46%, #0b2e5740, transparent 100%),
-    radial-gradient(ellipse 47% 17% at 57% 73%, #0b2e5729, transparent 100%);
+    radial-gradient(ellipse 35% 43% at 53% 46%, #ffffff40, transparent 100%),
+    radial-gradient(ellipse 47% 17% at 57% 73%, #ffffff29, transparent 100%);
   mask-image: conic-gradient(
     from 128deg at 50% 0%,
     transparent 0deg,
@@ -466,16 +466,16 @@
   .heroGlow {
     background: radial-gradient(
       ellipse 31% 15% at 50% 13%,
-      #0b2e5777,
-      #0b2e5722 55%,
+      #ffffff77,
+      #ffffff22 55%,
       transparent 100%
     );
   }
   .heroGlow::after {
     inset: 12% 0 0;
     background:
-      radial-gradient(ellipse 44% 58% at 44% 40%, #0b2e5766, transparent 96%),
-      radial-gradient(ellipse 51% 29% at 43% 61%, #0b2e5722, transparent 100%);
+      radial-gradient(ellipse 44% 58% at 44% 40%, #ffffff66, transparent 96%),
+      radial-gradient(ellipse 51% 29% at 43% 61%, #ffffff22, transparent 100%);
     mask-image: conic-gradient(
       from 117deg at 50% 0,
       transparent 0deg,

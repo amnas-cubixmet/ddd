@@ -127,9 +127,9 @@ export function buildStreetlight() {
   }
   const opticalFalloff = opalTexture();
   const opal = new MeshPhysicalMaterial({
-    color: "#f1f3f6",
+    color: "#14171c",
     map: opticalFalloff,
-    emissive: "#0B2E57",
+    emissive: "#ffffff",
     emissiveIntensity: 0,
     roughness: 0.42,
     metalness: 0,

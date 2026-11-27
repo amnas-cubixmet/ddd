@@ -4,6 +4,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useRef, type RefObject } from "react";
 import {
   Group,
+  Color,
   MathUtils,
   OrthographicCamera,
   PMREMGenerator,
@@ -22,6 +23,9 @@ type SceneProps = {
   onReady: () => void;
   onFailure: () => void;
 };
+
+const ledOff = new Color("#14171c");
+const ledOn = new Color("#f1f3f6");
 
 function Fixture({
   power,
@@ -105,6 +109,8 @@ function Fixture({
       emission,
       blend,
     );
+    // The lens itself brightens smoothly from dark graphite to neutral white.
+    product.opal.color.copy(ledOff).lerp(ledOn, MathUtils.clamp(product.opal.emissiveIntensity / 6, 0, 1));
     if (illumination.current) {
       const lens = root
         .localToWorld(projected.current.set(-0.62, 0.68, 0.08))
