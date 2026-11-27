@@ -10,15 +10,17 @@ export function LightingDivisions() {
       <p className="eyebrow">Lighting solutions</p>
       <h2 id="lighting-divisions-title">Lighting for every scale.</h2>
       <div className={styles.grid}>
-        {Object.values(lightingDivisions).map((division) => (
-          <Link key={division.href} href={division.href} className={styles.card}>
+        {Object.entries(lightingDivisions).map(([key, division], index) => (
+          <Link key={division.href} href={division.href} className={styles.card} data-division={key}>
             <div className={styles.image}>
-              <Image src={division.image} alt={division.alt} fill sizes="(max-width: 700px) 92vw, 45vw" loading="lazy" />
+              <Image src={division.image} alt={division.alt} fill sizes="(max-width: 700px) 92vw, 42vw" loading="lazy" />
             </div>
             <div className={styles.copy}>
+              <span className={styles.index}>0{index + 1} / Lighting division</span>
               <h3>{division.title}</h3>
               <p>{division.description}</p>
-              <span className={styles.link}>Explore lighting <ArrowUpRight size={18} aria-hidden="true" /></span>
+              <div className={styles.tags}>{division.highlights.map(text => <span key={text}>{text}</span>)}</div>
+              <span className={styles.link}>Explore collection <span className={styles.arrow}><ArrowUpRight size={19} aria-hidden="true" /></span></span>
             </div>
           </Link>
         ))}

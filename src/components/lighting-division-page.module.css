@@ -3,7 +3,7 @@
 .hero p:not(:global(.eyebrow)) { color: var(--muted); max-width: 55ch; }
 .heroImage { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 10px; background: var(--cloud); }
 .heroImage img { object-fit: cover; }
-.heroImage[data-division="infrastructure"] img { object-fit: contain; }
+.heroImage[data-division="architectural"] img { object-fit: contain; }
 .tags { display:flex; flex-wrap:wrap; gap: 8px; margin-block: 18px 24px; }
 .tags span { background: var(--cloud); color: var(--deep-navy); border-radius: 4px; padding: 7px 10px; font-size: .85rem; }
 .families { margin-block: 12px 32px; }
