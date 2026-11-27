@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Crosshair, Handshake, Lightbulb } from "lucide-react";
-import { Action, ProductCard } from "@/components/ui";
+import { Action } from "@/components/ui";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { HomeHero } from "@/components/home-hero";
 import { LightingDivisions } from "@/components/lighting-divisions";
@@ -34,7 +34,6 @@ const catalogue = catalogueCategories.map((category) => {
   const photoSlug = fixture && fixturePhotoGroups[fixture.slug]?.photos[0]?.image;
   const photo = publishedProducts.find((product) => product.slug === photoSlug);
   return {
-    photo,
     slide: {
       ...category,
       image: photo?.images[0].src ?? artwork(category.image),
@@ -46,9 +45,6 @@ const catalogue = catalogueCategories.map((category) => {
 });
 
 const slides = catalogue.map(({ slide }) => slide);
-const featuredProducts = catalogue
-  .map(({ photo }) => photo)
-  .filter((photo) => photo !== undefined);
 
 export default function Home() {
   return (
@@ -79,19 +75,6 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {featuredProducts.length > 0 && (
-        <section className={styles.featured} aria-labelledby="home-featured">
-          <div className="shell">
-            <h2 id="home-featured">Featured products</h2>
-            <div className="card-grid">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product.slug} item={product} />
-              ))}
-            </div>
-            <Action href="/products">View all products</Action>
-          </div>
-        </section>
-      )}
       <section className={styles.mission} aria-label="Mission and vision">
         <div className="shell">
           <div>
