@@ -39,16 +39,16 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   const root = useRef<HTMLElement>(null);
   const illumination = useRef<HTMLDivElement>(null);
   const pointer = useRef({ x: 0, y: 0 });
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [powered, setPowered] = useState(true);
   const [brightness, setBrightness] = useState(0);
-  const [enabled, setEnabled] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
   const touchMotion = useTouchHomepageMotion();
   const reduced = (useSiteReducedMotion() && !touchMotion);
   const markReady = useCallback(() => setReady(true), []);
-  const useFallback = useCallback(() => {
-    setEnabled(false);
+  const handleSceneFailure = useCallback(() => {
+    setFailed(true);
     setReady(false);
     illumination.current?.style.removeProperty("--lens-x");
     illumination.current?.style.removeProperty("--lens-y");
@@ -57,24 +57,10 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   useEffect(() => {
     const element = root.current;
     if (!element) return;
-    const loader = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return;
-      loader.disconnect();
-      try {
-        const context = document.createElement("canvas").getContext("webgl2");
-        setEnabled(Boolean(context));
-        context?.getExtension("WEBGL_lose_context")?.loseContext();
-      } catch {
-        setEnabled(false);
-      }
-    }, { rootMargin: "120px" });
+    if (typeof IntersectionObserver === "undefined") return;
     const visibility = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
-    loader.observe(element);
     visibility.observe(element);
-    return () => {
-      loader.disconnect();
-      visibility.disconnect();
-    };
+    return () => visibility.disconnect();
   }, [root]);
 
   const power = powered ? brightness / 100 : 0;
@@ -138,9 +124,9 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
               <div className={styles.heroGlow} />
             </div>
             <div className={styles.heroVisual} data-testid="streetlight-visual">
-              {enabled && (
+              {!failed && (
                 <div className={styles.heroCanvas}>
-                  <SceneBoundary fallback={useFallback}>
+                  <SceneBoundary fallback={handleSceneFailure}>
                     <StreetlightScene
                       power={power}
                       reduced={reduced}
@@ -148,7 +134,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
                       pointer={pointer}
                       illumination={illumination}
                       onReady={markReady}
-                      onFailure={useFallback}
+                      onFailure={handleSceneFailure}
                     />
                   </SceneBoundary>
                 </div>
