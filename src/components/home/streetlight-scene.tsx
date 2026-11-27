@@ -30,7 +30,7 @@ function setLightProperty(overlay: HTMLDivElement, name: string, value: string) 
   }
 }
 
-// Both canvas and poster use these fixed aspect ratios and camera poses.
+// Use fixed aspect ratios and camera poses for the live canvas.
 function configureCamera(camera: PerspectiveCamera, aspect: number) {
   camera.aspect = aspect;
   camera.fov = 39;
