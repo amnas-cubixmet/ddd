@@ -1250,3 +1250,18 @@ textarea::placeholder {
 .site-footer .button-primary { background: var(--sky); color: var(--deep-navy); }
 .site-footer .button-primary:hover { background: var(--white); color: var(--deep-navy); }
 .site-footer :focus-visible { outline-color: var(--sky); }
+
+/* Compact product-card type hierarchy. */
+.product-card .card-body .label {
+  font-size: .6875rem;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.product-card .card-body h3 {
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+}
