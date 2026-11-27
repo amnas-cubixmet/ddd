@@ -506,7 +506,8 @@ svg {
   margin-bottom: 3px;
 }
 .footer-main .brand-logo {
-  width: 160px;
+  width: 108px;
+  height: auto;
 }
 .footer-main p,
 .footer-main a:not(.brand-link),
