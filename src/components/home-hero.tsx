@@ -41,7 +41,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   const pointer = useRef({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
   const [powered, setPowered] = useState(true);
-  const [brightness, setBrightness] = useState(80);
+  const [brightness, setBrightness] = useState(0);
   const [enabled, setEnabled] = useState(false);
   const [ready, setReady] = useState(false);
   const touchMotion = useTouchHomepageMotion();
@@ -82,7 +82,11 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
     <section
       className={styles.hero}
       data-touch-home-motion={touchMotion || undefined}
-      style={{ "--hero-light-power": power } as CSSProperties}
+      style={{
+        "--hero-light-power": power,
+        "--bg": `color-mix(in srgb, #1F73BD, #14202E ${power * 100}%)`,
+        transition: reduced ? "none" : "background-color 250ms ease",
+      } as CSSProperties}
       ref={root}
       onPointerMove={(event) => {
         if (reduced || event.pointerType !== "mouse") return;
