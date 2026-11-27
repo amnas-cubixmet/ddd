@@ -18,7 +18,7 @@ function slideOffset(track: HTMLUListElement, index: number) {
 export function CatalogueSlider({
   slides,
 }: {
-  slides: readonly (Pick<CatalogueCategory, "slug" | "name" | "image"> & { href: string })[];
+  slides: readonly (Pick<CatalogueCategory, "slug" | "name"> & { image: string; href: string })[];
 }) {
   const trackRef = useRef<HTMLUListElement>(null);
   const touchMotion = useTouchHomepageMotion();
