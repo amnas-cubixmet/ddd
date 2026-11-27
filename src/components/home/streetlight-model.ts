@@ -14,6 +14,8 @@ import {
   MeshStandardMaterial,
   Path,
   Shape,
+  Box3,
+  Vector3,
   type BufferGeometry,
 } from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
@@ -228,23 +230,29 @@ export function buildStreetlight() {
   );
   collar.rotation.z = Math.PI / 2;
   for (const y of [-0.084, 0.084]) bolt(head, 1.59, y, 0.207, true);
+  assembly.updateMatrixWorld(true);
+  const headBounds = new Box3().setFromObject(head, true);
+  const lensCenter = head.localToWorld(new Vector3(-0.2, -0.17, 0));
+  const armExtension = 0.195;
+  const poleExtension = 0.76;
   const arm = part(
     head,
-    new CylinderGeometry(0.144, 0.144, 0.65, 40),
+    new CylinderGeometry(0.144, 0.144, 0.65 + armExtension, 40),
     graphite,
-    1.94,
+    1.94 + armExtension / 2,
     -0.005,
     0,
   );
   arm.rotation.z = Math.PI / 2;
-  const poleX = 1.48,
-    poleZ = -0.95;
+  const armShift = new Vector3(armExtension, 0, 0).applyQuaternion(head.quaternion);
+  const poleX = 1.48 + armShift.x,
+    poleZ = -0.95 + armShift.z;
   part(
     assembly,
-    new RoundedBoxGeometry(0.32, 2.34, 0.38, 3, 0.026),
+    new RoundedBoxGeometry(0.32, 2.34 + poleExtension, 0.38, 3, 0.026),
     anodized,
     poleX,
-    -0.63,
+    -0.63 + armShift.y - poleExtension / 2,
     poleZ,
   ).rotation.y = 0.3;
   part(
@@ -252,7 +260,7 @@ export function buildStreetlight() {
     new RoundedBoxGeometry(0.329, 0.055, 0.389, 3, 0.018),
     castingMetal,
     poleX,
-    0.55,
+    0.55 + armShift.y,
     poleZ,
   ).rotation.y = 0.3;
 
@@ -277,6 +285,8 @@ export function buildStreetlight() {
   }
   return {
     model,
+    headBounds,
+    lensCenter,
     opal,
     dispose() {
       opticalFalloff.dispose();
