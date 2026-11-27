@@ -26,6 +26,9 @@
   visibility: hidden;
   pointer-events: none;
 }
+.screen[data-dismissed="true"] .track::after {
+  animation: none;
+}
 .logo {
   width: clamp(180px, 23vw, 260px);
   height: auto;

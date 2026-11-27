@@ -106,10 +106,10 @@
   position: absolute;
   z-index: 2;
   right: calc((100% - 100cqw) / 2);
-  top: 0;
-  width: 65cqw;
+  top: 2%;
+  width: min(45cqw, 700px);
   height: auto;
-  aspect-ratio: 6 / 5;
+  aspect-ratio: 1.25;
   pointer-events: none;
   isolation: isolate;
 }
@@ -412,9 +412,9 @@
   .heroStage {
     position: relative;
     inset: auto;
-    width: 100%;
+    width: min(100%, 520px);
     height: auto;
-    aspect-ratio: 6 / 5;
+    aspect-ratio: 1.25;
     justify-self: center;
     margin-top: 8px;
     overflow: clip;
@@ -435,19 +435,20 @@
     overflow: clip;
   }
   .heroInner {
-    grid-template-rows: 1fr auto;
-    gap: clamp(24px, 6svh, 52px);
-    padding-block: clamp(120px, 39vw, 210px) 22px;
+    padding-block: 12px 22px;
+    grid-template-rows: auto auto auto;
+    gap: 12px;
   }
   .heroStage {
-    position: absolute;
-    inset: 0 auto auto 50%;
+    grid-row: 1;
+    position: relative;
+    inset: auto;
     z-index: 0;
-    width: 100cqw;
+    width: 100%;
     height: auto;
-    aspect-ratio: 31 / 50;
+    aspect-ratio: 1.75;
     margin: 0;
-    transform: translateX(-50%);
+
   }
   .heroLead {
     z-index: 1;
@@ -457,13 +458,7 @@
     --fixture-travel-y: 2px;
     --fixture-tilt: .45deg;
   }
-  .heroCanvas {
-    mask-image: linear-gradient(
-      #000 0 23%,
-      #0006 45%,
-      transparent 83%
-    );
-  }
+
   .heroIllumination {
     --lens-x: 52.8%;
     --lens-y: 12.5%;
@@ -574,9 +569,9 @@
     grid-area: 1 / 2 / 2 / 3;
     position: relative;
     inset: auto;
-    width: 100%;
+    width: min(100%, 520px);
     height: auto;
-    aspect-ratio: 6 / 5;
+    aspect-ratio: 1.25;
     margin: 0;
     transform: none;
     translate: none;
@@ -615,11 +610,11 @@
   .aboutArt:hover img {
     transform: none;
   }
-  .hero:not([data-touch-home-motion]) :is(.heroGlow, .heroMotion, .heroVisual, .heroLead > [data-hero-enter], .heroPanel[data-hero-panel]),
-  .hero:not([data-touch-home-motion]) .heroGlow::after {
+  .hero :is(.heroGlow, .heroMotion, .heroVisual, .heroLead > [data-hero-enter], .heroPanel[data-hero-panel]),
+  .hero .heroGlow::after {
     animation: none;
   }
-  .hero:not([data-touch-home-motion]) :is(.heroIllumination, .heroLink, .heroPrimary, .heroCanvas),
+  .hero :is(.heroIllumination, .heroLink, .heroPrimary, .heroCanvas),
   .faqRow button svg,
   .faqAnswer {
     transition: none;

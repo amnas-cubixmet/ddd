@@ -13,7 +13,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
-import { useSiteReducedMotion, useTouchHomepageMotion } from "./use-media-query";
+import { useSiteReducedMotion } from "./use-media-query";
 import styles from "./home/home.module.css";
 
 const StreetlightScene = dynamic(() => import("./home/streetlight-scene"), {
@@ -46,8 +46,8 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
   const [introTimedOut, setIntroTimedOut] = useState(false);
-  const touchMotion = useTouchHomepageMotion();
-  const reduced = (useSiteReducedMotion() && !touchMotion);
+  const wake = useRef<(() => void) | null>(null);
+  const reduced = useSiteReducedMotion();
   const markReady = useCallback(() => setReady(true), []);
   const handleSceneFailure = useCallback(() => {
     setFailed(true);
@@ -88,7 +88,6 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
     <LoadingScreen overlay dismissed={introDismissed} />
     <section
       className={styles.hero}
-      data-touch-home-motion={touchMotion || undefined}
       style={{
         "--hero-light-power": power,
         "--bg": `color-mix(in srgb, #1F73BD, #14202E ${power * 100}%)`,
@@ -99,8 +98,9 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
         if (reduced || event.pointerType !== "mouse") return;
         const rect = event.currentTarget.getBoundingClientRect();
         pointer.current = { x: (event.clientX - rect.left) / rect.width - 0.5, y: (event.clientY - rect.top) / rect.height - 0.5 };
+        wake.current?.();
       }}
-      onPointerLeave={() => { pointer.current = { x: 0, y: 0 }; }}
+      onPointerLeave={() => { pointer.current = { x: 0, y: 0 }; wake.current?.(); }}
     >
       <div className={`shell ${styles.heroInner}`}>
         <div className={styles.heroLead}>
@@ -152,6 +152,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
                       power={power}
                       reduced={reduced}
                       active={visible}
+                      wakeRef={wake}
                       pointer={pointer}
                       illumination={illumination}
                       onReady={markReady}
