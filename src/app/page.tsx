@@ -54,19 +54,6 @@ export default function Home() {
     <>
       <HomeHero catalogue={catalogueDownload} />
       <CatalogueSlider slides={slides} />
-      {featuredProducts.length > 0 && (
-        <section className={styles.featured} aria-labelledby="home-featured">
-          <div className="shell">
-            <h2 id="home-featured">Featured products</h2>
-            <div className="card-grid">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product.slug} item={product} />
-              ))}
-            </div>
-            <Action href="/products">View all products</Action>
-          </div>
-        </section>
-      )}
       <section className={styles.about} aria-labelledby="home-about">
         <Reveal className={`shell ${styles.aboutInner}`}>
           <div className={styles.aboutCopy}>
@@ -90,6 +77,19 @@ export default function Home() {
         </Reveal>
       </section>
 
+      {featuredProducts.length > 0 && (
+        <section className={styles.featured} aria-labelledby="home-featured">
+          <div className="shell">
+            <h2 id="home-featured">Featured products</h2>
+            <div className="card-grid">
+              {featuredProducts.map((product) => (
+                <ProductCard key={product.slug} item={product} />
+              ))}
+            </div>
+            <Action href="/products">View all products</Action>
+          </div>
+        </section>
+      )}
       <section className={styles.mission} aria-label="Mission and vision">
         <div className="shell">
           <div>
