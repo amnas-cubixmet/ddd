@@ -162,7 +162,7 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
           decay={2}
           angle={Math.PI / 3}
           penumbra={0.9}
-          color="#ffffff"
+          color="#0B2E57"
         />
         <RoundedBox
           args={[2.58, 0.37, 1.14]}
@@ -197,7 +197,7 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
           <meshStandardMaterial
             ref={diffuser}
             color="#8c929a"
-            emissive="#ffffff"
+            emissive="#0B2E57"
             emissiveIntensity={0}
             roughness={0.37}
             metalness={0.06}
