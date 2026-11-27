@@ -1,20 +1,15 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 
 const HomeIntroContext = createContext(false);
 
-// The root layout persists across client-side navigation. Once the initial
-// homepage has been left, visiting it again must not show the full-screen intro.
+// Allow the branded intro every time the homepage mounts, including client navigation.
 export function HomeIntroProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const [initialHome, setInitialHome] = useState(pathname === "/");
-  if (initialHome && pathname !== "/") {
-    setInitialHome(false);
-  }
   return (
-    <HomeIntroContext.Provider value={initialHome && pathname === "/"}>
+    <HomeIntroContext.Provider value={pathname === "/"}>
       {children}
     </HomeIntroContext.Provider>
   );

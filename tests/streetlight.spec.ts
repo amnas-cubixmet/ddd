@@ -37,7 +37,8 @@ test("streetlight renders and restores the selected brightness after a power cyc
   await expect(page.getByTestId("page-loading")).toHaveCount(0);
   await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Home", exact: true }).click();
   await expect(page).toHaveURL(/\/$/);
-  await expect(page.getByTestId("home-intro")).toHaveCount(0);
+  await expect(page.getByTestId("home-intro")).toHaveCount(1);
+  await expect(page.getByTestId("home-intro")).toBeHidden({ timeout: 25_000 });
 });
 
  test("inner pages do not show the branded homepage intro", async ({ page }) => {
