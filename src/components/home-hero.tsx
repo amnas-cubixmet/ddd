@@ -38,7 +38,7 @@ class SceneBoundary extends Component<
 }
 
 export function HomeHero({ catalogue }: { catalogue?: string }) {
-  const root = useRef<HTMLElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
   const illumination = useRef<HTMLDivElement>(null);
   const pointer = useRef({ x: 0, y: 0 });
   const [visible, setVisible] = useState(true);
@@ -58,13 +58,13 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   }, []);
 
   useEffect(() => {
-    const element = root.current;
+    const element = stage.current;
     if (!element) return;
     if (typeof IntersectionObserver === "undefined") return;
     const visibility = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
     visibility.observe(element);
     return () => visibility.disconnect();
-  }, [root]);
+  }, []);
 
   // Reveal immediately after the first rendered frames, or if rendering fails.
   // The watchdog is only a recovery path for a stalled renderer.
@@ -95,7 +95,6 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
         "--bg": `color-mix(in srgb, #1F73BD, #14202E ${power * 100}%)`,
         transition: reduced ? "none" : "background-color 250ms ease",
       } as CSSProperties}
-      ref={root}
       onPointerMove={(event) => {
         if (reduced || event.pointerType !== "mouse") return;
         const rect = event.currentTarget.getBoundingClientRect();
@@ -104,7 +103,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
       }}
       onPointerLeave={() => { pointer.current = { x: 0, y: 0 }; wake.current?.(); }}
     >
-      <div className={`shell ${styles.heroInner}`}>
+      <div className={styles.heroInner}>
         <div className={styles.heroLead}>
           <p className={styles.heroKicker} data-hero-enter>
             Powering a Brighter Tomorrow
@@ -136,6 +135,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
         </div>
         <div
           className={styles.heroStage}
+          ref={stage}
           data-hero-stage
           data-testid="streetlight-stage"
           data-fixed-hero="true"

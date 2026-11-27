@@ -3,6 +3,7 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useLayoutEffect, useRef, type RefObject } from "react";
 import {
+  Box3,
   Group,
   Color,
   MathUtils,
@@ -26,6 +27,29 @@ type SceneProps = {
 
 const ledOff = new Color("#14171c");
 const ledOn = new Color("#f1f3f6");
+const maxTilt = 0.07;
+const maxYaw = 0.16;
+
+function measureFixture(model: Group) {
+  const poseBounds = new Box3().setFromObject(model, true);
+  const neutralWidth = poseBounds.max.x - poseBounds.min.x;
+  const motionBounds = poseBounds.clone();
+
+  // Measure the visible geometry across the pointer motion range once per model.
+  for (const tilt of [-maxTilt, 0, maxTilt]) {
+    for (const yaw of [-maxYaw, 0, maxYaw]) {
+      model.rotation.set(tilt, yaw, 0);
+      motionBounds.union(poseBounds.setFromObject(model, true));
+    }
+  }
+
+  model.rotation.set(0, 0, 0);
+  return {
+    neutralWidth,
+    center: motionBounds.getCenter(new Vector3()),
+    size: motionBounds.getSize(new Vector3()),
+  };
+}
 
 function Fixture({
   power,
@@ -37,9 +61,10 @@ function Fixture({
   onReady,
   onFailure,
 }: SceneProps) {
-  const { camera, gl, get, size, invalidate } = useThree();
+  const { camera, gl, get, size: { width, height }, invalidate } = useThree();
   const mount = useRef<Group>(null);
   const fixture = useRef<ReturnType<typeof buildStreetlight> | null>(null);
+  const bounds = useRef<ReturnType<typeof measureFixture> | null>(null);
   const frames = useRef(0);
   const reveal = useRef(0);
   const projected = useRef(new Vector3());
@@ -48,6 +73,7 @@ function Fixture({
     const root = mount.current!;
     const { scene } = get();
     const product = buildStreetlight();
+    bounds.current = measureFixture(product.model);
     const studio = new RoomEnvironment();
     const generator = new PMREMGenerator(gl);
     const reflections = generator.fromScene(studio, 0, 0.1, 100, { size: 64 });
@@ -60,6 +86,7 @@ function Fixture({
     return () => {
       root.remove(product.model);
       fixture.current = null;
+      bounds.current = null;
       product.dispose();
       scene.environment = null;
       reflections.dispose();
@@ -70,11 +97,23 @@ function Fixture({
 
   useLayoutEffect(() => {
     const { camera } = get();
-    if (!(camera instanceof OrthographicCamera)) return;
-    camera.zoom = Math.min(size.width / 4.45, size.height / 3.65);
+    const framing = bounds.current;
+    if (!(camera instanceof OrthographicCamera) || !framing || width < 1 || height < 1) return;
+
+    // R3F sizes the orthographic frustum in CSS pixels. Leave room for the
+    // pointer poses, the CSS drift, and a narrow gap around the fixture.
+    const inset = Math.min(MathUtils.clamp(width * 0.02, 7, 13), width / 4, height / 4);
+    camera.position.x = framing.center.x;
+    camera.position.y = framing.center.y;
+    camera.zoom = Math.min(
+      (width * 0.92) / framing.neutralWidth,
+      (width - inset * 2) / framing.size.x,
+      (height - inset * 2) / framing.size.y,
+    );
     camera.updateProjectionMatrix();
+    camera.updateMatrixWorld();
     invalidate();
-  }, [get, size, invalidate]);
+  }, [get, width, height, invalidate]);
 
   useEffect(() => {
     const canvas = gl.domElement;
@@ -98,8 +137,8 @@ function Fixture({
     const product = fixture.current;
     const root = mount.current;
     if (!root || !product || (!active && frames.current >= 2)) return;
-    const yaw = reduced ? 0 : pointer.current.x * 0.32;
-    const tilt = reduced ? 0 : pointer.current.y * 0.14;
+    const yaw = reduced ? 0 : pointer.current.x * 2 * maxYaw;
+    const tilt = reduced ? 0 : pointer.current.y * 2 * maxTilt;
     const emission = power * 6;
     const blend = reduced ? 1 : 1 - Math.exp(-12 * Math.min(delta, 0.06));
     root.rotation.y = MathUtils.lerp(root.rotation.y, yaw, blend);
@@ -147,7 +186,7 @@ export default function StreetlightScene(props: SceneProps) {
       orthographic
       frameloop="demand"
       dpr={[1, 1.5]}
-      camera={{ position: [0, -0.1, 8], near: 0.1, far: 20 }}
+      camera={{ position: [0, 0, 8], near: 0.1, far: 20 }}
       gl={{ alpha: true, antialias: true, powerPreference: "low-power" }}
       onCreated={({ gl }) => gl.setClearAlpha(0)}
     >
