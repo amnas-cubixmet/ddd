@@ -1,5 +1,5 @@
 .section {
-  padding-block: clamp(48px, 7vw, 94px);
+  padding-block: clamp(48px, 7vw, 94px) clamp(8px, 1vw, 16px);
   min-width: 0;
 }
 

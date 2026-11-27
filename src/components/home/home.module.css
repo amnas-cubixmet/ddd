@@ -287,7 +287,7 @@
 .about {
   color: var(--text);
   background: var(--bg);
-  padding-block: clamp(66px, 10vw, 135px);
+  padding-block: clamp(12px, 1.6vw, 24px);
 }
 .aboutInner {
   display: grid;
@@ -520,7 +520,9 @@
   .lightControls input {
     width: 100%;
   }
-  .about,
+  .about {
+    padding-block: 14px;
+  }
   .faq {
     padding-block: clamp(48px, 12vw, 72px);
   }
@@ -630,7 +632,7 @@
 .featured {
   background: var(--gradient-light);
   color: var(--deep-navy);
-  padding-block: clamp(48px, 7vw, 100px);
+  padding-block: clamp(12px, 1.6vw, 24px) clamp(48px, 7vw, 100px);
 }
 .featured :global(.card-grid) {
   margin-block: 28px;
