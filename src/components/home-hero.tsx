@@ -84,7 +84,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
       data-touch-home-motion={touchMotion || undefined}
       style={{
         "--hero-light-power": power,
-        "--bg": `color-mix(in srgb, #1F73BD, #14202E ${power * 100}%)`,
+        "--bg": `color-mix(in srgb, #0B2E57, #14202E ${power * 100}%)`,
         transition: reduced ? "none" : "background-color 250ms ease",
       } as CSSProperties}
       ref={root}
