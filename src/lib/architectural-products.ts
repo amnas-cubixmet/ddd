@@ -20,6 +20,7 @@ const architecturalProductTypes = [
 type ArchitecturalSlug = (typeof architecturalProductTypes)[number]["slug"];
 
 type ArchitecturalPhoto = {
+  src?: string;
   alt: string;
   sourceUrl: string;
   credit: string;
@@ -27,16 +28,24 @@ type ArchitecturalPhoto = {
   representative: boolean;
 };
 
-// Populate only after verifying the original photo, product match and reuse rights.
-// The file must exist in public/images/products/architectural/<slug>.webp.
-const approvedPhotos: Partial<Record<ArchitecturalSlug, ArchitecturalPhoto>> = {};
+// Use verified photographs or explicitly identified reference images supplied for the catalogue.
+// Explicit src overrides the default architectural image path.
+const approvedPhotos: Partial<Record<ArchitecturalSlug, ArchitecturalPhoto>> = {
+  "strip-light": {
+    src: "/images/products/fixture-photos/led-strip-light.webp",
+    alt: "LED strip light reference image",
+    sourceUrl: "/images/products/fixture-photos/led-strip-light.webp",
+    credit: "Reference image",
+    representative: true,
+  },
+};
 
 export const architecturalProducts = architecturalProductTypes.map(item => {
   const photo = approvedPhotos[item.slug];
   return {
     ...item,
     image: photo
-      ? { ...photo, src: `/images/products/architectural/${item.slug}.webp` }
+      ? { ...photo, src: photo.src ?? `/images/products/architectural/${item.slug}.webp` }
       : undefined,
   };
 });

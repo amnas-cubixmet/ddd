@@ -19,7 +19,7 @@ export default function Page() {
           <h1 id="architectural-products">Recommended product list</h1>
           <p>{architecturalProducts.length} lighting types</p>
         </div>
-        <p className={catalogueStyles.notice}>Suggested catalogue. Contact our team to confirm availability and specifications. Representative photographs, where available, are identified; other products are shown without a photograph.</p>
+        <p className={catalogueStyles.notice}>Suggested catalogue. Contact our team to confirm availability and specifications. Representative images, where available, are identified; other products are shown without an image.</p>
         <ul className={catalogueStyles.grid} data-testid="architectural-catalogue">
           {architecturalProducts.map((item) => (
             <li key={item.slug} className={catalogueStyles.card}>
@@ -40,7 +40,7 @@ export default function Page() {
                 <p>{item.application}</p>
                 {item.image && (
                   <p className={catalogueStyles.credit}>
-                    {item.image.representative && "Representative photograph · "}
+                    {item.image.representative && "Representative image · "}
                     <a href={item.image.sourceUrl}>{item.image.credit}</a>
                     {item.image.licenseUrl && <> · <a href={item.image.licenseUrl}>Image license</a></>}
                   </p>
