@@ -1,3 +1,4 @@
+import { findArchitecturalProduct } from "@/lib/architectural-products";
 import { ContactSection } from "@/components/contact";
 import { PageIntro } from "@/components/ui";
 import { findCollection, products } from "@/lib/catalogue";
@@ -13,13 +14,14 @@ export default async function QuotePage({
   const query = await searchParams;
   const product = products.find((item) => item.slug === query.product);
   const collection = findCollection(query.collection);
+  const architecturalProduct = findArchitecturalProduct(query.architectural);
   const defaults =
     query.catalogue === "1"
       ? {
           interest: "LED product catalogue",
           message: "Please share the current Bharat Lums product catalogue.",
         }
-      : { interest: product?.name ?? collection?.name };
+      : { interest: product?.name ?? collection?.name ?? architecturalProduct?.name };
   return (
     <>
       <PageIntro
