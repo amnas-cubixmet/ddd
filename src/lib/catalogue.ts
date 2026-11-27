@@ -63,6 +63,29 @@ const ledFamilies = [
   ],
 ] as const;
 
+// Reference category names; illustrations are conceptual, not verified product photos.
+const additionalLightingFamilies = [
+  ["indoor-spot-lights","Indoor Spot Light","Directional accent lighting for interiors.","categories/indoor-spot-lights.svg","Aiming and highlighting interior features."],
+  ["recessed-down-lights","Recessed Down Light","Recessed ceiling lighting concepts.","categories/recessed-down-lights.svg","Flush-mounted ceiling lighting."],
+  ["surface-down-lights","Surface Down Light","Surface-mounted ceiling lighting concepts.","categories/surface-down-lights.svg","Ceilings without a recessed mounting cavity."],
+  ["track-lights","Track Light","Adjustable lighting along a mounting track.","categories/track-lights.svg","Retail displays and accent lighting."],
+  ["wall-lights","Wall Light","Wall-mounted architectural lighting concepts.","categories/wall-lights.svg","Interior walls and circulation areas."],
+  ["ceiling-lights","Ceiling Light","Ceiling-mounted general lighting concepts.","categories/ceiling-lights.svg","Interior ambient lighting."],
+  ["foot-lights","Foot Light","Low-level lighting concepts.","categories/foot-lights.svg","Stairs and circulation routes."],
+  ["led-lamps","LED Lamp","General lamp-format LED lighting concepts.","categories/led-lamps.svg","Suitable lamp holders and general lighting."],
+  ["pendant-lamps","Pendant Lamp","Suspended decorative lighting concepts.","categories/pendant-lamps.svg","Dining spaces and reception areas."],
+  ["led-strip-lights","LED Strip Light","Linear LED strip lighting concepts.","categories/led-strip-lights.svg","Coves and accent lighting."],
+  ["outdoor-spot-lights","Outdoor Spot Light","Directional exterior accent lighting concepts.","categories/outdoor-spot-lights.svg","Landscape and architectural accents."],
+  ["spike-lights","Spike Light","Ground-spike mounted lighting concepts.","categories/spike-lights.svg","Landscape accents and garden features."],
+  ["wall-washer-lights","Wall-Washer Light","Linear lighting concepts for wall illumination.","categories/wall-washer-lights.svg","Façades and architectural surfaces."],
+  ["bollard-lights","Bollard Light","Freestanding low-level exterior lighting concepts.","categories/bollard-lights.svg","Paths and landscaped circulation."],
+  ["gate-lights","Gate Light","Entrance and gate-mounted lighting concepts.","categories/gate-lights.svg","Entrance pillars and gates."],
+  ["inground-lights","Inground Light","Recessed ground lighting concepts.","categories/inground-lights.svg","Exterior architectural accents."],
+  ["pole-lights","Pole Light","Pole-mounted area lighting concepts.","categories/pole-lights.svg","Open spaces and circulation routes."],
+  ["magnetic-track-48v","48V Magnetic Track","Magnetic track lighting category.","categories/magnetic-track-48v.svg","Flexible interior lighting layouts; confirm system compatibility."],
+  ["underwater-lights","Underwater Light","Submerged lighting category.","categories/underwater-lights.svg","Water features; confirm suitability and installation rating."],
+] as const;
+
 const collectionFrom = ([slug, name, description, image]: readonly [
   string,
   string,
@@ -74,13 +97,16 @@ const collectionFrom = ([slug, name, description, image]: readonly [
   description,
   image,
 });
-export const catalogueCategories = ledFamilies.map(collectionFrom);
+export const catalogueCategories = [
+  ...ledFamilies.map(collectionFrom),
+  ...additionalLightingFamilies.map(([slug, name, description, image]) => ({ slug, name, description, image })),
+];
 export const collections = catalogueCategories;
 export function findCollection(slug: unknown) {
   return collections.find((item) => item.slug === slug);
 }
 
-export const artwork = (name: string) => `/images/${name}.webp`;
+export const artwork = (name: string) => `/images/${name.endsWith(".svg") ? name : `${name}.webp`}`;
 
 export type ProductImage = {
   src: string;
@@ -266,6 +292,20 @@ const representativeProducts: Product[] = [
   },
 ];
 
+// These entries support enquiries without asserting stock or technical specifications.
+export const additionalRepresentativeProducts: Product[] = additionalLightingFamilies.map(
+  ([slug, name, description, image, applications]) => ({
+    slug: `concept-${slug}`,
+    name,
+    categories: [slug],
+    status: "draft",
+    description: `${description} Contact us to confirm available models.`,
+    features: [],
+    applications,
+    images: [{ src: artwork(image), alt: `Representative illustration of ${name}`, label: "Concept illustration", representative: true }],
+  }),
+);
+
 const photographedProducts: Product[] = representativeProducts.flatMap((family) =>
   (fixturePhotoGroups[family.slug]?.photos ?? []).map((photo) => {
     const name = photo.wattage
@@ -304,10 +344,10 @@ const photographedProducts: Product[] = representativeProducts.flatMap((family) 
   }),
 );
 
-export const products = [...representativeProducts, ...photographedProducts];
+export const products = [...representativeProducts, ...photographedProducts, ...additionalRepresentativeProducts];
 
 export function findCatalogueFixture(categorySlug: string) {
-  return representativeProducts.find((item) => item.categories[0] === categorySlug);
+  return [...representativeProducts, ...additionalRepresentativeProducts].find((item) => item.categories[0] === categorySlug);
 }
 
 export const publishedProducts = products.filter(

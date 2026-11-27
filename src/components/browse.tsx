@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 import {
   catalogueCategories,
+  additionalRepresentativeProducts,
   catalogueLabel,
   findCollection,
   publishedProducts,
@@ -33,7 +34,7 @@ export function ProductsBrowser({ initialCategory }: { initialCategory: string }
     setWattage("");
   }
 
-  const visible = publishedProducts.filter(
+  const visible = [...publishedProducts, ...additionalRepresentativeProducts].filter(
     (item) =>
       (!category || item.categories.includes(category)) &&
       (!wattage || item.wattages?.includes(Number(wattage))) &&
