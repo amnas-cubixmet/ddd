@@ -1,11 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { CompanyValues } from "@/components/company-values";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { Action } from "@/components/ui";
-import { artwork } from "@/lib/catalogue";
 import { brand, metadata as pageMetadata } from "@/lib/site";
 import conferenceRoom from "../../../public/images/about-bharat-lums-conference.webp";
 import styles from "./about.module.css";
@@ -14,27 +11,6 @@ const intro =
   "Bharat Lums offers LED lighting solutions for commercial, industrial and outdoor spaces.";
 
 export const metadata = pageMetadata("About", "/about", intro);
-
-const applications = [
-  {
-    name: "Commercial",
-    description: "Lighting for offices, shops and shared interiors.",
-    image: "commercial-troffer",
-    category: "commercial-lighting",
-  },
-  {
-    name: "Industrial",
-    description: "Lighting for manufacturing, utility and storage spaces.",
-    image: "high-bay",
-    category: "led-industrial-lights",
-  },
-  {
-    name: "Outdoor",
-    description: "Lighting for paths, entrances and landscaped areas.",
-    image: "outdoor-bollard",
-    category: "outdoor-lighting",
-  },
-];
 
 export default function AboutPage() {
   return (
@@ -61,46 +37,6 @@ export default function AboutPage() {
           </div>
           <figcaption>Lighting application reference</figcaption>
         </figure>
-      </section>
-
-      <section
-        className={styles.applications}
-        aria-labelledby="applications-title"
-      >
-        <Reveal className={styles.sectionHeading}>
-          <p className="eyebrow">Our lighting solutions</p>
-          <h2 id="applications-title">Lighting by application.</h2>
-        </Reveal>
-        <div className={styles.applicationGrid}>
-          {applications.map((item) => (
-            <Reveal
-              as="article"
-              className={styles.applicationItem}
-              key={item.category}
-            >
-              <Link
-                className={styles.applicationCard}
-                href={`/products?category=${item.category}`}
-              >
-                <div className={styles.applicationImage}>
-                  <Image
-                    src={artwork(`products/${item.image}`)}
-                    alt=""
-                    fill
-                    sizes="(max-width: 650px) 92vw, (max-width: 1450px) 30vw, 430px"
-                  />
-                </div>
-                <div className={styles.applicationCopy}>
-                  <div>
-                    <h3>{item.name}</h3>
-                    <p>{item.description}</p>
-                  </div>
-                  <ArrowUpRight size={19} aria-hidden="true" />
-                </div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
       </section>
 
       <section className={styles.approach} aria-labelledby="approach-title">
