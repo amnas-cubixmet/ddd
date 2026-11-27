@@ -103,6 +103,9 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
       }}
       onPointerLeave={() => { pointer.current = { x: 0, y: 0 }; wake.current?.(); }}
     >
+      <div className={styles.heroIllumination} ref={illumination} data-ready={ready} aria-hidden="true">
+        <div className={styles.heroGlow} />
+      </div>
       <div className={styles.heroInner}>
         <div className={styles.heroLead}>
           <p className={styles.heroKicker} data-hero-enter>
@@ -143,9 +146,6 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
           aria-hidden="true"
         >
           <div className={styles.heroMotion} data-testid="streetlight-motion" data-motion-paused={!powered || !visible || reduced}>
-            <div className={styles.heroIllumination} ref={illumination}>
-              <div className={styles.heroGlow} />
-            </div>
             <div className={styles.heroVisual} data-testid="streetlight-visual">
               {!failed && (
                 <div className={styles.heroCanvas}>
