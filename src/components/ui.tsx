@@ -86,11 +86,12 @@ export function ProductCard({
         </span>
       </Link>
       <div className="card-body">
-        <p className="label">
-          {item.categories.map(findCollection).find(Boolean)?.name}
-        </p>
         <h3>
-          <Link href={`/products/${item.slug}`}>{item.name}</Link>
+          <Link href={`/products/${item.slug}`}>
+            {item.categories.map(findCollection).find(Boolean)?.name
+              ? `${item.categories.map(findCollection).find(Boolean)?.name} (${item.name})`
+              : item.name}
+          </Link>
         </h3>
         <p>{item.description}</p>
         {item.status === "verified" &&
