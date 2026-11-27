@@ -1,20 +1,17 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowUpRight, MessageCircle, Send } from "lucide-react";
-import { useId, useRef, useState } from "react";
+import { MessageCircle } from "lucide-react";
+import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { catalogueCategories } from "@/lib/catalogue";
 import {
-  enquiryEmailHref,
   enquirySchema,
   enquiryText,
   type Enquiry,
-  type EnquirySource,
 } from "@/lib/enquiry";
 
 type Defaults = { interest?: string; message?: string };
-type Status = { kind: "ok" | "error" | "draft"; message: string };
 const fields = [
   {
     name: "name",
@@ -66,19 +63,13 @@ const fields = [
 ] as const;
 
 export default function EnquiryForm({
-  online,
-  email,
   whatsappNumber,
   defaults,
   home = false,
-  source = home ? "home" : "contact",
 }: {
-  online: boolean;
-  email: string;
   whatsappNumber: string;
   defaults?: Defaults;
   home?: boolean;
-  source?: EnquirySource;
 }) {
   const formId = useId();
   const {
@@ -101,44 +92,16 @@ export default function EnquiryForm({
       website: "",
     },
   });
-  const [status, setStatus] = useState<Status | null>(null);
-  const [draft, setDraft] = useState("");
-  const attempt = useRef<{ body: string; id: string } | null>(null);
-  async function submit(values: Enquiry) {
+  const [status, setStatus] = useState<string | null>(null);
+  function submit(values: Enquiry) {
     if (home && (!values.subject || values.subject.length < 2 || !values.phone)) {
-      setStatus({ kind: "error", message: "Enter a valid phone number and subject." });
-      return;
-    }
-    setDraft(enquiryText(values));
-    if (!online) {
-      setStatus({
-        kind: "draft",
-        message: "Your enquiry draft is ready. Choose email or WhatsApp to review and send it.",
-      });
+      setStatus("Enter a valid phone number and subject.");
       return;
     }
     setStatus(null);
-    const body = JSON.stringify(values);
-    if (body !== attempt.current?.body)
-      attempt.current = { body, id: crypto.randomUUID() };
-    try {
-      const response = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, home, source, requestId: attempt.current.id }),
-      });
-      const result = await response.json();
-      setStatus({
-        kind: response.ok && result.ok ? "ok" : "error",
-        message: result.message || "The enquiry could not be sent.",
-      });
-    } catch {
-      setStatus({
-        kind: "error",
-        message:
-          "Online submission is temporarily unavailable. You can send your draft by email or WhatsApp.",
-      });
-    }
+    const message = enquiryText(values);
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    window.location.assign(url);
   }
 
   return (
@@ -148,7 +111,6 @@ export default function EnquiryForm({
       onSubmit={(event) => {
         void handleSubmit(submit, () => {
           setStatus(null);
-          setDraft("");
         })(event);
       }}
       noValidate={!home}
@@ -250,43 +212,18 @@ export default function EnquiryForm({
         <input tabIndex={-1} autoComplete="off" {...register("website")} />
       </label>
       <p className="form-note full">
-        {online
-          ? "We’ll use these details to respond to your enquiry."
-          : "Review your draft before sending it by email or WhatsApp."}
+        Your details will be included in a WhatsApp message. Review and send it in WhatsApp.
       </p>
       <button
         className="button button-primary full"
         type="submit"
         disabled={isSubmitting}
       >
-        {isSubmitting
-          ? "Submitting…"
-          : online
-            ? source === "quote" ? "Send Quote Request" : "Send Enquiry"
-            : "Prepare enquiry draft"}{" "}
-        <Send size={16} aria-hidden="true" />
+        Send via WhatsApp <MessageCircle size={18} aria-hidden="true" />
       </button>
       <div className="full" aria-live="polite">
-        {status && <p className="form-result" data-kind={status.kind}>{status.message}</p>}
+        {status && <p className="form-result" data-kind="error">{status}</p>}
       </div>
-      {draft && status && status.kind !== "ok" && (
-        <div className="full flex flex-wrap gap-3">
-          <a
-            className="button button-outline"
-            href={enquiryEmailHref(email, draft)}
-          >
-            Open email app <ArrowUpRight size={16} aria-hidden="true" />
-          </a>
-          <a
-            className="button button-outline"
-            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(draft)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open WhatsApp <MessageCircle size={16} aria-hidden="true" />
-          </a>
-        </div>
-      )}
     </form>
   );
 }

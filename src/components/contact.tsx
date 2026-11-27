@@ -16,7 +16,7 @@ export function ContactSection({
   return (
     <section
       className={`shell section-tight contact-grid ${styles.layout}`}
-      aria-label="Direct enquiry and contact details"
+      aria-label="Enquiry form and contact details"
     >
       <aside className={styles.panel} aria-labelledby="contact-team">
         <h2 id="contact-team">Contact our team</h2>
