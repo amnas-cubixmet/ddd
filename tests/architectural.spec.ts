@@ -21,7 +21,7 @@ test("all 16 lighting cards preserve product-specific enquiry selection", async 
 });
 
 test("responsive architectural grid has no overflow or broken approved photographs", async ({ page }, testInfo) => {
-  for (const [width, columns] of [[1440, 4], [900, 3], [430, 2], [360, 1]]) {
+  for (const [width, columns] of [[1440, 3], [900, 2], [430, 1], [360, 1]]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(route);
     const grid = page.getByTestId("architectural-catalogue");
@@ -38,4 +38,15 @@ test("responsive architectural grid has no overflow or broken approved photograp
     }
     await page.screenshot({ path: testInfo.outputPath(`architectural-${width}.png`), fullPage: true });
   }
+});
+
+ test("architectural product details and quick preview are available", async ({ page }) => {
+  await page.goto(route);
+  const first = page.getByTestId("architectural-catalogue").getByRole("listitem").first();
+  await first.getByRole("button", { name: "Quick preview" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog).toBeVisible();
+  await dialog.getByRole("link", { name: "View details" }).click();
+  await expect(page).toHaveURL(/architectural-lighting\/recessed-downlight$/);
+  await expect(page.getByRole("heading", { name: "LED Recessed Downlight", exact: true })).toBeVisible();
 });

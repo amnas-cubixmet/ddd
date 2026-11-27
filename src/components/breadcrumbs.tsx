@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import styles from "./breadcrumbs.module.css";
+import { findArchitecturalProduct } from "@/lib/architectural-products";
 
 type Category = { slug: string; name: string };
 type Product = { slug: string; name: string; category?: string };
@@ -29,8 +30,13 @@ export function Breadcrumbs({ categories, products }: { categories: Category[]; 
     crumbs.push({ name: staticPages[path], href: path });
   } else if (path === "/products" || path.startsWith("/products/")) {
     crumbs.push({ name: "Products", href: "/products" });
-    if (path === architectural) {
+    if (path === architectural || path.startsWith(`${architectural}/`)) {
       crumbs.push({ name: "Architectural & Commercial Lighting", href: architectural });
+      if (path !== architectural) {
+        const item = findArchitecturalProduct(path.slice(architectural.length + 1));
+        if (!item) return null;
+        crumbs.push({ name: item.name, href: path });
+      }
     } else if (path === infrastructure) {
       crumbs.push({ name: "Outdoor & Infrastructure Lighting", href: infrastructure });
       if (category) crumbs.push({ name: category.name, href: categoryHref(category.slug, infrastructure) });
