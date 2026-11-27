@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { catalogueCategories, products } from "@/lib/catalogue";
 import Header from "@/components/nav";
 import { Footer } from "@/components/ui";
 import { brand, description, metadataOrigin, siteUrl } from "@/lib/site";
@@ -49,7 +52,15 @@ export default function RootLayout({
           />
         )}
         <Header />
-        <main id="main-content">{children}</main>
+        <main id="main-content">
+          <Suspense fallback={null}>
+            <Breadcrumbs
+              categories={catalogueCategories.map(({ slug, name }) => ({ slug, name }))}
+              products={products.map(({ slug, name, categories }) => ({ slug, name, category: categories[0] }))}
+            />
+          </Suspense>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

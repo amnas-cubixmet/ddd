@@ -1,6 +1,5 @@
 import { LightingCategoryGrid } from "./lighting-category-grid";
 import { DivisionImage } from "./division-image";
-import Link from "next/link";
 import { ProductsBrowser } from "@/components/browse";
 import { Action } from "@/components/ui";
 import { catalogueCategories } from "@/lib/catalogue";
@@ -16,7 +15,6 @@ export async function LightingDivisionPage({ division, searchParams }: { divisio
   const categories = catalogueCategories.filter(item => allowed.includes(item.slug));
   return (
     <div className={`shell ${styles.page}`}>
-      <Link className="text-link" href="/products">← All lighting products</Link>
       {division === "architectural" && (
         <>
           <section className={divisionStyles.hero} aria-labelledby="division-title">

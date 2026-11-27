@@ -103,9 +103,6 @@ export default async function ProductPage({ params }: Params) {
       >
         <Gallery images={item.images} />
         <div className="detail-copy">
-          <Link className="text-link" href="/products">
-            ← All products
-          </Link>
           {item.features.length > 0 && (
             <>
               <h2>{item.status === "verified" ? "Fixture features" : "Design features"}</h2>

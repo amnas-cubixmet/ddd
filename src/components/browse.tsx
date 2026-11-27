@@ -27,9 +27,17 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
   const search = query.trim().toLowerCase();
   const hasFilters = Boolean(query || category || wattage);
 
+  function changeCategory(nextCategory: string) {
+    setCategory(nextCategory);
+    const url = new URL(window.location.href);
+    if (nextCategory) url.searchParams.set("category", nextCategory);
+    else url.searchParams.delete("category");
+    window.history.replaceState(null, "", url);
+  }
+
   function clearFilters() {
     setQuery("");
-    setCategory("");
+    changeCategory("");
     setWattage("");
   }
 
@@ -74,7 +82,7 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
           <span>Category</span>
           <select
             value={category}
-            onChange={(event) => setCategory(event.target.value)}
+            onChange={(event) => changeCategory(event.target.value)}
           >
             <option value="">All categories</option>
             <optgroup label="LED lighting categories">
