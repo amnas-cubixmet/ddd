@@ -21,7 +21,7 @@ export default async function ProductsPage({
   const initialCategory = findCollection(category)?.slug ?? "";
 
   return (
-    <div className={`shell ${styles.page}`}>
+    <div className={`shell ${styles.page} ${styles.compactPage}`}>
       <section className={styles.intro} aria-labelledby="products-title">
         <div>
           <p className="eyebrow">Product catalogue</p>
@@ -30,7 +30,7 @@ export default async function ProductsPage({
         <p>{description}</p>
       </section>
 
-      <LightingDivisions />
+      <div className={styles.divisions}><LightingDivisions /></div>
       <section className={styles.catalogue} aria-label="Browse LED lighting">
         <ProductsBrowser key={initialCategory} initialCategory={initialCategory} />
       </section>
