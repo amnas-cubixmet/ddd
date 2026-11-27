@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { HomeIntroProvider } from "@/components/home-intro-context";
 import { catalogueCategories, products } from "@/lib/catalogue";
 import Header from "@/components/nav";
 import { Footer } from "@/components/ui";
@@ -51,6 +52,7 @@ export default function RootLayout({
             }}
           />
         )}
+        <HomeIntroProvider>
         <Header />
         <main id="main-content">
           <Suspense fallback={null}>
@@ -62,6 +64,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        </HomeIntroProvider>
       </body>
     </html>
   );

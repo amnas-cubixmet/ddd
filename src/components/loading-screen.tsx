@@ -2,18 +2,16 @@ import Image from "next/image";
 import styles from "./loading-screen.module.css";
 
 export default function LoadingScreen({
-  overlay = false,
   dismissed = false,
 }: {
-  overlay?: boolean;
   dismissed?: boolean;
 }) {
   return (
     <div
       className={styles.screen}
-      data-mode={overlay ? "overlay" : "section"}
+      data-mode="overlay"
       data-dismissed={dismissed}
-      data-testid={overlay ? "home-intro" : "page-loading"}
+      data-testid="home-intro"
       role="status"
       aria-hidden={dismissed}
     >

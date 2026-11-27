@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import LoadingScreen from "./loading-screen";
+import { useHomeIntro } from "./home-intro-context";
 import { ArrowDown, ArrowDownRight, ArrowUpRight, Power } from "lucide-react";
 import {
   Component,
@@ -67,7 +68,8 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
 
   // Reveal immediately after the first rendered frames, or if rendering fails.
   // The watchdog is only a recovery path for a stalled renderer.
-  const introDismissed = ready || failed || introTimedOut;
+  const allowIntro = useHomeIntro();
+  const introDismissed = !allowIntro || ready || failed || introTimedOut;
 
   useEffect(() => {
     if (introDismissed) return;
@@ -85,7 +87,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   const power = powered ? brightness / 100 : 0;
   return (
     <>
-    <LoadingScreen overlay dismissed={introDismissed} />
+    {allowIntro && <LoadingScreen dismissed={introDismissed} />}
     <section
       className={styles.hero}
       style={{
