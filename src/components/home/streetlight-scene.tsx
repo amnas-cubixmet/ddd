@@ -6,6 +6,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, type RefObject } from "rea
 import {
   MathUtils,
   PerspectiveCamera,
+  Shape,
   Object3D,
   Vector3,
   type Group,
@@ -44,6 +45,48 @@ function configureCamera(camera: PerspectiveCamera, aspect: number) {
   camera.updateProjectionMatrix();
   camera.updateMatrixWorld(true);
 }
+
+// Reference-inspired die-cast housing: rounded nose, wide LED area and tapered neck.
+// Shape coordinates are in the fixture's length/width plane; extrusion adds thickness.
+function fixtureOutline(length: number, width: number, tapered: boolean) {
+  const x = length / 2;
+  const z = width / 2;
+  const shape = new Shape();
+  shape.moveTo(-x + .24, -z);
+  shape.lineTo(x - .52, -z);
+  shape.quadraticCurveTo(x - .23, -z, x - .10, -z * (tapered ? .56 : .78));
+  shape.quadraticCurveTo(x, -z * .43, x, -z * .20);
+  shape.lineTo(x, z * .20);
+  shape.quadraticCurveTo(x, z * .43, x - .10, z * (tapered ? .56 : .78));
+  shape.quadraticCurveTo(x - .23, z, x - .52, z);
+  shape.lineTo(-x + .24, z);
+  shape.quadraticCurveTo(-x, z, -x, z - .23);
+  shape.lineTo(-x, -z + .23);
+  shape.quadraticCurveTo(-x, -z, -x + .24, -z);
+  shape.closePath();
+  return shape;
+}
+
+function coolingFinOutline() {
+  const shape = new Shape();
+  shape.moveTo(-.48, 0);
+  shape.quadraticCurveTo(-.47, .15, -.32, .22);
+  shape.quadraticCurveTo(-.24, .26, -.12, .26);
+  shape.lineTo(.12, .26);
+  shape.quadraticCurveTo(.24, .26, .32, .22);
+  shape.quadraticCurveTo(.47, .15, .48, 0);
+  shape.closePath();
+  return shape;
+}
+
+const housingShape = fixtureOutline(2.48, 1.04, true);
+const bezelShape = fixtureOutline(2.35, .96, true);
+const lensShape = fixtureOutline(2.02, .76, false);
+const finShape = coolingFinOutline();
+const housingExtrude = { depth: .24, bevelEnabled: true, bevelSize: .065, bevelThickness: .055, bevelSegments: 4, curveSegments: 16, steps: 1 };
+const bezelExtrude = { depth: .065, bevelEnabled: true, bevelSize: .025, bevelThickness: .015, bevelSegments: 3, curveSegments: 16, steps: 1 };
+const lensExtrude = { depth: .035, bevelEnabled: true, bevelSize: .025, bevelThickness: .012, bevelSegments: 3, curveSegments: 16, steps: 1 };
+const finExtrude = { depth: .047, bevelEnabled: true, bevelSize: .012, bevelThickness: .012, bevelSegments: 2, curveSegments: 12, steps: 1 };
 
 function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: SceneProps) {
   const group = useRef<Group>(null);
@@ -120,118 +163,90 @@ function Fixture({ power, reduced, pointer, illumination, onReady, onFailure }: 
   return (
     <>
     <directionalLight ref={reflection} position={[-3, 5, 3]} intensity={3.1} color="#ffffff" />
+    <directionalLight position={[-4, 1, -3]} intensity={1.4} color="#e7eef8" />
     <group ref={group} rotation={[0.02, -0.39, -0.13]}>
-      <RoundedBox
-        args={[0.25, 4.2, 0.32]}
-        radius={0.055}
-        smoothness={3}
-        position={[1.12, -1.35, 0.02]}
-      >
-        <meshStandardMaterial
-          color="#282828"
-          roughness={0.49}
-          metalness={0.42}
-        />
+      {/* Square powder-coated pole with rounded edges and a separate top cap. */}
+      <RoundedBox args={[.30, 4.2, .34]} radius={.035} smoothness={4} position={[1.12, -1.35, .02]}>
+        <meshStandardMaterial color="#34383d" roughness={.45} metalness={.56} />
       </RoundedBox>
-      <group position={[0.7, 0.57, 0]} rotation={[0, 0, -0.18]}>
-        <RoundedBox args={[1.1, 0.22, 0.24]} radius={0.09} smoothness={3}>
-          <meshStandardMaterial
-            color="#383838"
-            roughness={0.42}
-            metalness={0.55}
-          />
-        </RoundedBox>
-        <RoundedBox
-          args={[0.3, 0.32, 0.32]}
-          radius={0.055}
-          smoothness={3}
-          position={[0.45, -0.045, 0]}
-        >
-          <meshStandardMaterial color="#292929" roughness={0.52} />
-        </RoundedBox>
+      <RoundedBox args={[.305, .055, .345]} radius={.02} smoothness={3} position={[1.12, .75, .02]}>
+        <meshStandardMaterial color="#474c53" roughness={.38} metalness={.64} />
+      </RoundedBox>
+      <group position={[.71, .55, .02]} rotation={[0, 0, -.18]}>
+        <mesh rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[.116, .116, .84, 32]} />
+          <meshStandardMaterial color="#30343a" roughness={.39} metalness={.65} />
+        </mesh>
       </group>
-      <group position={[-0.53, 0.69, 0.02]} rotation={[-0.34, 0.01, -0.23]}>
-        <object3D ref={lensCenter} position={[0, -0.225, 0]} />
-        <primitive object={target} position={[0, -3.8, 0.7]} />
-        <spotLight
-          ref={spotlight}
-          target={target}
-          position={[0, -0.24, 0]}
-          intensity={0}
-          distance={6}
-          decay={2}
-          angle={Math.PI / 3}
-          penumbra={0.9}
-          color="#0B2E57"
-        />
-        <RoundedBox
-          args={[2.58, 0.37, 1.14]}
-          radius={0.18}
-          smoothness={5}
-          position={[0, 0.034, 0]}
-        >
-          <meshStandardMaterial
-            color="#41464e"
-            roughness={0.35}
-            metalness={0.5}
-          />
+      <group position={[-.53, .69, .02]} rotation={[-.34, .01, -.23]}>
+        <object3D ref={lensCenter} position={[-.10, -.22, 0]} />
+        <primitive object={target} position={[0, -3.8, .7]} />
+        <spotLight ref={spotlight} target={target} position={[-.10, -.24, 0]}
+          intensity={0} distance={6} decay={2} angle={Math.PI / 3} penumbra={.9} color="#0B2E57" />
+
+        {/* Aerodynamic, bevelled cast-aluminium shell rather than a rectangular box. */}
+        <mesh position={[0, .15, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <extrudeGeometry args={[housingShape, housingExtrude]} />
+          <meshStandardMaterial color="#555b65" roughness={.36} metalness={.68} />
+        </mesh>
+        {/* Dark gasket/bezel and the recessed opal diffuser. */}
+        <mesh position={[0, -.12, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <extrudeGeometry args={[bezelShape, bezelExtrude]} />
+          <meshStandardMaterial color="#24272c" roughness={.49} metalness={.38} />
+        </mesh>
+        <mesh position={[-.10, -.194, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <extrudeGeometry args={[lensShape, lensExtrude]} />
+          <meshStandardMaterial ref={diffuser} color="#b9c1cc" emissive="#0B2E57"
+            emissiveIntensity={0} roughness={.32} metalness={.04} />
+        </mesh>
+        <RoundedBox args={[1.56, .023, .034]} radius={.009} smoothness={3} position={[-.14, -.244, 0]}>
+          <meshStandardMaterial color="#181b20" roughness={.43} metalness={.35} />
         </RoundedBox>
-        <RoundedBox
-          args={[2.44, 0.1, 1.05]}
-          radius={0.043}
-          smoothness={3}
-          position={[0, -0.13, 0]}
-        >
-          <meshStandardMaterial
-            color="#1b1e23"
-            roughness={0.56}
-            metalness={0.32}
-          />
-        </RoundedBox>
-        <RoundedBox
-          args={[2.24, 0.09, 0.9]}
-          radius={0.043}
-          smoothness={4}
-          position={[0, -0.174, 0]}
-        >
-          <meshStandardMaterial
-            ref={diffuser}
-            color="#8c929a"
-            emissive="#0B2E57"
-            emissiveIntensity={0}
-            roughness={0.37}
-            metalness={0.06}
-          />
-        </RoundedBox>
-        <RoundedBox
-          args={[1.95, 0.02, 0.055]}
-          radius={0.008}
-          smoothness={2}
-          position={[0, -0.225, 0]}
-        >
-          <meshStandardMaterial
-            color="#14171c"
-            roughness={0.53}
-            metalness={0.1}
-          />
-        </RoundedBox>
-        {Array.from({ length: 11 }, (_, index) => -1 + index * 0.19).map((x) => (
-          <RoundedBox
-            key={x}
-            args={[0.064, 0.16, 0.72 - Math.abs(x) * 0.16]}
-            radius={0.026}
-            smoothness={2}
-            position={[x, 0.25, 0]}
-          >
-            <meshStandardMaterial color="#30343a" roughness={0.42} metalness={0.62} />
-          </RoundedBox>
+
+        {/* Arched cooling ribs, shaped to taper into the rounded nose and neck. */}
+        {Array.from({ length: 11 }, (_, i) => {
+          const x = -1.03 + i * .188;
+          const taper = i === 0 ? .82 : i > 8 ? 1 - (i - 8) * .14 : 1;
+          return (
+            <mesh key={i} position={[x, .17, 0]} rotation={[0, -Math.PI / 2, 0]} scale={[taper, .72 + .28 * taper, 1]}>
+              <extrudeGeometry args={[finShape, finExtrude]} />
+              <meshStandardMaterial color="#363b43" roughness={.41} metalness={.62} />
+            </mesh>
+          );
+        })}
+
+        {/* Recessed fasteners around the diffuser rim. */}
+        {[[-.83, -.43], [-.14, -.44], [.55, -.41], [-.83, .43], [-.14, .44], [.55, .41], [1.01, -.25], [1.01, .25]].map(([x, z]) => (
+          <group key={`${x}:${z}`} position={[x, -.208, z]}>
+            <mesh>
+              <cylinderGeometry args={[.034, .034, .018, 24]} />
+              <meshStandardMaterial color="#9c958a" roughness={.32} metalness={.8} />
+            </mesh>
+            <mesh position={[0, -.011, 0]}>
+              <cylinderGeometry args={[.013, .013, .005, 6]} />
+              <meshStandardMaterial color="#25272a" roughness={.48} metalness={.3} />
+            </mesh>
+          </group>
         ))}
-        {[-0.9, 0, 0.9].flatMap((x) => [-0.48, 0.48].map((z) => (
-          <mesh key={`${x}:${z}`} position={[x, -0.183, z]}>
-            <cylinderGeometry args={[0.024, 0.024, 0.018, 12]} />
-            <meshStandardMaterial color="#b5ac9c" roughness={0.35} metalness={0.75} />
+        {/* Cylindrical mounting collar with visible hex bolts. */}
+        <group position={[1.30, -.01, 0]}>
+          <mesh rotation={[0, 0, Math.PI / 2]}>
+            <cylinderGeometry args={[.19, .19, .29, 32]} />
+            <meshStandardMaterial color="#373c43" roughness={.38} metalness={.64} />
           </mesh>
-        )))}
+          {[-.07, .07].map(y => (
+            <group key={y} position={[.025, y, .183]}>
+              <mesh rotation={[Math.PI / 2, 0, 0]}>
+                <cylinderGeometry args={[.042, .042, .022, 24]} />
+                <meshStandardMaterial color="#a8a29b" roughness={.32} metalness={.78} />
+              </mesh>
+              <mesh position={[0, 0, .015]} rotation={[Math.PI / 2, 0, 0]}>
+                <cylinderGeometry args={[.019, .019, .009, 6]} />
+                <meshStandardMaterial color="#292c31" roughness={.4} metalness={.4} />
+              </mesh>
+            </group>
+          ))}
+        </group>
       </group>
     </group>
     </>
