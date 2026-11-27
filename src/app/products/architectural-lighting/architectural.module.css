@@ -1,6 +1,6 @@
-.catalogue { margin-top: 24px; }
+.catalogue { margin-top: 0; }
 .heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-.heading h2 { color: var(--deep-navy); font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; }
+.heading h1 { color: var(--deep-navy); font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 700; }
 .heading p, .notice { color: var(--muted); font-size: .875rem; }
 .notice { margin-block: 8px 18px; line-height: 1.6; }
 .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; list-style: none; padding: 0; margin: 0; }

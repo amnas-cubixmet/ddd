@@ -14,13 +14,9 @@ export const metadata = pageMetadata(division.title, division.href, division.des
 export default function Page() {
   return (
     <div className={`shell ${styles.page} ${styles.compactPage}`}>
-      <section className={styles.intro} aria-labelledby="architectural-title">
-        <h1 id="architectural-title">{division.title}</h1>
-        <p>{division.description}</p>
-      </section>
       <section className={catalogueStyles.catalogue} aria-labelledby="architectural-products">
         <div className={catalogueStyles.heading}>
-          <h2 id="architectural-products">Recommended product list</h2>
+          <h1 id="architectural-products">Recommended product list</h1>
           <p>{architecturalProducts.length} lighting types</p>
         </div>
         <p className={catalogueStyles.notice}>Suggested catalogue. Contact our team to confirm availability and specifications. Representative photographs, where available, are identified; other products are shown without a photograph.</p>
