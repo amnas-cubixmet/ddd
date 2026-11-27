@@ -1,0 +1,11 @@
+.content { display:grid; gap:16px; min-width:0; }
+.content p { color:var(--muted); line-height:1.6; font-size:.95rem; margin:0; }
+.interest strong { color:var(--deep-navy); }
+.actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.actions a { display:flex; align-items:center; justify-content:center; gap:9px; min-height:48px; height:auto; padding:12px; font-size:.875rem; text-align:center; white-space:normal; }
+.actions a svg { flex-shrink:0; }
+.actions .email { color:#fff; background:#0B2E57; border-color:#0B2E57; }
+.actions .email:hover { background:#164F85; border-color:#164F85; }
+.actions .whatsapp { color:#0B2E57; border-color:#0B2E57; }
+.actions .whatsapp:hover { color:#fff; background:#0B2E57; }
+@media(max-width:600px){ .actions { grid-template-columns:minmax(0,1fr); } }

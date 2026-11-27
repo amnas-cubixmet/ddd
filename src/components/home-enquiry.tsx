@@ -1,5 +1,4 @@
-import { brand } from "@/lib/site";
-import EnquiryForm from "./enquiry-form";
+import { DirectEnquiry } from "./direct-enquiry";
 import { Reveal } from "./motion";
 import styles from "./home-enquiry.module.css";
 
@@ -13,7 +12,7 @@ export function HomeEnquiry() {
           <p>Tell us about your lighting requirements. Our team will be in touch.</p>
         </div>
         <div className={styles.panel}>
-          <EnquiryForm home online email={brand.email} whatsappNumber={brand.phoneHref.replace(/\D/g, "")} />
+          <DirectEnquiry />
         </div>
       </Reveal>
     </section>

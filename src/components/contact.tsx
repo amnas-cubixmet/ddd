@@ -1,7 +1,7 @@
 import { ArrowUpRight, Globe2, Mail, MessageCircle, Phone } from "lucide-react";
 import { brand } from "@/lib/site";
 import { enquiryEmailHref } from "@/lib/enquiry";
-import EnquiryForm from "./enquiry-form";
+import { DirectEnquiry } from "./direct-enquiry";
 import styles from "./contact.module.css";
 
 export function ContactSection({
@@ -16,7 +16,7 @@ export function ContactSection({
   return (
     <section
       className={`shell section-tight contact-grid ${styles.layout}`}
-      aria-label="Enquiry form and contact details"
+      aria-label="Direct enquiry and contact details"
     >
       <aside className={styles.panel} aria-labelledby="contact-team">
         <h2 id="contact-team">Contact our team</h2>
@@ -77,13 +77,7 @@ export function ContactSection({
         <h2 className={styles.formHeading} id="enquiry-title">
           {source === "quote" ? "Request a quote" : "Project enquiry"}
         </h2>
-        <EnquiryForm
-          online
-          source={source}
-          email={brand.email}
-          whatsappNumber={whatsappNumber}
-          defaults={defaults}
-        />
+        <DirectEnquiry defaults={defaults} />
       </div>
     </section>
   );
