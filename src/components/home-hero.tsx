@@ -138,23 +138,6 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
               <div className={styles.heroGlow} />
             </div>
             <div className={styles.heroVisual} data-testid="streetlight-visual">
-              <picture className={styles.heroFallback}>
-                <source
-                  media="(max-width: 650px) and (orientation: portrait), (max-width: 650px) and (min-height: 501px)"
-                  srcSet="/images/streetlight-fixed-mobile.webp"
-                />
-                {/* Captured directly from the fixed camera; no optimizer resizing or cropping. */}
-                <img
-                  src="/images/streetlight-fixed-wide.webp"
-                  alt=""
-                  width={936}
-                  height={780}
-                  fetchPriority="high"
-                  loading="eager"
-                  decoding="sync"
-                  data-testid="streetlight-poster"
-                />
-              </picture>
               {enabled && (
                 <div className={styles.heroCanvas}>
                   <SceneBoundary fallback={useFallback}>
