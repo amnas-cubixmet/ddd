@@ -35,16 +35,18 @@ export function ContactSection({
               <ArrowUpRight size={17} aria-hidden="true" />
             </a>
           </li>
-          <li>
-            <a href={brand.website}>
-              <Globe2 size={19} aria-hidden="true" />
-              <span>
-                <strong>Website</strong>
-                bharatlums.com
-              </span>
-              <ArrowUpRight size={17} aria-hidden="true" />
-            </a>
-          </li>
+          {source === "quote" && (
+            <li>
+              <a href={brand.website}>
+                <Globe2 size={19} aria-hidden="true" />
+                <span>
+                  <strong>Website</strong>
+                  bharatlums.com
+                </span>
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </a>
+            </li>
+          )}
           <li>
             <a href={brand.phoneHref}>
               <Phone size={19} aria-hidden="true" />
