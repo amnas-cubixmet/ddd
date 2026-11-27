@@ -40,13 +40,11 @@ test("responsive architectural grid has no overflow or broken approved photograp
   }
 });
 
- test("architectural product details and quick preview are available", async ({ page }) => {
+ test("architectural product details are available without quick preview", async ({ page }) => {
   await page.goto(route);
   const first = page.getByTestId("architectural-catalogue").getByRole("listitem").first();
-  await first.getByRole("button", { name: "Quick preview" }).click();
-  const dialog = page.getByRole("dialog");
-  await expect(dialog).toBeVisible();
-  await dialog.getByRole("link", { name: "View details" }).click();
+  await expect(page.getByRole("button", { name: "Quick preview" })).toHaveCount(0);
+  await first.getByRole("link", { name: "View details" }).click();
   await expect(page).toHaveURL(/architectural-lighting\/recessed-downlight$/);
   await expect(page.getByRole("heading", { name: "LED Recessed Downlight", exact: true })).toBeVisible();
 });

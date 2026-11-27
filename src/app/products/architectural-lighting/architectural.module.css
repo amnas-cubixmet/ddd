@@ -10,7 +10,5 @@
 .card :global(.image-link) { background: #0B2E57; flex-shrink: 0; }
 .credit { font-size: .75rem; }
 .credit a { text-decoration: underline; }
-.previewImage { position: relative; width: 100%; aspect-ratio: 4 / 3; background: #0B2E57; border-radius: 7px; overflow: hidden; margin-block: 12px; }
-.previewImage img { object-fit: contain; }
 @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 540px) { .grid { grid-template-columns: minmax(0, 1fr); } }
