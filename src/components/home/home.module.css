@@ -168,11 +168,6 @@
 .heroCanvas {
   width: 100%;
   height: 100%;
-  opacity: 0;
-  transition: opacity 260ms ease;
-}
-.heroStage[data-ready="true"] .heroCanvas {
-  opacity: 1;
 }
 .heroStage:not([data-ready="true"]) .heroIllumination {
   opacity: 0;
