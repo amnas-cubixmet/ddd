@@ -48,3 +48,19 @@ test("responsive architectural grid has no overflow or broken approved photograp
   await expect(page).toHaveURL(/architectural-lighting\/recessed-downlight$/);
   await expect(page.getByRole("heading", { name: "LED Recessed Downlight", exact: true })).toBeVisible();
 });
+
+ test("both divisions share catalogue controls and no quick preview", async ({ page }) => {
+  for (const path of [route, "/products/infrastructure-lighting"]) {
+    await page.goto(path);
+    await expect(page.getByRole("heading", { name: "Explore products", exact: true })).toBeVisible();
+    await expect(page.getByRole("searchbox", { name: "Search products" })).toBeVisible();
+    await expect(page.getByRole("combobox", { name: "Sort" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Quick preview" })).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "View details" }).first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "Enquire now" }).first()).toBeVisible();
+    await page.getByRole("searchbox", { name: "Search products" }).fill("zz-no-matching-fixture");
+    await expect(page.getByText("No lighting results match. Try another search or clear the filters.")).toBeVisible();
+    await page.getByRole("button", { name: "Clear filters" }).click();
+    await expect(page.getByRole("link", { name: "View details" }).first()).toBeVisible();
+  }
+});

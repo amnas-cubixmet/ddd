@@ -12,16 +12,13 @@ export const metadata = pageMetadata(division.title, division.href, division.des
 export default function Page() {
   return (
     <div className={`shell ${styles.page} ${styles.compactPage}`}>
-      <section className={catalogueStyles.catalogue} aria-labelledby="architectural-products">
-        <div className={catalogueStyles.heading}>
-          <h1 id="architectural-products">Recommended product list</h1>
-          <p>{architecturalProducts.length} lighting types</p>
-        </div>
+      <section className={styles.catalogue} aria-labelledby="architectural-products">
+        <h1 id="architectural-products">Explore products</h1>
         <p className={catalogueStyles.notice}>Suggested catalogue. Contact our team to confirm availability and specifications. Product images are for reference only.</p>
         <ArchitecturalCards items={architecturalProducts} />
       </section>
       <section className={styles.quote}>
-        <div><h2>Planning a lighting project?</h2><p>Contact our team to confirm available fixtures and suitable lighting for your space.</p></div>
+        <div><h2>Planning a lighting project?</h2><p>Contact our team to confirm available fixtures, specifications and suitable lighting for your space.</p></div>
         <Action href="/request-quote">Request a quote</Action>
       </section>
     </div>

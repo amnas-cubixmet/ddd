@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Search, X } from "lucide-react";
+import { useState } from "react";
+import { Search } from "lucide-react";
 import {
   catalogueCategories,
-  catalogueLabel,
   findCollection,
   publishedProducts,
-  type Product,
 } from "@/lib/catalogue";
-import { Action, ProductCard } from "./ui";
+import { ProductCard } from "./ui";
 
 const catalogueWattages = [
   ...new Set(
@@ -22,8 +20,6 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
   const [category, setCategory] = useState(initialCategory);
   const [wattage, setWattage] = useState("");
   const [sort, setSort] = useState("featured");
-  const [selected, setSelected] = useState<Product | null>(null);
-  const dialog = useRef<HTMLDialogElement>(null);
   const search = query.trim().toLowerCase();
   const hasFilters = Boolean(query || category || wattage);
 
@@ -54,9 +50,6 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
         .includes(search),
   );
   if (sort === "name") visible.sort((a, b) => a.name.localeCompare(b.name));
-  useEffect(() => {
-    if (selected && !dialog.current?.open) dialog.current?.showModal();
-  }, [selected]);
   return (
     <>
       <div
@@ -137,7 +130,6 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
             <ProductCard
               item={item}
               key={item.slug}
-              preview={() => setSelected(item)}
             />
           ))}
         </div>
@@ -147,34 +139,6 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
           <p>No lighting results match. Try another search or clear the filters.</p>
         </div>
       )}
-      <dialog
-        className="quick-preview"
-        ref={dialog}
-        onClose={() => setSelected(null)}
-        aria-labelledby="preview-title"
-      >
-        {selected && (
-          <>
-            <button
-              type="button"
-              className="icon-button dialog-close"
-              aria-label="Close preview"
-              onClick={() => dialog.current?.close()}
-            >
-              <X size={21} />
-            </button>
-            <p className="eyebrow">{catalogueLabel(selected)}</p>
-            <h2 id="preview-title">{selected.name}</h2>
-            <p>{selected.description}</p>
-            <ul>
-              {selected.features.map((feature) => (
-                <li key={feature}>{feature}</li>
-              ))}
-            </ul>
-            <Action href={`/products/${selected.slug}`}>View details</Action>
-          </>
-        )}
-      </dialog>
     </>
   );
 }

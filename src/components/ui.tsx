@@ -61,10 +61,8 @@ export function SectionHead({
 
 export function ProductCard({
   item,
-  preview,
 }: {
   item: Product;
-  preview?: () => void;
 }) {
   return (
     <Reveal
@@ -79,7 +77,7 @@ export function ProductCard({
         <CatalogueImage
           src={item.images[0].src}
           alt={item.images[0].alt}
-          sizes="(max-width: 560px) 92vw, (max-width: 805px) 46vw, 32vw"
+          sizes="(max-width: 540px) 92vw, (max-width: 900px) 46vw, 32vw"
         />
         <span className="card-icon">
           <ArrowUpRight size={19} />
@@ -117,11 +115,6 @@ export function ProductCard({
           >
             Enquire now <ArrowUpRight size={13} />
           </Link>
-          {preview && (
-            <button className="text-link" onClick={preview}>
-              Quick preview
-            </button>
-          )}
         </div>
       </div>
     </Reveal>

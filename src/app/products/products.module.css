@@ -113,6 +113,24 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(12px, 2vw, 24px);
 }
+.catalogue :global(.product-card) {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.catalogue :global(.product-card .image-link) {
+  background: #0B2E57;
+  flex-shrink: 0;
+}
+.catalogue :global(.product-card .card-body) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.catalogue :global(.product-card .card-actions) {
+  margin-top: auto;
+  padding-top: 18px;
+}
 
 .overview {
   margin-top: clamp(30px, 6vw, 80px);
