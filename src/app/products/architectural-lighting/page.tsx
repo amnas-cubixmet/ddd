@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { Action } from "@/components/ui";
 import { architecturalProducts } from "@/lib/architectural-products";
@@ -22,16 +23,36 @@ export default function Page() {
           <h2 id="architectural-products">Recommended product list</h2>
           <p>{architecturalProducts.length} lighting types</p>
         </div>
-        <p className={catalogueStyles.notice}>Suggested catalogue. Contact our team to confirm product availability, photographs and specifications.</p>
-        <ul className={catalogueStyles.grid}>
-          {architecturalProducts.map((item, index) => (
+        <p className={catalogueStyles.notice}>Suggested catalogue. Contact our team to confirm availability and specifications. Representative photographs, where available, are identified; other products are shown without a photograph.</p>
+        <ul className={catalogueStyles.grid} data-testid="architectural-catalogue">
+          {architecturalProducts.map((item) => (
             <li key={item.slug} className={catalogueStyles.card}>
-              <span className={catalogueStyles.number} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-              <h3>{item.name}</h3>
-              <p>{item.application}</p>
-              <Link className={catalogueStyles.enquiry} href={`/request-quote?architectural=${item.slug}`}>
-                Enquire now <ArrowUpRight size={15} aria-hidden="true" />
-              </Link>
+              {item.image && (
+                <div className={catalogueStyles.image}>
+                  <Image
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    fill
+                    sizes="(max-width: 380px) 100vw, (max-width: 760px) 50vw, (max-width: 1000px) 33vw, 25vw"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div className={catalogueStyles.content}>
+                <ArrowUpRight className={catalogueStyles.arrow} size={18} aria-hidden="true" />
+                <h3>{item.name}</h3>
+                <p>{item.application}</p>
+                {item.image && (
+                  <p className={catalogueStyles.credit}>
+                    {item.image.representative && "Representative photograph · "}
+                    <a href={item.image.sourceUrl}>{item.image.credit}</a>
+                    {item.image.licenseUrl && <> · <a href={item.image.licenseUrl}>Image license</a></>}
+                  </p>
+                )}
+                <Link className={catalogueStyles.enquiry} href={`/request-quote?architectural=${item.slug}`}>
+                  Enquire now <ArrowUpRight size={15} aria-hidden="true" />
+                </Link>
+              </div>
             </li>
           ))}
         </ul>
