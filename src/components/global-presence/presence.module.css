@@ -14,11 +14,7 @@
   @apply relative isolate overflow-hidden;
   padding-block: clamp(1.5rem, 4vw, 3.5rem);
   background-color: #1F73BD;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
-    linear-gradient(120deg, #16416F 0%, #195F9E 55%, #1F73BD 100%);
-  background-size: 27px 27px, 27px 27px, 100% 100%;
+  background-image: linear-gradient(120deg, #16416F 0%, #195F9E 55%, #1F73BD 100%);
   scroll-margin-top: 1rem;
 }
 
