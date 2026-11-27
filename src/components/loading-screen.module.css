@@ -1,0 +1,65 @@
+/* Prevent a transformed page wrapper from clipping the viewport overlay. */
+:global(.page-transition):has(.screen[data-mode="overlay"]) {
+  animation: none;
+}
+.screen {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-height: 55svh;
+  gap: 20px;
+  background: #1F73BD;
+}
+.screen[data-mode="overlay"] {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 120ms ease, visibility 0s linear 120ms;
+  /* Recovery if the client never hydrates. Not part of normal loading. */
+  animation: safety-hide 0s 9s forwards;
+}
+.screen[data-mode="overlay"][data-dismissed="true"] {
+  animation: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.logo {
+  width: clamp(180px, 23vw, 260px);
+  height: auto;
+  animation: logo-in 220ms ease-out both;
+}
+.track {
+  position: relative;
+  width: 92px;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #ffffff35;
+}
+.track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 42%;
+  border-radius: inherit;
+  background: #ffffff;
+  animation: progress 800ms ease-in-out infinite;
+}
+@keyframes logo-in {
+  from { opacity: .4; transform: scale(.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes progress {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(240%); }
+}
+@keyframes safety-hide {
+  to { visibility: hidden; pointer-events: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .screen[data-mode="overlay"] { transition: none; }
+  .logo, .track::after { animation: none; }
+}

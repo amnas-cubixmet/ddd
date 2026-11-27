@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import Image from "next/image";
+import LoadingScreen from "./loading-screen";
 import { ArrowDown, ArrowDownRight, ArrowUpRight, Power } from "lucide-react";
 import {
   Component,
@@ -45,7 +45,6 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   const [brightness, setBrightness] = useState(0);
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
-  const [introElapsed, setIntroElapsed] = useState(false);
   const [introTimedOut, setIntroTimedOut] = useState(false);
   const touchMotion = useTouchHomepageMotion();
   const reduced = (useSiteReducedMotion() && !touchMotion);
@@ -66,17 +65,15 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
     return () => visibility.disconnect();
   }, [root]);
 
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const minimum = window.setTimeout(() => setIntroElapsed(true), prefersReduced ? 0 : 900);
-    const maximum = window.setTimeout(() => setIntroTimedOut(true), 6500);
-    return () => {
-      window.clearTimeout(minimum);
-      window.clearTimeout(maximum);
-    };
-  }, []);
+  // Reveal immediately after the first rendered frames, or if rendering fails.
+  // The watchdog is only a recovery path for a stalled renderer.
+  const introDismissed = ready || failed || introTimedOut;
 
-  const introDismissed = introTimedOut || (introElapsed && (ready || failed));
+  useEffect(() => {
+    if (introDismissed) return;
+    const watchdog = window.setTimeout(() => setIntroTimedOut(true), 6500);
+    return () => window.clearTimeout(watchdog);
+  }, [introDismissed]);
 
   useEffect(() => {
     if (introDismissed) return;
@@ -88,26 +85,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
   const power = powered ? brightness / 100 : 0;
   return (
     <>
-    <div
-      className={styles.intro}
-      data-dismissed={introDismissed}
-      data-testid="home-intro"
-      role="status"
-      aria-hidden={introDismissed}
-    >
-      <Image
-        className={styles.introLogo}
-        src="/images/logo/bharat-lums-white.png"
-        alt="Bharat Lums"
-        width={432}
-        height={237}
-        sizes="(max-width: 600px) 180px, 260px"
-        loading="eager"
-        fetchPriority="high"
-      />
-      <span className={styles.introTrack} aria-hidden="true" />
-      <span className="sr-only">Loading the home page.</span>
-    </div>
+    <LoadingScreen overlay dismissed={introDismissed} />
     <section
       className={styles.hero}
       data-touch-home-motion={touchMotion || undefined}
