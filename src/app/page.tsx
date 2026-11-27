@@ -4,18 +4,14 @@ import { Action } from "@/components/ui";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { HomeHero } from "@/components/home-hero";
 import { LightingDivisions } from "@/components/lighting-divisions";
-import { CatalogueSlider } from "@/components/home/catalogue-slider";
+import { LightingCategoryGrid } from "@/components/lighting-category-grid";
+import { lightingDivisions } from "@/lib/lighting-divisions";
 import { HomeEnquiry } from "@/components/home-enquiry";
 import { HomeFaq } from "@/components/home/faq";
 import styles from "@/components/home/home.module.css";
 import { Reveal } from "@/components/motion";
 import conferenceRoom from "../../public/images/about-bharat-lums-conference.webp";
-import {
-  artwork,
-  catalogueCategories,
-  catalogueDownload,
-  publishedProducts,
-} from "@/lib/catalogue";
+import { catalogueDownload } from "@/lib/catalogue";
 import { metadata as pageMetadata } from "@/lib/site";
 
 export const metadata = {
@@ -27,21 +23,16 @@ export const metadata = {
   title: { absolute: "Bharat Lums | Powering a Brighter Tomorrow" },
 };
 
-const slides = catalogueCategories.map((category) => {
-  const photo = publishedProducts.find(product => product.categories.includes(category.slug));
-  return {
-    ...category,
-    image: photo?.images[0].src ?? artwork(category.image),
-    href: `/products?category=${category.slug}`,
-  };
-});
-
 export default function Home() {
   return (
     <>
       <HomeHero catalogue={catalogueDownload} />
       <div className="shell"><LightingDivisions /></div>
-      <div className={styles.catalogueBand}><CatalogueSlider slides={slides} /></div>
+      <div className={styles.catalogueBand}>
+        <div className="shell">
+          <LightingCategoryGrid href={lightingDivisions.infrastructure.href} allowedCategories={lightingDivisions.infrastructure.categories} home />
+        </div>
+      </div>
       <section className={styles.about} aria-labelledby="home-about">
         <Reveal className={`shell ${styles.aboutInner}`}>
           <div className={styles.aboutCopy}>

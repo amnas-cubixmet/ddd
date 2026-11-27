@@ -1,9 +1,9 @@
-import Image from "next/image";
+import { LightingCategoryGrid } from "./lighting-category-grid";
 import { DivisionImage } from "./division-image";
 import Link from "next/link";
 import { ProductsBrowser } from "@/components/browse";
 import { Action } from "@/components/ui";
-import { artwork, catalogueCategories } from "@/lib/catalogue";
+import { catalogueCategories } from "@/lib/catalogue";
 import { lightingDivisions, type LightingDivisionKey } from "@/lib/lighting-divisions";
 import styles from "@/app/products/products.module.css";
 import divisionStyles from "./lighting-division-page.module.css";
@@ -29,17 +29,7 @@ export async function LightingDivisionPage({ division, searchParams }: { divisio
           <DivisionImage src={info.image} fallbackSrc={info.fallbackImage} alt={info.alt} sizes="(max-width: 800px) 92vw, 45vw" priority />
         </div>
       </section>
-      {categories.length > 0 && <section className={divisionStyles.families} aria-labelledby="division-families">
-        <h2 id="division-families">Lighting categories</h2>
-        <div className={divisionStyles.categoryGrid}>
-          {categories.map(item => (
-            <Link className={divisionStyles.categoryCard} key={item.slug} href={`${info.href}?category=${item.slug}#division-catalogue`}>
-              <div className={divisionStyles.categoryImage}><Image src={artwork(item.image)} alt="" fill sizes="(max-width: 600px) 45vw, 23vw" loading="lazy" /></div>
-              <h3>{item.name}</h3>
-            </Link>
-          ))}
-        </div>
-      </section>}
+      <LightingCategoryGrid href={info.href} allowedCategories={allowed} />
       {categories.length > 0 ? <section id="division-catalogue" className={styles.catalogue} aria-labelledby="division-products">
         <h2 id="division-products">Explore products</h2>
         <ProductsBrowser key={initialCategory} initialCategory={initialCategory} allowedCategories={allowed} />
