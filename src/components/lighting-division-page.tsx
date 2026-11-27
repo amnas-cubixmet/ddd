@@ -14,7 +14,7 @@ export async function LightingDivisionPage({ division, searchParams }: { divisio
   const initialCategory = typeof category === "string" && allowed.includes(category) ? category : "";
   const categories = catalogueCategories.filter(item => allowed.includes(item.slug));
   return (
-    <div className={`shell ${styles.page}`}>
+    <div className={`shell ${styles.page}${division === "infrastructure" ? ` ${styles.compactPage}` : ""}`}>
       {division === "architectural" && (
         <>
           <section className={divisionStyles.hero} aria-labelledby="division-title">
