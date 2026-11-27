@@ -111,7 +111,7 @@
   top: 0;
   right: 0;
   width: min(48vw, 780px);
-  height: calc(100% - 82px);
+  height: 100%;
   pointer-events: none;
 }
 .heroMotion,
@@ -397,7 +397,7 @@
     top: 0;
     right: 0;
     width: min(100%, 620px);
-    height: var(--stage-height);
+    height: 100%;
   }
   .hero h1 {
     margin-top: 13px;
@@ -420,7 +420,7 @@
 }
 @media (orientation: landscape) and (max-height: 500px) and (min-width: 651px) and (max-width: 900px) {
   .heroInner { padding-block: 20px 90px; min-height: 350px; }
-  .heroStage { width: 48%; height: calc(100% - 70px); }
+  .heroStage { width: 48%; height: 100%; }
   .hero h1 { font-size: clamp(2rem, 7vw, 4rem); }
   .heroPanel { position: absolute; right: var(--hero-gutter); bottom: 12px; margin: 0; }
 }

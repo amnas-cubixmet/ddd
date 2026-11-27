@@ -234,7 +234,8 @@ export function buildStreetlight() {
   const headBounds = new Box3().setFromObject(head, true);
   const lensCenter = head.localToWorld(new Vector3(-0.2, -0.17, 0));
   const armExtension = 0.195;
-  const poleExtension = 0.76;
+  // Four times the previous 3.10-unit vertical pole; keep its top anchored.
+  const poleExtension = (2.34 + 0.76) * 4 - 2.34;
   const arm = part(
     head,
     new CylinderGeometry(0.144, 0.144, 0.65 + armExtension, 40),
