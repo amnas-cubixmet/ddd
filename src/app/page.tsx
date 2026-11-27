@@ -3,6 +3,7 @@ import { Crosshair, Handshake, Lightbulb } from "lucide-react";
 import { Action, ProductCard } from "@/components/ui";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { HomeHero } from "@/components/home-hero";
+import { LightingDivisions } from "@/components/lighting-divisions";
 import { CatalogueSlider } from "@/components/home/catalogue-slider";
 import { HomeEnquiry } from "@/components/home-enquiry";
 import { HomeFaq } from "@/components/home/faq";
@@ -53,6 +54,7 @@ export default function Home() {
   return (
     <>
       <HomeHero catalogue={catalogueDownload} />
+      <div className="shell"><LightingDivisions /></div>
       <CatalogueSlider slides={slides} />
       <section className={styles.about} aria-labelledby="home-about">
         <Reveal className={`shell ${styles.aboutInner}`}>

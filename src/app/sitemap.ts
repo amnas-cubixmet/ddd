@@ -7,6 +7,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     "/",
     "/products",
+    "/products/architectural-lighting",
+    "/products/infrastructure-lighting",
     "/about",
     "/contact",
     "/request-quote",

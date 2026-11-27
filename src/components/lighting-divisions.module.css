@@ -1,0 +1,14 @@
+.section { padding-block: clamp(18px, 3vw, 40px); }
+.section h2 { margin-block: 8px 20px; color: var(--deep-navy); font-size: clamp(1.9rem, 4vw, 3.6rem); }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); }
+.card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--cloud); color: var(--deep-navy); }
+.image { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--cloud); }
+.image img { object-fit: cover; transition: transform .35s ease; }
+.card:nth-child(2) .image img { object-fit: contain; }
+.copy { display: grid; gap: 10px; padding: clamp(16px, 3vw, 30px); flex: 1; }
+.copy h3 { font-size: clamp(1.35rem, 2.5vw, 2.25rem); line-height: 1.12; }
+.copy p { color: var(--muted); }
+.link { display: flex; align-items: center; gap: 8px; font-weight: 750; color: var(--accent); align-self: end; }
+.card:hover .link { text-decoration: underline; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) { .card:hover img { transform: scale(1.035); } }
+@media (max-width: 700px) { .grid { grid-template-columns: minmax(0, 1fr); } }

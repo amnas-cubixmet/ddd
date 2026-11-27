@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ProductsBrowser } from "@/components/browse";
+import { LightingDivisions } from "@/components/lighting-divisions";
 import { Action } from "@/components/ui";
 import { findCollection } from "@/lib/catalogue";
 import { fixtureOverviewPhotos } from "@/lib/fixture-photos";
@@ -29,6 +30,7 @@ export default async function ProductsPage({
         <p>{description}</p>
       </section>
 
+      <LightingDivisions />
       <section className={styles.catalogue} aria-label="Browse LED lighting">
         <ProductsBrowser key={initialCategory} initialCategory={initialCategory} />
       </section>
