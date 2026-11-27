@@ -1,0 +1,51 @@
+import { Crosshair, Handshake, Lightbulb } from "lucide-react";
+import styles from "./home/home.module.css";
+
+export function CompanyValues({ page = "home" }: { page?: "home" | "about" }) {
+  const strengthsId = `${page}-strengths`;
+  return (
+    <>
+      <section className={styles.mission} aria-label="Mission and vision">
+        <div className="shell">
+          <div>
+            <h2>Our mission</h2>
+            <p>To manufacture reliable, high-quality LED lighting in India, built with precision and delivered with honesty.</p>
+          </div>
+          <div>
+            <h2>Our vision</h2>
+            <p>To bring Indian manufacturing excellence to international markets and illuminate the world, one point of light at a time.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.strengths} aria-labelledby={strengthsId}>
+        <div className="shell">
+          <h2 id={strengthsId}>Built in India, designed to serve wider markets.</h2>
+          <ul>
+            <li>
+              <span className={styles.strengthIcon} aria-hidden="true">
+                <Crosshair size={23} strokeWidth={1.7} />
+              </span>
+              <h3>Precision and craftsmanship</h3>
+              <p>Our manufacturing approach puts care and attention to detail into LED lighting for real spaces.</p>
+            </li>
+            <li>
+              <span className={styles.strengthIcon} aria-hidden="true">
+                <Lightbulb size={23} strokeWidth={1.7} />
+              </span>
+              <h3>Reliable LED lighting</h3>
+              <p>We develop lighting for commercial, industrial and outdoor applications, with reliability as a design priority.</p>
+            </li>
+            <li>
+              <span className={styles.strengthIcon} aria-hidden="true">
+                <Handshake size={23} strokeWidth={1.7} />
+              </span>
+              <h3>Cooperation and shared purpose</h3>
+              <p>We work with customers and partners to understand the application and select suitable lighting.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </>
+  );
+}

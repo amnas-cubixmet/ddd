@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion";
+import { CompanyValues } from "@/components/company-values";
+import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { Action } from "@/components/ui";
 import { artwork } from "@/lib/catalogue";
 import { brand, metadata as pageMetadata } from "@/lib/site";
@@ -36,6 +38,7 @@ const applications = [
 
 export default function AboutPage() {
   return (
+    <>
     <div className={`shell ${styles.page}`}>
       <section className={styles.hero} aria-labelledby="about-title">
         <Reveal className={styles.heroCopy}>
@@ -119,6 +122,10 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
+    </div>
+    <CompanyValues page="about" />
+    <GlobalPresenceSection />
+    <div className={`shell ${styles.page}`} style={{ paddingTop: "clamp(24px, 4vw, 48px)" }}>
       <section className={styles.contact} aria-labelledby="about-contact">
         <div>
           <p className="eyebrow">{brand.tagline}</p>
@@ -132,5 +139,6 @@ export default function AboutPage() {
         </Action>
       </section>
     </div>
+    </>
   );
 }
