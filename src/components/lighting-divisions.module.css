@@ -66,10 +66,41 @@
 .card:hover .link { text-decoration: underline; }
 @media (hover: hover) and (prefers-reduced-motion: no-preference) { .card:hover img { transform: scale(1.035); } }
 @media (max-width: 700px) {
-  .card, .card[data-division="infrastructure"] { grid-template-columns: minmax(0, 1fr); min-height: 0; }
-  .image { aspect-ratio: 16 / 8; min-height: 0; }
+  .section { padding-block: 20px 24px; }
+  .section h2 { font-size: clamp(1.45rem, 5.5vw, 1.9rem); line-height: 1.15; margin-block: 4px 14px; }
+  .grid { gap: 14px; }
+  .card, .card[data-division="infrastructure"] {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    border-radius: 10px;
+  }
+  .image { aspect-ratio: 2 / 1; min-height: 0; }
   .card[data-division="infrastructure"] .image { grid-column: 1; grid-row: 1; }
   .card[data-division="infrastructure"] .copy { grid-column: 1; grid-row: 2; }
-  .copy { padding: 16px; }
+  .copy { padding: 13px 14px 12px; gap: 8px; }
+  .copy h3 {
+    font-size: clamp(1.08rem, 4.9vw, 1.42rem);
+    line-height: 1.16;
+    letter-spacing: -.025em;
+    text-wrap: pretty;
+  }
+  .copy p { font-size: .84rem; line-height: 1.5; }
+  .tags { gap: 4px 5px; }
+  .tags span { font-size: .66rem; line-height: 1.25; padding: 4px 7px; border-radius: 4px; }
+  .link {
+    font-size: .82rem;
+    margin-top: 2px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+  }
+  .card[data-division="infrastructure"] .link { border-color: #ffffff30; }
+  .arrow { width: 32px; height: 32px; }
+  .arrow svg { width: 16px; height: 16px; }
 }
+@media (max-width: 360px) {
+  .copy { padding: 12px; }
+  .copy p { font-size: .8rem; }
+  .tags span { font-size: .63rem; padding-inline: 5px; }
+}
+.card:focus-visible { outline: 2px solid var(--bharat-blue); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .card, .image img { transition: none; } }
