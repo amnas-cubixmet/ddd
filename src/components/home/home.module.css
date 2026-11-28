@@ -786,3 +786,46 @@
   .applicationAll { padding-inline: 11px; font-size: .76rem; }
   .applicationSecondary { font-size: .76rem; }
 }
+
+/* Match the About page mission and vision layout on the homepage. */
+.mission {
+  padding-block: clamp(36px, 6vw, 88px);
+}
+.mission :global(.shell) {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+.mission h2 {
+  color: #fff;
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -.055em;
+}
+.mission p {
+  color: #E5EFF8;
+  max-width: 65ch;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+.mission :global(.shell) > div + div {
+  border-top: 1px solid #527899;
+  padding-top: 24px;
+}
+@media (min-width: 768px) {
+  .mission :global(.shell) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 3.2vw, 44px);
+  }
+  .mission :global(.shell) > div + div {
+    border-top: 0;
+    border-left: 1px solid #527899;
+    padding: 0 0 0 clamp(28px, 3.2vw, 44px);
+  }
+}
+@media (max-width: 767px) {
+  .mission { padding-block: 28px; }
+  .mission :global(.shell) { gap: 20px; }
+  .mission :global(.shell) > div + div { padding-top: 20px; }
+  .mission h2 { font-size: clamp(1.5rem, 6.5vw, 2.25rem); }
+  .mission p { font-size: .875rem; line-height: 1.6; margin-top: 9px; }
+}
