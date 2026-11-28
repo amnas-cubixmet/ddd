@@ -6,12 +6,10 @@ export function MissionVision() {
       <section className={styles.mission} aria-label="Mission and vision">
         <div className="shell">
           <div>
-            <h2>Our mission</h2>
-            <p>To help project teams choose lighting that suits the space, the tasks and the installation conditions.</p>
+            <h2>Our Mission</h2><p>To manufacture reliable, high-quality LED lighting in India - built with precision, delivered with honesty.</p>
           </div>
           <div>
-            <h2>Our vision</h2>
-            <p>To make professional lighting information easier to compare, specify and enquire about.</p>
+            <h2>Our Vision</h2><p>To bring Indian manufacturing excellence to international markets and illuminate the world, one point of light at a time.</p>
           </div>
         </div>
       </section>
