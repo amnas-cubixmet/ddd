@@ -600,12 +600,12 @@
   }
 }
 
-/* Compact application directory: titles link to full application pages. */
+/* Compact blue lighting directory: one band, two simple linked lists. */
 .applicationBand {
-  background: var(--white);
-  color: var(--deep-navy);
+  background: var(--bharat-blue);
+  color: #fff;
 }
-.applications { padding-block: clamp(18px, 2.5vw, 32px); }
+.applications { padding-block: clamp(24px, 3.5vw, 44px); }
 .applicationHeading {
   display: flex;
   align-items: center;
@@ -614,7 +614,7 @@
   margin-bottom: 12px;
 }
 .applicationKicker {
-  color: var(--accent);
+  color: #fff;
   font-size: .65rem;
   font-weight: 750;
   letter-spacing: .12em;
@@ -625,11 +625,12 @@
   font-size: clamp(1.45rem, 3vw, 2.25rem);
   line-height: 1.12;
   letter-spacing: -.04em;
+  color: #fff;
 }
 .applicationIntro {
   max-width: 75ch;
   margin-top: 5px;
-  color: var(--muted);
+  color: #fff;
   font-size: .85rem;
   line-height: 1.45;
 }
@@ -638,7 +639,7 @@
   align-items: center;
   gap: 6px;
   min-height: 44px;
-  color: var(--accent);
+  color: #fff;
   font-size: .8rem;
   font-weight: 700;
   white-space: nowrap;
@@ -652,44 +653,51 @@
   margin: 0;
   padding: 0;
 }
-.applicationList li { min-width: 0; border-top: 1px solid var(--line); }
+.applicationList li { min-width: 0; border-top: 1px solid #ffffff55; }
 .applicationRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
   min-height: 44px;
-  padding-block: 8px;
-  color: var(--deep-navy);
+  padding-block: 9px;
+  color: #fff;
   text-decoration: none;
 }
-.applicationRow h3 {
-  font-size: .92rem;
+.applicationText { min-width: 0; }
+.applicationText h3, .applicationText h4 {
+  color: #fff;
+  font-size: .93rem;
   line-height: 1.3;
-  font-weight: 650;
+  font-weight: 700;
+  margin: 0;
 }
-.applicationArrow {
-  flex-shrink: 0;
-  color: var(--accent);
-  width: 16px;
-  height: 16px;
+.applicationText p {
+  color: #fff;
+  font-size: .8rem;
+  line-height: 1.45;
+  margin: 3px 0 0;
 }
+.applicationArrow { flex-shrink: 0; color: #fff; width: 16px; height: 16px; }
+.lightTypes { margin-top: clamp(20px, 3vw, 32px); }
+.lightTypes .applicationHeading { margin-bottom: 5px; }
+.lightTypes .applicationHeading h3 { color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.2; }
 .applicationRow:focus-visible, .applicationAll:focus-visible {
-  outline: 2px solid var(--bharat-blue);
+  outline: 2px solid #fff;
   outline-offset: 2px;
 }
 @media (hover: hover) and (pointer: fine) {
-  .applicationRow:hover h3, .applicationAll:hover {
-    color: var(--accent);
+  .applicationRow:hover :is(h3, h4), .applicationAll:hover {
     text-decoration: underline;
     text-underline-offset: 3px;
   }
 }
 @media (max-width: 650px) {
-  .applications { padding-block: 18px; }
+  .applications { padding-block: 20px; }
   .applicationHeading { flex-wrap: wrap; gap: 0 12px; margin-bottom: 4px; }
   .applicationHeading h2 { font-size: 1.45rem; }
   .applicationIntro { font-size: .8rem; }
   .applicationList { grid-template-columns: minmax(0, 1fr); }
-  .applicationRow h3 { font-size: .85rem; }
+  .applicationText h3, .applicationText h4 { font-size: .86rem; }
+  .applicationText p { font-size: .76rem; }
 }
