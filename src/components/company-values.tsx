@@ -1,10 +1,8 @@
 import { Crosshair, Handshake, Lightbulb } from "lucide-react";
 import styles from "./home/home.module.css";
 
-export function CompanyValues({ page = "home" }: { page?: "home" | "about" }) {
-  const strengthsId = `${page}-strengths`;
+export function MissionVision() {
   return (
-    <>
       <section className={styles.mission} aria-label="Mission and vision">
         <div className="shell">
           <div>
@@ -17,7 +15,12 @@ export function CompanyValues({ page = "home" }: { page?: "home" | "about" }) {
           </div>
         </div>
       </section>
+  );
+}
 
+export function LightingEnquiryHelp({ page = "home" }: { page?: "home" | "about" }) {
+  const strengthsId = `${page}-strengths`;
+  return (
       <section className={styles.strengths} aria-labelledby={strengthsId}>
         <div className="shell">
           <h2 id={strengthsId}>How we help with lighting enquiries</h2>
@@ -46,6 +49,14 @@ export function CompanyValues({ page = "home" }: { page?: "home" | "about" }) {
           </ul>
         </div>
       </section>
+  );
+}
+
+export function CompanyValues({ page = "home" }: { page?: "home" | "about" }) {
+  return (
+    <>
+      <MissionVision />
+      <LightingEnquiryHelp page={page} />
     </>
   );
 }

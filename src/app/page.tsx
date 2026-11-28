@@ -2,7 +2,7 @@ import Image from "next/image";
 import { DivisionImage } from "@/components/division-image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { CompanyValues } from "@/components/company-values";
+import { MissionVision, LightingEnquiryHelp } from "@/components/company-values";
 import { Action } from "@/components/ui";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { HomeHero } from "@/components/home-hero";
@@ -57,7 +57,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <CompanyValues />
+      <MissionVision />
 
       <div className="shell"><LightingDivisions /></div>
       <div className={styles.catalogueBand}>
@@ -65,6 +65,8 @@ export default function Home() {
       </div>
 
       <GlobalPresenceSection />
+
+      <LightingEnquiryHelp />
 
       <HomeFaq catalogue={catalogueDownload} />
 
