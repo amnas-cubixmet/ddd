@@ -58,3 +58,6 @@
 }
 @media (max-width: 360px) { .grid { gap: 8px; } .grid :global(.product-card .card-body) { padding: 8px; } .search button { padding-inline: 12px; } .toolbar select { max-width: 66%; } }
 @media (prefers-reduced-motion: reduce) { .chevron { transition: none; } }
+
+.categoryEnd { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; }
+@media (max-width: 650px) { .grid :global(.card-actions .text-link) { min-height: 44px; overflow-wrap: anywhere; } }

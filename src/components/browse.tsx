@@ -37,6 +37,14 @@ const ranges = [
   {value: "100", label: "31–100 W"}, {value: "250", label: "101–250 W"},
   {value: "above", label: "Above 250 W"}, {value: "unknown", label: "Not specified"},
 ];
+function normalizeSearch(value: string) {
+  return value.toLowerCase().replace(/(\d)\s*w(?:atts?)?\b/g, "$1w").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+}
+function matchesSearch(product: Listing, query: string) {
+  const haystack = normalizeSearch([product.name, product.categoryName, product.description, product.slug, product.brand, product.watts === undefined ? "" : product.watts + "W"].join(" "));
+  return normalizeSearch(query).split(" ").filter(Boolean).every(term =>
+    /^\d+w$/.test(term) ? haystack.split(" ").includes(term) : haystack.includes(term));
+}
 function matchesWatts(watts: number | undefined, range: string) {
   if (!range) return true;
   if (range === "unknown") return watts === undefined;
@@ -65,13 +73,14 @@ export function ProductsBrowser({ initialCategory = "", allowedCategories, inclu
   const [brand, setBrand] = useState("");
   const [wattage, setWattage] = useState("");
   const [sort, setSort] = useState("featured");
-  const search = query.trim().toLowerCase();
+  const search = query.trim();
   const active = Number(Boolean(category && !fixedCategory)) + Number(Boolean(brand)) + Number(Boolean(wattage));
-  const visible = scope.filter(p =>
-    (!category || p.category === category) && (!brand || (brand === "unknown" ? !p.brand : p.brand === brand)) &&
-    matchesWatts(p.watts, wattage) &&
-    (p.name + " " + p.categoryName + " " + p.description + " " + p.slug).toLowerCase().includes(search));
-  if (sort === "name") visible.sort((a,b) => a.name.localeCompare(b.name));
+  const matching = scope.filter(p =>
+    (!brand || (brand === "unknown" ? !p.brand : p.brand === brand)) &&
+    matchesWatts(p.watts, wattage) && matchesSearch(p, search));
+  const visible = matching.filter(p => !category || p.category === category);
+  if (sort === "name" || sort === "name-desc") visible.sort((a,b) =>
+    sort === "name" ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
   if (sort === "watts-asc" || sort === "watts-desc") visible.sort((a,b) => {
     if (a.watts === undefined) return b.watts === undefined ? 0 : 1;
     if (b.watts === undefined) return -1;
@@ -100,7 +109,7 @@ export function ProductsBrowser({ initialCategory = "", allowedCategories, inclu
   return (
     <div className={styles.browser}>
       <form className={styles.search} role="search" onSubmit={e => { e.preventDefault(); }}>
-        <input type="search" aria-label="Search products" value={query} placeholder="Search model, e.g. NEONA"
+        <input type="search" aria-label="Search products" value={query} placeholder="Search model, name or wattage"
           onChange={e => { capture(); setQuery(e.target.value); }} />
         <button type="submit">Search</button>
       </form>
@@ -114,18 +123,18 @@ export function ProductsBrowser({ initialCategory = "", allowedCategories, inclu
           <legend>Category</legend>
           {[["", "All categories"], ...categories].map(([value, label]) => (
             <button type="button" key={value} className={styles.category} aria-pressed={category === value} onClick={() => changeCategory(value)}>
-              <span>{label}</span>{category === value ? <Check size={16} aria-hidden="true" /> : <span className={styles.count}>{value ? scope.filter(p=>p.category===value).length : scope.length}</span>}
+              <span>{label}</span><span className={styles.categoryEnd}><span className={styles.count}>{value ? matching.filter(p=>p.category===value).length : matching.length}</span>{category === value && <Check size={16} aria-hidden="true" />}</span>
             </button>
           ))}
         </fieldset>}
-        {brands.length > 0 && <fieldset className={styles.group}><legend>Brand</legend>{filterPills([{value:"",label:"Any"},...brands.map(value=>({value,label:value})),{value:"unknown",label:"Not specified"}],brand,setBrand)}</fieldset>}
-        {hasWattage && <fieldset className={styles.group}><legend>Wattage</legend>{filterPills(ranges,wattage,setWattage)}</fieldset>}
+        {(brands.length > 0 || scope.some(p => !p.brand)) && <fieldset className={styles.group}><legend>Brand</legend>{filterPills([{value:"",label:"Any"},...brands.map(value=>({value,label:value})),{value:"unknown",label:"Not specified"}],brand,setBrand)}</fieldset>}
+        {(hasWattage || scope.some(p => p.watts === undefined)) && <fieldset className={styles.group}><legend>Wattage</legend>{filterPills(hasWattage ? ranges : ranges.filter(r => r.value === "" || r.value === "unknown"),wattage,setWattage)}</fieldset>}
         <button type="button" className={styles.apply} onClick={() => setOpen(false)}>Show {visible.length} products</button>
       </div>
       <div className={styles.toolbar}>
         <p role="status"><strong>{visible.length}</strong> {visible.length === 1 ? "product" : "products"}</p>
         <select aria-label="Sort" value={sort} onChange={e => {capture(); setSort(e.target.value);}}>
-          <option value="featured">Featured</option><option value="name">Name: A to Z</option>
+          <option value="featured">Featured</option><option value="name">Name: A to Z</option><option value="name-desc">Name: Z to A</option>
           {hasWattage && <><option value="watts-asc">Wattage: low to high</option><option value="watts-desc">Wattage: high to low</option></>}
         </select>
       </div>

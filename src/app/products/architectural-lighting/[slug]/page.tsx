@@ -7,9 +7,13 @@ import { architecturalProducts, findArchitecturalProduct } from "@/lib/architect
 import { brand } from "@/lib/site";
 import { pageMetadata, paths } from "@/lib/seo";
 import { PageSchema } from "@/components/seo-data";
-import { LightingLinks } from "@/components/lighting-content";
+import { LightingFaq, LightingLinks, LightingSections } from "@/components/lighting-content";
 import { lightingDivisions } from "@/lib/lighting-divisions";
+import { architectureEditorial, architectureRelated } from "@/lib/product-editorial";
+import { CatalogueImage } from "@/components/catalogue-image";
+import { RelatedCatalogueGrid } from "@/components/related-catalogue-grid";
 import styles from "../../products.module.css";
+import detailStyles from "../../product-detail.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -29,11 +33,9 @@ export default async function Page({ params }: Params) {
   if (!item) notFound();
   const quote = `/contact?architectural=${item.slug}`;
   const message = encodeURIComponent(`Hello Bharat Lums, I would like more information about ${item.name}. Please confirm availability and specifications.`);
-  const uses = item.application.toLowerCase().split(", ");
-  const related = architecturalProducts.filter(({ slug }) => slug !== item.slug)
-    .map((other) => ({ other, overlap: other.application.toLowerCase().split(", ").filter((use) => uses.includes(use)).length }))
-    .sort((a, b) => b.overlap - a.overlap)
-    .slice(0, 3).map(({ other }) => ({ name: other.name, href: paths.architecturalFixture(other.slug) }));
+  const editorial = architectureEditorial(item.slug, item.name, item.selection);
+  const related = architectureRelated(item.slug)
+    .flatMap(slug => architecturalProducts.filter(other => other.slug === slug && other.slug !== item.slug));
   return (
     <div className={`shell ${styles.page} ${styles.compactPage}`}>
       <PageSchema title={item.name} path={paths.architecturalFixture(item.slug)} summary={item.selection} ancestors={[
@@ -41,7 +43,7 @@ export default async function Page({ params }: Params) {
         { name: lightingDivisions.architectural.title, href: paths.architecture },
       ]} />
       <section className={styles.intro}><h1>{item.name}</h1><p>{item.application}</p></section>
-      <section className="detail-grid section-tight catalogue-detail-motion" aria-label="Product details">
+      <section className={`detail-grid section-tight catalogue-detail-motion ${detailStyles.detail}`} aria-label="Product details">
         {item.image && <Gallery images={[{ src: item.image.src, alt: item.image.alt, label: "Product reference", representative: item.image.representative }]} />}
         <div className="detail-copy">
           <h2>Applications</h2><p>{item.application}</p>
@@ -55,7 +57,20 @@ export default async function Page({ params }: Params) {
           <p><Link className="text-link" href="/products/architectural-lighting">All architectural lighting</Link></p>
         </div>
       </section>
-      <LightingLinks title="Related architectural fixture references" links={related} />
+      <LightingSections sections={editorial.sections} />
+      <LightingFaq entries={editorial.faq} />
+      {related.length > 0 && <section className="section-tight" aria-labelledby="related-architecture">
+        <h2 id="related-architecture" className="catalogue-section-title">Related architectural fixture references</h2>
+        <RelatedCatalogueGrid signature={related.map(p => p.slug).join("|")}>
+          {related.map(p => <article key={p.slug} data-catalogue-item={p.slug} className="catalogue-motion-item media-card product-card">
+            {p.image && <Link className="image-link" href={paths.architecturalFixture(p.slug)} aria-label={"View " + p.name}><CatalogueImage src={p.image.src} alt={p.image.alt} sizes="(max-width: 900px) 46vw, 30vw" /></Link>}
+            <div className="card-body"><h3><Link href={paths.architecturalFixture(p.slug)}>{p.name}</Link></h3><p>{p.application}</p><p>Reference image</p>
+              <div className="card-actions"><Link className="text-link" href={paths.architecturalFixture(p.slug)}>View details</Link><Link className="text-link" href={"/contact?architectural=" + p.slug}>Enquire now</Link></div>
+            </div>
+          </article>)}
+        </RelatedCatalogueGrid>
+      </section>}
+      <LightingLinks title="Lighting project resources" links={[{name:"Architectural lighting catalogue",href:paths.architecture},{name:"Lighting applications",href:"/applications"},{name:"Lighting selection guides",href:"/lighting-guides"}]} />
     </div>
   );
 }
