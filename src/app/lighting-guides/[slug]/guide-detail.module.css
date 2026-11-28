@@ -1,0 +1,53 @@
+.page { min-width: 0; color: var(--deep-navy); }
+.hero { display: grid; grid-template-columns: minmax(0,1fr); gap: 24px; align-items: center; padding-block: clamp(24px,3vw,42px) clamp(24px,3vw,36px); }
+.hero.withImage { grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); }
+.intro { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.back { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--accent); font-weight: 700; font-size: .85rem; }
+.back:hover { text-decoration: underline; }
+.kicker { font-size: .7rem; letter-spacing: .12em; font-weight: 700; text-transform: uppercase; color: var(--accent); }
+.hero h1 { font-size: clamp(2rem,4vw,3.65rem); line-height: 1.12; letter-spacing: -.045em; max-width: 30ch; overflow-wrap: anywhere; }
+.lead { max-width: 72ch; color: var(--muted); font-size: 1rem; line-height: 1.65; }
+.byline { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: .8rem; color: var(--muted); }
+.byline svg { color: var(--accent); }
+.figure { margin: 0; min-width: 0; }
+.photo { position: relative; aspect-ratio: 4/3; width: 100%; overflow: hidden; border-radius: 9px; background: var(--cloud); }
+.photo img { object-fit: contain; }
+.figure figcaption { font-size: .75rem; line-height: 1.45; color: var(--muted); margin-top: 6px; }
+.band { background: var(--cloud); padding-block: clamp(24px,3vw,42px); }
+.layout { display: grid; grid-template-columns: minmax(0,1.85fr) minmax(0,1fr); gap: clamp(16px,2.5vw,32px); align-items: start; }
+.article, .sidebar { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.section, .panel { min-width: 0; padding: clamp(16px,2vw,24px); background: var(--white); border: 1px solid var(--line); border-radius: 9px; }
+.section { scroll-margin-top: 90px; }
+.sectionHead { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.number { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; border-radius: 6px; background: var(--sky); color: var(--deep-navy); font-weight: 700; font-size: .8rem; }
+.section h2 { font-size: clamp(1.2rem,1.85vw,1.6rem); line-height: 1.25; letter-spacing: -.025em; overflow-wrap: anywhere; }
+.section p, .section li { font-size: .95rem; line-height: 1.75; color: var(--muted); overflow-wrap: anywhere; }
+.section ul { list-style: disc; padding-left: 20px; margin-top: 12px; }
+.panel h2, .enquiry h2 { font-size: clamp(1.15rem,1.6vw,1.4rem); line-height: 1.25; letter-spacing: -.025em; }
+.panel ul { list-style: none; margin: 10px 0 0; padding: 0; }
+.panel li + li { border-top: 1px solid var(--line); }
+.panel a { display: flex; align-items: center; justify-content: space-between; gap: 9px; min-height: 44px; padding-block: 10px; color: var(--deep-navy); font-size: .85rem; line-height: 1.45; font-weight: 650; text-decoration: none; }
+.panel a span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.panel a svg { color: var(--accent); flex-shrink: 0; }
+.panel a:hover { color: var(--accent); text-decoration: underline; }
+.enquiry { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; background: var(--deep-navy); color: var(--white); padding: clamp(16px,2vw,24px); border-radius: 9px; }
+.enquiry p { color: var(--sky); font-size: .875rem; line-height: 1.6; }
+.enquiry :global(.button) { width: 100%; min-height: 46px; white-space: normal; text-align: center; padding: 10px 12px; background: var(--white); color: var(--deep-navy); border-color: var(--white); font-size: .82rem; }
+.enquiry :global(.button:hover) { background: var(--sky); color: var(--deep-navy); }
+@media (max-width: 805px) {
+  .page :global(.shell) { width: calc(100% - 32px); }
+  .hero, .hero.withImage { grid-template-columns: minmax(0,1fr); gap: 16px; padding-block: 16px 24px; }
+  .intro { gap: 9px; }
+  .hero h1 { font-size: clamp(1.85rem,6.8vw,2.75rem); }
+  .lead { font-size: .9rem; line-height: 1.6; }
+  .back { font-size: .8rem; }
+  .figure { width: min(100%,520px); }
+  .band { padding-block: 20px 28px; }
+  .layout { grid-template-columns: minmax(0,1fr); gap: 16px; }
+  .article, .sidebar { gap: 12px; }
+  .section, .panel, .enquiry { padding: 14px; }
+  .sectionHead { gap: 9px; margin-bottom: 10px; }
+  .number { width: 32px; height: 32px; }
+  .section h2 { font-size: 1.2rem; }
+  .section p, .section li { font-size: .875rem; line-height: 1.65; }
+}
