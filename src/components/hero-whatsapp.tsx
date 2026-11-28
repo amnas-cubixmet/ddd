@@ -1,33 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { brand } from "@/lib/site";
 
 export function HeroWhatsApp() {
-  const pathname = usePathname();
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (pathname !== "/") return;
-    const hero = document.querySelector("[data-home-hero]");
-    if (!hero) return;
-    const update = () => {
-      const rect = hero.getBoundingClientRect();
-      const visibleHeight = Math.max(0, Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0));
-      setVisible(visibleHeight >= Math.min(120, rect.height * .25));
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, [pathname]);
-
-  if (pathname !== "/" || !visible) return null;
-
   return (
     <a
       className="floating-whatsapp"
