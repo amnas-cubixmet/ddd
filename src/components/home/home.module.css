@@ -600,104 +600,83 @@
   }
 }
 
-/* Compact blue lighting directory: one band, two simple linked lists. */
+/* One compact image-led lighting application section. */
 .applicationBand {
   background: var(--bharat-blue);
   color: #fff;
 }
-.applications { padding-block: clamp(24px, 3.5vw, 44px); }
-.applicationHeading {
-  display: flex;
+.applicationFeature {
+  display: grid;
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: clamp(24px, 5vw, 64px);
+  padding-block: clamp(24px, 4vw, 48px);
 }
+.applicationFeatureImage {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0b2e57;
+}
+.applicationFeatureImage img { object-fit: contain; }
+.applicationFeatureCopy { min-width: 0; }
 .applicationKicker {
-  color: #fff;
-  font-size: .65rem;
+  font-size: .7rem;
   font-weight: 750;
   letter-spacing: .12em;
   text-transform: uppercase;
-  margin-bottom: 5px;
+  margin: 0 0 8px;
 }
-.applicationHeading h2 {
-  font-size: clamp(1.45rem, 3vw, 2.25rem);
+.applicationFeatureCopy h2 {
+  color: #fff;
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
   line-height: 1.12;
-  letter-spacing: -.04em;
-  color: #fff;
+  letter-spacing: -.045em;
+  margin: 0;
 }
-.applicationIntro {
-  max-width: 75ch;
-  margin-top: 5px;
+.applicationFeatureCopy > p:not(.applicationKicker) {
   color: #fff;
-  font-size: .85rem;
-  line-height: 1.45;
+  font-size: clamp(.88rem, 1.3vw, 1rem);
+  line-height: 1.6;
+  margin: 12px 0 16px;
+  max-width: 62ch;
 }
-.applicationAll {
+.applicationFeatureLinks { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+.applicationAll, .applicationSecondary, .applicationGuide {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   min-height: 44px;
-  color: #fff;
-  font-size: .8rem;
+  font-size: .83rem;
   font-weight: 700;
-  white-space: nowrap;
   text-decoration: none;
 }
-.applicationList {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(20px, 5vw, 64px);
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.applicationAll {
+  background: #fff;
+  color: #0b2e57;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  padding: 8px 15px;
 }
-.applicationList li { min-width: 0; border-top: 1px solid #ffffff55; }
-.applicationRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 44px;
-  padding-block: 9px;
-  color: #fff;
-  text-decoration: none;
-}
-.applicationText { min-width: 0; }
-.applicationText h3, .applicationText h4 {
-  color: #fff;
-  font-size: .93rem;
-  line-height: 1.3;
-  font-weight: 700;
-  margin: 0;
-}
-.applicationText p {
-  color: #fff;
-  font-size: .8rem;
-  line-height: 1.45;
-  margin: 3px 0 0;
-}
-.applicationArrow { flex-shrink: 0; color: #fff; width: 16px; height: 16px; }
-.lightTypes { margin-top: clamp(20px, 3vw, 32px); }
-.lightTypes .applicationHeading { margin-bottom: 5px; }
-.lightTypes .applicationHeading h3 { color: #fff; font-size: clamp(1.2rem, 2vw, 1.6rem); line-height: 1.2; }
-.applicationRow:focus-visible, .applicationAll:focus-visible {
+.applicationSecondary, .applicationGuide { color: #fff; }
+.applicationGuide { font-size: .76rem; margin-top: 4px; }
+.applicationAll:focus-visible, .applicationSecondary:focus-visible, .applicationGuide:focus-visible {
   outline: 2px solid #fff;
-  outline-offset: 2px;
+  outline-offset: 4px;
 }
 @media (hover: hover) and (pointer: fine) {
-  .applicationRow:hover :is(h3, h4), .applicationAll:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
+  .applicationAll:hover { background: #0b2e57; color: #fff; }
+  .applicationSecondary:hover, .applicationGuide:hover { text-decoration: underline; }
 }
-@media (max-width: 650px) {
-  .applications { padding-block: 20px; }
-  .applicationHeading { flex-wrap: wrap; gap: 0 12px; margin-bottom: 4px; }
-  .applicationHeading h2 { font-size: 1.45rem; }
-  .applicationIntro { font-size: .8rem; }
-  .applicationList { grid-template-columns: minmax(0, 1fr); }
-  .applicationText h3, .applicationText h4 { font-size: .86rem; }
-  .applicationText p { font-size: .76rem; }
+@media (max-width: 700px) {
+  .applicationFeature {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 15px;
+    padding-block: 22px;
+  }
+  .applicationFeatureImage { aspect-ratio: 16 / 9; }
+  .applicationFeatureCopy h2 { font-size: clamp(1.55rem, 6vw, 2rem); }
+  .applicationFeatureCopy > p:not(.applicationKicker) { font-size: .85rem; margin: 8px 0 12px; }
 }

@@ -15,9 +15,7 @@ import { Reveal } from "@/components/motion";
 import conferenceRoom from "../../public/images/about-bharat-lums-conference.webp";
 import { artwork, catalogueCategories, catalogueDownload } from "@/lib/catalogue";
 import { description, pageMetadata, paths } from "@/lib/seo";
-import { LightingLinks, LightingSections } from "@/components/lighting-content";
 import { PageSchema } from "@/components/seo-data";
-import { applications, guides } from "@/lib/lighting-content";
 
 const homeTitle = "Professional LED Lighting Solutions";
 export const metadata = pageMetadata({ title: homeTitle, path: "/", summary: description, home: true });
@@ -27,27 +25,6 @@ const slides = catalogueCategories.map((category) => ({
   image: artwork(category.image),
   href: `${lightingDivisions.infrastructure.href}?category=${category.slug}#division-catalogue`,
 }));
-
-const applicationDescriptions: Record<string, string> = {
-  "road-and-highway-lighting": "Roads, highways and pedestrian crossings.",
-  "warehouse-lighting": "Storage aisles, loading areas and picking stations.",
-  "factory-lighting": "Production areas, workshops and inspection stations.",
-  "office-lighting": "Workspaces, meeting rooms and reception areas.",
-  "retail-lighting": "Merchandise displays, showrooms and shopping spaces.",
-  "parking-area-lighting": "Vehicle lanes, parking bays and entrances.",
-  "hospitality-lighting": "Hotels, guest areas, corridors and feature walls.",
-};
-
-const featuredLightTypes = [
-  { name: "LED Street Lights", href: paths.category("led-street-lights"), summary: "Roadways and pedestrian routes." },
-  { name: "LED Flood Lights", href: paths.category("floodlights"), summary: "Outdoor yards, entrances and open areas." },
-  { name: "LED High Bay Lights", href: paths.category("high-bay-industrial-lighting"), summary: "High-ceiling industrial spaces." },
-  { name: "LED Warehouse Lighting", href: paths.category("led-warehouse-lighting"), summary: "Warehouse aisles and staging areas." },
-  { name: "LED Wall Washer", href: paths.architecturalFixture("wall-washer"), summary: "Even illumination for architectural walls." },
-  { name: "LED Linear Light", href: paths.architecturalFixture("linear-light"), summary: "Offices and commercial interiors." },
-  { name: "LED Panel Light", href: paths.architecturalFixture("panel-light"), summary: "General lighting for office ceilings." },
-  { name: "LED Track Light", href: paths.architecturalFixture("track-light"), summary: "Adjustable lighting for retail displays." },
-];
 
 export default function Home() {
   return (
@@ -84,65 +61,31 @@ export default function Home() {
       </section>
 
       <section className={styles.applicationBand} aria-labelledby="home-applications">
-        <div className={`shell ${styles.applications}`}>
-          <div className={styles.applicationHeading}>
-            <div>
-              <p className={styles.applicationKicker}>Solutions by sector</p>
-              <h2 id="home-applications">Lighting by application</h2>
-              <p className={styles.applicationIntro}>Explore LED lighting solutions for infrastructure, industrial spaces and commercial interiors.</p>
-            </div>
-            <Link href={paths.applications} className={styles.applicationAll}>
-              View all applications <ArrowUpRight size={18} aria-hidden="true" />
-            </Link>
+        <div className={`shell ${styles.applicationFeature}`}>
+          <div className={styles.applicationFeatureImage}>
+            <Image
+              src="/images/products/fixture-photos/led-wall-washer.webp"
+              alt="LED wall washer fixture reference"
+              fill
+              sizes="(max-width: 700px) 90vw, (max-width: 1450px) 43vw, 560px"
+            />
           </div>
-          <ul className={styles.applicationList}>
-            {applications.map((entry) => (
-              <li key={entry.slug}>
-                <Link href={paths.application(entry.slug)} className={styles.applicationRow} prefetch={false}>
-                  <div className={styles.applicationText}>
-                    <h3>{entry.title}</h3>
-                    <p>{applicationDescriptions[entry.slug] ?? entry.summary}</p>
-                  </div>
-                  <ArrowUpRight className={styles.applicationArrow} size={19} aria-hidden="true" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <section className={styles.lightTypes} aria-labelledby="home-light-types">
-            <div className={styles.applicationHeading}>
-              <h3 id="home-light-types">Lighting by type</h3>
-              <Link href={paths.products} className={styles.applicationAll}>
-                All products <ArrowUpRight size={16} aria-hidden="true" />
+          <div className={styles.applicationFeatureCopy}>
+            <p className={styles.applicationKicker}>Solutions by sector</p>
+            <h2 id="home-applications">Lighting by application</h2>
+            <p>From LED street lights and industrial high bays to architectural wall washers, explore lighting solutions for roads, workplaces, commercial interiors and outdoor spaces. Choose fixtures around your project requirements, light distribution and installation conditions.</p>
+            <div className={styles.applicationFeatureLinks}>
+              <Link href={paths.applications} className={styles.applicationAll}>
+                Explore applications <ArrowUpRight size={17} aria-hidden="true" />
+              </Link>
+              <Link href={paths.products} className={styles.applicationSecondary}>
+                All products <ArrowUpRight size={15} aria-hidden="true" />
               </Link>
             </div>
-            <ul className={styles.applicationList}>
-              {featuredLightTypes.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className={styles.applicationRow} prefetch={false}>
-                    <div className={styles.applicationText}>
-                      <h4>{item.name}</h4>
-                      <p>{item.summary}</p>
-                    </div>
-                    <ArrowUpRight className={styles.applicationArrow} size={16} aria-hidden="true" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
+            <Link href={paths.guides} className={styles.applicationGuide}>Lighting specification guides <ArrowUpRight size={14} aria-hidden="true" /></Link>
+          </div>
         </div>
       </section>
-
-      <div className="shell">
-        <LightingSections sections={[
-          { title: "Light output and energy use", text: "Compare lumens and input watts together to understand luminous efficacy. Check the distribution and mounting position to see how much light reaches the working area." },
-          { title: "Colour and visual comfort", text: "Colour temperature describes how warm or cool the light appears. Colour rendering describes how it represents colours. Use the actual finishes, displays and working conditions when comparing choices." },
-          { title: "Optics and installation", text: "Beam distribution, mounting height and position affect coverage. Ask for the model’s verified ingress rating and installation instructions for the conditions on site." },
-        ]} />
-        <LightingLinks title="Lighting specification guides" links={[
-          ...guides.slice(0, 3).map((entry) => ({ name: entry.title, href: paths.guide(entry.slug) })),
-          { name: "All lighting guides", href: paths.guides },
-        ]} />
-      </div>
 
       <CompanyValues />
 
