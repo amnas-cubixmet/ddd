@@ -32,10 +32,6 @@ export default function Home() {
     <>
       <PageSchema title={homeTitle} path="/" summary={description} />
       <HomeHero catalogue={catalogueDownload} />
-      <div className="shell"><LightingDivisions /></div>
-      <div className={styles.catalogueBand}>
-        <CatalogueSlider slides={slides} />
-      </div>
       <section className={styles.about} aria-labelledby="home-about">
         <Reveal className={`shell ${styles.aboutInner}`}>
           <div className={styles.aboutCopy}>
@@ -62,6 +58,11 @@ export default function Home() {
       </section>
 
       <CompanyValues />
+
+      <div className="shell"><LightingDivisions /></div>
+      <div className={styles.catalogueBand}>
+        <CatalogueSlider slides={slides} />
+      </div>
 
       <GlobalPresenceSection />
 
