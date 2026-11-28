@@ -167,9 +167,8 @@
     line-height: 1.35;
   }
   .label svg { width: 15px; height: 15px; flex-shrink: 0; }
-  /* Keep navigation accessible beside the fixed bottom-right chat shortcut. */
   .controls {
-    justify-content: flex-start;
+    justify-content: flex-end;
     padding-top: 6px;
     gap: 8px;
   }
