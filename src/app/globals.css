@@ -1381,7 +1381,7 @@ textarea::placeholder {
 /* Site-wide fixed WhatsApp shortcut. */
 .floating-whatsapp {
   position: fixed;
-  left: max(20px, env(safe-area-inset-left));
+  right: max(20px, env(safe-area-inset-right));
   bottom: max(20px, env(safe-area-inset-bottom));
   z-index: 900;
   display: grid;
@@ -1389,7 +1389,7 @@ textarea::placeholder {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #08754e;
+  background: #1F73BD;
   color: #fff;
   border: 1px solid #fff;
   box-shadow: 0 5px 18px #0b2e5730;
@@ -1401,11 +1401,11 @@ textarea::placeholder {
   outline-offset: 4px;
 }
 @media (hover: hover) and (pointer: fine) {
-  .floating-whatsapp:hover { background: #065c3e; color: #fff; transform: translateY(-3px); }
+  .floating-whatsapp:hover { background: #0B2E57; color: #fff; transform: translateY(-3px); }
 }
 @media (max-width: 600px) {
   .floating-whatsapp {
-    left: max(14px, env(safe-area-inset-left));
+    right: max(14px, env(safe-area-inset-right));
     bottom: max(14px, env(safe-area-inset-bottom));
     width: 50px;
     height: 50px;
