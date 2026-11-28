@@ -600,104 +600,96 @@
   }
 }
 
-/* Simple application directory — no individual cards. */
+/* Compact application directory: titles link to full application pages. */
 .applicationBand {
   background: var(--white);
   color: var(--deep-navy);
 }
-.applications {
-  padding-block: clamp(28px, 4vw, 54px);
-}
+.applications { padding-block: clamp(18px, 2.5vw, 32px); }
 .applicationHeading {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 22px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 .applicationKicker {
   color: var(--accent);
-  font-size: .72rem;
+  font-size: .65rem;
   font-weight: 750;
-  letter-spacing: .13em;
+  letter-spacing: .12em;
   text-transform: uppercase;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 }
 .applicationHeading h2 {
-  font-size: clamp(1.8rem, 3.5vw, 2.9rem);
-  line-height: 1.1;
-  letter-spacing: -.045em;
+  font-size: clamp(1.45rem, 3vw, 2.25rem);
+  line-height: 1.12;
+  letter-spacing: -.04em;
 }
 .applicationIntro {
-  max-width: 65ch;
-  margin-top: 8px;
+  max-width: 75ch;
+  margin-top: 5px;
   color: var(--muted);
-  line-height: 1.55;
-  font-size: .94rem;
+  font-size: .85rem;
+  line-height: 1.45;
 }
 .applicationAll {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   min-height: 44px;
   color: var(--accent);
-  font-size: .86rem;
-  font-weight: 750;
+  font-size: .8rem;
+  font-weight: 700;
   white-space: nowrap;
   text-decoration: none;
 }
 .applicationList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(20px, 5vw, 64px);
   list-style: none;
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--line);
 }
-.applicationList li { border-bottom: 1px solid var(--line); }
+.applicationList li { min-width: 0; border-top: 1px solid var(--line); }
 .applicationRow {
-  display: grid;
-  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr) 24px;
+  display: flex;
   align-items: center;
-  gap: clamp(12px, 3vw, 36px);
-  padding-block: 16px;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 44px;
+  padding-block: 8px;
   color: var(--deep-navy);
   text-decoration: none;
 }
 .applicationRow h3 {
-  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  font-size: .92rem;
   line-height: 1.3;
-  font-weight: 700;
+  font-weight: 650;
 }
-.applicationRow p {
-  font-size: .9rem;
-  line-height: 1.55;
-  color: var(--muted);
-  margin: 0;
+.applicationArrow {
+  flex-shrink: 0;
+  color: var(--accent);
+  width: 16px;
+  height: 16px;
 }
-.applicationArrow { justify-self: end; color: var(--accent); }
 .applicationRow:focus-visible, .applicationAll:focus-visible {
   outline: 2px solid var(--bharat-blue);
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 @media (hover: hover) and (pointer: fine) {
   .applicationRow:hover h3, .applicationAll:hover {
     color: var(--accent);
     text-decoration: underline;
-    text-underline-offset: 4px;
+    text-underline-offset: 3px;
   }
 }
 @media (max-width: 650px) {
-  .applications { padding-block: 22px 26px; }
-  .applicationHeading { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 10px; }
-  .applicationHeading h2 { font-size: clamp(1.6rem, 6.3vw, 2rem); }
-  .applicationKicker { font-size: .65rem; }
-  .applicationIntro { font-size: .85rem; }
-  .applicationAll { font-size: .8rem; }
-  .applicationRow {
-    grid-template-columns: minmax(0, 1fr) 20px;
-    gap: 5px 10px;
-    padding-block: 12px;
-  }
-  .applicationRow h3 { grid-column: 1; grid-row: 1; font-size: .98rem; }
-  .applicationRow p { grid-column: 1; grid-row: 2; font-size: .81rem; line-height: 1.5; }
-  .applicationArrow { grid-column: 2; grid-row: 1; width: 17px; height: 17px; }
+  .applications { padding-block: 18px; }
+  .applicationHeading { flex-wrap: wrap; gap: 0 12px; margin-bottom: 4px; }
+  .applicationHeading h2 { font-size: 1.45rem; }
+  .applicationIntro { font-size: .8rem; }
+  .applicationList { grid-template-columns: minmax(0, 1fr); }
+  .applicationRow h3 { font-size: .85rem; }
 }

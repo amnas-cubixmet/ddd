@@ -79,7 +79,6 @@ export default function Home() {
               <li key={entry.slug}>
                 <Link href={paths.application(entry.slug)} className={styles.applicationRow} prefetch={false}>
                   <h3>{entry.title}</h3>
-                  <p>{entry.summary}</p>
                   <ArrowUpRight className={styles.applicationArrow} size={19} aria-hidden="true" />
                 </Link>
               </li>
