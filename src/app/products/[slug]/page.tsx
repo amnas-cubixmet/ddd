@@ -11,15 +11,16 @@ import {
   isIndexableProduct,
   products,
   relatedProducts,
+  fixturePhoto,
+  fixturePhotoGroups,
+  categoryDetails,
+  lightingDivisions,
+  infrastructureEditorial,
 } from "@/lib/catalogue";
-import { fixturePhoto, fixturePhotoGroups } from "@/lib/fixture-photos";
 import { brand } from "@/lib/site";
 import { absoluteUrl, pageMetadata, paths } from "@/lib/seo";
-import { categoryDetails } from "@/lib/category-content";
 import { JsonLd, PageSchema } from "@/components/seo-data";
 import { LightingFaq, LightingLinks, LightingSections } from "@/components/lighting-content";
-import { lightingDivisions } from "@/lib/lighting-divisions";
-import { infrastructureEditorial } from "@/lib/product-editorial";
 import photoStyles from "./fixture-photos.module.css";
 import detailStyles from "../product-detail.module.css";
 

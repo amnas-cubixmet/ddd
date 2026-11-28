@@ -5,7 +5,7 @@ description: Generate, retouch, optimize, validate and integrate premium photore
 # Bharat Lums product imaging
 
 ## Inspect and resume
-- Read src/lib/fixture-photos.ts, src/lib/catalogue.ts, src/lib/architectural-products.ts and data/product-image-manifest.json. Inventory actual slugs and image paths; never count numbered alternate photos as products.
+- Read src/lib/catalogue.ts (the centralized catalogue and image mapping) and data/product-image-manifest.json (the image generation progress log). Inventory actual slugs and image paths; never count numbered alternate photos as products.
 - Confirm files exist and inspect all visual references. Distinguish confirmed physical products from representative architectural product types. Preserve originals, descriptions, specifications, routing and metadata.
 - Process pending products in batches of 2–3, starting with deep-reflector and panel-light. Skip completed assets only after checking files and QC. Never claim image creation without actual files.
 
@@ -23,7 +23,7 @@ description: Generate, retouch, optimize, validate and integrate premium photore
 
 ## Integrate
 - Inspect existing product cards, both product detail routes, gallery and home featured products. Centralize accepted image mapping; use existing images as fallback until all three replacement views pass QC. Keep architectural representative attribution and distinguish reference-based renderings from authentic photographs.
-- Use Next.js Image with accurate alt, sizes, fixed aspect ratio, sensible loading and priority. Gallery: accessible thumbnail selection, zoom, swipe, keyboard and error handling. Preserve existing UI, metadata, enquiry behavior and URLs.
+- Use Next.js Image with accurate alt, sizes, fixed aspect ratio, sensible loading and priority. Gallery: accessible thumbnail selection, swipe, keyboard and error handling; do not reintroduce zoom or a fullscreen modal. Preserve existing UI, metadata, enquiry behavior and URLs.
 
 ## Verify and publish
 - Test at 320,375,390,430,768,1024,1280,1440,1920 px: homepage, listing, detail, gallery, image crop/load, errors and overflow.

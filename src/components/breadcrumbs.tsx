@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import styles from "./breadcrumbs.module.css";
-import { findArchitecturalProduct } from "@/lib/architectural-products";
+import { findArchitecturalProduct } from "@/lib/catalogue";
 
 type Category = { slug: string; name: string };
 type Product = { slug: string; name: string; category?: string };

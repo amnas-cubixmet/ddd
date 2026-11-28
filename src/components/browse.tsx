@@ -3,8 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Check, ChevronDown, Filter } from "lucide-react";
-import { catalogueCategories, publishedProducts } from "@/lib/catalogue";
-import { architecturalProducts } from "@/lib/architectural-products";
+import {
+  catalogueCategories,
+  publishedProducts,
+  architecturalProducts,
+} from "@/lib/catalogue";
 import { paths } from "@/lib/seo";
 import { CatalogueImage } from "./catalogue-image";
 import { useCatalogueMotion } from "./catalogue-motion";

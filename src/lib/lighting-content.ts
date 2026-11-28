@@ -1,5 +1,5 @@
 import { paths, type ShareImage } from "./seo";
-import { fixturePhoto } from "./fixture-photos";
+import { fixturePhoto } from "./catalogue";
 
 export type ContentSection = { title: string; text: string; points?: string[] };
 export type ContentLink = { name: string; href: string };

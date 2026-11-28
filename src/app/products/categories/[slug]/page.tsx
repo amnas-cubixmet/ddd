@@ -3,11 +3,16 @@ import { notFound } from "next/navigation";
 import { LightingFaq, LightingLinks, LightingSections } from "@/components/lighting-content";
 import { PageSchema } from "@/components/seo-data";
 import { Action, PageIntro } from "@/components/ui";
-import { catalogueCategories, findCollection, isIndexableProduct, publishedProducts } from "@/lib/catalogue";
-import { categoryDetails } from "@/lib/category-content";
-import { categoryEditorial } from "@/lib/product-editorial";
+import {
+  catalogueCategories,
+  findCollection,
+  isIndexableProduct,
+  publishedProducts,
+  categoryDetails,
+  categoryEditorial,
+  lightingDivisions,
+} from "@/lib/catalogue";
 import { pageMetadata, paths } from "@/lib/seo";
-import { lightingDivisions } from "@/lib/lighting-divisions";
 
 type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;

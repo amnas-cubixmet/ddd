@@ -3,13 +3,17 @@ import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { Gallery } from "@/components/gallery";
 import { Action } from "@/components/ui";
-import { architecturalProducts, findArchitecturalProduct } from "@/lib/architectural-products";
+import {
+  architecturalProducts,
+  findArchitecturalProduct,
+  lightingDivisions,
+  architectureEditorial,
+  architectureRelated,
+} from "@/lib/catalogue";
 import { brand } from "@/lib/site";
 import { pageMetadata, paths } from "@/lib/seo";
 import { PageSchema } from "@/components/seo-data";
 import { LightingFaq, LightingLinks, LightingSections } from "@/components/lighting-content";
-import { lightingDivisions } from "@/lib/lighting-divisions";
-import { architectureEditorial, architectureRelated } from "@/lib/product-editorial";
 import { CatalogueImage } from "@/components/catalogue-image";
 import { RelatedCatalogueGrid } from "@/components/related-catalogue-grid";
 import styles from "../../products.module.css";

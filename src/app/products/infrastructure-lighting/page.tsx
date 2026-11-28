@@ -1,5 +1,5 @@
 import { LightingDivisionPage } from "@/components/lighting-division-page";
-import { lightingDivisions } from "@/lib/lighting-divisions";
+import { lightingDivisions } from "@/lib/catalogue";
 import { pageMetadata } from "@/lib/seo";
 
 const division = lightingDivisions.infrastructure;

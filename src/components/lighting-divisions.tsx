@@ -1,7 +1,7 @@
 import { DivisionImage } from "./division-image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { lightingDivisions } from "@/lib/lighting-divisions";
+import { lightingDivisions } from "@/lib/catalogue";
 import styles from "./lighting-divisions.module.css";
 
 export function LightingDivisions() {

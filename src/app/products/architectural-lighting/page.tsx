@@ -1,9 +1,11 @@
 import { ArchitecturalCards } from "./architectural-cards";
 import { Action } from "@/components/ui";
-import { architecturalProducts } from "@/lib/architectural-products";
-import { lightingDivisions } from "@/lib/lighting-divisions";
+import {
+  architecturalProducts,
+  lightingDivisions,
+  divisionContent,
+} from "@/lib/catalogue";
 import { pageMetadata, paths } from "@/lib/seo";
-import { divisionContent } from "@/lib/category-content";
 import { LightingFaq, LightingLinks, LightingSections } from "@/components/lighting-content";
 import { PageSchema } from "@/components/seo-data";
 import styles from "../products.module.css";

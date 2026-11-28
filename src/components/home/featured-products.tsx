@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { publishedProducts } from "@/lib/catalogue";
-import { architecturalProducts } from "@/lib/architectural-products";
+import {
+  publishedProducts,
+  architecturalProducts,
+} from "@/lib/catalogue";
 import { paths } from "@/lib/seo";
 import styles from "./featured-products.module.css";
 

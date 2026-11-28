@@ -1,5 +1,8 @@
-import { findArchitecturalProduct } from "@/lib/architectural-products";
-import { findCollection, products } from "@/lib/catalogue";
+import {
+  findArchitecturalProduct,
+  findCollection,
+  products,
+} from "@/lib/catalogue";
 import { applications } from "@/lib/lighting-content";
 import { ContactSection } from "@/components/contact";
 import { pageMetadata } from "@/lib/seo";

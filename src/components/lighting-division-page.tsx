@@ -1,11 +1,14 @@
 import { ProductsBrowser } from "@/components/browse";
 import { Action } from "@/components/ui";
-import { catalogueCategories } from "@/lib/catalogue";
-import { lightingDivisions, type LightingDivisionKey } from "@/lib/lighting-divisions";
+import {
+  catalogueCategories,
+  lightingDivisions,
+  type LightingDivisionKey,
+  divisionContent,
+} from "@/lib/catalogue";
 import styles from "@/app/products/products.module.css";
 import { PageSchema } from "@/components/seo-data";
 import { LightingFaq, LightingLinks, LightingSections } from "@/components/lighting-content";
-import { divisionContent } from "@/lib/category-content";
 import { paths } from "@/lib/seo";
 
 export async function LightingDivisionPage({ division, searchParams }: { division: LightingDivisionKey; searchParams: Promise<{ category?: string | string[] }> }) {
