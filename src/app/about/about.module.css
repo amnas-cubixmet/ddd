@@ -174,3 +174,75 @@
 @media (prefers-reduced-motion: reduce) {
   .industryCard { transition: none; }
 }
+
+/* Why choose us: compact, consistent navy cards, without staggered rows. */
+.navy[aria-labelledby="why-title"] {
+  padding-block: clamp(36px, 5vw, 72px);
+}
+.navy[aria-labelledby="why-title"] .strengthGrid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  margin-block: 24px 0;
+  align-items: stretch;
+}
+.navy[aria-labelledby="why-title"] .strengthGrid li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: clamp(14px, 1.5vw, 22px);
+  border: 1px solid #527899;
+  border-radius: 8px;
+  background: #123B64;
+}
+.strengthIcon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 7px;
+  color: #DCEEFF;
+  background: #254E76;
+}
+.navy[aria-labelledby="why-title"] .strengthGrid h3 {
+  font-size: clamp(1rem, 1.35vw, 1.25rem);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+.navy[aria-labelledby="why-title"] .strengthGrid p {
+  margin: 0;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.55;
+  overflow-wrap: break-word;
+}
+@media (min-width: 1200px) {
+  .navy[aria-labelledby="why-title"] .strengthGrid h3 { min-height: 2.5em; }
+}
+@media (max-width: 1199px) {
+  .navy[aria-labelledby="why-title"] .strengthGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .navy[aria-labelledby="why-title"] { padding-block: 28px; }
+  .navy[aria-labelledby="why-title"] .strengthGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .navy[aria-labelledby="why-title"] .strengthGrid li { padding: 12px; gap: 8px; }
+  .strengthIcon { width: 36px; height: 36px; }
+  .strengthIcon svg { width: 20px; height: 20px; }
+  .navy[aria-labelledby="why-title"] .strengthGrid h3 { font-size: 1rem; overflow-wrap: anywhere; }
+  .navy[aria-labelledby="why-title"] .strengthGrid p { font-size: .8rem; line-height: 1.5; }
+}
+@media (max-width: 374px) {
+  .navy[aria-labelledby="why-title"] .strengthGrid { grid-template-columns: minmax(0, 1fr); }
+  .navy[aria-labelledby="why-title"] .strengthGrid li {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    column-gap: 12px;
+  }
+  .navy[aria-labelledby="why-title"] .strengthIcon { grid-row: 1 / 3; }
+  .navy[aria-labelledby="why-title"] .strengthGrid p { grid-column: 2; }
+}

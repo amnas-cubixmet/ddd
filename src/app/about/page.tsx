@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Route, Warehouse, Factory, Building2, ShoppingBag, Hotel, CarFront } from "lucide-react";
+import { ArrowUpRight, Route, Warehouse, Factory, Building2, ShoppingBag, Hotel, CarFront, Layers, Compass, ClipboardCheck, Lightbulb, MessageCircle } from "lucide-react";
 import { Action } from "@/components/ui";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { HomeEnquiry } from "@/components/home-enquiry";
@@ -42,6 +42,8 @@ const steps = [
   ["Confirm specifications", "Request model-specific details such as output, colour temperature, optics, environmental rating and control compatibility where relevant."],
   ["Send a project enquiry", "Share the selected references, quantities, location and timeline so current specifications and availability can be discussed."],
 ];
+
+const strengthIcons = [Layers, Compass, ClipboardCheck, Lightbulb, MessageCircle] as const;
 
 const strengths = [
   ["Diverse catalogue", "Explore photographed infrastructure fixtures and clearly identified interior lighting references."],
@@ -143,7 +145,18 @@ export default function AboutPage() {
       </section>
       <section className={styles.navy} aria-labelledby="why-title">
         <div className={styles.inner}><p className={styles.kicker}>Working with us</p><h2 id="why-title">Why choose Bharat Lums?</h2>
-          <ul className={styles.strengthGrid}>{strengths.map(([name, text]) => <li key={name}><h3>{name}</h3><p>{text}</p></li>)}</ul>
+          <ul className={styles.strengthGrid}>
+            {strengths.map(([name, text], index) => {
+              const Icon = strengthIcons[index];
+              return (
+                <li key={name}>
+                  <span className={styles.strengthIcon}><Icon size={23} strokeWidth={1.65} aria-hidden="true" /></span>
+                  <h3>{name}</h3>
+                  <p>{text}</p>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
       <section className={styles.inner + " " + styles.section + " " + styles.split} aria-labelledby="commitment-title">
