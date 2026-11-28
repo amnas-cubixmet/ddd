@@ -24,7 +24,7 @@ export default async function Page({ params }: Params) {
   return (
     <div className={`shell ${styles.page} ${styles.compactPage}`}>
       <section className={styles.intro}><h1>{item.name}</h1><p>{item.application}</p></section>
-      <section className="detail-grid section-tight" aria-label="Product details">
+      <section className="detail-grid section-tight catalogue-detail-motion" aria-label="Product details">
         {item.image && <Gallery images={[{ src: item.image.src, alt: item.image.alt, label: "Product reference", representative: item.image.representative }]} />}
         <div className="detail-copy">
           <h2>Applications</h2><p>{item.application}</p>

@@ -61,14 +61,14 @@ export function SectionHead({
 
 export function ProductCard({
   item,
+  managedMotion = false,
 }: {
   item: Product;
+  managedMotion?: boolean;
 }) {
-  return (
-    <Reveal
-      as="article"
-      className={`media-card product-card${item.status === "photographed" ? " product-card-photographed" : ""}`}
-    >
+  const className = `media-card product-card${item.status === "photographed" ? " product-card-photographed" : ""}`;
+  const content = (
+    <>
       <Link
         href={`/products/${item.slug}`}
         className="image-link"
@@ -117,8 +117,11 @@ export function ProductCard({
           </Link>
         </div>
       </div>
-    </Reveal>
+    </>
   );
+  return managedMotion
+    ? <article className={className}>{content}</article>
+    : <Reveal as="article" className={className}>{content}</Reveal>;
 }
 
 export function QuoteBanner() {

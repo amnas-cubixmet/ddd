@@ -8,6 +8,7 @@ import {
   publishedProducts,
 } from "@/lib/catalogue";
 import { ProductCard } from "./ui";
+import { useCatalogueMotion } from "./catalogue-motion";
 
 const catalogueWattages = [
   ...new Set(
@@ -24,6 +25,7 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
   const hasFilters = Boolean(query || category || wattage);
 
   function changeCategory(nextCategory: string) {
+    capture();
     setCategory(nextCategory);
     const url = new URL(window.location.href);
     if (nextCategory) url.searchParams.set("category", nextCategory);
@@ -50,6 +52,7 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
         .includes(search),
   );
   if (sort === "name") visible.sort((a, b) => a.name.localeCompare(b.name));
+  const { grid, capture } = useCatalogueMotion<HTMLDivElement>(visible.map(item => item.slug).join("|"));
   return (
     <>
       <div
@@ -66,7 +69,7 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
             <input
               type="search"
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => { capture(); setQuery(event.target.value); }}
               placeholder="e.g. street lights"
             />
           </span>
@@ -92,7 +95,7 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
             <span>Wattage on label</span>
             <select
               value={wattage}
-              onChange={(event) => setWattage(event.target.value)}
+              onChange={(event) => { capture(); setWattage(event.target.value); }}
             >
               <option value="">All wattages</option>
               {wattages.map((watts) => (
@@ -107,7 +110,7 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
           <span>Sort</span>
           <select
             value={sort}
-            onChange={(event) => setSort(event.target.value)}
+            onChange={(event) => { capture(); setSort(event.target.value); }}
           >
             <option value="featured">Featured first</option>
             <option value="name">Name · A to Z</option>
@@ -124,16 +127,13 @@ export function ProductsBrowser({ initialCategory, allowedCategories }: { initia
           </button>
         )}
       </div>
-      {visible.length > 0 && (
-        <div className="card-grid catalogue-grid-transition" key={category}>
-          {visible.map((item) => (
-            <ProductCard
-              item={item}
-              key={item.slug}
-            />
-          ))}
-        </div>
-      )}
+      <div className="card-grid" ref={grid} data-testid="infrastructure-catalogue">
+        {visible.map(item => (
+          <div className="catalogue-motion-item" data-catalogue-item={item.slug} key={item.slug}>
+            <ProductCard item={item} managedMotion />
+          </div>
+        ))}
+      </div>
       {visible.length === 0 && (
         <div className="empty-state">
           <p>No lighting results match. Try another search or clear the filters.</p>
