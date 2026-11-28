@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, ArrowRight, BookOpen, Layers, ExternalLink, CheckCircle2 } from "lucide-react";
-import { resourceMetadata } from "@/components/lighting-resource-page";
+import { pageMetadata } from "@/lib/seo";
+import { getApplicationImage } from "@/lib/application-images";
 import { PageSchema } from "@/components/seo-data";
 import { Action } from "@/components/ui";
 import { applications } from "@/lib/lighting-content";
@@ -13,25 +14,18 @@ type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
 export const generateStaticParams = () => applications.map(({ slug }) => ({ slug }));
 
-const visual: Record<string, { src: string; alt: string; fixture?: boolean }> = {
-  "road-and-highway-lighting": { src: "/images/products/street-light.webp", alt: "LED street lighting fixture reference", fixture: true },
-  "warehouse-lighting": { src: "/images/products/warehouse-high-bay.webp", alt: "Warehouse lighting fixture reference", fixture: true },
-  "factory-lighting": { src: "/images/products/high-bay.webp", alt: "Industrial high bay lighting fixture reference", fixture: true },
-  "office-lighting": { src: "/images/conference-room-linear-lighting.webp", alt: "Conference room with linear lighting" },
-  "retail-lighting": { src: "/images/architectural-commercial-lighting.webp", alt: "Architectural and commercial lighting reference" },
-  "parking-area-lighting": { src: "/images/lighting-by-application.webp", alt: "Illustrative outdoor lighting near a commercial building" },
-  "hospitality-lighting": { src: "/images/architectural-commercial-lighting.webp", alt: "Architectural interior lighting reference" },
-};
-
 export async function generateMetadata({ params }: Props) {
-  return resourceMetadata("applications", (await params).slug);
+  const { slug } = await params;
+  const entry = applications.find(item => item.slug === slug);
+  if (!entry) return {};
+  return pageMetadata({ ...entry, path: paths.application(slug), image: getApplicationImage(slug) ?? entry.image });
 }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
   const entry = applications.find(item => item.slug === slug);
   if (!entry) notFound();
-  const image = visual[slug] ?? { src: "/images/lighting-by-application.webp", alt: "Illustrative lighting application" };
+  const image = getApplicationImage(slug);
   const enquiry = `/contact?application=${entry.slug}`;
   return (
     <div className={styles.page}>
@@ -47,8 +41,9 @@ export default async function Page({ params }: Props) {
             <Link href="#planning" className={styles.secondary}>Planning guide <ArrowRight size={16} aria-hidden="true" /></Link>
           </div>
         </div>
-        <div className={`${styles.heroImage} ${image.fixture ? styles.fixture : ""}`}>
-          <Image src={image.src} alt={image.alt} fill sizes="(max-width: 767px) 92vw, 45vw" preload />
+        <div className={styles.heroImage} data-testid="application-hero-image">
+          {image ? <Image src={image.src} alt={image.alt} fill sizes="(max-width: 767px) calc(100vw - 32px), 45vw" preload />
+            : <span className={styles.pendingImage}>Application photography pending</span>}
         </div>
       </section>
       <section className={styles.planning} id="planning" aria-labelledby="planning-title">

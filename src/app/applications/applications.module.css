@@ -10,22 +10,25 @@
 .primary:hover { background: var(--deep-navy); }
 .band { padding-block: clamp(28px,4vw,56px); background: var(--cloud); scroll-margin-top: 90px; }
 .band h2, .resources h2 { margin: 8px 0 20px; font-size: clamp(1.65rem,3vw,2.75rem); line-height: 1.12; letter-spacing: -.04em; color: var(--deep-navy); }
-.grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; list-style: none; padding: 0; margin: 0; }
+.grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; list-style: none; padding: 0; margin: 0; }
 .grid li { display: flex; min-width: 0; }
-.applicationCard { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 0; border: 1px solid var(--line); background: var(--white); border-radius: 9px; padding: clamp(14px,1.6vw,22px); text-decoration: none; transition: border-color .18s,background-color .18s; }
-.cardTop { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--accent); }
+.applicationCard { display: flex; flex-direction: column; flex: 1; min-width: 0; border: 1px solid var(--line); background: var(--white); border-radius: 8px; overflow: hidden; text-decoration: none; transition: border-color .18s; }
+.cardImage { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: var(--cloud); display: grid; place-items: center; }
+.cardImage img { object-fit: cover; transition: transform .35s ease; }
+.pendingImage { padding: 12px; text-align: center; color: var(--muted); font-size: .875rem; }
+.cardBody { display: flex; flex: 1; flex-direction: column; gap: 10px; padding: clamp(12px,1.5vw,18px); min-width: 0; }
 .icon { display: grid; place-items: center; flex-shrink: 0; width: 42px; height: 42px; border-radius: 7px; background: #E5EFF8; color: var(--deep-navy); }
 .applicationCard h3, .resourceCard h3 { margin: 0; font-size: clamp(1rem,1.5vw,1.25rem); line-height: 1.3; letter-spacing: -.02em; color: var(--deep-navy); overflow-wrap: anywhere; }
 .applicationCard p, .resourceCard p { margin: 0; font-size: .875rem; color: var(--muted); line-height: 1.55; }
-.cardLink { display: flex; align-items: center; gap: 5px; margin-top: auto; padding-top: 8px; font-size: .8rem; color: var(--accent); font-weight: 700; }
+.cardLink { display: flex; align-items: center; gap: 5px; margin-top: auto; min-height: 44px; padding-top: 4px; font-size: .8rem; color: var(--accent); font-weight: 700; }
 .cardLink svg { flex-shrink: 0; }
 .resources { padding-block: clamp(28px,4vw,56px); }
 .resourceGrid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
 .resourceCard { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 9px; padding: 16px; color: var(--accent); }
 .resourceCard p { margin-top: 5px; }
 .applicationCard:focus-visible, .resourceCard:focus-visible, .primary:focus-visible { outline: 2px solid var(--bharat-blue); outline-offset: 3px; }
-@media (hover:hover) { .applicationCard:hover, .resourceCard:hover { background: #f9fcff; border-color: var(--bharat-blue); } }
-@media (max-width:1099px) { .grid { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@media (hover:hover) { .applicationCard:hover, .resourceCard:hover { border-color: var(--bharat-blue); } .applicationCard:hover .cardImage img { transform: scale(1.035); } }
+@media (max-width:1023px) { .grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media (max-width:767px) {
   .hero, .resources { width: calc(100% - 32px); }
   .band :global(.shell) { width: calc(100% - 32px); }
@@ -36,9 +39,9 @@
   .lead { font-size: .875rem; }
   .band, .resources { padding-block: 24px; }
   .band h2, .resources h2 { font-size: clamp(1.45rem,6vw,2rem); margin-bottom: 14px; }
-  .grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .grid { gap: 12px; }
   .resourceGrid { grid-template-columns: minmax(0,1fr); gap: 10px; }
-  .applicationCard { padding: 12px; gap: 8px; }
+  .cardBody { padding: 12px; gap: 8px; }
   .applicationCard h3 { font-size: 1rem; }
   .applicationCard p, .resourceCard p { font-size: .84rem; }
   .icon { width: 36px; height: 36px; }
@@ -46,4 +49,4 @@
   .resourceCard { padding: 12px; gap: 10px; }
 }
 @media (max-width:479px) { .grid { grid-template-columns: minmax(0,1fr); } }
-@media (prefers-reduced-motion:reduce) { .applicationCard { transition:none; } }
+@media (prefers-reduced-motion:reduce) { .applicationCard, .cardImage img { transition:none; } .applicationCard:hover .cardImage img { transform:none; } }
