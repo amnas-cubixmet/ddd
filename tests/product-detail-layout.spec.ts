@@ -12,6 +12,19 @@ test("shared detail layout preserves gallery, enquiry, and mobile widths", async
       expect(await detail.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(" ").length)).toBe(width <= 805 ? 1 : 2);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       await expect(detail.locator(".product-gallery-image img")).toHaveCSS("object-fit", "cover");
+      if (width <= 805) {
+        const gallery = await detail.locator(".product-gallery-image").boundingBox();
+        expect(Math.abs(gallery!.width - gallery!.height)).toBeLessThanOrEqual(2);
+        const order = await Promise.all([
+          detail.locator(".product-gallery").boundingBox(),
+          detail.locator(".detail-copy").boundingBox(),
+          detail.locator("#specifications-title").boundingBox(),
+          detail.getByRole("complementary", { name: "Project enquiry and applications" }).boundingBox(),
+        ]);
+        for (let index = 1; index < order.length; index++) {
+          expect(order[index]!.y).toBeGreaterThanOrEqual(order[index - 1]!.y + order[index - 1]!.height - 1);
+        }
+      }
     }
     const summary = detail.locator(".detail-copy");
     const panel = detail.getByRole("complementary", { name: "Project enquiry and applications" });
