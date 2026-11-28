@@ -6,8 +6,8 @@
   margin-block: 16px clamp(28px, 4vw, 56px);
 }
 .detail > * { min-width: 0; }
-.detail :global(.product-gallery-image) { aspect-ratio: 1 / 1; border-radius: 10px; background: var(--cloud); }
-.detail :global(.product-gallery-image img), .detail :global(.gallery-controls img) { object-fit: contain; }
+.detail :global(.product-gallery .product-gallery-image) { aspect-ratio: 1 / 1; border-radius: 10px; background: var(--cloud); }
+.detail :global(.product-gallery .product-gallery-image img), .detail :global(.product-gallery .gallery-controls img) { object-fit: contain; }
 .summary { min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
 .summary h1 { font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--deep-navy); line-height: 1.15; letter-spacing: -.035em; overflow-wrap: anywhere; }
 .summary p, .summary ul { margin: 0; }
@@ -41,7 +41,7 @@
   .detail:global(.detail-grid), .specLayout { grid-template-columns: minmax(0,1fr); gap: 18px; }
   .detail:global(.shell), .specLayout:global(.shell) { width: calc(100% - 32px); }
   .detail:global(.detail-grid) { margin-block: 12px 26px; }
-  .detail :global(.product-gallery-image) { aspect-ratio: 1 / 1; }
+  .detail :global(.product-gallery .product-gallery-image) { aspect-ratio: 1 / 1; }
   .summary { gap: 10px; }
   .summary h1 { font-size: clamp(1.65rem, 6.8vw, 2.25rem); }
   .summary .lead, .summary > p:not(.eyebrow) { font-size: .875rem; }
