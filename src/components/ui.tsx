@@ -167,7 +167,7 @@ export function Footer() {
           </nav>
           <div className="footer-links">
             <h2>Get in touch</h2>
-            <a href={`mailto:${brand.email}`}>{brand.email}</a>
+            <span>{brand.email}</span>
             <a href={brand.phoneHref}>{brand.phone}</a>
             <a
               href={`https://wa.me/${brand.phoneHref.replace(/\D/g, "")}`}

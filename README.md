@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. The catalogue and WhatsApp enquiry forms work without SMTP credentials.
+Open http://localhost:3000. The catalogue and enquiry forms work without email service credentials.
 
 ## Content and assets
 
@@ -22,7 +22,7 @@ Open http://localhost:3000. The catalogue and WhatsApp enquiry forms work withou
 
 ## Enquiries
 
-The public forms open a prefilled WhatsApp message for the visitor to review and send. The optional server-side email endpoint can be configured separately using `.env.example`.
+The public forms open a prefilled WhatsApp message for the visitor to review and send. Enquiries are sent through WhatsApp; there is no server-side email submission endpoint.
 
 ## Checks
 

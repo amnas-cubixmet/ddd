@@ -5,14 +5,8 @@ const optionalText = (max: number) => z.string().trim().max(max);
 export const enquirySchema = z.object({
   name: z.string().trim().min(2, "Enter your full name.").max(100),
   company: optionalText(120),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Enter your email.")
-    .max(160)
-    .email("Enter a valid email address."),
-  phone: optionalText(30).refine(
-    (value) => !value || /^(?=(?:\D*\d){7,15}\D*$)[+\d() -]+$/.test(value),
+  phone: z.string().trim().min(1, "Enter your phone number.").max(30).refine(
+    (value) => /^(?=(?:\D*\d){7,15}\D*$)[+\d() -]+$/.test(value),
     "Enter a valid phone number.",
   ),
   subject: optionalText(150).optional(),
@@ -32,29 +26,11 @@ export const enquirySchema = z.object({
 });
 
 export type Enquiry = z.infer<typeof enquirySchema>;
-export const enquirySourceSchema = z.enum(["home", "contact", "quote"]);
-export type EnquirySource = z.infer<typeof enquirySourceSchema>;
-
-export const enquirySources = {
-  home: { label: "Homepage", title: "New website enquiry", path: "/" },
-  contact: { label: "Contact page", title: "New contact enquiry", path: "/contact" },
-  quote: { label: "Request a quote", title: "New quotation request", path: "/request-quote" },
-} satisfies Record<EnquirySource, { label: string; title: string; path: string }>;
-
-export function enquiryEmailHref(email: string, draft?: string) {
-  const subject = encodeURIComponent("Bharat Lums website enquiry");
-  const body = draft
-    ? `&body=${encodeURIComponent(draft.replace(/\r?\n/g, "\r\n"))}`
-    : "";
-  return `mailto:${email}?subject=${subject}${body}`;
-}
-
 export function enquiryText(input: Enquiry) {
   return (
     [
       ["Name", input.name],
       ["Company", input.company],
-      ["Email", input.email],
       ["Phone", input.phone],
       ["Subject", input.subject],
       ["Product interest", input.interest],

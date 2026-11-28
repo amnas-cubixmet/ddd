@@ -27,17 +27,11 @@ const fields = [
     auto: "organization",
   },
   {
-    name: "email",
-    label: "Email address",
-    type: "email",
-    auto: "email",
-    required: true,
-  },
-  {
     name: "phone",
     label: "Phone number",
     type: "tel",
     auto: "tel",
+    required: true,
   },
   {
     name: "subject",
@@ -81,7 +75,6 @@ export default function EnquiryForm({
     defaultValues: {
       name: "",
       company: "",
-      email: "",
       phone: "",
       subject: "",
       interest: defaults?.interest ?? "",
@@ -94,8 +87,8 @@ export default function EnquiryForm({
   });
   const [status, setStatus] = useState<string | null>(null);
   function submit(values: Enquiry) {
-    if (home && (!values.subject || values.subject.length < 2 || !values.phone)) {
-      setStatus("Enter a valid phone number and subject.");
+    if (home && (!values.subject || values.subject.length < 2)) {
+      setStatus("Enter a valid subject.");
       return;
     }
     setStatus(null);
@@ -150,7 +143,7 @@ export default function EnquiryForm({
               type={field.type}
               autoComplete={"auto" in field ? field.auto : undefined}
               inputMode={"inputMode" in field ? field.inputMode : undefined}
-              placeholder={home ? ({ name: "Enter your full name", company: "Your company (optional)", email: "you@example.com", phone: "+91 00000 00000", subject: "How can we help?" } as Record<string, string>)[field.name] : required ? `${field.label} *` : field.label}
+              placeholder={home ? ({ name: "Enter your full name", company: "Your company (optional)", phone: "+91 00000 00000", subject: "How can we help?" } as Record<string, string>)[field.name] : required ? `${field.label} *` : field.label}
               aria-invalid={Boolean(error)}
               required={required}
               aria-describedby={error ? `${id}-error` : undefined}

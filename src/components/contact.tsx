@@ -1,6 +1,5 @@
 import { ArrowUpRight, Globe2, Mail, MessageCircle, Phone } from "lucide-react";
 import { brand } from "@/lib/site";
-import { enquiryEmailHref } from "@/lib/enquiry";
 import { DirectEnquiry } from "./direct-enquiry";
 import styles from "./contact.module.css";
 
@@ -31,14 +30,13 @@ export function ContactSection({
         </p>
         <ul className={styles.methods}>
           <li>
-            <a href={enquiryEmailHref(brand.email)}>
+            <div className={styles.staticMethod}>
               <Mail size={19} aria-hidden="true" />
               <span>
                 <strong>Email</strong>
                 {brand.email}
               </span>
-              <ArrowUpRight size={17} aria-hidden="true" />
-            </a>
+            </div>
           </li>
           {source === "quote" && (
             <li>

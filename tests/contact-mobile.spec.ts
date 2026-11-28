@@ -17,5 +17,7 @@ test("contact mobile layout keeps fields readable, links functional and product 
   await expect(form.getByRole("button", { name: "Send via WhatsApp" })).toBeVisible();
   await form.getByRole("button", { name: "Send via WhatsApp" }).click();
   await expect(form.getByLabel("Full name")).toHaveAttribute("aria-invalid", "true");
-  await expect(form.getByLabel("Email address")).toHaveAttribute("aria-invalid", "true");
+  await expect(form.getByLabel("Phone number")).toHaveAttribute("aria-invalid", "true");
+  await expect(form.getByLabel("Email address")).toHaveCount(0);
+  await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
 });

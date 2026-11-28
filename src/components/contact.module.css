@@ -33,7 +33,7 @@
   list-style: none;
 }
 
-.methods a {
+.methods :is(a, .staticMethod) {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
@@ -94,8 +94,8 @@
   .person { margin-block: 8px 12px; font-size: .85rem; line-height: 1.5; }
   .person strong { font-size: .95rem; }
   .methods { gap: 7px; }
-  .methods a { min-height: 52px; padding: 9px 10px; gap: 10px; border-radius: 7px; }
-  .methods a > svg:first-child { color: var(--accent); width: 20px; height: 20px; }
+  .methods :is(a, .staticMethod) { min-height: 52px; padding: 9px 10px; gap: 10px; border-radius: 7px; }
+  .methods :is(a, .staticMethod) > svg:first-child { color: var(--accent); width: 20px; height: 20px; }
   .methods a > svg:last-child { width: 15px; height: 15px; color: var(--accent); }
   .methods span { font-size: .81rem; line-height: 1.4; min-width: 0; }
   .methods strong { font-size: .86rem; }
@@ -146,7 +146,7 @@
 }
 @media (max-width: 360px) {
   .panel { padding: 12px; }
-  .methods a { gap: 8px; padding-inline: 8px; }
+  .methods :is(a, .staticMethod) { gap: 8px; padding-inline: 8px; }
   .panel :global(.enquiry-field input),
   .panel :global(.enquiry-field select),
   .panel :global(.enquiry-field textarea) { padding-inline: 9px; }
