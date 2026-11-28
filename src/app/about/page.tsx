@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Route, Warehouse, Factory, Building2, ShoppingBag, Hotel, CarFront } from "lucide-react";
 import { Action } from "@/components/ui";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { HomeEnquiry } from "@/components/home-enquiry";
@@ -25,13 +25,13 @@ const expertise = [
 ];
 
 const industries = [
-  ["Roads and highways", "Street and access-route lighting"],
-  ["Warehouses and logistics", "Storage aisles and loading zones"],
-  ["Factories and manufacturing", "Production areas and workstations"],
-  ["Offices and workspaces", "Desks, meeting rooms and circulation"],
-  ["Retail and shopping malls", "Displays and customer-facing areas"],
-  ["Hotels and hospitality", "Reception and shared interiors"],
-  ["Outdoor parking areas", "Vehicle routes and pedestrian zones"],
+  { name: "Roads and highways", text: "Street and access-route lighting", slug: "road-and-highway-lighting", icon: Route },
+  { name: "Warehouses and logistics", text: "Storage aisles and loading zones", slug: "warehouse-lighting", icon: Warehouse },
+  { name: "Factories and manufacturing", text: "Production areas and workstations", slug: "factory-lighting", icon: Factory },
+  { name: "Offices and workspaces", text: "Desks, meeting rooms and circulation", slug: "office-lighting", icon: Building2 },
+  { name: "Retail and shopping malls", text: "Displays and customer-facing areas", slug: "retail-lighting", icon: ShoppingBag },
+  { name: "Hotels and hospitality", text: "Reception and shared interiors", slug: "hospitality-lighting", icon: Hotel },
+  { name: "Outdoor parking areas", text: "Vehicle routes and pedestrian zones", slug: "parking-area-lighting", icon: CarFront },
 ];
 
 const steps = [
@@ -120,7 +120,20 @@ export default function AboutPage() {
         <div className={styles.inner}>
           <p className={styles.kicker}>Applications</p><h2 id="industries-title">Industries we serve</h2>
           <p className={styles.lead}>Explore lighting categories for these project environments. Confirm the requirements of the actual site before choosing a fixture.</p>
-          <ul className={styles.industryGrid}>{industries.map(([name, text]) => <li key={name}><h3>{name}</h3><p>{text}</p></li>)}</ul>
+          <ul className={styles.industryGrid}>
+            {industries.map(({ name, text, slug, icon: Icon }) => (
+              <li key={slug}>
+                <Link href={paths.application(slug)} className={styles.industryCard}>
+                  <span className={styles.industryCardTop}>
+                    <span className={styles.industryIcon}><Icon size={23} strokeWidth={1.65} aria-hidden="true" /></span>
+                    <ArrowUpRight className={styles.industryArrow} size={17} aria-hidden="true" />
+                  </span>
+                  <h3>{name}</h3>
+                  <p>{text}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
           <Action href={paths.applications}>Explore lighting applications</Action>
         </div>
       </section>
