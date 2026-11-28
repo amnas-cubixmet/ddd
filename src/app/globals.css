@@ -1377,3 +1377,42 @@ textarea::placeholder {
 }
 .site-header .header-quote svg,
 .main-nav .mobile-quote svg { flex-shrink: 0; }
+
+/* Site-wide fixed WhatsApp shortcut. */
+.floating-whatsapp {
+  position: fixed;
+  left: max(20px, env(safe-area-inset-left));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #08754e;
+  color: #fff;
+  border: 1px solid #fff;
+  box-shadow: 0 5px 18px #0b2e5730;
+  text-decoration: none;
+  transition: background-color .2s ease, transform .2s ease;
+}
+.floating-whatsapp:focus-visible {
+  outline: 3px solid #1f73bd;
+  outline-offset: 4px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .floating-whatsapp:hover { background: #065c3e; color: #fff; transform: translateY(-3px); }
+}
+@media (max-width: 600px) {
+  .floating-whatsapp {
+    left: max(14px, env(safe-area-inset-left));
+    bottom: max(14px, env(safe-area-inset-bottom));
+    width: 50px;
+    height: 50px;
+  }
+  .floating-whatsapp svg { width: 26px; height: 26px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-whatsapp { transition: none; }
+  .floating-whatsapp:hover { transform: none; }
+}
