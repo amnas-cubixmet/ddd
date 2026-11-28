@@ -1,0 +1,39 @@
+canonical_route,primary_keyword,cluster,secondary_keywords,intent,status,evidence_date
+/,professional LED lighting solutions,brand,LED lighting solutions,commercial comparison,implemented,2026-11-28
+/about,professional lighting catalogue,company,,commercial comparison,implemented,2026-11-28
+/products,LED lighting products,catalogue,,commercial comparison,implemented,2026-11-28
+/products/architectural-lighting,architectural and commercial LED lighting,division,commercial LED lighting | architectural lighting solutions | commercial building lighting | shopping mall lighting,commercial comparison,implemented,2026-11-28
+/products/infrastructure-lighting,outdoor and infrastructure LED lighting,division,outdoor LED lighting,commercial comparison,implemented,2026-11-28
+/applications,LED lighting applications,application hub,,commercial comparison,implemented,2026-11-28
+/lighting-guides,LED lighting guides,guide hub,,commercial comparison,implemented,2026-11-28
+/contact,LED lighting enquiry,conversion,,commercial comparison,implemented,2026-11-28
+/request-quote,LED lighting project quote,conversion,,commercial comparison,implemented,2026-11-28
+/products/categories/floodlights,LED flood lights,outdoor fixtures,,commercial comparison,implemented,2026-11-28
+/products/categories/led-street-lights,LED street lights,roadway fixtures,,commercial comparison,implemented,2026-11-28
+/products/categories/high-bay-industrial-lighting,industrial LED high bay lights,industrial fixtures,industrial LED lighting,commercial comparison,implemented,2026-11-28
+/products/categories/led-warehouse-lighting,LED warehouse fixtures,linear fixtures,,commercial comparison,implemented,2026-11-28
+/applications/road-and-highway-lighting,road and highway LED lighting,roadways,road infrastructure lighting,commercial comparison,implemented,2026-11-28
+/applications/warehouse-lighting,LED lighting for warehouses,warehouse design,warehouse lighting requirements,commercial comparison,implemented,2026-11-28
+/applications/factory-lighting,LED lighting for factories,factory design,industrial lighting solutions,commercial comparison,implemented,2026-11-28
+/applications/office-lighting,LED office lighting,office design,,commercial comparison,implemented,2026-11-28
+/applications/retail-lighting,LED retail lighting,retail design,,commercial comparison,implemented,2026-11-28
+/applications/parking-area-lighting,outdoor parking area lighting,parking design,,commercial comparison,implemented,2026-11-28
+/applications/hospitality-lighting,LED hospitality lighting,hospitality design,,commercial comparison,implemented,2026-11-28
+/lighting-guides/led-street-light-guide,how to specify LED street lights,selection guide,street light wattage selection,informational,implemented,2026-11-28
+/lighting-guides/choose-led-flood-lights,how to choose LED flood lights,selection guide,floodlight beam angle,informational,implemented,2026-11-28
+/lighting-guides/led-high-bay-lighting-guide,LED high bay lighting guide,selection guide,,informational,implemented,2026-11-28
+/lighting-guides/lumens-watts-lux,lumens watts and lux explained,selection guide,energy efficient lighting,informational,implemented,2026-11-28
+/lighting-guides/ip65-ip66-lighting,IP65 and IP66 for LED lighting,selection guide,,informational,implemented,2026-11-28
+/products/oron-30,Oreli OFL-ORON 30 W,model,,model and specification,implemented,2026-11-28
+/products/oron-50,Oreli OFL-ORON 50 W,model,,model and specification,implemented,2026-11-28
+/products/oron-100,Oreli OFL-ORON 100 W,model,,model and specification,implemented,2026-11-28
+/products/glowbee-150,Oreli OFL-GlowBee 150 W,model,,model and specification,implemented,2026-11-28
+/products/glowbee-200,Oreli OFL-GlowBee 200 W,model,,model and specification,implemented,2026-11-28
+/products/vimio-150,Oreli VIMIO15D150 150 W,model,,model and specification,implemented,2026-11-28
+/products/neona-18,Oreli OSL-NEONA 18 W,model,,model and specification,implemented,2026-11-28
+/products/neona-24,Oreli OSL-NEONA 24 W,model,,model and specification,implemented,2026-11-28
+/products/neona-36,Oreli OSL-NEONA 36 W,model,,model and specification,implemented,2026-11-28
+/products/neona-50,Oreli OSL-NEONA 50 W,model,,model and specification,implemented,2026-11-28
+/products/neona-100,Oreli OSL-NEONA 100 W,model,,model and specification,implemented,2026-11-28
+/products/novapro-50,Oreli OSL-NOVAPRO 50 W,model,,model and specification,implemented,2026-11-28
+/products/novapro-100,Oreli OSL-NOVAPRO 100 W,model,,model and specification,implemented,2026-11-28
