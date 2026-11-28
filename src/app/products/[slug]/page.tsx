@@ -8,11 +8,17 @@ import { Action, PageIntro, ProductCard, QuoteBanner } from "@/components/ui";
 import {
   catalogueLabel,
   collections,
+  isIndexableProduct,
   products,
   relatedProducts,
 } from "@/lib/catalogue";
 import { fixturePhoto, fixturePhotoGroups } from "@/lib/fixture-photos";
-import { brand, metadata as pageMetadata, siteUrl } from "@/lib/site";
+import { brand } from "@/lib/site";
+import { absoluteUrl, pageMetadata, paths } from "@/lib/seo";
+import { categoryDetails } from "@/lib/category-content";
+import { JsonLd, PageSchema } from "@/components/seo-data";
+import { LightingLinks } from "@/components/lighting-content";
+import { lightingDivisions } from "@/lib/lighting-divisions";
 import photoStyles from "./fixture-photos.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -25,14 +31,14 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params) {
   const { slug } = await params;
   const item = products.find((product) => product.slug === slug);
-  return item
-    ? pageMetadata(
-        item.name,
-        `/products/${slug}`,
-        item.description,
-        item.images[0].src,
-      )
-    : {};
+  const category = collections.find((collection) => collection.slug === item?.categories[0]);
+  return item ? pageMetadata({
+    title: item.model && category ? `${item.name} – ${category.name}` : item.name,
+    path: paths.product(slug),
+    summary: item.description,
+    image: item.images[0],
+    index: isIndexableProduct(item),
+  }) : {};
 }
 
 export default async function ProductPage({ params }: Params) {
@@ -42,6 +48,10 @@ export default async function ProductPage({ params }: Params) {
 
   const photographed = item.status === "photographed";
   const specs = item.status === "draft" ? [] : [...(item.specifications ?? [])];
+  if (item.model) {
+    specs.unshift({ name: "Model code", value: item.model.code });
+    specs.unshift({ name: "Brand on label", value: item.model.brand });
+  }
   if (item.status !== "draft" && item.wattages?.length) {
     specs.unshift({ name: "Wattage", value: `${item.wattages.join(" / ")} W` });
   }
@@ -63,36 +73,30 @@ export default async function ProductPage({ params }: Params) {
     `Hello Bharat Lums, I would like more information about ${item.name}. Please share the available options and specifications.`,
   );
 
-  const structuredProduct = siteUrl && item.status !== "draft"
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: item.name,
-        description: item.description,
-        url: new URL(`/products/${slug}`, siteUrl).href,
-        image: item.images.map(({ src }) => new URL(src, siteUrl).href),
-        category: collections
-          .filter(({ slug: category }) => item.categories.includes(category))
-          .map(({ name }) => name)
-          .join(", "),
-        additionalProperty: specs.map(({ name, value }) => ({
-          "@type": "PropertyValue",
-          name,
-          value,
-        })),
-      }
-    : undefined;
+  const path = paths.product(slug);
+  const url = absoluteUrl(path);
+  const family = collections.find(({ slug }) => item.categories.includes(slug));
+  const guidance = family ? categoryDetails(family.slug) : undefined;
 
   return (
     <>
-      {structuredProduct && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredProduct).replace(/</g, "\\u003c"),
-          }}
-        />
-      )}
+      <PageSchema title={item.name} path={path} summary={item.description} ancestors={[
+        { name: "Products", href: paths.products },
+        { name: lightingDivisions.infrastructure.title, href: paths.infrastructure },
+        ...(family ? [{ name: family.name, href: paths.category(family.slug) }] : []),
+      ]} />
+      {url && isIndexableProduct(item) && <JsonLd data={{
+        "@type": "Product",
+        "@id": `${url}#product`,
+        name: item.name,
+        description: item.description,
+        url,
+        image: item.images.map(({ src }) => absoluteUrl(src)),
+        category: family?.name,
+        ...(item.model ? { brand: { "@type": "Brand", name: item.model.brand }, model: item.model.code } : {}),
+        additionalProperty: specs.filter(({ name }) => name !== "Brand on label" && name !== "Model code")
+          .map(({ name, value }) => ({ "@type": "PropertyValue", name, value })),
+      }} />}
       <PageIntro
         eyebrow={catalogueLabel(item)}
         title={item.name}
@@ -120,6 +124,12 @@ export default async function ProductPage({ params }: Params) {
               <p>{item.applications}</p>
             </>
           )}
+          {guidance && (
+            <>
+              <h2>Selection and installation</h2>
+              <p>{guidance.selection}</p>
+            </>
+          )}
           <h2>Technical information</h2>
           {specs.length > 0 ? (
             <table className="product-spec-table">
@@ -140,6 +150,9 @@ export default async function ProductPage({ params }: Params) {
               Ask our team for available models and verified specifications.
             </p>
           )}
+          {specs.length > 0 && photographed && (
+            <p>Ask for the exact datasheet and current availability. Confirm light output, electrical requirements, mounting and any project-specific ratings before ordering.</p>
+          )}
           {downloads.length > 0 && (
             <div className="product-detail-actions">
               {downloads.map(({ href, label }) => (
@@ -156,7 +169,7 @@ export default async function ProductPage({ params }: Params) {
                 <Link
                   className="text-link"
                   key={category.slug}
-                  href={{ pathname: "/products", query: { category: category.slug } }}
+                  href={paths.category(category.slug)}
                 >
                   {category.name}
                 </Link>
@@ -189,7 +202,7 @@ export default async function ProductPage({ params }: Params) {
                   <Link href={`/products/${image}`} className={photoStyles.photo} aria-label={`View ${title}`}>
                     <Image
                       src={fixturePhoto(image)}
-                      alt=""
+                      alt={`${title} fixture photograph`}
                       fill
                       loading="lazy"
                       sizes="(max-width: 560px) 92vw, (max-width: 805px) 45vw, (max-width: 1450px) 30vw, 430px"
@@ -219,6 +232,10 @@ export default async function ProductPage({ params }: Params) {
           </RelatedCatalogueGrid>
         </section>
       )}
+      {guidance && <div className="shell"><LightingLinks title="Project and installation resources" links={[
+        { name: "Lighting application planning", href: paths.application(guidance.application) },
+        { name: "Fixture selection guide", href: paths.guide(guidance.guide) },
+      ]} /></div>}
       <QuoteBanner />
     </>
   );

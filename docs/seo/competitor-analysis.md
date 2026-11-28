@@ -1,0 +1,21 @@
+# Competitor analysis
+
+Researched and implemented on 28 November 2026.
+
+Dated review of publicly retrievable pages and their search snippets. Coverage includes category or application landing, naming, visible headings, fixtures, specification depth, content and contact options where observable. Search visibility is an observation of retrieved result types. Search volume, difficulty, organic rankings and traffic are unverified. Changi's product presentation was used as a design reference.
+
+| Site | Observed page or search evidence | Implication for Bharat Lums | Source |
+| --- | --- | --- | --- |
+| HiLums and Oreli | Category and series navigation, brand/series/wattage names, model imagery, made-to-order or quote language depending on page. | Match exact label identities, preserve the photo evidence and guide the buyer to the appropriate enquiry. | [Store](https://hilums.com/store) · [Street light series](https://hilums.com/store/street-lights) |
+| Changi Lighting | Product families, product-list routes and a separate catalogue hub. | Keep category-first discovery and connect catalogue context to technical selection. | [Products](https://www.changilighting.com/products) · [Catalogues](https://www.changilighting.com/catalogues) |
+| Signify / Philips | High bay and low bay category, linked families and model naming. | Use a clear fixture-type hierarchy and practical links to exact model information. | [High-bay and low-bay](https://www.signify.com/en-in/prof/indoor-luminaires/high-bay-and-low-bay/SMC_CHLBAY_CA/category) |
+| Wipro Lighting | Product picker organised by use, with high bay, mid bay, indoor and street ranges. | Provide routes by application and fixture, with a clear model or project quote path. | [Industrial solutions](https://www.wiprolighting.com/products/industrial-solutions) |
+| Havells | Separate indoor highbay family and linear product detail with feature descriptions. | Request exact technical data at the model level and keep family guidance separate. | [High bay family](https://havellslighting.com/products/led-indoor-lights/led-highbay-lights/) |
+| Bajaj Electricals | Dedicated industrial workspaces page connects the buying context to fixture families. | Treat factory and warehouse projects as distinct planning tasks. | [Industrial workspaces](https://www.bajajelectricals.com/pages/industrial-workspaces-lighting) |
+| Crompton | Industrial collection and fixture-level retail/catalogue listings. | Explain model identity and provide an enquiry path suited to project procurement. | [Industrial lighting collection](https://www.crompton.co.in/collections/industrial-lighting) |
+| LEDVANCE | Detailed professional SKUs with optics and ratings plus an educational warehouse application guide. | Link selection advice to evidence and ask for photometry instead of promising performance. | [Warehouse guide](https://www.ledvance.com/en-us/professional-lighting/insights/blog/application/warehouse-lighting) |
+| Keltron Lighting Division | Regional lighting division and catalogue records for flood and street luminaires. | Geographic and manufacturer positioning require explicit evidence. | [Lighting division](https://www.keltron.org/index.php/keltron-lighting-division) |
+| Dialight | Specialist high-bay product families and searchable installation documentation. | Include mounting questions and exact-document requests. Defer claims about special environments until documented. | [High bays](https://www.dialight.com/product/products-solutions/high-bay-lights/) · [Installation manuals](https://www.dialight.com/resources/installation-manuals/) |
+| Tricircle Group | A UAE industrial lighting landing page includes high bay, linear high bay and floodlight clusters across industrial uses. | Keep Gulf terms in research until Bharat Lums verifies its service capability. | [Industrial LED lighting supply](https://tricirclegroup.ae/led-industrial-lighting/) |
+
+The next content priority is verified manufacturer documentation and project evidence, followed by additional guides in response to real buyer questions. Detailed model scope, installation context and concise specifications matter more than matching a competitor's number of pages.

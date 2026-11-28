@@ -2,15 +2,18 @@ import Image from "next/image";
 import { ProductsBrowser } from "@/components/browse";
 import { LightingDivisions } from "@/components/lighting-divisions";
 import { Action } from "@/components/ui";
-import { findCollection } from "@/lib/catalogue";
+import { catalogueCategories, findCollection } from "@/lib/catalogue";
 import { fixtureOverviewPhotos } from "@/lib/fixture-photos";
-import { metadata as pageMetadata } from "@/lib/site";
+import { pageMetadata, paths } from "@/lib/seo";
+import { PageSchema } from "@/components/seo-data";
+import { LightingLinks } from "@/components/lighting-content";
+import { lightingDivisions } from "@/lib/lighting-divisions";
 import styles from "./products.module.css";
 
 const description =
-  "Explore LED lighting for commercial, industrial and outdoor spaces.";
+  "Browse LED lighting products for infrastructure, commercial interiors and industrial sites. Compare fixture types, photographed models and enquiry options.";
 
-export const metadata = pageMetadata("Lighting Products", "/products", description);
+export const metadata = pageMetadata({ title: "LED Lighting Products and Catalogue", path: paths.products, summary: description });
 
 export default async function ProductsPage({
   searchParams,
@@ -22,6 +25,8 @@ export default async function ProductsPage({
 
   return (
     <div className={`shell ${styles.page} ${styles.compactPage}`}>
+      <PageSchema title="Products" path={paths.products} summary={description}
+        items={Object.values(lightingDivisions).map(({ title, href }) => ({ name: title, href }))} />
       <section className={styles.intro} aria-labelledby="products-title">
         <div>
           <p className="eyebrow">Product catalogue</p>
@@ -35,6 +40,9 @@ export default async function ProductsPage({
         <ProductsBrowser key={initialCategory} initialCategory={initialCategory} />
       </section>
 
+      <LightingLinks title="Browse by fixture type" links={catalogueCategories.map(({ name, slug }) => ({
+        name, href: paths.category(slug),
+      }))} />
       <details className={styles.overview}>
         <summary>More fixture photos</summary>
         <div className={styles.overviewGrid}>

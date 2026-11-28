@@ -101,6 +101,9 @@ export default function EnquiryForm({
     setStatus(null);
     const message = enquiryText(values);
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    window.dispatchEvent(new CustomEvent("bharat:whatsapp-enquiry-open", {
+      detail: { source: home ? "home" : "enquiry" },
+    }));
     window.location.assign(url);
   }
 

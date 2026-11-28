@@ -8,10 +8,12 @@ export function CatalogueImage({
   src,
   alt,
   sizes,
+  eager = false,
 }: {
   src: string;
   alt: string;
   sizes: string;
+  eager?: boolean;
 }) {
   const [failedSrc, setFailedSrc] = useState<string>();
   if (failedSrc === src) {
@@ -33,7 +35,8 @@ export function CatalogueImage({
       alt={alt}
       fill
       sizes={sizes}
-      loading="lazy"
+      loading={eager ? "eager" : "lazy"}
+      fetchPriority={eager ? "high" : undefined}
       onError={() => setFailedSrc(src)}
     />
   );

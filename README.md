@@ -11,17 +11,18 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. The catalogue and email-draft fallback work without service credentials.
+Open http://localhost:3000. The catalogue and WhatsApp enquiry forms work without SMTP credentials.
 
 ## Content and assets
 
 - The Illustrator logo was exported as an original-colour SVG and transparent PNG. The website uses a lighter blue treatment of the same artwork. The business card supplied the contact name, phone and email.
-- The catalogue shows ten LED lighting categories. Source records and representative imagery are in `src/lib/catalogue.ts`. Add verified product records and datasheets before publishing individual models.
-- Hero imagery is AI-generated. Replace it with approved photography when available.
+- The catalogue distinguishes model-label photos from illustrative lighting references. Use supplier catalogue records for provenance and verify exact specifications and availability before expanding the public catalogue.
+- See [the SEO audit](docs/seo/seo-audit.md) and [release configuration](docs/seo/technical-seo-report.md) for the crawl, canonical and verification settings.
+- For future SEO work, use [the repository SEO skill](.agents/skills/bharat-lums-seo-engine/SKILL.md). Clients without skill discovery can load the file directly.
 
 ## Enquiries
 
-Create `.env.local` from `.env.example`. All three forms use server-only Gmail SMTP via Nodemailer. No database or admin page is needed. See [email setup](docs/email-setup.md).
+The public forms open a prefilled WhatsApp message for the visitor to review and send. The optional server-side email endpoint can be configured separately using `.env.example`.
 
 ## Checks
 
@@ -33,6 +34,4 @@ npx playwright install chromium
 npm test
 ```
 
-Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to use an installed Chromium binary. Desktop and mobile tests run against the production server. The CI workflow installs Chromium and runs the same checks.
-
-See [email setup](docs/email-setup.md) and [responsive audit](docs/responsive-audit.md).
+Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` to use an installed Chromium binary. The Playwright suite runs against the built production server.

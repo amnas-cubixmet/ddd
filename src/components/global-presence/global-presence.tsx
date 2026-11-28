@@ -180,7 +180,7 @@ export function GlobalPresenceSection() {
   return (
     <section
       id="global-presence"
-      aria-label="Interactive lighting markets map"
+      aria-label="Interactive regional map"
       className={styles.section}
       data-touch-home-motion={touchMotion || undefined}
       ref={section}
@@ -210,6 +210,7 @@ export function GlobalPresenceSection() {
                 ? "Drag to rotate, or select a country to focus the globe."
                 : "Select a country to highlight it on the map."}
             </p>
+            <p className={styles.instruction}>Illustrative map. Contact us about service availability for your project location.</p>
             <div
               className={styles.countries}
               role="group"

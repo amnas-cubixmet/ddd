@@ -17,8 +17,8 @@
   opacity: 1;
   visibility: visible;
   transition: opacity 120ms ease, visibility 0s linear 120ms;
-  /* Recovery if the client never hydrates. Not part of normal loading. */
-  animation: safety-hide 0s 9s forwards;
+  /* Release the overlay even if client hydration is delayed. */
+  animation: safety-hide 0s 2s forwards;
 }
 .screen[data-mode="overlay"][data-dismissed="true"] {
   animation: none;

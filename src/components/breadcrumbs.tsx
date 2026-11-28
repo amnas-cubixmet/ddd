@@ -17,7 +17,9 @@ const staticPages: Record<string, string> = {
   "/request-quote": "Request a quote",
 };
 
-export function Breadcrumbs({ categories, products }: { categories: Category[]; products: Product[] }) {
+export function Breadcrumbs({ categories, products, applications, guides }: {
+  categories: Category[]; products: Product[]; applications: Category[]; guides: Category[];
+}) {
   const path = usePathname();
   const params = useSearchParams();
   if (!path || path === "/") return null;
@@ -26,7 +28,19 @@ export function Breadcrumbs({ categories, products }: { categories: Category[]; 
   const categoryHref = (slug: string, parent: string) =>
     `${parent}?category=${encodeURIComponent(slug)}${parent === infrastructure ? "#division-catalogue" : ""}`;
 
-  if (staticPages[path]) {
+  const resource = [
+    { href: "/applications", name: "LED lighting applications", entries: applications },
+    { href: "/lighting-guides", name: "LED lighting guides", entries: guides },
+  ].find(({ href }) => path === href || path.startsWith(`${href}/`));
+
+  if (resource) {
+    crumbs.push({ name: resource.name, href: resource.href });
+    if (path !== resource.href) {
+      const entry = resource.entries.find(({ slug }) => path === `${resource.href}/${slug}`);
+      if (!entry) return null;
+      crumbs.push({ name: entry.name, href: path });
+    }
+  } else if (staticPages[path]) {
     crumbs.push({ name: staticPages[path], href: path });
   } else if (path === "/products" || path.startsWith("/products/")) {
     crumbs.push({ name: "Products", href: "/products" });
@@ -40,6 +54,11 @@ export function Breadcrumbs({ categories, products }: { categories: Category[]; 
     } else if (path === infrastructure) {
       crumbs.push({ name: "Outdoor & Infrastructure Lighting", href: infrastructure });
       if (category) crumbs.push({ name: category.name, href: categoryHref(category.slug, infrastructure) });
+    } else if (path.startsWith("/products/categories/")) {
+      const family = categories.find(({ slug }) => path === `/products/categories/${slug}`);
+      if (!family) return null;
+      crumbs.push({ name: "Outdoor & Infrastructure Lighting", href: infrastructure });
+      crumbs.push({ name: family.name, href: path });
     } else if (path === "/products") {
       if (category) crumbs.push({ name: category.name, href: categoryHref(category.slug, path) });
     } else {
@@ -47,7 +66,7 @@ export function Breadcrumbs({ categories, products }: { categories: Category[]; 
       if (!product) return null;
       const family = categories.find(item => item.slug === product.category);
       crumbs.push({ name: "Outdoor & Infrastructure Lighting", href: infrastructure });
-      if (family) crumbs.push({ name: family.name, href: categoryHref(family.slug, infrastructure) });
+      if (family) crumbs.push({ name: family.name, href: `/products/categories/${family.slug}` });
       crumbs.push({ name: product.name, href: path });
     }
   } else {

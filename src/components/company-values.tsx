@@ -9,39 +9,39 @@ export function CompanyValues({ page = "home" }: { page?: "home" | "about" }) {
         <div className="shell">
           <div>
             <h2>Our mission</h2>
-            <p>To manufacture reliable, high-quality LED lighting in India, built with precision and delivered with honesty.</p>
+            <p>To help project teams choose lighting that suits the space, the tasks and the installation conditions.</p>
           </div>
           <div>
             <h2>Our vision</h2>
-            <p>To bring Indian manufacturing excellence to international markets and illuminate the world, one point of light at a time.</p>
+            <p>To make professional lighting information easier to compare, specify and enquire about.</p>
           </div>
         </div>
       </section>
 
       <section className={styles.strengths} aria-labelledby={strengthsId}>
         <div className="shell">
-          <h2 id={strengthsId}>Built in India, designed to serve wider markets.</h2>
+          <h2 id={strengthsId}>How we help with lighting enquiries</h2>
           <ul>
             <li>
               <span className={styles.strengthIcon} aria-hidden="true">
                 <Crosshair size={23} strokeWidth={1.7} />
               </span>
-              <h3>Precision and craftsmanship</h3>
-              <p>Our manufacturing approach puts care and attention to detail into LED lighting for real spaces.</p>
+              <h3>Fixture selection</h3>
+              <p>Start with the catalogue and tell us what you need to light, where the fittings can go and what performance the project requires.</p>
             </li>
             <li>
               <span className={styles.strengthIcon} aria-hidden="true">
                 <Lightbulb size={23} strokeWidth={1.7} />
               </span>
-              <h3>Reliable LED lighting</h3>
-              <p>We develop lighting for commercial, industrial and outdoor applications, with reliability as a design priority.</p>
+              <h3>Model and specification details</h3>
+              <p>Send the model name or fixture reference with your enquiry so the team can confirm current details and options.</p>
             </li>
             <li>
               <span className={styles.strengthIcon} aria-hidden="true">
                 <Handshake size={23} strokeWidth={1.7} />
               </span>
-              <h3>Cooperation and shared purpose</h3>
-              <p>We work with customers and partners to understand the application and select suitable lighting.</p>
+              <h3>Project enquiries</h3>
+              <p>Share the project location, quantities and timeline to help us respond to your requirements.</p>
             </li>
           </ul>
         </div>

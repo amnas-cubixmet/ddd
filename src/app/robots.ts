@@ -1,12 +1,9 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/lib/site";
+import { absoluteUrl, indexableSite } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: {
-      userAgent: "*",
-      ...(siteUrl ? { disallow: "/api/" } : { disallow: "/" }),
-    },
-    sitemap: siteUrl ? new URL("/sitemap.xml", siteUrl).href : undefined,
+    rules: { userAgent: "*", disallow: "/api/" },
+    sitemap: indexableSite ? absoluteUrl("/sitemap.xml") : undefined,
   };
 }
