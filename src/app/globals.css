@@ -1442,3 +1442,44 @@ textarea::placeholder {
   .floating-whatsapp::after { animation: whatsapp-ring 3.2s ease-out .4s infinite; }
   .floating-whatsapp svg { animation: whatsapp-icon-wave 3.2s ease-in-out .4s infinite; transform-origin: center; }
 }
+
+/* Mobile header: keep the phone number visible beside the borderless menu. */
+@media (max-width: 805px) {
+  .site-header .header-inner { gap: 8px; }
+  .site-header .header-quote {
+    display: inline-flex;
+    order: 1;
+    margin-inline-start: auto;
+    min-height: 44px;
+    padding: 0 3px;
+    gap: 5px;
+    font-size: .78rem;
+    line-height: 1.2;
+    background: transparent;
+    color: var(--bharat-blue);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .site-header .header-quote:hover {
+    background: transparent;
+    color: var(--deep-navy);
+  }
+  .site-header .header-quote svg { width: 14px; height: 14px; }
+  .site-header .menu-toggle {
+    order: 2;
+    flex: 0 0 44px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--deep-navy);
+    box-shadow: none;
+  }
+  .site-header .menu-toggle:hover { background: transparent; color: var(--bharat-blue); }
+  .site-header .menu-toggle svg { width: 22px; height: 22px; }
+  .main-nav .mobile-quote { display: none; }
+  .site-header :is(.menu-toggle, .header-quote):focus-visible {
+    outline: 2px solid var(--bharat-blue);
+    outline-offset: 1px;
+  }
+}
