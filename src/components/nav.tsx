@@ -10,6 +10,7 @@ const links = [
   ["/", "Home"],
   ["/about", "About"],
   ["/products", "Products"],
+  ["/applications", "Applications"],
   ["/contact", "Contact"],
 ];
 
