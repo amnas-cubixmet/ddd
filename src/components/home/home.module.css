@@ -602,26 +602,27 @@
 
 /* One compact image-led lighting application section. */
 .applicationBand {
-  background: var(--bharat-blue);
+  background: rgb(11, 46, 87);
   color: #fff;
 }
 .applicationFeature {
   display: grid;
-  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: stretch;
   gap: clamp(24px, 5vw, 64px);
   padding-block: clamp(24px, 4vw, 48px);
 }
 .applicationFeatureImage {
   position: relative;
   min-width: 0;
-  aspect-ratio: 16 / 10;
+  min-height: clamp(240px, 25vw, 360px);
+  align-self: stretch;
   overflow: hidden;
   border-radius: 8px;
   background: #0b2e57;
 }
 .applicationFeatureImage img { object-fit: cover; object-position: center; }
-.applicationFeatureCopy { min-width: 0; }
+.applicationFeatureCopy { min-width: 0; display: flex; flex-direction: column; justify-content: center; }
 .applicationKicker {
   font-size: .7rem;
   font-weight: 750;
@@ -661,13 +662,13 @@
   padding: 8px 15px;
 }
 .applicationSecondary, .applicationGuide { color: #fff; }
-.applicationGuide { font-size: .76rem; margin-top: 4px; }
+.applicationGuide { font-size: .76rem; margin-top: 4px; align-self: flex-start; }
 .applicationAll:focus-visible, .applicationSecondary:focus-visible, .applicationGuide:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 4px;
 }
 @media (hover: hover) and (pointer: fine) {
-  .applicationAll:hover { background: #0b2e57; color: #fff; }
+  .applicationAll:hover { background: var(--bharat-blue); color: #fff; }
   .applicationSecondary:hover, .applicationGuide:hover { text-decoration: underline; }
 }
 @media (max-width: 700px) {
@@ -676,7 +677,7 @@
     gap: 15px;
     padding-block: 22px;
   }
-  .applicationFeatureImage { aspect-ratio: 16 / 9; }
+  .applicationFeatureImage { min-height: 0; aspect-ratio: 16 / 9; }
   .applicationFeatureCopy h2 { font-size: clamp(1.55rem, 6vw, 2rem); }
   .applicationFeatureCopy > p:not(.applicationKicker) { font-size: .85rem; margin: 8px 0 12px; }
 }
