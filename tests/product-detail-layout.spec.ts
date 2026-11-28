@@ -11,10 +11,11 @@ test("shared detail layout preserves gallery, enquiry, and mobile widths", async
       await page.setViewportSize({ width, height: 900 });
       expect(await detail.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(" ").length)).toBe(width <= 805 ? 1 : 2);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-      await expect(detail.locator(".product-gallery-image img")).toHaveCSS("object-fit", "contain");
+      await expect(detail.locator(".product-gallery-image img")).toHaveCSS("object-fit", "cover");
     }
     await detail.getByRole("button", { name: "Open full-size fixture image" }).click();
     await expect(page.getByRole("dialog")).toBeVisible();
+    await expect(page.locator(".lightbox-image img")).toHaveCSS("object-fit", "contain");
     await page.getByRole("button", { name: "Close fixture image" }).click();
     await expect(page.getByRole("dialog")).not.toBeVisible();
   }
