@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, BookOpen, ExternalLink, Layers, MessageCircle } from "lucide-react";
+import { ArrowUpRight, BookOpen, ExternalLink, Layers, MessageCircle } from "lucide-react";
 import { resourceMetadata } from "@/components/lighting-resource-page";
 import { JsonLd, PageSchema } from "@/components/seo-data";
 import { Action } from "@/components/ui";
@@ -36,7 +36,6 @@ export default async function Page({ params }: Props) {
       }} />}
       <header className={`shell ${styles.hero} ${entry.image ? styles.withImage : ""}`}>
         <div className={styles.intro}>
-          <Link href={paths.guides} className={styles.back}><ArrowLeft size={16} aria-hidden="true" /> All lighting guides</Link>
           <p className={styles.kicker}>Lighting guide</p>
           <h1>{entry.title}</h1>
           <p className={styles.lead}>{entry.summary}</p>
