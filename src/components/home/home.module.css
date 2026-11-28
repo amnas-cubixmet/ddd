@@ -700,3 +700,8 @@
   .applicationCard:hover { transform: none; }
 }
 
+
+/* Keep the fixed hero chat shortcut clear of the desktop light controls. */
+@media (min-width: 901px), (orientation: landscape) and (max-height: 500px) and (min-width: 651px) {
+  .heroPanel { right: max(96px, var(--hero-gutter), env(safe-area-inset-right)); }
+}

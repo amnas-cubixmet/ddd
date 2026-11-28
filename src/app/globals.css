@@ -1378,7 +1378,7 @@ textarea::placeholder {
 .site-header .header-quote svg,
 .main-nav .mobile-quote svg { flex-shrink: 0; }
 
-/* Site-wide fixed WhatsApp shortcut. */
+/* Fixed WhatsApp shortcut while the homepage hero is visible. */
 .floating-whatsapp {
   position: fixed;
   right: max(20px, env(safe-area-inset-right));
@@ -1418,7 +1418,7 @@ textarea::placeholder {
   .floating-whatsapp:hover { transform: none; }
 }
 
-/* A brief attention cue without an endlessly moving control. */
+/* Continuous pulse with a quiet interval between waves. */
 .floating-whatsapp::after {
   content: "";
   position: absolute;
@@ -1430,7 +1430,7 @@ textarea::placeholder {
 }
 @keyframes whatsapp-ring {
   0% { transform: scale(1); opacity: .55; }
-  65%, 100% { transform: scale(1.38); opacity: 0; }
+  45%, 100% { transform: scale(1.38); opacity: 0; }
 }
 @keyframes whatsapp-icon-wave {
   0%, 25%, 100% { transform: rotate(0); }
@@ -1439,6 +1439,6 @@ textarea::placeholder {
   19% { transform: rotate(-5deg); }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .floating-whatsapp::after { animation: whatsapp-ring 1.6s ease-out .4s 3; }
-  .floating-whatsapp svg { animation: whatsapp-icon-wave 1.6s ease-in-out .4s 3; transform-origin: center; }
+  .floating-whatsapp::after { animation: whatsapp-ring 3.2s ease-out .4s infinite; }
+  .floating-whatsapp svg { animation: whatsapp-icon-wave 3.2s ease-in-out .4s infinite; transform-origin: center; }
 }

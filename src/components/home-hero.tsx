@@ -90,6 +90,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
     {allowIntro && <LoadingScreen dismissed={introDismissed} />}
     <section
       className={styles.hero}
+      data-home-hero
       style={{
         "--hero-light-power": power,
         "--bg": `color-mix(in srgb, #1F73BD, #14202E ${power * 100}%)`,
