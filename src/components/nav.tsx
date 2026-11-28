@@ -12,7 +12,7 @@ const links = [
   ["/about", "About"],
   ["/products", "Products"],
   ["/applications", "Applications"],
-  ["/lighting-guides", "Lighting Guides"],
+  ["/lighting-guides", "Guides"],
   ["/contact", "Contact"],
 ];
 
