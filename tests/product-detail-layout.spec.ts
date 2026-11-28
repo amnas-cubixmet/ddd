@@ -13,6 +13,13 @@ test("shared detail layout preserves gallery, enquiry, and mobile widths", async
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       await expect(detail.locator(".product-gallery-image img")).toHaveCSS("object-fit", "cover");
     }
+    const summary = detail.locator(".detail-copy");
+    const panel = detail.getByRole("complementary", { name: "Project enquiry and applications" });
+    const gallery = detail.locator(".product-gallery");
+    const specs = detail.locator("#specifications-title");
+    const [summaryBox, panelBox, galleryBox, specsBox] = await Promise.all([summary.boundingBox(), panel.boundingBox(), gallery.boundingBox(), specs.boundingBox()]);
+    expect(panelBox!.y - (summaryBox!.y + summaryBox!.height)).toBeLessThanOrEqual(24);
+    expect(specsBox!.y - (galleryBox!.y + galleryBox!.height)).toBeLessThanOrEqual(24);
     await detail.getByRole("button", { name: "Open full-size fixture image" }).click();
     await expect(page.getByRole("dialog")).toBeVisible();
     await expect(page.locator(".lightbox-image img")).toHaveCSS("object-fit", "contain");

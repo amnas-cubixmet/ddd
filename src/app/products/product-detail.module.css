@@ -58,3 +58,28 @@
   .cta :global(.button svg) { width: 14px; height: 14px; }
   .specifications :global(.product-spec-table th), .specifications :global(.product-spec-table td) { padding: 9px 5px; }
 }
+
+/* Independently stacked columns avoid empty grid rows when content heights differ. */
+.mediaColumn, .infoColumn {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 20px;
+}
+.mediaColumn > *, .infoColumn > * { min-width: 0; }
+.editorial > div { margin-block: 0; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.editorial h2 { font-size: clamp(1.15rem, 1.7vw, 1.45rem); }
+.editorial p { font-size: .875rem; }
+.editorial section { padding-top: 12px; }
+.specifications { scroll-margin-top: 72px; }
+.projectPanel { gap: 9px; }
+.projectPanel .resourceLink { min-height: 36px; }
+@media (max-width: 805px) {
+  .mediaColumn, .infoColumn { display: contents; }
+  .detail :global(.product-gallery) { order: 0; }
+  .summary { order: 1; }
+  .specifications { order: 2; }
+  .projectPanel { order: 3; }
+  .editorial { order: 4; }
+  .detail:global(.detail-grid) { gap: 20px; }
+}

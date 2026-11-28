@@ -102,33 +102,8 @@ export default async function ProductPage({ params }: Params) {
           .map(({ name, value }) => ({ "@type": "PropertyValue", name, value })),
       }} />}
       <section className={`shell detail-grid catalogue-detail-motion ${detailStyles.detail}`} aria-labelledby="fixture-title">
+        <div className={detailStyles.mediaColumn}>
         <Gallery images={item.images} />
-        <div className={`detail-copy ${detailStyles.summary}`}>
-          <p className={detailStyles.eyebrow}>{[item.model?.brand, family?.name ?? catalogueLabel(item)].filter(Boolean).join(" · ")}</p>
-          <h1 id="fixture-title">{item.name}</h1>
-          <p className={detailStyles.lead}>{item.description}</p>
-          {specs.length > 0 && <ul className={detailStyles.highlights} aria-label="Key product information">
-            {specs.slice(0,4).map(({name,value}) => <li key={name}><span>{name}</span><strong>{value}</strong></li>)}
-          </ul>}
-          {item.status === "draft" && <p className={detailStyles.note}>Fixture reference. Confirm the exact model and specifications with our team.</p>}
-          <div className={detailStyles.cta}>
-            <p>Share your requirements to confirm model availability and request a project quotation.</p>
-          <div className="product-detail-actions">
-            <Action href={enquiryHref}>Request a quote</Action>
-            <a
-              className="button button-outline"
-              href={`https://wa.me/${whatsappNumber}?text=${message}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MessageCircle size={17} aria-hidden="true" /> WhatsApp enquiry
-            </a>
-          </div>
-          </div>
-          {family && <Link className={detailStyles.categoryLink} href={paths.category(family.slug)}>Explore {family.name.toLowerCase()} <span aria-hidden="true">↗</span></Link>}
-        </div>
-      </section>
-      <section className={`shell ${detailStyles.specLayout}`} aria-labelledby="specifications-title">
         <div className={detailStyles.specifications}>
           <h2 id="specifications-title">Technical specifications</h2>
           {specs.length > 0 ? (
@@ -163,6 +138,33 @@ export default async function ProductPage({ params }: Params) {
             </div>
           )}
         </div>
+          <div className={detailStyles.editorial}><LightingSections sections={editorial.sections} /></div>
+        </div>
+        <div className={detailStyles.infoColumn}>
+        <div className={`detail-copy ${detailStyles.summary}`}>
+          <p className={detailStyles.eyebrow}>{[item.model?.brand, family?.name ?? catalogueLabel(item)].filter(Boolean).join(" · ")}</p>
+          <h1 id="fixture-title">{item.name}</h1>
+          <p className={detailStyles.lead}>{item.description}</p>
+          {specs.length > 0 && <ul className={detailStyles.highlights} aria-label="Key product information">
+            {specs.slice(0,4).map(({name,value}) => <li key={name}><span>{name}</span><strong>{value}</strong></li>)}
+          </ul>}
+          {item.status === "draft" && <p className={detailStyles.note}>Fixture reference. Confirm the exact model and specifications with our team.</p>}
+          <div className={detailStyles.cta}>
+            <p>Share your requirements to confirm model availability and request a project quotation.</p>
+          <div className="product-detail-actions">
+            <Action href={enquiryHref}>Request a quote</Action>
+            <a
+              className="button button-outline"
+              href={`https://wa.me/${whatsappNumber}?text=${message}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MessageCircle size={17} aria-hidden="true" /> WhatsApp enquiry
+            </a>
+          </div>
+          </div>
+          {family && <Link className={detailStyles.categoryLink} href={paths.category(family.slug)}>Explore {family.name.toLowerCase()} <span aria-hidden="true">↗</span></Link>}
+        </div>
         <aside className={detailStyles.projectPanel} aria-label="Project enquiry and applications">
           <h2>Planning a lighting project?</h2>
           <p>Send your fixture reference, quantities, mounting requirements and project location to request suitable options.</p>
@@ -172,8 +174,9 @@ export default async function ProductPage({ params }: Params) {
           {guidance && <><h3>Selection and installation</h3><p>{guidance.selection}</p></>}
           {item.features.length > 0 && <><h3>Fixture features</h3><ul>{item.features.map(feature => <li key={feature}>{feature}</li>)}</ul></>}
         </aside>
+        </div>
       </section>
-      <div className="shell"><LightingSections sections={editorial.sections} /><LightingFaq entries={editorial.faq} /></div>
+      <div className="shell"><LightingFaq entries={editorial.faq} /></div>
       {photoGroup && (
         <section className="shell section-tight" aria-labelledby="fixture-photos">
           <div className={photoStyles.intro}>

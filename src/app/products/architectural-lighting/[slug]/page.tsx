@@ -43,7 +43,18 @@ export default async function Page({ params }: Params) {
         { name: lightingDivisions.architectural.title, href: paths.architecture },
       ]} />
       <section className={`detail-grid catalogue-detail-motion ${detailStyles.detail}`} aria-labelledby="fixture-title">
+        <div className={detailStyles.mediaColumn}>
         {item.image && <Gallery images={[{ src: item.image.src, alt: item.image.alt, label: "Product reference", representative: item.image.representative }]} />}
+        <div className={detailStyles.specifications}>
+          <h2 id="specifications-title">Product information</h2>
+          <table className="product-spec-table">
+            <tbody><tr><th scope="row">Fixture type</th><td>{item.name}</td></tr><tr><th scope="row">Typical applications</th><td>{item.application}</td></tr></tbody>
+          </table>
+          <p>Contact our team to confirm available models and verified specifications.</p>
+        </div>
+          <div className={detailStyles.editorial}><LightingSections sections={editorial.sections} /></div>
+        </div>
+        <div className={detailStyles.infoColumn}>
         <div className={`detail-copy ${detailStyles.summary}`}>
           <p className={detailStyles.eyebrow}>Architectural &amp; Commercial Lighting</p>
           <h1 id="fixture-title">{item.name}</h1>
@@ -59,23 +70,14 @@ export default async function Page({ params }: Params) {
           </div>
           <Link className={detailStyles.categoryLink} href={paths.architecture}>All architectural lighting <span aria-hidden="true">↗</span></Link>
         </div>
-      </section>
-      <section className={detailStyles.specLayout} aria-labelledby="specifications-title">
-        <div className={detailStyles.specifications}>
-          <h2 id="specifications-title">Product information</h2>
-          <table className="product-spec-table">
-            <tbody><tr><th scope="row">Fixture type</th><td>{item.name}</td></tr><tr><th scope="row">Typical applications</th><td>{item.application}</td></tr></tbody>
-          </table>
-          <p>Contact our team to confirm available models and verified specifications.</p>
-        </div>
         <aside className={detailStyles.projectPanel} aria-label="Project enquiry and applications">
           <h2>Planning a lighting project?</h2>
           <p>Share your layout, quantities and lighting requirements to discuss suitable fixture options.</p>
           <Action href={quote}>Request a project quote</Action>
           <h3>Selection and installation</h3><p>{item.selection}</p>
         </aside>
+        </div>
       </section>
-      <LightingSections sections={editorial.sections} />
       <LightingFaq entries={editorial.faq} />
       <LightingLinks title="Lighting guides and applications" links={[{name:"Architectural lighting catalogue",href:paths.architecture},{name:"Lighting applications",href:"/applications"},{name:"Lighting selection guides",href:"/lighting-guides"}]} />
       {related.length > 0 && <section className="section-tight" aria-labelledby="related-architecture">
