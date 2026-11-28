@@ -1316,3 +1316,54 @@ textarea::placeholder {
 @media (prefers-reduced-motion: reduce) {
   .product-card, .product-card .card-icon { transition: none; }
 }
+
+/* Additional lighting-inspired micro-interactions. Images remain stationary. */
+@keyframes catalogue-light-sweep {
+  from { transform: translateX(-110%); opacity: 0; }
+  22% { opacity: 1; }
+  78% { opacity: 1; }
+  to { transform: translateX(110%); opacity: 0; }
+}
+@keyframes catalogue-gallery-reveal {
+  from { opacity: .35; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .catalogue-detail-motion .product-gallery-image .gallery-image-transition {
+    animation: catalogue-gallery-reveal 480ms cubic-bezier(.2,.65,.25,1) both;
+  }
+  .catalogue-detail-motion .gallery-controls button {
+    transition: border-color 250ms ease, box-shadow 250ms ease;
+  }
+  .catalogue-detail-motion .gallery-controls button[aria-pressed="true"] {
+    box-shadow: 0 0 0 2px var(--bharat-blue);
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .catalogue-motion-item .product-card .image-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(112deg, transparent 33%, rgb(255 255 255 / 7%) 44%, rgb(255 255 255 / 19%) 50%, rgb(255 255 255 / 7%) 56%, transparent 67%);
+    transform: translateX(-110%);
+    opacity: 0;
+  }
+  .catalogue-motion-item .product-card:is(:hover, :focus-within) .image-link::after {
+    animation: catalogue-light-sweep 720ms ease-in-out both;
+  }
+  .catalogue-motion-item .product-card .card-icon svg,
+  .catalogue-motion-item .product-card .card-actions .text-link svg {
+    transition: transform 280ms cubic-bezier(.2,.65,.25,1);
+  }
+  .catalogue-motion-item .product-card .image-link:is(:hover, :focus-visible) .card-icon svg {
+    transform: translate(2px, -2px);
+  }
+  .catalogue-motion-item .product-card .card-actions .text-link:first-child:is(:hover, :focus-visible) svg {
+    transform: translateX(4px);
+  }
+  .catalogue-motion-item .product-card .card-actions .text-link:last-child:is(:hover, :focus-visible) svg {
+    transform: translate(3px, -3px);
+  }
+}

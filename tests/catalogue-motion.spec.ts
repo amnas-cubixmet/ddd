@@ -59,5 +59,19 @@ test("motion-safe responsive cards preserve images and controls", async ({ page 
     })).toBe(true);
     await expect(card.locator("img")).toHaveCSS("transform", "none");
     await expect(card.locator("img")).toHaveCSS("object-fit", "contain");
+    await expect.poll(() => card.locator(".image-link").evaluate(node => getComputedStyle(node, "::after").animationName)).toBe("catalogue-light-sweep");
+  }
+});
+
+test("light sweep and gallery fade respect reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const { path, grid: id } of divisions) {
+    await page.goto(path);
+    const card = page.getByTestId(id).locator(".product-card").first();
+    await card.scrollIntoViewIfNeeded();
+    await card.hover();
+    expect(await card.locator(".image-link").evaluate(node => getComputedStyle(node, "::after").animationName)).toBe("none");
+    await card.getByRole("link", { name: "View details" }).click();
+    await expect(page.locator(".catalogue-detail-motion .gallery-image-transition")).toHaveCSS("animation-name", "none");
   }
 });
