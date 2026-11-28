@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, X } from "lucide-react";
+import { Phone, X } from "lucide-react";
 import { brand } from "@/lib/site";
 import { useRef, useState } from "react";
 
@@ -88,7 +88,11 @@ export default function Header() {
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpenedAt(open ? null : path)}
         >
-          {open ? <X /> : <Menu />}
+          {open ? <X aria-hidden="true" /> : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true" focusable="false">
+              <path d="M5 9h14M5 15h8" />
+            </svg>
+          )}
         </button>
         <nav
           id="site-navigation"
