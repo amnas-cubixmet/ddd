@@ -620,7 +620,7 @@
   border-radius: 8px;
   background: #0b2e57;
 }
-.applicationFeatureImage img { object-fit: contain; }
+.applicationFeatureImage img { object-fit: cover; object-position: center; }
 .applicationFeatureCopy { min-width: 0; }
 .applicationKicker {
   font-size: .7rem;
