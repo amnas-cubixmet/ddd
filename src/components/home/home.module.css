@@ -740,3 +740,51 @@
     font-size: .83rem;
   }
 }
+
+/* A dedicated full-width application section, independent of the technical guides. */
+.applicationBand {
+  background: var(--cloud);
+  border-block: 1px solid var(--line);
+  color: var(--deep-navy);
+}
+.applicationBand .applications {
+  padding-block: clamp(36px, 5vw, 68px);
+}
+.applicationBand .applicationAll {
+  background: var(--deep-navy);
+  color: #fff;
+}
+.applicationBand .applicationCard {
+  background: #fff;
+}
+@media (hover: hover) and (pointer: fine) {
+  .applicationBand .applicationAll:hover {
+    background: var(--bharat-blue);
+    border-color: var(--bharat-blue);
+  }
+}
+@media (max-width: 600px) {
+  .applicationBand .applications { padding-block: 24px; }
+  .applicationHeading { gap: 12px; margin-bottom: 16px; }
+  .applicationHeading h2 {
+    font-size: clamp(1.65rem, 6.7vw, 2.1rem);
+    line-height: 1.1;
+  }
+  .applicationKicker { font-size: .68rem; margin-bottom: 6px; }
+  .applicationIntro { font-size: .875rem; line-height: 1.5; margin-top: 8px; }
+  .applicationAll { min-height: 44px; padding: 8px 14px; font-size: .8rem; }
+  .applicationGrid { gap: 10px; }
+  .applicationCard {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: start;
+    padding: 14px;
+    gap: 9px 12px;
+    border-radius: 10px;
+  }
+  .applicationIcon { width: 40px; height: 40px; margin: 0; border-radius: 8px; }
+  .applicationIcon svg { width: 22px; height: 22px; }
+  .applicationCard h3 { align-self: center; font-size: 1rem; line-height: 1.25; }
+  .applicationCard p { grid-column: 1 / -1; font-size: .84rem; line-height: 1.5; }
+  .applicationCardAction { grid-column: 1 / -1; padding-top: 9px; font-size: .78rem; }
+}

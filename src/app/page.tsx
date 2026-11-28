@@ -73,8 +73,8 @@ export default function Home() {
         </Reveal>
       </section>
 
-      <div className="shell">
-        <section className={styles.applications} aria-labelledby="home-applications">
+      <section className={styles.applicationBand} aria-labelledby="home-applications">
+        <div className={`shell ${styles.applications}`}>
           <div className={styles.applicationHeading}>
             <div>
               <p className={styles.applicationKicker}>Solutions by sector</p>
@@ -100,7 +100,10 @@ export default function Home() {
               );
             })}
           </ul>
-        </section>
+        </div>
+      </section>
+
+      <div className="shell">
         <LightingSections sections={[
           { title: "Light output and energy use", text: "Compare lumens and input watts together to understand luminous efficacy. Check the distribution and mounting position to see how much light reaches the working area." },
           { title: "Colour and visual comfort", text: "Colour temperature describes how warm or cool the light appears. Colour rendering describes how it represents colours. Use the actual finishes, displays and working conditions when comparing choices." },
