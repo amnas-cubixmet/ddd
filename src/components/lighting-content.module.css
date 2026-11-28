@@ -83,3 +83,103 @@
   color: var(--muted);
   font-size: 0.875rem;
 }
+
+/* Mobile-only guide directory; shared article and product layouts are unchanged. */
+.guideIndex { min-width: 0; }
+
+@media (max-width: 805px) {
+  .guideIndex :global(.shell) { width: calc(100% - 32px); }
+  .guideIndex :global(.page-intro) { padding-block: 24px 18px; }
+  .guideIndex :global(.page-intro .eyebrow) {
+    margin-bottom: 8px;
+    font-size: .68rem;
+    letter-spacing: .12em;
+  }
+  .guideIndex :global(.page-intro h1) {
+    max-width: none;
+    font-size: clamp(1.95rem, 7.5vw, 3.15rem);
+    line-height: 1.12;
+    letter-spacing: -.045em;
+    text-wrap: initial;
+    overflow-wrap: anywhere;
+  }
+  .guideIndex :global(.intro-copy) {
+    font-size: .875rem;
+    line-height: 1.6;
+    margin-top: 10px;
+    max-width: 65ch;
+  }
+  .guideIndex :global(.section-tight) { padding-bottom: 28px; }
+  .guideIndex .links { margin-block: 0 24px; }
+  .guideIndex .links:last-child { margin-bottom: 0; }
+  .guideIndex .links h2 {
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+    line-height: 1.2;
+    color: var(--deep-navy);
+    letter-spacing: -.035em;
+    margin-bottom: 12px;
+  }
+  .guideIndex .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+  .guideIndex .grid li {
+    position: relative;
+    min-width: 0;
+    padding: 14px 38px 14px 14px;
+    border-radius: 8px;
+    background: var(--cloud);
+    border: 1px solid var(--line);
+  }
+  .guideIndex .grid a {
+    display: block;
+    min-height: 24px;
+    padding-block: 0;
+    font-size: 1rem;
+    line-height: 1.35;
+    color: var(--deep-navy);
+    font-weight: 700;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  /* Stretch each existing, keyboard-accessible link over its entire card. */
+  .guideIndex .grid a::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+  }
+  .guideIndex .grid a::after {
+    content: "↗";
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    color: var(--accent);
+    font-size: 1.1rem;
+    line-height: 1.35;
+  }
+  .guideIndex .grid li:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .guideIndex .grid p {
+    margin-top: 7px;
+    font-size: .84rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+  .guideIndex .links:last-child .grid li {
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    background: var(--white);
+  }
+}
+@media (min-width: 600px) and (max-width: 805px) {
+  .guideIndex .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 360px) {
+  .guideIndex .grid li { padding: 12px 34px 12px 12px; }
+  .guideIndex .grid a { font-size: .95rem; }
+  .guideIndex .grid a::after { right: 12px; top: 12px; }
+}
