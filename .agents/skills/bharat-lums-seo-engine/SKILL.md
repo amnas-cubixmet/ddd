@@ -24,6 +24,8 @@ description: >
 
 ## References
 
+- [About page SEO](references/about-page-seo.md)
+
 - [Brand guidelines](references/brand-guidelines.md)
 - [Keyword research](references/keyword-research.md)
 - [Competitor research](references/competitor-research.md)
