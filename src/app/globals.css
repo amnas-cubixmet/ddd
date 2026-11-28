@@ -1394,6 +1394,7 @@ textarea::placeholder {
   border: 1px solid #fff;
   box-shadow: 0 5px 18px #0b2e5730;
   text-decoration: none;
+  isolation: isolate;
   transition: background-color .2s ease, transform .2s ease;
 }
 .floating-whatsapp:focus-visible {
@@ -1415,4 +1416,29 @@ textarea::placeholder {
 @media (prefers-reduced-motion: reduce) {
   .floating-whatsapp { transition: none; }
   .floating-whatsapp:hover { transform: none; }
+}
+
+/* A brief attention cue without an endlessly moving control. */
+.floating-whatsapp::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border: 2px solid #1F73BD;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+}
+@keyframes whatsapp-ring {
+  0% { transform: scale(1); opacity: .55; }
+  65%, 100% { transform: scale(1.38); opacity: 0; }
+}
+@keyframes whatsapp-icon-wave {
+  0%, 25%, 100% { transform: rotate(0); }
+  7% { transform: rotate(-10deg); }
+  13% { transform: rotate(10deg); }
+  19% { transform: rotate(-5deg); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .floating-whatsapp::after { animation: whatsapp-ring 1.6s ease-out .4s 3; }
+  .floating-whatsapp svg { animation: whatsapp-icon-wave 1.6s ease-in-out .4s 3; transform-origin: center; }
 }
