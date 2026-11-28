@@ -19,6 +19,12 @@ class Page(HTMLParser):
         if tag == 'link' and values.get('rel') == 'canonical':
             self.canonical.append(values.get('href'))
 
+def normalized_url(url):
+    if not url:
+        return url
+    parsed = urlsplit(url)
+    return parsed._replace(path=parsed.path or "/").geturl()
+
 def main():
     parser = argparse.ArgumentParser(description='Check sitemap pages via a local or deployed server')
     parser.add_argument('origin')
@@ -29,10 +35,10 @@ def main():
 
     def check(url):
         try:
-            with urlopen(origin + urlsplit(url).path, timeout=20) as response:
+            with urlopen(origin + (urlsplit(url).path or "/"), timeout=20) as response:
                 page = Page()
                 page.feed(response.read().decode())
-            if page.canonical != [url] or page.headings != 1:
+            if [normalized_url(value) for value in page.canonical] != [normalized_url(url)] or page.headings != 1:
                 return f'{url}: canonical={page.canonical}, H1 count={page.headings}'
         except (OSError, ValueError) as error:
             return f'{url}: {error}'
