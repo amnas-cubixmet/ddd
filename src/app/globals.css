@@ -1367,3 +1367,13 @@ textarea::placeholder {
     transform: translate(3px, -3px);
   }
 }
+
+/* Keep the contact number readable in the existing header action slot. */
+.site-header .header-quote,
+.main-nav .mobile-quote {
+  font-variant-numeric: tabular-nums;
+  gap: 8px;
+  white-space: nowrap;
+}
+.site-header .header-quote svg,
+.main-nav .mobile-quote svg { flex-shrink: 0; }

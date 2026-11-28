@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
+import { brand } from "@/lib/site";
 import { useRef, useState } from "react";
 
 const links = [
@@ -109,7 +110,13 @@ export default function Header() {
               </Link>
             );
           })}
+          <a className="button button-outline mobile-quote" href={brand.phoneHref} onClick={() => setOpenedAt(null)} aria-label={`Call Bharat Lums at ${brand.phone}`}>
+            <Phone size={16} aria-hidden="true" /> {brand.phone}
+          </a>
         </nav>
+        <a className="button button-outline header-quote" href={brand.phoneHref} aria-label={`Call Bharat Lums at ${brand.phone}`}>
+          <Phone size={16} aria-hidden="true" /> {brand.phone}
+        </a>
       </div>
     </header>
   );

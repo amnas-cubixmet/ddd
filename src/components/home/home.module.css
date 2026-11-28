@@ -699,3 +699,15 @@
   .applicationCard { transition: none; }
   .applicationCard:hover { transform: none; }
 }
+
+/* Direct WhatsApp chat in the hero action group. */
+.heroLink.heroWhatsapp {
+  background: #08754e;
+  border-color: #fff;
+  color: #fff;
+}
+.heroLink.heroWhatsapp:hover {
+  background: #065c3e;
+  color: #fff;
+}
+.heroWhatsapp svg { flex-shrink: 0; }
