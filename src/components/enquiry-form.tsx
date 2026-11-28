@@ -115,7 +115,7 @@ export default function EnquiryForm({
       {fields.filter((field) => home ? !["interest", "location", "quantity"].includes(field.name) : field.name !== "subject").map((field) => {
         const id = `${formId}-${field.name}`;
         const error = errors[field.name];
-        const required = "required" in field || (home && (field.name === "phone" || field.name === "subject"));
+        const required = "required" in field || (home && field.name === "subject");
         return (
           <div className={`enquiry-field${home && field.name === "subject" ? " full" : ""}`} key={field.name}>
             <label className={home ? undefined : "sr-only"} htmlFor={id}>
