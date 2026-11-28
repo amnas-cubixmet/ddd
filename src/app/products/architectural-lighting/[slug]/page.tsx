@@ -42,23 +42,42 @@ export default async function Page({ params }: Params) {
         { name: "Products", href: paths.products },
         { name: lightingDivisions.architectural.title, href: paths.architecture },
       ]} />
-      <section className={styles.intro}><h1>{item.name}</h1><p>{item.application}</p></section>
-      <section className={`detail-grid section-tight catalogue-detail-motion ${detailStyles.detail}`} aria-label="Product details">
+      <section className={`detail-grid catalogue-detail-motion ${detailStyles.detail}`} aria-labelledby="fixture-title">
         {item.image && <Gallery images={[{ src: item.image.src, alt: item.image.alt, label: "Product reference", representative: item.image.representative }]} />}
-        <div className="detail-copy">
-          <h2>Applications</h2><p>{item.application}</p>
-          <h2>Selection and installation</h2><p>{item.selection}</p>
-          <h2>Technical information</h2><p>Contact our team to confirm available models and verified specifications.</p>
-          <p>Suggested catalogue. Product images are for reference only.</p>
-          <div className="product-detail-actions">
-            <Action href={quote}>Request a quote</Action>
-            <a className="button button-outline" href={`https://wa.me/${brand.phoneHref.replace(/\D/g, "")}?text=${message}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={17} aria-hidden="true" /> WhatsApp enquiry</a>
+        <div className={`detail-copy ${detailStyles.summary}`}>
+          <p className={detailStyles.eyebrow}>Architectural &amp; Commercial Lighting</p>
+          <h1 id="fixture-title">{item.name}</h1>
+          <p className={detailStyles.lead}>{item.application}</p>
+          <p>{item.selection}</p>
+          <p className={detailStyles.note}>Product reference image. Confirm the exact fixture model and technical specifications with our team.</p>
+          <div className={detailStyles.cta}>
+            <p>Share your requirements to request model information and a project quotation.</p>
+            <div className="product-detail-actions">
+              <Action href={quote}>Request a quote</Action>
+              <a className="button button-outline" href={`https://wa.me/${brand.phoneHref.replace(/\D/g, "")}?text=${message}`} target="_blank" rel="noopener noreferrer"><MessageCircle size={17} aria-hidden="true" /> WhatsApp enquiry</a>
+            </div>
           </div>
-          <p><Link className="text-link" href="/products/architectural-lighting">All architectural lighting</Link></p>
+          <Link className={detailStyles.categoryLink} href={paths.architecture}>All architectural lighting <span aria-hidden="true">↗</span></Link>
         </div>
+      </section>
+      <section className={detailStyles.specLayout} aria-labelledby="specifications-title">
+        <div className={detailStyles.specifications}>
+          <h2 id="specifications-title">Product information</h2>
+          <table className="product-spec-table">
+            <tbody><tr><th scope="row">Fixture type</th><td>{item.name}</td></tr><tr><th scope="row">Typical applications</th><td>{item.application}</td></tr></tbody>
+          </table>
+          <p>Contact our team to confirm available models and verified specifications.</p>
+        </div>
+        <aside className={detailStyles.projectPanel} aria-label="Project enquiry and applications">
+          <h2>Planning a lighting project?</h2>
+          <p>Share your layout, quantities and lighting requirements to discuss suitable fixture options.</p>
+          <Action href={quote}>Request a project quote</Action>
+          <h3>Selection and installation</h3><p>{item.selection}</p>
+        </aside>
       </section>
       <LightingSections sections={editorial.sections} />
       <LightingFaq entries={editorial.faq} />
+      <LightingLinks title="Lighting guides and applications" links={[{name:"Architectural lighting catalogue",href:paths.architecture},{name:"Lighting applications",href:"/applications"},{name:"Lighting selection guides",href:"/lighting-guides"}]} />
       {related.length > 0 && <section className="section-tight" aria-labelledby="related-architecture">
         <h2 id="related-architecture" className="catalogue-section-title">Related architectural fixture references</h2>
         <RelatedCatalogueGrid signature={related.map(p => p.slug).join("|")}>
@@ -70,7 +89,7 @@ export default async function Page({ params }: Params) {
           </article>)}
         </RelatedCatalogueGrid>
       </section>}
-      <LightingLinks title="Lighting project resources" links={[{name:"Architectural lighting catalogue",href:paths.architecture},{name:"Lighting applications",href:"/applications"},{name:"Lighting selection guides",href:"/lighting-guides"}]} />
+
     </div>
   );
 }

@@ -1,8 +1,60 @@
-.detail:global(.detail-grid) { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr); }
+/* Shared product detail layout for both catalogue divisions. */
+.detail:global(.detail-grid) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(24px, 3vw, 44px);
+  margin-block: 16px clamp(28px, 4vw, 56px);
+}
 .detail > * { min-width: 0; }
-.detail :global(.product-spec-table) { table-layout: fixed; overflow-wrap: anywhere; }
-.detail :global(.product-spec-table th) { width: 44%; }
-.detail :global(.product-detail-actions) { min-width: 0; }
-.detail :global(.product-detail-actions .button) { max-width: 100%; white-space: normal; min-height: 44px; overflow-wrap: anywhere; }
-@media(max-width: 805px) { .detail:global(.detail-grid) { grid-template-columns: minmax(0,1fr); gap: 20px; } }
-@media(max-width: 430px) { .detail :global(.product-spec-table th), .detail :global(.product-spec-table td) { padding: 9px 6px; } .detail :global(.product-detail-actions) { flex-direction: column; align-items: stretch; } }
+.detail :global(.product-gallery-image) { aspect-ratio: 1 / 1; border-radius: 10px; background: var(--cloud); }
+.detail :global(.product-gallery-image img), .detail :global(.gallery-controls img) { object-fit: contain; }
+.summary { min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 12px; }
+.summary h1 { font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--deep-navy); line-height: 1.15; letter-spacing: -.035em; overflow-wrap: anywhere; }
+.summary p, .summary ul { margin: 0; }
+.summary .eyebrow { color: var(--accent); font-size: .72rem; letter-spacing: .09em; font-weight: 700; text-transform: uppercase; }
+.summary .lead { font-size: 1rem; line-height: 1.6; color: var(--muted); }
+.summary .note { font-size: .84rem; line-height: 1.5; }
+.summary .highlights { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; list-style: none; padding: 0; }
+.highlights li { display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); border-radius: 7px; padding: 11px 13px; min-width: 0; overflow-wrap: anywhere; }
+.highlights span { font-size: .72rem; color: var(--muted); }
+.highlights strong { color: var(--deep-navy); font-size: .95rem; font-weight: 700; }
+.cta { display: grid; gap: 12px; border-top: 1px solid var(--line); padding-top: 16px; margin-top: 4px; }
+.cta p { font-size: .875rem; line-height: 1.5; }
+.cta :global(.product-detail-actions) { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; min-width: 0; }
+.cta :global(.button) { width: 100%; min-height: 46px; max-width: 100%; white-space: normal; text-align: center; justify-content: center; padding: 9px 12px; font-size: .85rem; }
+.categoryLink, .resourceLink { color: var(--accent); font-size: .875rem; font-weight: 700; text-underline-offset: 3px; display: inline-flex; gap: 5px; align-items: center; min-height: 44px; width: fit-content; max-width: 100%; overflow-wrap: anywhere; }
+.categoryLink:hover, .resourceLink:hover { text-decoration: underline; }
+.specLayout { display: grid; grid-template-columns: minmax(0, 2.05fr) minmax(0, 1fr); align-items: start; gap: clamp(20px, 3vw, 40px); margin-bottom: clamp(28px, 5vw, 60px); }
+.specLayout > * { min-width: 0; }
+.specifications h2, .projectPanel h2 { color: var(--deep-navy); font-size: clamp(1.25rem, 2vw, 1.65rem); line-height: 1.25; letter-spacing: -.025em; }
+.specifications p { font-size: .875rem; color: var(--muted); line-height: 1.6; margin-top: 10px; }
+.specifications :global(.product-spec-table) { table-layout: fixed; overflow-wrap: anywhere; font-size: .9rem; }
+.specifications :global(.product-spec-table th) { width: 36%; font-weight: 600; color: var(--muted); }
+.specifications :global(.product-spec-table td) { color: var(--deep-navy); }
+.specifications :global(.product-spec-table th), .specifications :global(.product-spec-table td) { padding: 11px 8px; vertical-align: top; }
+.projectPanel { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; border: 1px solid var(--line); background: var(--cloud); border-radius: 10px; padding: clamp(16px, 2vw, 24px); }
+.projectPanel p, .projectPanel li { font-size: .875rem; color: var(--muted); line-height: 1.6; }
+.projectPanel h3 { color: var(--deep-navy); font-size: 1rem; line-height: 1.3; margin-top: 4px; letter-spacing: -.015em; }
+.projectPanel :global(.button) { width: 100%; max-width: 100%; min-height: 44px; white-space: normal; text-align: center; justify-content: center; }
+.projectPanel ul { list-style: disc; padding-left: 18px; }
+@media (max-width: 805px) {
+  .detail:global(.detail-grid), .specLayout { grid-template-columns: minmax(0,1fr); gap: 18px; }
+  .detail:global(.shell), .specLayout:global(.shell) { width: calc(100% - 32px); }
+  .detail:global(.detail-grid) { margin-block: 12px 26px; }
+  .detail :global(.product-gallery-image) { aspect-ratio: 1 / 1; }
+  .summary { gap: 10px; }
+  .summary h1 { font-size: clamp(1.65rem, 6.8vw, 2.25rem); }
+  .summary .lead, .summary > p:not(.eyebrow) { font-size: .875rem; }
+  .summary .highlights { gap: 8px; }
+  .highlights li { padding: 9px; }
+  .highlights strong { font-size: .85rem; }
+  .specifications :global(.product-spec-table) { font-size: .82rem; }
+  .specifications :global(.product-spec-table th) { width: 42%; }
+  .projectPanel { padding: 14px; }
+}
+@media (max-width: 360px) {
+  .cta :global(.product-detail-actions) { gap: 8px; }
+  .cta :global(.button) { font-size: .75rem; padding-inline: 6px; gap: 4px; }
+  .cta :global(.button svg) { width: 14px; height: 14px; }
+  .specifications :global(.product-spec-table th), .specifications :global(.product-spec-table td) { padding: 9px 5px; }
+}

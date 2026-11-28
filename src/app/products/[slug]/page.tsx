@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Download, MessageCircle } from "lucide-react";
 import { Gallery } from "@/components/gallery";
 import { RelatedCatalogueGrid } from "@/components/related-catalogue-grid";
-import { Action, PageIntro, ProductCard, QuoteBanner } from "@/components/ui";
+import { Action, ProductCard, QuoteBanner } from "@/components/ui";
 import {
   catalogueLabel,
   collections,
@@ -64,7 +64,8 @@ export default async function ProductPage({ params }: Params) {
           { label: "Download catalogue", href: item.catalogue },
         ].filter((download) => download.href)
       : [];
-  const related = relatedProducts(item);
+  const preferredRelated = relatedProducts(item);
+  const related = [...preferredRelated, ...products.filter(product => product.slug !== item.slug && product.status !== "draft" && product.categories.some(category => item.categories.includes(category)) && !preferredRelated.some(other => other.slug === product.slug))].slice(0, 4);
   const photoGroup = fixturePhotoGroups[slug];
   const enquiryHref =
     item.status === "draft"
@@ -100,40 +101,36 @@ export default async function ProductPage({ params }: Params) {
         additionalProperty: specs.filter(({ name }) => name !== "Brand on label" && name !== "Model code")
           .map(({ name, value }) => ({ "@type": "PropertyValue", name, value })),
       }} />}
-      <PageIntro
-        eyebrow={catalogueLabel(item)}
-        title={item.name}
-        description={item.description}
-      />
-      <section
-        className={`shell detail-grid section-tight catalogue-detail-motion ${detailStyles.detail}`}
-        aria-label="Fixture details"
-      >
+      <section className={`shell detail-grid catalogue-detail-motion ${detailStyles.detail}`} aria-labelledby="fixture-title">
         <Gallery images={item.images} />
-        <div className="detail-copy">
-          {item.features.length > 0 && (
-            <>
-              <h2>{item.status === "verified" ? "Fixture features" : "Design features"}</h2>
-              <ul>
-                {item.features.map((feature) => (
-                  <li key={feature}>{feature}</li>
-                ))}
-              </ul>
-            </>
-          )}
-          {item.applications && (
-            <>
-              <h2>Applications</h2>
-              <p>{item.applications}</p>
-            </>
-          )}
-          {guidance && (
-            <>
-              <h2>Selection and installation</h2>
-              <p>{guidance.selection}</p>
-            </>
-          )}
-          <h2>Technical information</h2>
+        <div className={`detail-copy ${detailStyles.summary}`}>
+          <p className={detailStyles.eyebrow}>{[item.model?.brand, family?.name ?? catalogueLabel(item)].filter(Boolean).join(" · ")}</p>
+          <h1 id="fixture-title">{item.name}</h1>
+          <p className={detailStyles.lead}>{item.description}</p>
+          {specs.length > 0 && <ul className={detailStyles.highlights} aria-label="Key product information">
+            {specs.slice(0,4).map(({name,value}) => <li key={name}><span>{name}</span><strong>{value}</strong></li>)}
+          </ul>}
+          {item.status === "draft" && <p className={detailStyles.note}>Fixture reference. Confirm the exact model and specifications with our team.</p>}
+          <div className={detailStyles.cta}>
+            <p>Share your requirements to confirm model availability and request a project quotation.</p>
+          <div className="product-detail-actions">
+            <Action href={enquiryHref}>Request a quote</Action>
+            <a
+              className="button button-outline"
+              href={`https://wa.me/${whatsappNumber}?text=${message}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MessageCircle size={17} aria-hidden="true" /> WhatsApp enquiry
+            </a>
+          </div>
+          </div>
+          {family && <Link className={detailStyles.categoryLink} href={paths.category(family.slug)}>Explore {family.name.toLowerCase()} <span aria-hidden="true">↗</span></Link>}
+        </div>
+      </section>
+      <section className={`shell ${detailStyles.specLayout}`} aria-labelledby="specifications-title">
+        <div className={detailStyles.specifications}>
+          <h2 id="specifications-title">Technical specifications</h2>
           {specs.length > 0 ? (
             <table className="product-spec-table">
               <caption className={photographed ? photoStyles.specCaption : "sr-only"}>
@@ -165,31 +162,16 @@ export default async function ProductPage({ params }: Params) {
               ))}
             </div>
           )}
-          <div className="filter-pills">
-            {collections
-              .filter((category) => item.categories.includes(category.slug))
-              .map((category) => (
-                <Link
-                  className="text-link"
-                  key={category.slug}
-                  href={paths.category(category.slug)}
-                >
-                  {category.name}
-                </Link>
-              ))}
-          </div>
-          <div className="product-detail-actions">
-            <Action href={enquiryHref}>Request a quote</Action>
-            <a
-              className="button button-outline"
-              href={`https://wa.me/${whatsappNumber}?text=${message}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MessageCircle size={17} aria-hidden="true" /> WhatsApp enquiry
-            </a>
-          </div>
         </div>
+        <aside className={detailStyles.projectPanel} aria-label="Project enquiry and applications">
+          <h2>Planning a lighting project?</h2>
+          <p>Send your fixture reference, quantities, mounting requirements and project location to request suitable options.</p>
+          <Action href={enquiryHref}>Request a project quote</Action>
+          {family && <><h3>Lighting application</h3><Link className={detailStyles.resourceLink} href={paths.category(family.slug)}>{family.name} <span aria-hidden="true">↗</span></Link></>}
+          {item.applications && <p>{item.applications}</p>}
+          {guidance && <><h3>Selection and installation</h3><p>{guidance.selection}</p></>}
+          {item.features.length > 0 && <><h3>Fixture features</h3><ul>{item.features.map(feature => <li key={feature}>{feature}</li>)}</ul></>}
+        </aside>
       </section>
       <div className="shell"><LightingSections sections={editorial.sections} /><LightingFaq entries={editorial.faq} /></div>
       {photoGroup && (
@@ -222,6 +204,10 @@ export default async function ProductPage({ params }: Params) {
           </div>
         </section>
       )}
+      {guidance && <div className="shell"><LightingLinks title="Lighting guides and applications" links={[
+        { name: "Lighting application planning", href: paths.application(guidance.application) },
+        { name: "Fixture selection guide", href: paths.guide(guidance.guide) },
+      ]} /></div>}
       {related.length > 0 && (
         <section className="shell section-tight" aria-labelledby="related-fixtures">
           <h2 className="catalogue-section-title" id="related-fixtures">
@@ -236,10 +222,7 @@ export default async function ProductPage({ params }: Params) {
           </RelatedCatalogueGrid>
         </section>
       )}
-      {guidance && <div className="shell"><LightingLinks title="Project and installation resources" links={[
-        { name: "Lighting application planning", href: paths.application(guidance.application) },
-        { name: "Fixture selection guide", href: paths.guide(guidance.guide) },
-      ]} /></div>}
+
       <QuoteBanner />
     </>
   );
