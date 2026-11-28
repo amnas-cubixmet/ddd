@@ -681,3 +681,67 @@
   .applicationFeatureCopy h2 { font-size: clamp(1.55rem, 6vw, 2rem); }
   .applicationFeatureCopy > p:not(.applicationKicker) { font-size: .85rem; margin: 8px 0 12px; }
 }
+
+/* Mobile hero: dedicated product area and compact, readable controls. */
+@media (max-width: 650px) {
+  .heroInner {
+    --hero-gutter: clamp(16px, 4.5vw, 24px);
+    --stage-height: clamp(174px, 54vw, 290px);
+    grid-template-columns: minmax(0, 1fr);
+    padding: calc(var(--stage-height) + 10px) max(var(--hero-gutter), env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(var(--hero-gutter), env(safe-area-inset-left));
+  }
+  .heroStage {
+    width: 100%;
+    height: var(--stage-height);
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, #000 0%, #000 84%, transparent 100%);
+  }
+  .heroLead { width: 100%; }
+  .heroKicker {
+    font-size: .65rem;
+    line-height: 1.4;
+    letter-spacing: .11em;
+  }
+  .hero h1 {
+    margin-top: 10px;
+    font-size: clamp(2.4rem, 9.6vw, 3.8rem);
+    line-height: .94;
+    letter-spacing: -.065em;
+    word-spacing: .02em;
+  }
+  .heroSummary {
+    max-width: 46ch;
+    margin-top: 12px;
+    font-size: .875rem;
+    line-height: 1.55;
+    font-weight: 500;
+  }
+  .heroActions {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .heroPrimary, .heroLink {
+    min-width: 0;
+    min-height: 44px;
+    padding: 7px 6px;
+    gap: 5px;
+    font-size: clamp(.66rem, 2.5vw, .78rem);
+    line-height: 1.2;
+    text-align: center;
+  }
+  .heroPrimary svg, .heroLink svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .heroPanel {
+    width: 100%;
+    margin-top: 14px;
+    padding: 9px 58px 8px 10px;
+    border-radius: 9px;
+  }
+  .modelCaption { font-size: .59rem; letter-spacing: .08em; }
+  .lightControls { gap: 8px; }
+  .lightControls button { min-width: 70px; font-size: .73rem; gap: 4px; }
+  .lightControls label { font-size: .65rem; }
+  .lightControls input { min-height: 28px; }
+}
