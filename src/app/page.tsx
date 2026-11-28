@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { DivisionImage } from "@/components/division-image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { CompanyValues } from "@/components/company-values";
@@ -63,10 +64,10 @@ export default function Home() {
       <section className={styles.applicationBand} aria-labelledby="home-applications">
         <div className={`shell ${styles.applicationFeature}`}>
           <div className={styles.applicationFeatureImage}>
-            <Image
-              src="/images/products/fixture-photos/led-wall-washer.webp"
-              alt="LED wall washer fixture reference"
-              fill
+            <DivisionImage
+              src="/images/lighting-by-application.webp"
+              fallbackSrc="/images/conference-room-linear-lighting.webp"
+              alt="Illustrative LED lighting across an industrial complex, roadways, loading bays and office interiors"
               sizes="(max-width: 700px) 90vw, (max-width: 1450px) 43vw, 560px"
             />
           </div>
