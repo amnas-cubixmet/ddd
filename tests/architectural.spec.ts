@@ -21,7 +21,7 @@ test("all 16 lighting cards preserve product-specific enquiry selection", async 
 });
 
 test("responsive architectural grid has no overflow or broken approved photographs", async ({ page }, testInfo) => {
-  for (const [width, columns] of [[1440, 3], [900, 2], [430, 1], [360, 1]]) {
+  for (const [width, columns] of [[1440, 3], [900, 2], [430, 2], [360, 2], [320, 2]]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(route);
     const grid = page.getByTestId("architectural-catalogue");

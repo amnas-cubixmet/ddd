@@ -21,7 +21,7 @@ export default async function ProductsPage({
   searchParams: Promise<{ category?: string | string[] }>;
 }) {
   const { category } = await searchParams;
-  const initialCategory = findCollection(category)?.slug ?? "";
+  const initialCategory = category === "architectural" ? category : findCollection(category)?.slug ?? "";
 
   return (
     <div className={`shell ${styles.page} ${styles.compactPage}`}>
@@ -30,16 +30,16 @@ export default async function ProductsPage({
       <section className={styles.intro} aria-labelledby="products-title">
         <div>
           <p className="eyebrow">Product catalogue</p>
-          <h1 id="products-title">LED lighting catalogue.</h1>
+          <h1 id="products-title">All LED lighting</h1>
         </div>
         <p>{description}</p>
       </section>
 
-      <div className={styles.divisions}><LightingDivisions /></div>
       <section className={styles.catalogue} aria-label="Browse LED lighting">
-        <ProductsBrowser key={initialCategory} initialCategory={initialCategory} />
+        <ProductsBrowser key={initialCategory} initialCategory={initialCategory} includeArchitecture />
       </section>
 
+      <div className={styles.divisions}><LightingDivisions /></div>
       <LightingLinks title="Browse by fixture type" links={catalogueCategories.map(({ name, slug }) => ({
         name, href: paths.category(slug),
       }))} />

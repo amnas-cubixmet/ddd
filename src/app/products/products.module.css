@@ -247,3 +247,14 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+@media (max-width: 650px) {
+  .compactPage { width: calc(100% - 32px); padding-block: 18px 30px; }
+  .intro { margin-bottom: 8px; }
+  .intro h1 { font-size: clamp(1.8rem, 7.8vw, 2.45rem); line-height: 1.12; }
+  .intro > p { font-size: .9rem; line-height: 1.5; }
+  .catalogue > h2 { font-size: 1.45rem; }
+  .quote { padding: 16px; margin-top: 26px; }
+  .quote h2 { font-size: 1.55rem; }
+  .quoteActions { flex-shrink: 1; width: 100%; }
+}

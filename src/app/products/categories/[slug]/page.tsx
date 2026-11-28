@@ -1,7 +1,8 @@
+import { ProductsBrowser } from "@/components/browse";
 import { notFound } from "next/navigation";
 import { LightingFaq, LightingLinks, LightingSections } from "@/components/lighting-content";
 import { PageSchema } from "@/components/seo-data";
-import { Action, PageIntro, ProductCard } from "@/components/ui";
+import { Action, PageIntro } from "@/components/ui";
 import { catalogueCategories, findCollection, isIndexableProduct, publishedProducts } from "@/lib/catalogue";
 import { categoryDetails } from "@/lib/category-content";
 import { pageMetadata, paths } from "@/lib/seo";
@@ -39,7 +40,7 @@ export default async function CategoryPage({ params }: Props) {
         <section aria-labelledby="category-list">
           <h2 className="catalogue-section-title" id="category-list">Catalogue fixtures</h2>
           {wattages.length > 0 && <p>Photographed label wattages include {wattages.join(", ")} W. Contact us to confirm the exact specifications and quote availability.</p>}
-          <div className="card-grid">{fixtures.map((fixture) => <ProductCard key={fixture.slug} item={fixture} />)}</div>
+          <ProductsBrowser initialCategory={slug} allowedCategories={[slug]} fixedCategory />
         </section>
         <LightingSections sections={[
           { title: "Applications", text: content.use },
