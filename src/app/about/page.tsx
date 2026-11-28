@@ -115,7 +115,6 @@ export default function AboutPage() {
             <div className={styles.cardBody}><h3>{item.title}</h3><p>{item.text}</p><Link href={item.href} prefetch={false} className={styles.textLink}>Explore {item.title.toLowerCase()} <ArrowUpRight size={15} aria-hidden="true" /></Link></div>
           </article>)}
         </div>
-        <p className={styles.note}>Images show fixture or application references; they do not establish completed Bharat Lums projects.</p>
       </section>
       <section className={styles.band} aria-labelledby="industries-title">
         <div className={styles.inner}>
