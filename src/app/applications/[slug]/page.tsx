@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, ArrowRight, BookOpen, Layers, ExternalLink, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, ArrowRight, BookOpen, Layers, CheckCircle2 } from "lucide-react";
 import { pageMetadata } from "@/lib/seo";
 import { applicationImage } from "@/lib/application-images";
 import { PageSchema } from "@/components/seo-data";
@@ -74,12 +74,6 @@ export default async function Page({ params }: Props) {
             })}
           </div>
         </section>
-        {entry.sources?.length ? (
-          <section className={styles.references} aria-labelledby="references-title">
-            <h2 id="references-title">Technical references</h2>
-            <ul>{entry.sources.map(source => <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer"><span>{source.name}</span><ExternalLink size={15} aria-hidden="true" /></a></li>)}</ul>
-          </section>
-        ) : null}
         <section className={styles.enquiry} aria-labelledby="enquiry-title">
           <div><p className={styles.kicker}>Project enquiries</p><h2 id="enquiry-title">Have a lighting project in mind?</h2><p>Share your site layout, quantities and lighting requirements with our team.</p></div>
           <Action href={enquiry}>Discuss your lighting requirements</Action>

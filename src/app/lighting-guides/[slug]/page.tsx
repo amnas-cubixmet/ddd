@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, BookOpen, ExternalLink, Layers, MessageCircle } from "lucide-react";
+import { ArrowUpRight, BookOpen, Layers, MessageCircle } from "lucide-react";
 import { resourceMetadata } from "@/components/lighting-resource-page";
 import { JsonLd, PageSchema } from "@/components/seo-data";
 import { Action } from "@/components/ui";
@@ -61,10 +61,6 @@ export default async function Page({ params }: Props) {
             ))}
           </article>
           <aside className={styles.sidebar} aria-label="Guide resources">
-            {entry.sources?.length ? <section className={styles.panel} aria-labelledby="technical-references-title">
-              <h2 id="technical-references-title">Technical references</h2>
-              <ul>{entry.sources.map(source => <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer"><span>{source.name}</span><ExternalLink size={15} aria-hidden="true" /></a></li>)}</ul>
-            </section> : null}
             <section className={styles.panel} aria-labelledby="related-resources-title">
               <h2 id="related-resources-title">Related lighting resources</h2>
               <ul>{entry.related.map(link => {

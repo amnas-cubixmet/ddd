@@ -81,12 +81,6 @@ export function LightingResourcePage({ kind, entry }: { kind: Collection; entry:
             </figure>
           )}
           <LightingSections sections={entry.sections} />
-          {entry.sources?.length ? (
-            <section className={styles.sources}>
-              <h2>Technical references</h2>
-              <ul>{entry.sources.map(({ name, href }) => <li key={href}><a href={href}>{name}</a></li>)}</ul>
-            </section>
-          ) : null}
         </article>
         <LightingLinks title="Related lighting resources" links={entry.related} />
         <Action href={guide ? "/contact" : `/contact?application=${entry.slug}`}>Discuss your lighting requirements</Action>
