@@ -61,6 +61,12 @@ export default function Home() {
         </Reveal>
       </section>
 
+      <CompanyValues />
+
+      <GlobalPresenceSection />
+
+      <HomeFaq catalogue={catalogueDownload} />
+
       <section className={styles.applicationBand} aria-labelledby="home-applications">
         <div className={`shell ${styles.applicationFeature}`}>
           <div className={styles.applicationFeatureImage}>
@@ -88,11 +94,6 @@ export default function Home() {
         </div>
       </section>
 
-      <CompanyValues />
-
-      <GlobalPresenceSection />
-
-      <HomeFaq catalogue={catalogueDownload} />
       <div className={styles.enquiryBand}><HomeEnquiry /></div>
     </>
   );
