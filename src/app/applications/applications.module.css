@@ -47,3 +47,18 @@
 }
 @media (max-width:479px) { .grid { grid-template-columns: minmax(0,1fr); } }
 @media (prefers-reduced-motion:reduce) { .applicationCard { transition:none; } }
+
+/* Image-led project cards: uniform image frames, aligned content and actions. */
+.grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.applicationCard { padding: 0; gap: 0; overflow: hidden; }
+.cardImage { position: relative; width: 100%; aspect-ratio: 4 / 3; background: var(--cloud); overflow: hidden; }
+.cardImage img { object-fit: cover; transition: transform .25s ease; }
+.fixtureImage { background: var(--deep-navy); }
+.fixtureImage img { object-fit: contain; }
+.cardBody { display: flex; flex: 1; flex-direction: column; min-width: 0; gap: 10px; padding: 16px; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .applicationCard:hover .cardImage img { transform: scale(1.035); }
+}
+@media (max-width: 1023px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px) { .cardBody { padding: 12px; gap: 8px; } }
+@media (max-width: 479px) { .grid { grid-template-columns: minmax(0, 1fr); } }

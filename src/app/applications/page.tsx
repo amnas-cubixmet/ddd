@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Route, Warehouse, Factory, Building2, ShoppingBag, Hotel, CarFront, Layers, BookOpen } from "lucide-react";
+import { ArrowUpRight, Layers, BookOpen } from "lucide-react";
 import { resourceMetadata } from "@/components/lighting-resource-page";
 import { PageSchema } from "@/components/seo-data";
 import { applications } from "@/lib/lighting-content";
+import { applicationImage } from "@/lib/application-images";
 import { paths } from "@/lib/seo";
 import styles from "./applications.module.css";
 
@@ -11,15 +12,6 @@ export const metadata = resourceMetadata("applications");
 
 const title = "LED lighting applications";
 const summary = "Explore lighting requirements for roads, factories, warehouses, parking areas, offices, showrooms and hospitality projects.";
-const icons = {
-  "road-and-highway-lighting": Route,
-  "warehouse-lighting": Warehouse,
-  "factory-lighting": Factory,
-  "office-lighting": Building2,
-  "retail-lighting": ShoppingBag,
-  "parking-area-lighting": CarFront,
-  "hospitality-lighting": Hotel,
-};
 const resources = [
   { name: "LED lighting catalogue", text: "Explore fixtures and compare product information.", href: paths.products, icon: Layers },
   { name: "LED lighting guides", text: "Understand light output, optics and fixture selection.", href: paths.guides, icon: BookOpen },
@@ -47,14 +39,18 @@ export default function Page() {
           <h2 id="project-types-title">Explore by project type</h2>
           <ul className={styles.grid} data-testid="application-grid">
             {applications.map(entry => {
-              const Icon = icons[entry.slug as keyof typeof icons] ?? Layers;
+              const image = applicationImage(entry.slug);
               return (
                 <li key={entry.slug}>
                   <Link href={paths.application(entry.slug)} className={styles.applicationCard}>
-                    <div className={styles.cardTop}><span className={styles.icon}><Icon size={24} strokeWidth={1.65} aria-hidden="true" /></span><ArrowUpRight size={17} aria-hidden="true" /></div>
-                    <h3>{entry.title}</h3>
-                    <p>{entry.summary}</p>
-                    <span className={styles.cardLink}>Explore application <ArrowUpRight size={14} aria-hidden="true" /></span>
+                    <div className={`${styles.cardImage} ${image.fixture ? styles.fixtureImage : ""}`}>
+                      <Image src={image.src} alt={image.alt} fill sizes="(max-width: 479px) 92vw, (max-width: 1023px) 46vw, 32vw" />
+                    </div>
+                    <div className={styles.cardBody}>
+                      <h3>{entry.title}</h3>
+                      <p>{entry.summary}</p>
+                      <span className={styles.cardLink}>Explore application <ArrowUpRight size={14} aria-hidden="true" /></span>
+                    </div>
                   </Link>
                 </li>
               );

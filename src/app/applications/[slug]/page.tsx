@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, ArrowRight, BookOpen, Layers, ExternalLink, CheckCircle2 } from "lucide-react";
-import { resourceMetadata } from "@/components/lighting-resource-page";
+import { pageMetadata } from "@/lib/seo";
+import { applicationImage } from "@/lib/application-images";
 import { PageSchema } from "@/components/seo-data";
 import { Action } from "@/components/ui";
 import { applications } from "@/lib/lighting-content";
@@ -13,25 +14,18 @@ type Props = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
 export const generateStaticParams = () => applications.map(({ slug }) => ({ slug }));
 
-const visual: Record<string, { src: string; alt: string; fixture?: boolean }> = {
-  "road-and-highway-lighting": { src: "/images/products/street-light.webp", alt: "LED street lighting fixture reference", fixture: true },
-  "warehouse-lighting": { src: "/images/products/warehouse-high-bay.webp", alt: "Warehouse lighting fixture reference", fixture: true },
-  "factory-lighting": { src: "/images/products/high-bay.webp", alt: "Industrial high bay lighting fixture reference", fixture: true },
-  "office-lighting": { src: "/images/conference-room-linear-lighting.webp", alt: "Conference room with linear lighting" },
-  "retail-lighting": { src: "/images/architectural-commercial-lighting.webp", alt: "Architectural and commercial lighting reference" },
-  "parking-area-lighting": { src: "/images/lighting-by-application.webp", alt: "Illustrative outdoor lighting near a commercial building" },
-  "hospitality-lighting": { src: "/images/architectural-commercial-lighting.webp", alt: "Architectural interior lighting reference" },
-};
 
 export async function generateMetadata({ params }: Props) {
-  return resourceMetadata("applications", (await params).slug);
+  const { slug } = await params;
+  const entry = applications.find(item => item.slug === slug);
+  return entry ? pageMetadata({ title: entry.title, path: paths.application(slug), summary: entry.summary, image: applicationImage(slug) }) : {};
 }
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
   const entry = applications.find(item => item.slug === slug);
   if (!entry) notFound();
-  const image = visual[slug] ?? { src: "/images/lighting-by-application.webp", alt: "Illustrative lighting application" };
+  const image = applicationImage(slug);
   const enquiry = `/contact?application=${entry.slug}`;
   return (
     <div className={styles.page}>
