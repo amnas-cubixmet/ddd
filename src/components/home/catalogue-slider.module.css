@@ -131,9 +131,54 @@
 }
 
 @media (max-width: 560px) {
-  .track {
-    grid-auto-columns: 87%;
+  .section {
+    padding-block: 20px 18px;
   }
+  .heading {
+    align-items: center;
+    gap: 4px 10px;
+    margin-bottom: 12px;
+  }
+  .heading h2 {
+    font-size: clamp(1.5rem, 6.8vw, 2.1rem);
+    line-height: 1.1;
+    letter-spacing: -.055em;
+  }
+  .allProducts {
+    min-height: 44px;
+    font-size: .75rem;
+    gap: 4px;
+    white-space: nowrap;
+  }
+  .allProducts svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .track {
+    --gap: 10px;
+    grid-auto-columns: 84%;
+    padding-block: 2px 4px;
+  }
+  .image {
+    aspect-ratio: 3 / 2;
+    border-radius: 8px;
+    background: var(--white);
+  }
+  .label {
+    padding-block: 9px 6px;
+    font-size: .85rem;
+    line-height: 1.35;
+  }
+  .label svg { width: 15px; height: 15px; flex-shrink: 0; }
+  /* Keep navigation accessible beside the fixed bottom-right chat shortcut. */
+  .controls {
+    justify-content: flex-start;
+    padding-top: 6px;
+    gap: 8px;
+  }
+  .controls button svg { width: 17px; height: 17px; }
+}
+@media (max-width: 340px) {
+  .heading h2 { font-size: 1.5rem; }
+  .allProducts { font-size: .7rem; }
+  .track { grid-auto-columns: 86%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
