@@ -10,7 +10,7 @@
   width: 100%;
   background: var(--bg);
   color: var(--text);
-  font-family: Manrope, var(--font-hanken), Arial, sans-serif;
+  font-family: var(--font-hanken, "Hanken Grotesk"), Arial, sans-serif;
 }
 
 .heroInner {
@@ -829,3 +829,6 @@
   .mission h2 { font-size: clamp(1.5rem, 6.5vw, 2.25rem); }
   .mission p { font-size: .875rem; line-height: 1.6; margin-top: 9px; }
 }
+
+/* Brand Guideline 12: Montserrat is reserved for the brand tagline. */
+.heroKicker { font-family: var(--font-montserrat, "Montserrat"), Arial, sans-serif; }

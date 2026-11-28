@@ -10,10 +10,11 @@ import { brand } from "@/lib/site";
 import { applications, guides } from "@/lib/lighting-content";
 import { absoluteUrl, description, indexableSite, metadataOrigin, siteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/seo-data";
-import { Hanken_Grotesk } from "next/font/google";
+import { Hanken_Grotesk, Montserrat } from "next/font/google";
 import "./globals.css";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"], variable: "--font-hanken", display: "swap" });
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat", display: "swap" });
 
 export const metadata: Metadata = {
   title: {
@@ -34,7 +35,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={hanken.variable}>
+    <html lang="en" className={`${hanken.variable} ${montserrat.variable}`}>
       <body id="top">
         {siteUrl && <JsonLd data={[
           {

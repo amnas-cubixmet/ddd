@@ -42,7 +42,7 @@ html::-webkit-scrollbar {
 body {
   color: var(--text);
   font:
-    400 15px/1.55 var(--font-hanken),
+    400 15px/1.55 var(--font-hanken, "Hanken Grotesk"),
     Arial,
     Helvetica,
     sans-serif;
@@ -1513,3 +1513,6 @@ textarea::placeholder {
     height: 48px;
   }
 }
+
+/* Brand typography: native controls inherit the primary site typeface. */
+button, input, select, textarea { font-family: inherit; }
