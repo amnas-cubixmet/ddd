@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Download, MessageCircle } from "lucide-react";
 import { Gallery } from "@/components/gallery";
+import { RelatedCatalogueGrid } from "@/components/related-catalogue-grid";
 import { Action, PageIntro, ProductCard, QuoteBanner } from "@/components/ui";
 import {
   catalogueLabel,
@@ -98,7 +99,7 @@ export default async function ProductPage({ params }: Params) {
         description={item.description}
       />
       <section
-        className="shell detail-grid section-tight"
+        className="shell detail-grid section-tight catalogue-detail-motion"
         aria-label="Fixture details"
       >
         <Gallery images={item.images} />
@@ -209,11 +210,13 @@ export default async function ProductPage({ params }: Params) {
           <h2 className="catalogue-section-title" id="related-fixtures">
             Related fixtures
           </h2>
-          <div className="card-grid">
-            {related.map((product) => (
-              <ProductCard item={product} key={product.slug} />
+          <RelatedCatalogueGrid signature={related.map(product => product.slug).join("|")}>
+            {related.map(product => (
+              <div className="catalogue-motion-item" data-catalogue-item={product.slug} key={product.slug}>
+                <ProductCard item={product} managedMotion />
+              </div>
             ))}
-          </div>
+          </RelatedCatalogueGrid>
         </section>
       )}
       <QuoteBanner />
