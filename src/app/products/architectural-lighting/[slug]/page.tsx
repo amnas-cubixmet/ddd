@@ -9,10 +9,11 @@ import { pageMetadata, paths } from "@/lib/seo";
 import { PageSchema } from "@/components/seo-data";
 import { LightingFaq, LightingLinks, LightingSections } from "@/components/lighting-content";
 import { lightingDivisions } from "@/lib/lighting-divisions";
-import { architectureEditorial } from "@/lib/product-editorial";
+import { architectureEditorial, architectureRelated } from "@/lib/product-editorial";
 import { CatalogueImage } from "@/components/catalogue-image";
 import { RelatedCatalogueGrid } from "@/components/related-catalogue-grid";
 import styles from "../../products.module.css";
+import detailStyles from "../../product-detail.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
 export const dynamicParams = false;
@@ -33,11 +34,8 @@ export default async function Page({ params }: Params) {
   const quote = `/contact?architectural=${item.slug}`;
   const message = encodeURIComponent(`Hello Bharat Lums, I would like more information about ${item.name}. Please confirm availability and specifications.`);
   const editorial = architectureEditorial(item.slug, item.name, item.selection);
-  const uses = item.application.toLowerCase().split(", ");
-  const related = architecturalProducts.filter(({ slug }) => slug !== item.slug)
-    .map((other) => ({ other, overlap: other.application.toLowerCase().split(", ").filter((use) => uses.includes(use)).length }))
-    .sort((a, b) => b.overlap - a.overlap)
-    .filter(({ overlap }) => overlap > 0).slice(0, 4).map(({ other }) => other);
+  const related = architectureRelated(item.slug)
+    .flatMap(slug => architecturalProducts.filter(other => other.slug === slug && other.slug !== item.slug));
   return (
     <div className={`shell ${styles.page} ${styles.compactPage}`}>
       <PageSchema title={item.name} path={paths.architecturalFixture(item.slug)} summary={item.selection} ancestors={[
@@ -45,7 +43,7 @@ export default async function Page({ params }: Params) {
         { name: lightingDivisions.architectural.title, href: paths.architecture },
       ]} />
       <section className={styles.intro}><h1>{item.name}</h1><p>{item.application}</p></section>
-      <section className="detail-grid section-tight catalogue-detail-motion" aria-label="Product details">
+      <section className={`detail-grid section-tight catalogue-detail-motion ${detailStyles.detail}`} aria-label="Product details">
         {item.image && <Gallery images={[{ src: item.image.src, alt: item.image.alt, label: "Product reference", representative: item.image.representative }]} />}
         <div className="detail-copy">
           <h2>Applications</h2><p>{item.application}</p>

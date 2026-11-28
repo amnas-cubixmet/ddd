@@ -5,6 +5,7 @@ import { PageSchema } from "@/components/seo-data";
 import { Action, PageIntro } from "@/components/ui";
 import { catalogueCategories, findCollection, isIndexableProduct, publishedProducts } from "@/lib/catalogue";
 import { categoryDetails } from "@/lib/category-content";
+import { categoryEditorial } from "@/lib/product-editorial";
 import { pageMetadata, paths } from "@/lib/seo";
 import { lightingDivisions } from "@/lib/lighting-divisions";
 
@@ -45,6 +46,7 @@ export default async function CategoryPage({ params }: Props) {
         <LightingSections sections={[
           { title: "Applications", text: content.use },
           { title: "How to compare fixtures", text: content.selection },
+          ...categoryEditorial(slug),
         ]} />
         <LightingFaq entries={[{ question: content.question, answer: content.answer }]} />
         <LightingLinks title="Related lighting resources" links={[

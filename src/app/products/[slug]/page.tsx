@@ -21,6 +21,7 @@ import { LightingFaq, LightingLinks, LightingSections } from "@/components/light
 import { lightingDivisions } from "@/lib/lighting-divisions";
 import { infrastructureEditorial } from "@/lib/product-editorial";
 import photoStyles from "./fixture-photos.module.css";
+import detailStyles from "../product-detail.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -105,7 +106,7 @@ export default async function ProductPage({ params }: Params) {
         description={item.description}
       />
       <section
-        className="shell detail-grid section-tight catalogue-detail-motion"
+        className={`shell detail-grid section-tight catalogue-detail-motion ${detailStyles.detail}`}
         aria-label="Fixture details"
       >
         <Gallery images={item.images} />

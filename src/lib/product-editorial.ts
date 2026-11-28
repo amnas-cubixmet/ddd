@@ -58,3 +58,35 @@ export function infrastructureEditorial(item: Product) {
     {question:"How can I request a quote for " + item.name + "?",answer:"Use the product enquiry or WhatsApp link and include the quantities, site dimensions, mounting conditions and technical requirements."},
   ]};
 }
+
+// Related references share a lighting function, mounting approach or project application.
+const architectureRelations: Record<string, string[]> = {
+  "recessed-downlight":["surface-downlight","adjustable-spotlight","cob-spotlight"],
+  "surface-downlight":["recessed-downlight","ceiling-light","cylinder-light"],
+  "cob-spotlight":["adjustable-spotlight","track-light","grille-light"],
+  "track-light":["magnetic-track-light","adjustable-spotlight","cob-spotlight"],
+  "magnetic-track-light":["track-light","profile-light","linear-light"],
+  "linear-light":["suspended-linear-light","profile-light","panel-light"],
+  "suspended-linear-light":["linear-light","pendant-light","panel-light"],
+  "panel-light":["linear-light","suspended-linear-light","ceiling-light"],
+  "pendant-light":["suspended-linear-light","cylinder-light","ceiling-light"],
+  "wall-washer":["adjustable-spotlight","track-light","strip-light"],
+  "strip-light":["profile-light","wall-washer","linear-light"],
+  "profile-light":["strip-light","linear-light","magnetic-track-light"],
+  "adjustable-spotlight":["cob-spotlight","track-light","grille-light"],
+  "grille-light":["adjustable-spotlight","cob-spotlight","recessed-downlight"],
+  "ceiling-light":["surface-downlight","panel-light","pendant-light"],
+  "cylinder-light":["surface-downlight","pendant-light","adjustable-spotlight"],
+};
+export function architectureRelated(slug: string) { return architectureRelations[slug] ?? []; }
+
+const categoryPlanning: Record<string, [string,string]> = {
+  floodlights:["A floodlighting brief should identify the boundaries of the area, the location of entrances, nearby properties, vehicle movements and any obstructions. Provide a site plan with proposed mounting points and directions. The exact beam distribution determines how much light reaches each part of the site; the angle and position may also affect glare for pedestrians and drivers. Compare alternatives on installed coverage rather than assuming a higher wattage solves a dark area.","Ask for an exact model datasheet and photometric file. Confirm bracket dimensions, aiming adjustment, supply requirements and environmental suitability, including any exposure to dust or water. Agree the lighting design before purchase and allow for safe maintenance access."],
+  "led-street-lights":["Road lighting planning starts with route geometry. Record the carriageway width, pedestrian areas, pole positions and any changes in road alignment. Check whether poles are on one side or both sides and note existing bracket outreach. Compare the light distribution from the exact model with the required coverage, uniformity and glare criteria for the intended route.","When replacing existing fixtures, record the pole and bracket connection as well as the electrical supply. Include the model reference, desired quantity, delivery location and any surge or environmental requirements in your enquiry. A model label identifies a variant but does not establish a compliant road layout."],
+  "high-bay-industrial-lighting":["Start the industrial lighting brief by identifying work zones, production equipment, inspection benches and storage areas. Record the ceiling and task heights and possible obstructions from machines or building services. An open production floor and a narrow passage can require different distributions. Consider how staff move through the site and where glare might affect work.","The photographed round fixtures provide design references for comparison. Confirm the exact model, mounting method, available optics, electrical supply, environmental ratings and safe access for maintenance. Assess operating hours and required illumination as part of the energy comparison."],
+  "led-warehouse-lighting":["Divide the warehouse into rack aisles, loading and staging zones, packing benches and circulation areas. Mark shelf heights, aisle widths and the position of work surfaces. Consider light on vertical labels as well as horizontal surfaces, including changes to stock and obstructions during operation. Compare the proposed distribution in a lighting layout rather than selecting a fixture by shape alone.","For the photographed single-bar and dual-bar designs, request the exact model and dimensions before approving a layout. Confirm suspension or bracket arrangements, supply and control requirements, environmental conditions and maintenance access. Include the warehouse plan and expected quantities in a project enquiry."],
+};
+export function categoryEditorial(slug: string) {
+  const notes = categoryPlanning[slug];
+  return notes ? [{title:"Prepare a project lighting brief",text:notes[0]},{title:"Technical confirmation and quotation",text:notes[1]}] : [];
+}

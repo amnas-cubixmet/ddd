@@ -40,3 +40,14 @@ test("all products mobile catalogue has live filters and sorting", async ({page}
   await sort.selectOption("watts-desc");
   await expect(grid.locator("h3").first()).toContainText("200 W");
 });
+
+test("related fixtures and specifications remain usable at 320px", async ({ page }) => {
+  await page.setViewportSize({width:320,height:800});
+  for (const path of ["/products/neona-50","/products/architectural-lighting/wall-washer"]) {
+    await page.goto(path);
+    const related = page.locator("section[aria-labelledby^='related-'] .card-grid");
+    await expect(related).toHaveCount(1);
+    expect(await related.evaluate(el => getComputedStyle(el).gridTemplateColumns.split(" ").length)).toBe(2);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  }
+});
