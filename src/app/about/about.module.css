@@ -78,3 +78,22 @@
 
 .page :global(#global-presence) h3 { color: var(--text); }
 .page :global(#global-presence) :focus-visible { outline-color: white; }
+
+/* Mobile About introduction and company profile. */
+@media (max-width: 767px) {
+  .hero { padding-block: 16px 26px; gap: 16px; }
+  .hero .figure { order: -1; width: 100%; }
+  .heroImage { aspect-ratio: 16 / 9; border-radius: 8px; }
+  .hero .figure figcaption { margin-top: 5px; font-size: .7rem; }
+  .copy { gap: 10px; }
+  .copy h1 { font-size: clamp(1.8rem, 7.8vw, 2.65rem); line-height: 1.1; }
+  .copy .lead { font-size: .875rem; line-height: 1.6; }
+  .copy :global(.button) { min-height: 44px; font-size: .82rem; margin-top: 4px; }
+  .band[aria-labelledby="who-title"] { padding-block: 24px; }
+  .band[aria-labelledby="who-title"] .split { gap: 12px; grid-template-columns: minmax(0, 1fr); }
+  .band[aria-labelledby="who-title"] .kicker { font-size: .65rem; margin-bottom: 6px; }
+  .band[aria-labelledby="who-title"] h2 { font-size: clamp(1.5rem, 6.5vw, 2rem); line-height: 1.15; }
+  .band[aria-labelledby="who-title"] .prose { gap: 12px; }
+  .band[aria-labelledby="who-title"] .prose p { font-size: .875rem; line-height: 1.6; max-width: 100%; }
+  .band[aria-labelledby="who-title"] .textLink { font-size: .82rem; overflow-wrap: anywhere; }
+}
