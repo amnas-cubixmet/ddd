@@ -152,20 +152,15 @@
   .industryCard:hover { border-color: var(--bharat-blue); background: #f9fcff; }
 }
 @media (min-width: 1100px) {
-  .band[aria-labelledby="industries-title"] .industryGrid { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 18px; }
-  .industryGrid li { grid-column: span 2; }
-  .industryGrid li:nth-child(5) { grid-column: 2 / span 2; }
+  .band[aria-labelledby="industries-title"] .industryGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; grid-auto-rows: 1fr; }
 }
 @media (min-width: 768px) and (max-width: 1099px) {
-  .band[aria-labelledby="industries-title"] .industryGrid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
-  .industryGrid li { grid-column: span 2; }
-  .industryGrid li:last-child { grid-column: 3 / span 2; }
+  .band[aria-labelledby="industries-title"] .industryGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; grid-auto-rows: 1fr; }
 }
 @media (max-width: 767px) {
   .band[aria-labelledby="industries-title"] { padding-block: 26px; }
   .band[aria-labelledby="industries-title"] .lead { font-size: .875rem; line-height: 1.6; margin-block: 10px 14px; }
   .band[aria-labelledby="industries-title"] .industryGrid { gap: 10px; margin-block: 16px; }
-  .industryGrid li:last-child { grid-column: 1 / -1; }
   .industryCard { padding: 12px; gap: 8px; }
   .industryIcon { width: 36px; height: 36px; }
   .industryIcon svg { width: 20px; height: 20px; }
