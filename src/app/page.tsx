@@ -7,25 +7,18 @@ import { Action } from "@/components/ui";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { HomeHero } from "@/components/home-hero";
 import { LightingDivisions } from "@/components/lighting-divisions";
-import { CatalogueSlider } from "@/components/home/catalogue-slider";
-import { lightingDivisions } from "@/lib/lighting-divisions";
+import { FeaturedProducts } from "@/components/home/featured-products";
 import { HomeEnquiry } from "@/components/home-enquiry";
 import { HomeFaq } from "@/components/home/faq";
 import styles from "@/components/home/home.module.css";
 import { Reveal } from "@/components/motion";
 import conferenceRoom from "../../public/images/about-bharat-lums-conference.webp";
-import { artwork, catalogueCategories, catalogueDownload } from "@/lib/catalogue";
+import { catalogueDownload } from "@/lib/catalogue";
 import { description, pageMetadata, paths } from "@/lib/seo";
 import { PageSchema } from "@/components/seo-data";
 
 const homeTitle = "Professional LED Lighting Solutions";
 export const metadata = pageMetadata({ title: homeTitle, path: "/", summary: description, home: true });
-
-const slides = catalogueCategories.map((category) => ({
-  ...category,
-  image: artwork(category.image),
-  href: `${lightingDivisions.infrastructure.href}?category=${category.slug}#division-catalogue`,
-}));
 
 export default function Home() {
   return (
@@ -61,7 +54,7 @@ export default function Home() {
 
       <div className="shell"><LightingDivisions /></div>
       <div className={styles.catalogueBand}>
-        <CatalogueSlider slides={slides} />
+        <FeaturedProducts />
       </div>
 
       <GlobalPresenceSection />
