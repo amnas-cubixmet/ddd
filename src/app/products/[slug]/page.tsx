@@ -17,8 +17,9 @@ import { brand } from "@/lib/site";
 import { absoluteUrl, pageMetadata, paths } from "@/lib/seo";
 import { categoryDetails } from "@/lib/category-content";
 import { JsonLd, PageSchema } from "@/components/seo-data";
-import { LightingLinks } from "@/components/lighting-content";
+import { LightingFaq, LightingLinks, LightingSections } from "@/components/lighting-content";
 import { lightingDivisions } from "@/lib/lighting-divisions";
+import { infrastructureEditorial } from "@/lib/product-editorial";
 import photoStyles from "./fixture-photos.module.css";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -77,6 +78,7 @@ export default async function ProductPage({ params }: Params) {
   const url = absoluteUrl(path);
   const family = collections.find(({ slug }) => item.categories.includes(slug));
   const guidance = family ? categoryDetails(family.slug) : undefined;
+  const editorial = infrastructureEditorial(item);
 
   return (
     <>
@@ -188,6 +190,7 @@ export default async function ProductPage({ params }: Params) {
           </div>
         </div>
       </section>
+      <div className="shell"><LightingSections sections={editorial.sections} /><LightingFaq entries={editorial.faq} /></div>
       {photoGroup && (
         <section className="shell section-tight" aria-labelledby="fixture-photos">
           <div className={photoStyles.intro}>
