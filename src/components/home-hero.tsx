@@ -128,7 +128,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
                 Download Catalogue <ArrowDown size={17} aria-hidden="true" />
               </a>
             ) : (
-              <a className={styles.heroLink} href="/request-quote?catalogue=1">
+              <a className={styles.heroLink} href="/contact?catalogue=1">
                 Request Catalogue <ArrowUpRight size={17} aria-hidden="true" />
               </a>
             )}

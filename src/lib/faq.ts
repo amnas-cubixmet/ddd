@@ -17,7 +17,7 @@ export function getFaqEntries(catalogue?: string): FaqEntry[] {
       question: "How can I request a quotation?",
       answer: [
         "Use our ",
-        { label: "quote form", href: "/request-quote" },
+        { label: "quote form", href: "/contact" },
         " and include the application, location and quantities you have in mind.",
       ],
     },
@@ -29,7 +29,7 @@ export function getFaqEntries(catalogue?: string): FaqEntry[] {
         ".",
       ] : [
         "You can ",
-        { label: "request a catalogue", href: "/request-quote?catalogue=1" },
+        { label: "request a catalogue", href: "/contact?catalogue=1" },
         " from our team. There is currently no public download.",
       ],
     },
@@ -49,7 +49,7 @@ export function getFaqEntries(catalogue?: string): FaqEntry[] {
       question: "Where can I find technical specifications?",
       answer: [
         "Verified specifications appear on individual product pages when available. For a specific project, ",
-        { label: "ask the team", href: "/request-quote" },
+        { label: "ask the team", href: "/contact" },
         " for model and technical details.",
       ],
     },

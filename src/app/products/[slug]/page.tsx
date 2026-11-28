@@ -66,8 +66,8 @@ export default async function ProductPage({ params }: Params) {
   const photoGroup = fixturePhotoGroups[slug];
   const enquiryHref =
     item.status === "draft"
-      ? `/request-quote?collection=${item.categories[0]}`
-      : `/request-quote?product=${slug}`;
+      ? `/contact?collection=${item.categories[0]}`
+      : `/contact?product=${slug}`;
   const whatsappNumber = brand.phoneHref.replace(/\D/g, "");
   const message = encodeURIComponent(
     `Hello Bharat Lums, I would like more information about ${item.name}. Please share the available options and specifications.`,

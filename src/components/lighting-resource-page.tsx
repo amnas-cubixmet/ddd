@@ -89,7 +89,7 @@ export function LightingResourcePage({ kind, entry }: { kind: Collection; entry:
           ) : null}
         </article>
         <LightingLinks title="Related lighting resources" links={entry.related} />
-        <Action href={guide ? "/request-quote" : `/request-quote?application=${entry.slug}`}>Discuss your lighting requirements</Action>
+        <Action href={guide ? "/contact" : `/contact?application=${entry.slug}`}>Discuss your lighting requirements</Action>
       </div>
     </>
   );

@@ -18,6 +18,7 @@ test("sitemap, canonical URL and indexing rules agree", async ({ request, page }
     expect(xml).toContain(`<loc>${site}/products/categories/floodlights</loc>`);
     expect(xml).toContain(`<loc>${site}/applications/warehouse-lighting</loc>`);
     expect(xml).toContain(`<loc>${site}/lighting-guides/led-high-bay-lighting-guide</loc>`);
+    expect(xml).not.toContain("/request-quote");
     expect(xml).not.toContain("/products/round-black-grouped");
     expect(xml).not.toContain("/products/architectural-lighting/panel-light");
   } else {
@@ -43,7 +44,7 @@ test("application and guide content works without JavaScript", async ({ browser,
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("LED lighting for warehouses");
     await expect(page.getByRole("link", { name: "LED warehouse fixture catalogue" })).toBeVisible();
     await expect(page.getByRole("link", { name: "Discuss your lighting requirements" }))
-      .toHaveAttribute("href", "/request-quote?application=warehouse-lighting");
+      .toHaveAttribute("href", "/contact?application=warehouse-lighting");
     await page.goto("/lighting-guides/led-high-bay-lighting-guide");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("LED high bay lighting guide");
     await expect(page.getByRole("heading", { name: "Technical references" })).toBeVisible();
@@ -57,9 +58,15 @@ test("application and guide content works without JavaScript", async ({ browser,
 });
 
 test("warehouse quote retains context on the form and WhatsApp link", async ({ page }) => {
-  await page.goto("/request-quote?application=warehouse-lighting");
+  await page.goto("/contact?application=warehouse-lighting");
   await expect(page.getByRole("combobox", { name: "Product interest" })).toHaveValue("LED lighting for warehouses");
   const chat = page.getByRole("link", { name: /WhatsApp Chat with our team/ });
   const href = await chat.getAttribute("href");
   expect(new URL(href!).searchParams.get("text")).toContain("LED lighting for warehouses");
+});
+
+test("removed quote route redirects to contact and preserves context", async ({ page }) => {
+  await page.goto("/request-quote?application=warehouse-lighting");
+  await expect(page).toHaveURL(/\/contact\?application=warehouse-lighting$/);
+  await expect(page.getByRole("combobox", { name: "Product interest" })).toHaveValue("LED lighting for warehouses");
 });

@@ -52,7 +52,7 @@ export default async function CategoryPage({ params }: Props) {
           ...catalogueCategories.filter((item) => item.slug !== slug)
             .map((item) => ({ name: item.name, href: paths.category(item.slug) })),
         ]} />
-        <Action href={`/request-quote?collection=${slug}`}>Request a quote for {category.name}</Action>
+        <Action href={`/contact?collection=${slug}`}>Request a quote for {category.name}</Action>
       </div>
     </>
   );

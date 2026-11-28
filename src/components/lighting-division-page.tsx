@@ -31,7 +31,7 @@ export async function LightingDivisionPage({ division, searchParams }: { divisio
       <LightingLinks title="Related lighting resources" links={content.links} />
       <section className={styles.quote}>
         <div><h2>Planning a lighting project?</h2><p>Contact our team to confirm available fixtures, specifications and suitable lighting for your space.</p></div>
-        <Action href="/request-quote">Request a quote</Action>
+        <Action href="/contact">Request a quote</Action>
       </section>
     </div>
   );

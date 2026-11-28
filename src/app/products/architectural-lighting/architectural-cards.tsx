@@ -10,7 +10,7 @@ import styles from "./architectural.module.css";
 
 type Item = (typeof architecturalProducts)[number];
 const detailHref = (slug: string) => `/products/architectural-lighting/${slug}`;
-const quoteHref = (slug: string) => `/request-quote?architectural=${slug}`;
+const quoteHref = (slug: string) => `/contact?architectural=${slug}`;
 
 export function ArchitecturalCards({ items }: { items: readonly Item[] }) {
   const [query, setQuery] = useState("");

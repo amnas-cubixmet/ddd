@@ -66,7 +66,7 @@ export default async function ProductsPage({
           <p>Tell us what you need to light. We can help you compare fixtures and confirm availability and specifications.</p>
         </div>
         <div className={styles.quoteActions}>
-          <Action href="/request-quote" diagonal>
+          <Action href="/contact" diagonal>
             Request a quote
           </Action>
           <Action href="/contact" secondary>

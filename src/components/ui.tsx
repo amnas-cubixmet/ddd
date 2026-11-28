@@ -111,7 +111,7 @@ export function ProductCard({
           </Link>
           <Link
             className="text-link"
-            href={`/request-quote?product=${item.slug}`}
+            href={`/contact?product=${item.slug}`}
           >
             Enquire now <ArrowUpRight size={13} />
           </Link>
@@ -136,7 +136,7 @@ export function QuoteBanner() {
             options.
           </p>
         </div>
-        <Action href="/request-quote" diagonal>
+        <Action href="/contact" diagonal>
           Request a quote
         </Action>
       </div>

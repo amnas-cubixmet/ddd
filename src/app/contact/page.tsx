@@ -1,3 +1,6 @@
+import { findArchitecturalProduct } from "@/lib/architectural-products";
+import { findCollection, products } from "@/lib/catalogue";
+import { applications } from "@/lib/lighting-content";
 import { ContactSection } from "@/components/contact";
 import { pageMetadata } from "@/lib/seo";
 import { PageSchema } from "@/components/seo-data";
@@ -8,7 +11,19 @@ const description =
 
 export const metadata = pageMetadata({ title: "Contact for LED Lighting Enquiries", path: "/contact", summary: description });
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const query = await searchParams;
+  const product = products.find((item) => item.slug === query.product);
+  const collection = findCollection(query.collection);
+  const architecturalProduct = findArchitecturalProduct(query.architectural);
+  const application = applications.find((item) => item.slug === query.application);
+  const defaults = query.catalogue === "1"
+    ? { interest: "LED product catalogue", message: "Please share the current Bharat Lums product catalogue." }
+    : { interest: product?.name ?? collection?.name ?? architecturalProduct?.name ?? application?.title };
   return (
     <>
       <PageSchema title="Contact" path="/contact" summary={description} />
@@ -19,7 +34,7 @@ export default function ContactPage() {
         </div>
         <p>{description}</p>
       </section>
-      <ContactSection />
+      <ContactSection defaults={defaults} />
     </>
   );
 }

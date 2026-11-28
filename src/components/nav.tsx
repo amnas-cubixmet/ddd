@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useRef, useState } from "react";
 
 const links = [
@@ -109,20 +109,7 @@ export default function Header() {
               </Link>
             );
           })}
-          <Link
-            className="button button-outline mobile-quote"
-            href="/request-quote"
-            onClick={() => setOpenedAt(null)}
-          >
-            Request a quote <ArrowUpRight size={15} />
-          </Link>
         </nav>
-        <Link
-          className="button button-outline header-quote"
-          href="/request-quote"
-        >
-          Request a quote <ArrowUpRight size={15} />
-        </Link>
       </div>
     </header>
   );

@@ -83,7 +83,7 @@ export default function AboutPage() {
             Share your project location, quantities and lighting requirements.
           </p>
         </div>
-        <Action href="/request-quote" diagonal>
+        <Action href="/contact" diagonal>
           Request a quote
         </Action>
       </section>

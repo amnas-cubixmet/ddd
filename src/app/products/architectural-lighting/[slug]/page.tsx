@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Params) {
 export default async function Page({ params }: Params) {
   const item = findArchitecturalProduct((await params).slug);
   if (!item) notFound();
-  const quote = `/request-quote?architectural=${item.slug}`;
+  const quote = `/contact?architectural=${item.slug}`;
   const message = encodeURIComponent(`Hello Bharat Lums, I would like more information about ${item.name}. Please confirm availability and specifications.`);
   const uses = item.application.toLowerCase().split(", ");
   const related = architecturalProducts.filter(({ slug }) => slug !== item.slug)

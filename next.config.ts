@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const config: NextConfig = {
   poweredByHeader: false,
+  async redirects() {
+    return [{ source: "/request-quote", destination: "/contact", permanent: true }];
+  },
   async headers() {
     return [
       {

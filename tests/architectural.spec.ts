@@ -9,12 +9,12 @@ test("all 16 lighting cards preserve product-specific enquiry selection", async 
   await expect(cards).toHaveCount(16);
   const products = await cards.evaluateAll(items => items.map(item => ({
     name: item.querySelector("h3")?.textContent?.trim() ?? "",
-    href: item.querySelector('a[href^="/request-quote"]')?.getAttribute("href") ?? "",
+    href: item.querySelector('a[href^="/contact"]')?.getAttribute("href") ?? "",
   })));
   expect(new Set(products.map(item => item.href)).size).toBe(16);
   for (const product of products) {
     expect(product.name).not.toBe("");
-    expect(product.href).toMatch(/^\/request-quote\?architectural=[a-z-]+$/);
+    expect(product.href).toMatch(/^\/contact\?architectural=[a-z-]+$/);
     await page.goto(product.href);
     await expect(page.getByRole("combobox", { name: "Product interest" })).toHaveValue(product.name);
   }

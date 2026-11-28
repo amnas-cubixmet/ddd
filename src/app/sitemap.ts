@@ -6,7 +6,7 @@ import { absoluteUrl, indexableSite, paths } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!indexableSite) return [];
   const pagePaths = [
-    "/", "/about", "/contact", "/request-quote",
+    "/", "/about", "/contact",
     paths.products, paths.architecture, paths.infrastructure, paths.applications, paths.guides,
     ...catalogueCategories.map(({ slug }) => paths.category(slug)),
     ...products.filter(isIndexableProduct).map(({ slug }) => paths.product(slug)),
