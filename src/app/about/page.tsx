@@ -105,8 +105,8 @@ export default function AboutPage() {
       </section>
       <section className={styles.navy} aria-label="Mission and vision">
         <div className={styles.inner + " " + styles.values}>
-          <div><p className={styles.kicker}>01 / Purpose</p><h2>Our mission</h2><p>To help project teams make informed lighting selections by connecting fixture types with the needs of the space, its users and its installation conditions. We aim to make the catalogue and enquiry process clear enough to support meaningful specification discussions.</p></div>
-          <div><p className={styles.kicker}>02 / Direction</p><h2>Our vision</h2><p>To make professional lighting information easier to explore, compare and enquire about, while encouraging attention to energy use, visual comfort and practical long-term performance considerations.</p></div>
+          <div><h2>Our mission</h2><p>To help project teams make informed lighting selections by connecting fixture types with the needs of the space, its users and its installation conditions. We aim to make the catalogue and enquiry process clear enough to support meaningful specification discussions.</p></div>
+          <div><h2>Our vision</h2><p>To make professional lighting information easier to explore, compare and enquire about, while encouraging attention to energy use, visual comfort and practical long-term performance considerations.</p></div>
         </div>
       </section>
       <section className={styles.inner + " " + styles.section} aria-labelledby="expertise-title">
