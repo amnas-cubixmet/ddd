@@ -20,8 +20,6 @@ export const metadata = {
 };
 
 const expertise = [
-  { title: "Infrastructure lighting", image: "/images/products/street-light.webp", alt: "Street lighting fixture reference", href: paths.infrastructure, text: "Explore street and flood lighting for roads, access routes and outdoor areas. Consider pole height, spacing, beam distribution and exposure when comparing fixtures." },
-  { title: "Industrial lighting", image: "/images/products/warehouse-high-bay.webp", alt: "Warehouse high bay lighting reference", href: paths.category("high-bay-industrial-lighting"), text: "Review high bay and warehouse fixture types for factories, storage facilities and logistics areas. Mounting height, operating hours and task visibility help define the selection." },
   { title: "Architectural lighting", image: "/images/architectural-commercial-lighting.webp", alt: "Architectural and commercial lighting reference", href: paths.architecture, text: "Explore downlights, track lighting, wall washers and linear fixtures for interiors where accent, orientation and visual character matter." },
   { title: "Commercial lighting", image: "/images/conference-room-linear-lighting.webp", alt: "Linear luminaires in a conference room", href: paths.architecture, text: "Compare panel, suspended and linear lighting types for offices, retail and hospitality. Balance workplane illumination, glare, ceiling layout and appearance." },
 ];
