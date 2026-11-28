@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, ZoomIn, X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from "react";
 import type { ProductImage } from "@/lib/catalogue";
 import { CatalogueImage } from "./catalogue-image";
@@ -12,12 +12,8 @@ export function Gallery({
   images: [ProductImage, ...ProductImage[]];
 }) {
   const [index, setIndex] = useState(0);
-  const [opened, setOpened] = useState(false);
-  const [zoom, setZoom] = useState(false);
-  const dialog = useRef<HTMLDialogElement>(null);
   const rail = useRef<HTMLDivElement>(null);
   const gesture = useRef<{ id: number; x: number; y: number } | null>(null);
-  const suppressClick = useRef(false);
   const image = images[index];
   const multiple = images.length > 1;
 
@@ -37,7 +33,6 @@ export function Gallery({
 
   function move(delta: number) {
     setIndex(current => (current + delta + images.length) % images.length);
-    setZoom(false);
   }
 
   function handleKeys(event: KeyboardEvent<HTMLElement>) {
@@ -46,53 +41,35 @@ export function Gallery({
     move(event.key === "ArrowRight" ? 1 : -1);
   }
 
-  function startSwipe(event: PointerEvent<HTMLButtonElement>) {
-    suppressClick.current = false;
+  function startSwipe(event: PointerEvent<HTMLDivElement>) {
     if (!multiple || event.pointerType === "mouse" || !event.isPrimary) return;
     gesture.current = { id: event.pointerId, x: event.clientX, y: event.clientY };
   }
 
-  function endSwipe(event: PointerEvent<HTMLButtonElement>) {
+  function endSwipe(event: PointerEvent<HTMLDivElement>) {
     const start = gesture.current;
     gesture.current = null;
     if (!start || start.id !== event.pointerId) return;
     const dx = event.clientX - start.x;
     const dy = event.clientY - start.y;
     if (Math.abs(dx) >= 36 && Math.abs(dx) > Math.abs(dy) * 1.25) {
-      suppressClick.current = true;
       move(dx < 0 ? 1 : -1);
     }
-  }
-
-  function openImage() {
-    if (suppressClick.current) {
-      suppressClick.current = false;
-      return;
-    }
-    setZoom(false);
-    setOpened(true);
-    dialog.current?.showModal();
   }
 
   return (
     <div className={`product-gallery ${styles.gallery}`} role="region" aria-label="Product image slider" onKeyDown={handleKeys}>
       <div className={styles.stage}>
-        <button
+        <div
           className={`detail-image product-gallery-image ${styles.mainImage}`}
-          type="button"
-          onClick={openImage}
           onPointerDown={startSwipe}
           onPointerUp={endSwipe}
-          onPointerCancel={() => { gesture.current = null; suppressClick.current = false; }}
-          aria-label="Open full-size fixture image"
+          onPointerCancel={() => { gesture.current = null; }}
         >
           <span className="gallery-image-transition" key={image.src}>
             <CatalogueImage {...image} eager={index === 0} sizes="(max-width: 805px) 94vw, (max-width: 1450px) 50vw, 690px" />
           </span>
-          <span className="card-icon">
-            <ZoomIn size={19} aria-hidden="true" />
-          </span>
-        </button>
+        </div>
         {multiple && <>
           <button type="button" className={`${styles.arrow} ${styles.previous}`} aria-label="Previous image" onClick={() => move(-1)}>
             <ChevronLeft size={20} aria-hidden="true" />
@@ -120,30 +97,6 @@ export function Gallery({
           ))}
         </div>
       )}
-      <dialog
-        className="product-lightbox"
-        ref={dialog}
-        onClose={() => setOpened(false)}
-        onKeyDown={event => { if (event.key === "ArrowLeft" || event.key === "ArrowRight") event.stopPropagation(); }}
-        aria-labelledby="product-image-title"
-      >
-        <header>
-          <h2 id="product-image-title">{image.label}</h2>
-          <button type="button" className="icon-button" aria-label="Close fixture image" onClick={() => dialog.current?.close()}>
-            <X size={20} />
-          </button>
-        </header>
-        <button type="button" className="lightbox-image" aria-pressed={zoom} aria-label="Magnify fixture" onClick={() => setZoom(!zoom)}>
-          <span className={zoom ? "image-magnified" : undefined}>
-            {opened && <CatalogueImage src={image.src} alt={image.alt} sizes="(max-width: 700px) 94vw, 850px" />}
-          </span>
-        </button>
-        {multiple && <div className={styles.lightboxNavigation}>
-          <button type="button" aria-label="Previous full-size image" onClick={() => move(-1)}><ChevronLeft size={20} /></button>
-          <span>{index + 1} / {images.length}</span>
-          <button type="button" aria-label="Next full-size image" onClick={() => move(1)}><ChevronRight size={20} /></button>
-        </div>}
-      </dialog>
     </div>
   );
 }

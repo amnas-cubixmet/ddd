@@ -33,10 +33,15 @@ test("shared detail layout preserves gallery, enquiry, and mobile widths", async
     const [summaryBox, panelBox, galleryBox, specsBox] = await Promise.all([summary.boundingBox(), panel.boundingBox(), gallery.boundingBox(), specs.boundingBox()]);
     expect(panelBox!.y - (summaryBox!.y + summaryBox!.height)).toBeLessThanOrEqual(24);
     expect(specsBox!.y - (galleryBox!.y + galleryBox!.height)).toBeLessThanOrEqual(24);
-    await detail.getByRole("button", { name: "Open full-size fixture image" }).click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await expect(page.locator(".lightbox-image img")).toHaveCSS("object-fit", "contain");
-    await page.getByRole("button", { name: "Close fixture image" }).click();
-    await expect(page.getByRole("dialog")).not.toBeVisible();
+    await expect(detail.locator(".product-lightbox")).toHaveCount(0);
+    await detail.locator(".product-gallery-image").click({position: {x: 30, y: 30}});
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    const next = gallery.getByRole("button", { name: "Next image" });
+    if (await next.count()) {
+      await next.click();
+      await expect(gallery.locator('[aria-live="polite"]')).toContainText("Image 2 of");
+      await gallery.getByRole("button", { name: "Previous image" }).click();
+      await expect(gallery.locator('[aria-live="polite"]')).toContainText("Image 1 of");
+    }
   }
 });
