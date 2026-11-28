@@ -78,3 +78,11 @@
   .details { font-size: .72rem; padding-top: 7px; }
   .details svg { width: 12px; height: 12px; }
 }
+
+@media (max-width: 360px) {
+  .heading { flex-wrap: wrap; gap: 2px 8px; }
+  .heading h2 { font-size: 1.3rem; }
+  .grid { gap: 8px; }
+  .copy { padding: 8px; }
+  .copy h3 { overflow-wrap: normal; word-break: normal; }
+}

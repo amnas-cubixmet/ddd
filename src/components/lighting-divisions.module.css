@@ -133,3 +133,10 @@
 }
 .card:focus-visible { outline: 2px solid var(--bharat-blue); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .card, .image img { transition: none; } }
+
+@media (max-width: 650px) {
+  .section { padding-block: 24px; }
+  .grid { gap: 12px; grid-auto-rows: auto; }
+  .copy h3 { overflow-wrap: anywhere; }
+  .link { min-height: 44px; }
+}

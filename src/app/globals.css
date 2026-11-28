@@ -1495,3 +1495,21 @@ textarea::placeholder {
   .site-header .header-inner { gap: 4px; }
   .site-header .header-quote { font-size: .72rem; gap: 4px; }
 }
+
+/* Homepage-only mobile shell, footer and fixed chat alignment. */
+@media (max-width: 650px) {
+  .home-header ~ main .shell,
+  .home-header ~ .site-footer .shell { width: calc(100% - 32px); }
+  .home-header ~ .site-footer .footer-main { gap: 16px 12px; padding-block: 24px; }
+  .home-header ~ .site-footer .footer-brand,
+  .home-header ~ .site-footer .footer-links { min-width: 0; }
+  .home-header ~ .site-footer .footer-main p { overflow-wrap: anywhere; }
+  .home-header ~ .site-footer .footer-links a { min-height: 44px; padding-block: 7px; font-size: .8rem; }
+  .home-header ~ .site-footer .footer-bottom { padding-bottom: calc(68px + env(safe-area-inset-bottom)); font-size: .76rem; }
+  .home-header ~ .floating-whatsapp {
+    right: max(10px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: 48px;
+    height: 48px;
+  }
+}

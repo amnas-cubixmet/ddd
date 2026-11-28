@@ -225,3 +225,17 @@
 .countries button[aria-pressed="true"] svg {
   color: var(--highlight);
 }
+
+/* Compact touch-first map console. Keep the interactive globe and all countries. */
+@media (max-width: 650px) {
+  .section { padding-block: 24px; }
+  .console { border-radius: 10px; }
+  .stage { min-height: clamp(220px, 73vw, 340px); border-radius: 10px 10px 0 0; }
+  .controls { padding: 12px; border-radius: 0 0 10px 10px; }
+  .details h3 { font-size: clamp(1.5rem, 6vw, 2rem); margin-block: 6px; }
+  .details > p:last-child { min-height: 0; font-size: .85rem; line-height: 1.5; }
+  .kicker { font-size: .65rem; letter-spacing: .1em; }
+  .instruction { margin-block: 8px; font-size: .76rem; line-height: 1.5; }
+  .countries button { min-height: 44px; font-size: .76rem; }
+  .reset { margin-top: 6px; min-height: 44px; }
+}

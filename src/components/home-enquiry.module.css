@@ -117,3 +117,21 @@
     transition: none;
   }
 }
+
+/* Mobile form: single-column controls, no iOS focus zoom, compact panel. */
+@media (max-width: 650px) {
+  .section { padding-block: 26px; }
+  .heading { margin-bottom: 16px; text-align: left; }
+  .heading .kicker { font-size: .65rem; letter-spacing: .12em; margin-bottom: 6px; }
+  .heading h2 { font-size: clamp(1.65rem, 7vw, 2.3rem); line-height: 1.12; }
+  .heading > p:last-child { margin: 8px 0 0; font-size: .85rem; line-height: 1.55; }
+  .panel { padding: 12px; border-radius: 10px; }
+  .panel :global(.homepage-enquiry-form) { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .panel :global(.enquiry-field) { min-width: 0; gap: 5px; }
+  .panel :global(.enquiry-field label) { font-size: .8rem; }
+  .panel :global(.enquiry-field input),
+  .panel :global(.enquiry-field select),
+  .panel :global(.enquiry-field textarea) { min-height: 46px; padding: 10px 12px; font-size: 16px; max-width: 100%; }
+  .panel :global(.enquiry-field textarea) { min-height: 110px; }
+  .panel :global(.homepage-enquiry-form > .button-primary) { min-height: 48px; font-size: .85rem; white-space: normal; }
+}
