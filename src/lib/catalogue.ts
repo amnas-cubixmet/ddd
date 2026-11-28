@@ -1,10 +1,10 @@
 import { fixturePhoto, fixturePhotoGroups } from "./fixture-photos";
 
 const photographedFamilies = [
-  { slug: "led-flood-light", category: "floodlights", name: "LED Flood Light", label: "LED Flood Lights", description: "Photographed flood light fixtures.", image: "products/flood-light" },
-  { slug: "led-street-light", category: "led-street-lights", name: "LED Street Light", label: "LED Street Lights", description: "Photographed street light fixtures.", image: "products/street-light" },
-  { slug: "led-high-bay-light", category: "high-bay-industrial-lighting", name: "LED High Bay Light", label: "LED High Bay Lights", description: "Photographed round fixtures and reflectors.", image: "products/high-bay" },
-  { slug: "led-warehouse-light", category: "led-warehouse-lighting", name: "LED Warehouse Light", label: "LED Warehouse Lighting", description: "Photographed linear modular fixtures.", image: "products/warehouse-high-bay" },
+  { slug: "led-flood-light", category: "floodlights", name: "LED Flood Light", label: "LED Flood Lights", description: "Compare labelled floodlights for entrances, yards and defined outdoor areas.", image: "products/flood-light" },
+  { slug: "led-street-light", category: "led-street-lights", name: "LED Street Light", label: "LED Street Lights", description: "Explore roadway fixtures and compare mounting and light distribution requirements.", image: "products/street-light" },
+  { slug: "led-high-bay-light", category: "high-bay-industrial-lighting", name: "LED High Bay Light", label: "LED High Bay Lights", description: "Explore round high bay and reflector designs for taller industrial spaces.", image: "products/high-bay" },
+  { slug: "led-warehouse-light", category: "led-warehouse-lighting", name: "LED Warehouse Light", label: "LED Warehouse Lighting", description: "Browse linear fixture references for warehouse aisles and staging areas.", image: "products/warehouse-high-bay" },
 ] as const;
 
 export const catalogueCategories = photographedFamilies.map(family => ({
@@ -37,23 +37,28 @@ export type Product = {
   applications: string;
   status: "draft" | "photographed" | "verified";
   wattages?: number[];
+  model?: { brand: string; code: string };
   specifications?: { name: string; value: string }[];
   datasheet?: `/${string}.pdf`;
   catalogue?: `/${string}.pdf`;
 };
 
-// Application descriptions for matching photographed model families and wattages.
-// See docs/hilums-catalogue-reference.json for supplier provenance.
-// Keep label-derived model names, photos and specifications unchanged.
-const supplierDescriptions: Record<string, string> = {
-  "oron-30": "30 W LED floodlight for smaller exterior areas, including building entrances and walkways.",
-  "oron-50": "50 W LED floodlight for outdoor lighting around residential and commercial properties.",
-  "oron-100": "100 W LED floodlight for covering larger exterior areas.",
-  "neona-18": "18 W LED streetlight for neighborhood lanes and compact pedestrian spaces.",
-  "neona-24": "24 W LED streetlight for local access roads and footpaths.",
-  "neona-36": "36 W LED streetlight for residential roads and mid-sized outdoor areas.",
-  "neona-50": "50 W LED streetlight for wider local roads and shared parking spaces.",
-  "neona-100": "100 W LED streetlight for broad streets, parking areas and larger outdoor sites."
+// Match only models linked to the existing product photos. Supplier references are recorded in
+// docs/hilums-catalogue-reference.json and do not establish Bharat Lums stock or warranty.
+const modelGuidance: Record<string, string> = {
+  "oron-30": "For an entrance or short walkway, check close-range coverage and glare from the mounting position.",
+  "oron-50": "When assessing a building perimeter, compare the beam footprint at the planned height and tilt.",
+  "oron-100": "For a wider yard, check how the proposed beam meets the edges of the target area.",
+  "glowbee-150": "When comparing floodlights for a loading area, assess shadows behind vehicles from the planned aiming positions.",
+  "glowbee-200": "For a larger exterior area, check spill light and glare at site boundaries.",
+  "vimio-150": "Use the VIMIO15D150 code when requesting the optic, mounting dimensions and full datasheet.",
+  "neona-18": "For a pedestrian route, use the actual pole geometry to check the spaces between fixtures.",
+  "neona-24": "When reviewing an access route, compare near- and far-side coverage at the intended bracket position.",
+  "neona-36": "Compare distributions at the planned pole spacing and review illumination at path intersections.",
+  "neona-50": "Include road width and bracket overhang when evaluating the layout.",
+  "neona-100": "For a wider site, request the photometric file for the exact model and check coverage across all lanes.",
+  "novapro-50": "For an existing pole line, confirm the bracket fit and compare the road-facing distribution.",
+  "novapro-100": "Request the exact model data when reviewing the proposed layout, ingress requirements and surge protection.",
 };
 
 const photographedProducts: Product[] = photographedFamilies.flatMap((family) =>
@@ -72,9 +77,10 @@ const photographedProducts: Product[] = photographedFamilies.flatMap((family) =>
       name,
       status: "photographed",
       categories: [family.category],
-      description: supplierDescriptions[photo.image] ?? (photo.wattage
-        ? `Photographed ${family.name.toLowerCase()} with an Oreli model label.`
-        : "Photographed fixture. Ask us for the exact model and specifications."),
+      description: photo.wattage
+        ? `${name} is a photographed ${family.name.toLowerCase()}. ${modelGuidance[photo.image] ?? "Contact us for the model datasheet and availability."}`
+        : `Photographed ${photo.name[0].toLowerCase() + photo.name.slice(1)} reference. Contact us to confirm the exact model, mounting and ratings.`,
+      model: photo.wattage ? { brand: "Oreli", code: photo.name } : undefined,
       features: [],
       applications: "",
       images: [
@@ -103,6 +109,10 @@ export function findCatalogueFixture(categorySlug: string) {
 export const publishedProducts = products.filter(
   (product) => product.status !== "draft",
 );
+export function isIndexableProduct(product: Product) {
+  return product.status === "verified" || (product.status === "photographed" && Boolean(product.model));
+}
+
 export const catalogueDownload = publishedProducts.find(
   (product) => product.status === "verified" && product.catalogue,
 )?.catalogue;

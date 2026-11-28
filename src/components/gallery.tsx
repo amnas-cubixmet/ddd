@@ -87,7 +87,7 @@ export function Gallery({
           aria-label="Open full-size fixture image"
         >
           <span className="gallery-image-transition" key={image.src}>
-            <CatalogueImage {...image} sizes="(max-width: 805px) 94vw, 55vw" />
+            <CatalogueImage {...image} eager={index === 0} sizes="(max-width: 805px) 94vw, (max-width: 1450px) 50vw, 690px" />
           </span>
           <span className="card-icon">
             <ZoomIn size={19} aria-hidden="true" />

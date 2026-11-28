@@ -160,7 +160,9 @@ export function Footer() {
             <h2 id="footer-explore">Explore</h2>
             <Link href="/products">Product Catalogue</Link>
             <Link href="/about">Company Information</Link>
-            <Link href="/#global-presence">Global presence</Link>
+            <Link href="/applications">Lighting Applications</Link>
+            <Link href="/lighting-guides">Lighting Guides</Link>
+            <Link href="/#global-presence">Explore the regional map</Link>
             <Link href="/contact">Contact</Link>
           </nav>
           <div className="footer-links">

@@ -3,23 +3,27 @@ import { Reveal } from "@/components/motion";
 import { CompanyValues } from "@/components/company-values";
 import { GlobalPresenceSection } from "@/components/global-presence/global-presence";
 import { Action } from "@/components/ui";
-import { brand, metadata as pageMetadata } from "@/lib/site";
+import { brand } from "@/lib/site";
+import { pageMetadata, paths } from "@/lib/seo";
+import { PageSchema } from "@/components/seo-data";
+import { LightingLinks, LightingSections } from "@/components/lighting-content";
 import conferenceRoom from "../../../public/images/about-bharat-lums-conference.webp";
 import styles from "./about.module.css";
 
 const intro =
-  "Bharat Lums offers LED lighting solutions for commercial, industrial and outdoor spaces.";
+  "Meet Bharat Lums and learn how to brief an LED lighting enquiry for commercial interiors, industrial sites and outdoor infrastructure.";
 
-export const metadata = pageMetadata("About", "/about", intro);
+export const metadata = pageMetadata({ title: "About Our Lighting Approach", path: "/about", summary: intro });
 
 export default function AboutPage() {
   return (
     <>
+    <PageSchema title="About" path="/about" summary={intro} />
     <div className={`shell ${styles.page}`}>
       <section className={styles.hero} aria-labelledby="about-title">
         <Reveal className={styles.heroCopy}>
           <p className="eyebrow">About Bharat Lums</p>
-          <h1 id="about-title">Engineering brighter possibilities.</h1>
+          <h1 id="about-title">About Bharat Lums</h1>
           <p className={styles.lead}>{intro}</p>
           <Action href="/products" diagonal>
             Explore products
@@ -58,6 +62,15 @@ export default function AboutPage() {
         </Reveal>
       </section>
 
+      <LightingSections sections={[
+        { title: "What the catalogue covers", text: "The infrastructure catalogue includes photographed street lights, flood lights and industrial fixture designs. The architectural collection illustrates common lighting types for commercial interiors. Model-specific labels and reference imagery are identified in the catalogue." },
+        { title: "What to send with a project enquiry", text: "Tell us the application, site dimensions, mounting heights and quantities. Include any required datasheet, optic, environmental rating or control compatibility. These details help us discuss the appropriate fixture type and confirm the model information for your project." },
+      ]} />
+      <LightingLinks title="Explore the catalogue and project resources" links={[
+        { name: "Outdoor and infrastructure lighting", href: paths.infrastructure },
+        { name: "Architectural and commercial lighting", href: paths.architecture },
+        { name: "Lighting applications", href: paths.applications },
+      ]} />
     </div>
     <CompanyValues page="about" />
     <GlobalPresenceSection />

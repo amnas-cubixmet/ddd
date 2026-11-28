@@ -73,7 +73,7 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
 
   useEffect(() => {
     if (introDismissed) return;
-    const watchdog = window.setTimeout(() => setIntroTimedOut(true), 6500);
+    const watchdog = window.setTimeout(() => setIntroTimedOut(true), 1800);
     return () => window.clearTimeout(watchdog);
   }, [introDismissed]);
 
@@ -112,14 +112,12 @@ export function HomeHero({ catalogue }: { catalogue?: string }) {
             Powering a Brighter Tomorrow
           </p>
           <h1 data-hero-enter>
-            <span>Light up</span>
-            <span>
-              the future<span className={styles.heroDot}>.</span>
-            </span>
+            <span>LED lighting</span>{" "}
+            <span>solutions<span className={styles.heroDot}>.</span></span>
           </h1>
           <p className={styles.heroSummary} data-hero-enter>
-            Advanced LED lighting solutions for commercial, industrial and
-            outdoor environments.
+            Compare lighting for roads, industrial facilities and commercial
+            interiors. Browse the catalogue or discuss your project with Bharat Lums.
           </p>
           <div className={styles.heroActions} data-hero-enter>
             <Link className={styles.heroPrimary} href="/products">

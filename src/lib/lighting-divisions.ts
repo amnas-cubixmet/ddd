@@ -2,7 +2,7 @@ export const lightingDivisions = {
   architectural: {
     title: "Architectural & Commercial Lighting",
     href: "/products/architectural-lighting",
-    description: "Lighting for shopping malls, showrooms, hospitality, offices and refined interiors.",
+    description: "Compare architectural and commercial LED lighting fixture types for offices, retail showrooms, shopping centres and hospitality interiors.",
     image: "/images/architectural-commercial-lighting.webp",
     alt: "Architectural and commercial lighting",
     fallbackImage: "/images/products/office-linear.webp",
@@ -12,11 +12,11 @@ export const lightingDivisions = {
   infrastructure: {
     title: "Outdoor & Infrastructure Lighting",
     href: "/products/infrastructure-lighting",
-    description: "Large-area lighting for roads, highways, industrial sites, warehouses and exterior spaces.",
+    description: "Explore outdoor and infrastructure LED lighting for roads, parking areas, industrial facilities and warehouses. Compare photographed fixtures and project requirements.",
     image: "/images/conference-room-linear-lighting.webp",
     fallbackImage: undefined,
     alt: "Illustrative outdoor road and street lighting application",
-    highlights: ["Roads & highways", "High mast & flood lighting", "Industrial facilities", "Outdoor spaces"],
+    highlights: ["Roads & highways", "Flood lighting", "Industrial facilities", "Outdoor spaces"],
     categories: ["floodlights", "led-street-lights", "high-bay-industrial-lighting", "led-warehouse-lighting"],
   },
 } as const;

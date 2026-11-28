@@ -13,6 +13,11 @@ export function ContactSection({
 }) {
   const whatsappNumber = brand.phoneHref.replace(/\D/g, "");
 
+  const whatsapp = new URL(`https://wa.me/${whatsappNumber}`);
+  if (defaults?.interest) {
+    whatsapp.searchParams.set("text", `Hello Bharat Lums, I would like to enquire about ${defaults.interest}. Please confirm the options and availability.`);
+  }
+
   return (
     <section
       className={`shell section-tight contact-grid ${styles.layout}`}
@@ -59,7 +64,7 @@ export function ContactSection({
           </li>
           <li>
             <a
-              href={`https://wa.me/${whatsappNumber}`}
+              href={whatsapp.href}
               target="_blank"
               rel="noopener noreferrer"
             >
