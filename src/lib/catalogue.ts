@@ -42,6 +42,20 @@ export type Product = {
   catalogue?: `/${string}.pdf`;
 };
 
+// Application descriptions for matching photographed model families and wattages.
+// See docs/hilums-catalogue-reference.json for supplier provenance.
+// Keep label-derived model names, photos and specifications unchanged.
+const supplierDescriptions: Record<string, string> = {
+  "oron-30": "30 W LED floodlight for smaller exterior areas, including building entrances and walkways.",
+  "oron-50": "50 W LED floodlight for outdoor lighting around residential and commercial properties.",
+  "oron-100": "100 W LED floodlight for covering larger exterior areas.",
+  "neona-18": "18 W LED streetlight for neighborhood lanes and compact pedestrian spaces.",
+  "neona-24": "24 W LED streetlight for local access roads and footpaths.",
+  "neona-36": "36 W LED streetlight for residential roads and mid-sized outdoor areas.",
+  "neona-50": "50 W LED streetlight for wider local roads and shared parking spaces.",
+  "neona-100": "100 W LED streetlight for broad streets, parking areas and larger outdoor sites."
+};
+
 const photographedProducts: Product[] = photographedFamilies.flatMap((family) =>
   (fixturePhotoGroups[family.slug]?.photos ?? []).map((photo) => {
     const name = photo.wattage
@@ -58,9 +72,9 @@ const photographedProducts: Product[] = photographedFamilies.flatMap((family) =>
       name,
       status: "photographed",
       categories: [family.category],
-      description: photo.wattage
+      description: supplierDescriptions[photo.image] ?? (photo.wattage
         ? `Photographed ${family.name.toLowerCase()} with an Oreli model label.`
-        : "Photographed fixture. Ask us for the exact model and specifications.",
+        : "Photographed fixture. Ask us for the exact model and specifications."),
       features: [],
       applications: "",
       images: [
