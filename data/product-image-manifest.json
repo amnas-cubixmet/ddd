@@ -1,0 +1,1087 @@
+{
+  "brand": "BHARAT LUMS",
+  "sourceBranch": "main",
+  "sourceTree": "ae2bcc6669bf5512ddaa1cf215a304e5978e8990",
+  "confirmedProducts": 40,
+  "targetImages": 120,
+  "completedImages": 0,
+  "referenceFileCount": 149,
+  "standard": {
+    "background": "#002652",
+    "width": 1600,
+    "height": 1600,
+    "format": "webp",
+    "colorSpace": "sRGB"
+  },
+  "products": [
+    {
+      "name": "Round fixture with deep reflector",
+      "slug": "deep-reflector",
+      "category": "high-bay-industrial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/deep-reflector.webp",
+        "public/images/products/fixture-photos/deep-reflector-2.webp",
+        "public/images/products/fixture-photos/deep-reflector-3.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "alternate views visually inspected; primary not retrieved",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/deep-reflector/01.webp",
+        "public/images/products/catalogue/deep-reflector/02.webp",
+        "public/images/products/catalogue/deep-reflector/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Panel Light",
+      "slug": "panel-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-panel-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/panel-light/01.webp",
+        "public/images/products/catalogue/panel-light/02.webp",
+        "public/images/products/catalogue/panel-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OFL-ORON · 30 W",
+      "slug": "oron-30",
+      "category": "floodlights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/oron-30.webp",
+        "public/images/products/fixture-photos/oron-30-2.webp",
+        "public/images/products/fixture-photos/oron-30-3.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/oron-30/01.webp",
+        "public/images/products/catalogue/oron-30/02.webp",
+        "public/images/products/catalogue/oron-30/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OFL-ORON · 50 W",
+      "slug": "oron-50",
+      "category": "floodlights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/oron-50.webp",
+        "public/images/products/fixture-photos/oron-50-2.webp",
+        "public/images/products/fixture-photos/oron-50-3.webp",
+        "public/images/products/fixture-photos/oron-50-4.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/oron-50/01.webp",
+        "public/images/products/catalogue/oron-50/02.webp",
+        "public/images/products/catalogue/oron-50/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OFL-ORON · 100 W",
+      "slug": "oron-100",
+      "category": "floodlights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/oron-100.webp",
+        "public/images/products/fixture-photos/oron-100-2.webp",
+        "public/images/products/fixture-photos/oron-100-3.webp",
+        "public/images/products/fixture-photos/oron-100-4.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/oron-100/01.webp",
+        "public/images/products/catalogue/oron-100/02.webp",
+        "public/images/products/catalogue/oron-100/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OFL-GlowBee · 150 W",
+      "slug": "glowbee-150",
+      "category": "floodlights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/glowbee-150.webp",
+        "public/images/products/fixture-photos/glowbee-150-2.webp",
+        "public/images/products/fixture-photos/glowbee-150-3.webp",
+        "public/images/products/fixture-photos/glowbee-150-4.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/glowbee-150/01.webp",
+        "public/images/products/catalogue/glowbee-150/02.webp",
+        "public/images/products/catalogue/glowbee-150/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OFL-GlowBee · 200 W",
+      "slug": "glowbee-200",
+      "category": "floodlights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/glowbee-200.webp",
+        "public/images/products/fixture-photos/glowbee-200-2.webp",
+        "public/images/products/fixture-photos/glowbee-200-3.webp",
+        "public/images/products/fixture-photos/glowbee-200-4.webp",
+        "public/images/products/fixture-photos/glowbee-200-5.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/glowbee-200/01.webp",
+        "public/images/products/catalogue/glowbee-200/02.webp",
+        "public/images/products/catalogue/glowbee-200/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli VIMIO15D150 · 150 W",
+      "slug": "vimio-150",
+      "category": "floodlights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/vimio-150.webp",
+        "public/images/products/fixture-photos/vimio-150-2.webp",
+        "public/images/products/fixture-photos/vimio-150-3.webp",
+        "public/images/products/fixture-photos/vimio-150-4.webp",
+        "public/images/products/fixture-photos/vimio-150-5.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/vimio-150/01.webp",
+        "public/images/products/catalogue/vimio-150/02.webp",
+        "public/images/products/catalogue/vimio-150/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OSL-NEONA · 18 W",
+      "slug": "neona-18",
+      "category": "led-street-lights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/neona-18.webp",
+        "public/images/products/fixture-photos/neona-18-2.webp",
+        "public/images/products/fixture-photos/neona-18-3.webp",
+        "public/images/products/fixture-photos/neona-18-4.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/neona-18/01.webp",
+        "public/images/products/catalogue/neona-18/02.webp",
+        "public/images/products/catalogue/neona-18/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OSL-NEONA · 24 W",
+      "slug": "neona-24",
+      "category": "led-street-lights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/neona-24.webp",
+        "public/images/products/fixture-photos/neona-24-2.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/neona-24/01.webp",
+        "public/images/products/catalogue/neona-24/02.webp",
+        "public/images/products/catalogue/neona-24/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OSL-NEONA · 36 W",
+      "slug": "neona-36",
+      "category": "led-street-lights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/neona-36.webp",
+        "public/images/products/fixture-photos/neona-36-2.webp",
+        "public/images/products/fixture-photos/neona-36-3.webp",
+        "public/images/products/fixture-photos/neona-36-4.webp",
+        "public/images/products/fixture-photos/neona-36-5.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/neona-36/01.webp",
+        "public/images/products/catalogue/neona-36/02.webp",
+        "public/images/products/catalogue/neona-36/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OSL-NEONA · 50 W",
+      "slug": "neona-50",
+      "category": "led-street-lights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/neona-50.webp",
+        "public/images/products/fixture-photos/neona-50-2.webp",
+        "public/images/products/fixture-photos/neona-50-3.webp",
+        "public/images/products/fixture-photos/neona-50-4.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/neona-50/01.webp",
+        "public/images/products/catalogue/neona-50/02.webp",
+        "public/images/products/catalogue/neona-50/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OSL-NEONA · 100 W",
+      "slug": "neona-100",
+      "category": "led-street-lights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/neona-100.webp",
+        "public/images/products/fixture-photos/neona-100-2.webp",
+        "public/images/products/fixture-photos/neona-100-3.webp",
+        "public/images/products/fixture-photos/neona-100-4.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/neona-100/01.webp",
+        "public/images/products/catalogue/neona-100/02.webp",
+        "public/images/products/catalogue/neona-100/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OSL-NOVAPRO · 50 W",
+      "slug": "novapro-50",
+      "category": "led-street-lights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/novapro-50.webp",
+        "public/images/products/fixture-photos/novapro-50-2.webp",
+        "public/images/products/fixture-photos/novapro-50-3.webp",
+        "public/images/products/fixture-photos/novapro-50-4.webp",
+        "public/images/products/fixture-photos/novapro-50-5.webp",
+        "public/images/products/fixture-photos/novapro-50-6.webp",
+        "public/images/products/fixture-photos/novapro-50-7.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/novapro-50/01.webp",
+        "public/images/products/catalogue/novapro-50/02.webp",
+        "public/images/products/catalogue/novapro-50/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Oreli OSL-NOVAPRO · 100 W",
+      "slug": "novapro-100",
+      "category": "led-street-lights",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/novapro-100.webp",
+        "public/images/products/fixture-photos/novapro-100-2.webp",
+        "public/images/products/fixture-photos/novapro-100-3.webp",
+        "public/images/products/fixture-photos/novapro-100-4.webp",
+        "public/images/products/fixture-photos/novapro-100-5.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/novapro-100/01.webp",
+        "public/images/products/catalogue/novapro-100/02.webp",
+        "public/images/products/catalogue/novapro-100/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Black round fixture with exposed LED board",
+      "slug": "round-black-exposed",
+      "category": "high-bay-industrial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/round-black-exposed.webp",
+        "public/images/products/fixture-photos/round-black-exposed-2.webp",
+        "public/images/products/fixture-photos/round-black-exposed-3.webp",
+        "public/images/products/fixture-photos/round-black-exposed-4.webp",
+        "public/images/products/fixture-photos/round-black-exposed-5.webp",
+        "public/images/products/fixture-photos/round-black-exposed-6.webp",
+        "public/images/products/fixture-photos/round-black-exposed-7.webp",
+        "public/images/products/fixture-photos/round-black-exposed-8.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/round-black-exposed/01.webp",
+        "public/images/products/catalogue/round-black-exposed/02.webp",
+        "public/images/products/catalogue/round-black-exposed/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Black round fixture with grouped lens modules",
+      "slug": "round-black-grouped",
+      "category": "high-bay-industrial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/round-black-grouped.webp",
+        "public/images/products/fixture-photos/round-black-grouped-2.webp",
+        "public/images/products/fixture-photos/round-black-grouped-3.webp",
+        "public/images/products/fixture-photos/round-black-grouped-4.webp",
+        "public/images/products/fixture-photos/round-black-grouped-5.webp",
+        "public/images/products/fixture-photos/round-black-grouped-6.webp",
+        "public/images/products/fixture-photos/round-black-grouped-7.webp",
+        "public/images/products/fixture-photos/round-black-grouped-8.webp",
+        "public/images/products/fixture-photos/round-black-grouped-9.webp",
+        "public/images/products/fixture-photos/round-black-grouped-10.webp",
+        "public/images/products/fixture-photos/round-black-grouped-11.webp",
+        "public/images/products/fixture-photos/round-black-grouped-12.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/round-black-grouped/01.webp",
+        "public/images/products/catalogue/round-black-grouped/02.webp",
+        "public/images/products/catalogue/round-black-grouped/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Black bracket-mounted multi-lens fixture",
+      "slug": "round-black-multilens",
+      "category": "high-bay-industrial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/round-black-multilens.webp",
+        "public/images/products/fixture-photos/round-black-multilens-2.webp",
+        "public/images/products/fixture-photos/round-black-multilens-3.webp",
+        "public/images/products/fixture-photos/round-black-multilens-4.webp",
+        "public/images/products/fixture-photos/round-black-multilens-5.webp",
+        "public/images/products/fixture-photos/round-black-multilens-6.webp",
+        "public/images/products/fixture-photos/round-black-multilens-7.webp",
+        "public/images/products/fixture-photos/round-black-multilens-8.webp",
+        "public/images/products/fixture-photos/round-black-multilens-9.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/round-black-multilens/01.webp",
+        "public/images/products/catalogue/round-black-multilens/02.webp",
+        "public/images/products/catalogue/round-black-multilens/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Silver bracket-mounted multi-lens fixture",
+      "slug": "round-silver-multilens",
+      "category": "high-bay-industrial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/round-silver-multilens.webp",
+        "public/images/products/fixture-photos/round-silver-multilens-2.webp",
+        "public/images/products/fixture-photos/round-silver-multilens-3.webp",
+        "public/images/products/fixture-photos/round-silver-multilens-4.webp",
+        "public/images/products/fixture-photos/round-silver-multilens-5.webp",
+        "public/images/products/fixture-photos/round-silver-multilens-6.webp",
+        "public/images/products/fixture-photos/round-silver-multilens-7.webp",
+        "public/images/products/fixture-photos/round-silver-multilens-8.webp",
+        "public/images/products/fixture-photos/round-silver-multilens-9.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/round-silver-multilens/01.webp",
+        "public/images/products/catalogue/round-silver-multilens/02.webp",
+        "public/images/products/catalogue/round-silver-multilens/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Silver round LED fixture",
+      "slug": "round-silver-face",
+      "category": "high-bay-industrial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/round-silver-face.webp",
+        "public/images/products/fixture-photos/round-silver-face-2.webp",
+        "public/images/products/fixture-photos/round-silver-face-3.webp",
+        "public/images/products/fixture-photos/round-silver-face-4.webp",
+        "public/images/products/fixture-photos/round-silver-face-5.webp",
+        "public/images/products/fixture-photos/round-silver-face-6.webp",
+        "public/images/products/fixture-photos/round-silver-face-7.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/round-silver-face/01.webp",
+        "public/images/products/catalogue/round-silver-face/02.webp",
+        "public/images/products/catalogue/round-silver-face/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Round reflector with grouped lenses",
+      "slug": "reflector-grouped",
+      "category": "high-bay-industrial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/reflector-grouped.webp",
+        "public/images/products/fixture-photos/reflector-grouped-2.webp",
+        "public/images/products/fixture-photos/reflector-grouped-3.webp",
+        "public/images/products/fixture-photos/reflector-grouped-4.webp",
+        "public/images/products/fixture-photos/reflector-grouped-5.webp",
+        "public/images/products/fixture-photos/reflector-grouped-6.webp",
+        "public/images/products/fixture-photos/reflector-grouped-7.webp",
+        "public/images/products/fixture-photos/reflector-grouped-8.webp",
+        "public/images/products/fixture-photos/reflector-grouped-9.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/reflector-grouped/01.webp",
+        "public/images/products/catalogue/reflector-grouped/02.webp",
+        "public/images/products/catalogue/reflector-grouped/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Round reflector with exposed LED board",
+      "slug": "reflector-exposed",
+      "category": "high-bay-industrial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/reflector-exposed.webp",
+        "public/images/products/fixture-photos/reflector-exposed-2.webp",
+        "public/images/products/fixture-photos/reflector-exposed-3.webp",
+        "public/images/products/fixture-photos/reflector-exposed-4.webp",
+        "public/images/products/fixture-photos/reflector-exposed-5.webp",
+        "public/images/products/fixture-photos/reflector-exposed-6.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/reflector-exposed/01.webp",
+        "public/images/products/catalogue/reflector-exposed/02.webp",
+        "public/images/products/catalogue/reflector-exposed/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Large round reflector with dark inner ring",
+      "slug": "reflector-dark-ring",
+      "category": "high-bay-industrial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/reflector-dark-ring.webp",
+        "public/images/products/fixture-photos/reflector-dark-ring-2.webp",
+        "public/images/products/fixture-photos/reflector-dark-ring-3.webp",
+        "public/images/products/fixture-photos/reflector-dark-ring-4.webp",
+        "public/images/products/fixture-photos/reflector-dark-ring-5.webp",
+        "public/images/products/fixture-photos/reflector-dark-ring-6.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/reflector-dark-ring/01.webp",
+        "public/images/products/catalogue/reflector-dark-ring/02.webp",
+        "public/images/products/catalogue/reflector-dark-ring/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Single-bar modular LED fixture",
+      "slug": "linear-single",
+      "category": "led-warehouse-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/linear-single.webp",
+        "public/images/products/fixture-photos/linear-single-2.webp",
+        "public/images/products/fixture-photos/linear-single-3.webp",
+        "public/images/products/fixture-photos/linear-single-4.webp",
+        "public/images/products/fixture-photos/linear-single-5.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/linear-single/01.webp",
+        "public/images/products/catalogue/linear-single/02.webp",
+        "public/images/products/catalogue/linear-single/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Dual-bar modular LED fixture",
+      "slug": "linear-dual",
+      "category": "led-warehouse-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/linear-dual.webp",
+        "public/images/products/fixture-photos/linear-dual-2.webp",
+        "public/images/products/fixture-photos/linear-dual-3.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "reference-based",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/linear-dual/01.webp",
+        "public/images/products/catalogue/linear-dual/02.webp",
+        "public/images/products/catalogue/linear-dual/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Recessed Downlight",
+      "slug": "recessed-downlight",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-recessed-downlight.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/recessed-downlight/01.webp",
+        "public/images/products/catalogue/recessed-downlight/02.webp",
+        "public/images/products/catalogue/recessed-downlight/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Surface Downlight",
+      "slug": "surface-downlight",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-surface-downlight.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/surface-downlight/01.webp",
+        "public/images/products/catalogue/surface-downlight/02.webp",
+        "public/images/products/catalogue/surface-downlight/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED COB Spotlight",
+      "slug": "cob-spotlight",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-cob-spotlight.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/cob-spotlight/01.webp",
+        "public/images/products/catalogue/cob-spotlight/02.webp",
+        "public/images/products/catalogue/cob-spotlight/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Track Light",
+      "slug": "track-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-track-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/track-light/01.webp",
+        "public/images/products/catalogue/track-light/02.webp",
+        "public/images/products/catalogue/track-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Magnetic Track Light",
+      "slug": "magnetic-track-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/magnetic-track-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/magnetic-track-light/01.webp",
+        "public/images/products/catalogue/magnetic-track-light/02.webp",
+        "public/images/products/catalogue/magnetic-track-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Linear Light",
+      "slug": "linear-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-linear-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/linear-light/01.webp",
+        "public/images/products/catalogue/linear-light/02.webp",
+        "public/images/products/catalogue/linear-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "Suspended Linear Light",
+      "slug": "suspended-linear-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/suspended-linear-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/suspended-linear-light/01.webp",
+        "public/images/products/catalogue/suspended-linear-light/02.webp",
+        "public/images/products/catalogue/suspended-linear-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Pendant Light",
+      "slug": "pendant-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-pendant-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/pendant-light/01.webp",
+        "public/images/products/catalogue/pendant-light/02.webp",
+        "public/images/products/catalogue/pendant-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Wall Washer",
+      "slug": "wall-washer",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-wall-washer.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/wall-washer/01.webp",
+        "public/images/products/catalogue/wall-washer/02.webp",
+        "public/images/products/catalogue/wall-washer/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Strip Light",
+      "slug": "strip-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-strip-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/strip-light/01.webp",
+        "public/images/products/catalogue/strip-light/02.webp",
+        "public/images/products/catalogue/strip-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Profile Light",
+      "slug": "profile-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-profile-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/profile-light/01.webp",
+        "public/images/products/catalogue/profile-light/02.webp",
+        "public/images/products/catalogue/profile-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Adjustable Spotlight",
+      "slug": "adjustable-spotlight",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-adjustable-spotlight.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/adjustable-spotlight/01.webp",
+        "public/images/products/catalogue/adjustable-spotlight/02.webp",
+        "public/images/products/catalogue/adjustable-spotlight/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Grille Light",
+      "slug": "grille-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-grille-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/grille-light/01.webp",
+        "public/images/products/catalogue/grille-light/02.webp",
+        "public/images/products/catalogue/grille-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Ceiling Light",
+      "slug": "ceiling-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-ceiling-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/ceiling-light/01.webp",
+        "public/images/products/catalogue/ceiling-light/02.webp",
+        "public/images/products/catalogue/ceiling-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    },
+    {
+      "name": "LED Cylinder Light",
+      "slug": "cylinder-light",
+      "category": "architectural-commercial-lighting",
+      "originalReferencePaths": [
+        "public/images/products/fixture-photos/led-cylinder-light.webp"
+      ],
+      "referenceAvailability": "present-in-repository",
+      "referenceIdentityReview": "pending",
+      "imageGenerationType": "representative",
+      "primaryImagePath": null,
+      "secondaryImagePath": null,
+      "thirdImagePath": null,
+      "targetPaths": [
+        "public/images/products/catalogue/cylinder-light/01.webp",
+        "public/images/products/catalogue/cylinder-light/02.webp",
+        "public/images/products/catalogue/cylinder-light/03.webp"
+      ],
+      "imageDimensions": null,
+      "imageFileSizes": null,
+      "qualityControlStatus": "pending",
+      "websiteIntegrationStatus": "pending",
+      "completionStatus": "pending"
+    }
+  ]
+}
